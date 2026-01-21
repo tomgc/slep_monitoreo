@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoreo de Procesos y Resultados Educativos</title>
+    <style>
+        :root {
+            --primary-navy: #2c3e50;
+            --accent-blue: #3498db;
+            --text-gray: #4a4a4a;
+            --light-border: #f0f0f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #ffffff;
+            color: var(--primary-navy);
+        }
+
+        /* --- MENÚ LATERAL INTEGRADO (STICKY) --- */
+        nav#side-nav {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 80px 30px;
+            background: #ffffff;
+            border-right: 1px solid var(--light-border);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        nav#side-nav a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            padding: 10px;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        nav#side-nav a:hover {
+            color: var(--accent-blue);
+            background-color: #f8faff;
+        }
+
+        /* --- CONTENIDO --- */
+        main {
+            margin-left: 310px;
+            padding: 80px 40px;
+            width: 100%;
+            max-width: 950px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 70px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        section {
+            margin-bottom: 100px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 35px;
+            font-weight: 700;
+        }
+
+        /* --- SECCIÓN 1: PESTAÑAS (TABS) --- */
+        .tabs-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 15px;
+            border-bottom: 1px solid var(--light-border);
+        }
+
+        .tab-link {
+            background: none;
+            border: none;
+            padding: 15px 0;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            text-align: left;
+            max-width: 250px;
+            transition: 0.3s;
+        }
+
+        .tab-link.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        .tab-body {
+            display: none;
+            line-height: 1.8;
+            color: var(--text-gray);
+            padding: 20px 0;
+            animation: fadeIn 0.4s;
+        }
+
+        .tab-body.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- SECCIÓN 2: EJEMPLOS --- */
+        .example-box {
+            border: 1px solid var(--light-border);
+            padding: 30px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .example-box:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .media-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #fafafa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            margin-bottom: 20px;
+            border: 1px dashed #ddd;
+        }
+
+        /* --- SECCIÓN 3: CONTACTO --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .card-person strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .card-person span {
+            display: block;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .card-person a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            nav#side-nav { display: none; }
+            main { margin-left: 0; padding: 40px 20px; }
+            .tabs-header { flex-direction: column; gap: 0; }
+            .tab-link { max-width: 100%; padding: 10px 0; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="side-nav">
+        <a href="#que-hace">1. ¿Qué hace?</a>
+        <a href="#ejemplos">2. Ejemplos de trabajo</a>
+        <a href="#quienes-somos">3. ¿Quiénes la conforman?</a>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Área de Monitoreo de Procesos y Resultados Educativos</h1>
+        </header>
+
+        <section id="que-hace">
+            <h2>1. ¿Qué hace?</h2>
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-link active" onclick="openTab(event, 'linea1')">Sistematización y monitoreo (Comunidades)</button>
+                    <button class="tab-link" onclick="openTab(event, 'linea2')">Sistematización y monitoreo (Servicio Local)</button>
+                    <button class="tab-link" onclick="openTab(event, 'linea3')">Fortalecimiento de capacidades</button>
+                </div>
+
+                <div id="linea1" class="tab-body active">
+                    <p><strong>Línea: Sistematización de información y monitoreo de procesos y resultados a nivel de las comunidades educativas.</strong></p>
+                    <p>Descripción detallada de cómo el área apoya directamente a las escuelas y liceos en el seguimiento de sus propios indicadores y procesos internos.</p>
+                </div>
+
+                <div id="linea2" class="tab-body">
+                    <p><strong>Línea: Sistematización de información y monitoreo de procesos y resultados a nivel del Servicio Local de Educación Pública.</strong></p>
+                    <p>Descripción del trabajo de consolidación de datos a nivel macro para la gestión del SLEP Costa Central y el cumplimiento de metas institucionales.</p>
+                </div>
+
+                <div id="linea3" class="tab-body">
+                    <p><strong>Línea: Fortalecimiento de capacidades para la toma de decisión basada en datos en el SLEP y las unidades educativas.</strong></p>
+                    <p>Enfoque en la capacitación y entrega de herramientas técnicas para que los equipos directivos utilicen la información de manera estratégica.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ejemplos">
+            <h2>2. Ejemplos de trabajo</h2>
+            <div class="example-box">
+                <div class="media-placeholder">Visualización de Reporte</div>
+                <h4>Reporte Anótate en la Lista (AEL)</h4>
+                <p>Análisis de vacantes y comportamiento de las listas de espera en el territorio de la Costa Central para el proceso 2026.</p>
+            </div>
+        </section>
+
+        <section id="quienes-somos">
+            <h2>3. ¿Quiénes la conforman?</h2>
+            <div class="contact-grid">
+                <div class="card-person">
+                    <strong>Tomás González Cifuentes</strong>
+                    <span>Profesional encargado</span>
+                    <a href="mailto:tomas.gonzalez@slepcostacentral.gob.cl">tomas.gonzalez@slepcostacentral.gob.cl</a>
+                </div>
+                <div class="card-person">
+                    <strong>Javier Pizarro Morales</strong>
+                    <span>Profesional del área</span>
+                    <a href="mailto:javier.pizarro@slepcostacentral.gob.cl">javier.pizarro@slepcostacentral.gob.cl</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function openTab(evt, tabId) {
+            let i, tabBody, tabLinks;
+            tabBody = document.getElementsByClassName("tab-body");
+            for (i = 0; i < tabBody.length; i++) {
+                tabBody[i].classList.remove("active");
+            }
+            tabLinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
