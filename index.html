@@ -63,7 +63,7 @@
 
         #tab-description { padding: 30px; background: var(--bg-active); border-radius: 12px; transition: opacity 0.3s; margin-bottom: 30px; border-left: 4px solid var(--accent-blue); min-height: 100px; line-height: 1.7; }
         
-        /* --- GLOSARIO DINÁMICO --- */
+        /* --- GLOSARIO --- */
         .glossary-term { border-bottom: 1px dashed var(--accent-blue); cursor: help; color: inherit; font-weight: 500; }
         .glossary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 20px; }
         .glossary-item { padding: 15px; background: var(--bg-active); border-radius: 8px; font-size: 0.9rem; border-left: 3px solid var(--light-border); transition: 0.2s; }
@@ -107,10 +107,13 @@
             <h2>1. ¿Qué hace?</h2>
             <div class="section-content">
                 <p>
-                    La Nueva Educación Pública, en su esfuerzo por impulsar un entorno institucional caracterizado por una mirada estratégica de los procesos educativos, propone una <strong>cultura de monitoreo de datos</strong> que permita impulsar una mejora continua informada y sistemática.
+                    La Nueva Educación Pública, en su compromiso por fomentar un entorno institucional con visión estratégica de los procesos educativos, propone una <strong>cultura de monitoreo de datos</strong> que impulse una mejora continua, informada y sistemática.
                 </p>
                 <p>
                     En este contexto, esta área tiene como objetivo producir, recopilar, sistematizar, interpretar y difundir información clave sobre procesos y resultados educativos del territorio que den cuenta de la <strong>trayectoria educativa y aprendizaje</strong> de las y los estudiantes de los establecimientos que conforman el <span class="glossary-term" title="Servicio Local de Educación Pública">SLEP</span> Costa Central.
+                </p>
+                <p>
+                    El Área de Monitoreo busca transformar la información en conocimiento que permita, tanto a las comunidades educativas como al nivel central del Servicio Local, entender mejor su realidad, visibilizar sus logros, detectar a tiempo sus desafíos y alimentar la toma de decisiones informadas.
                 </p>
                 
                 <p>Su quehacer se organiza en tres ámbitos de actuación:</p>
@@ -128,7 +131,7 @@
         <section id="ejemplos">
             <h2>2. Ejemplos de trabajo</h2>
             <div class="section-content">
-                <p>Visualización de indicadores clave (incluyendo <span class="glossary-term" title="Indicadores de Desarrollo Personal y Social">IDPS</span> y resultados <span class="glossary-term" title="Sistema Nacional de Evaluación de Resultados de Aprendizaje">Simce</span>):</p>
+                <p>Visualización de indicadores clave para la gestión educativa territorial:</p>
                 <div style="border: 1px solid var(--light-border); padding: 30px; border-radius: 15px; background: #fff;">
                     <div class="stat-bar-label" style="display:flex; justify-content:space-between; font-size:0.85rem;"><span>Reporte Matrícula AEL</span><span>92%</span></div>
                     <div class="stat-bar-bg"><div id="bar1" class="stat-bar-fill"></div></div>
@@ -192,7 +195,6 @@
         }
 
         function renderApp() {
-            // Render Contactos
             document.getElementById('contact-grid').innerHTML = equipo.map(p => `
                 <div class="card-person">
                     <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg><span class="name-text">${p.nombre}</span></div>
@@ -201,15 +203,9 @@
                 </div>
             `).join('');
 
-            // Render Glosario
             document.getElementById('glossary-container').innerHTML = glosario
                 .sort((a,b) => a.sigla.localeCompare(b.sigla))
-                .map(g => `
-                <div class="glossary-item">
-                    <strong>${g.sigla}</strong>
-                    ${g.def}
-                </div>
-            `).join('');
+                .map(g => `<div class="glossary-item"><strong>${g.sigla}</strong>${g.def}</div>`).join('');
         }
 
         function copyEmail(el, mail) {
