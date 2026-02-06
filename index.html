@@ -51,10 +51,11 @@
         .section-content p { margin-bottom: 30px; }
 
         /* --- TABS (MENÚ SECCIÓN 1) --- */
-        .tab-menu { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--light-border); padding-bottom: 10px; }
-        .tab-btn { background: none; border: 1px solid transparent; padding: 8px 16px; border-radius: 20px; cursor: pointer; color: var(--text-gray); font-weight: 500; transition: 0.3s; font-size: 0.85rem; }
+        .tab-menu { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--light-border); padding-bottom: 10px; flex-wrap: wrap; }
+        .tab-btn { background: none; border: 1px solid transparent; padding: 10px 16px; border-radius: 8px; cursor: pointer; color: var(--text-gray); font-weight: 500; transition: 0.3s; font-size: 0.85rem; text-align: left; }
+        .tab-btn:hover { background: var(--bg-active); }
         .tab-btn.active-tab { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
-        #tab-description { padding: 25px; background: var(--bg-active); border-radius: 12px; transition: opacity 0.3s; margin-bottom: 30px; border-left: 4px solid var(--accent-blue); }
+        #tab-description { padding: 25px; background: var(--bg-active); border-radius: 12px; transition: opacity 0.3s; margin-bottom: 30px; border-left: 4px solid var(--accent-blue); min-height: 60px; }
 
         /* --- GRÁFICOS --- */
         .stat-bar-bg { background: var(--light-border); height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0 25px; }
@@ -64,10 +65,8 @@
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
         .card-person { padding: 25px; border-radius: 12px; background: var(--bg-active); display: flex; flex-direction: column; gap: 10px; border: 1px solid transparent; transition: 0.3s ease; }
         .card-person:hover { border-color: var(--light-border); background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
-        
         .contact-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 400; color: var(--text-gray); }
         .name-text { font-size: 1rem; font-weight: 700; color: var(--primary-navy); }
-        
         .contact-item svg { color: var(--accent-blue); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); flex-shrink: 0; }
         .card-person:hover .icon-tag { transform: rotate(15deg) scale(1.1); }
         .card-person:hover .icon-hammer { transform: rotate(-20deg); }
@@ -128,7 +127,7 @@
                 </div>
                 <div id="tab-description"></div>
 
-                <p><em>(Placeholder para scroll)</em> Pellentesque in ipsum id orci porta dapibus. Curabitur aliquet quam id dui posuere blandit. Donec sollicitudin molestie malesuada. Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Sed porttitor lectus nibh.</p>
+                <p><em>(Información complementaria)</em> El equipo técnico trabaja en estrecha colaboración con las unidades de acompañamiento para asegurar que el dato se traduzca en acciones pedagógicas concretas.</p>
             </div>
         </section>
 
@@ -142,8 +141,7 @@
                     <div class="stat-bar-label" style="display:flex; justify-content:space-between; font-size:0.85rem;"><span>Asistencia Territorial</span><span>78%</span></div>
                     <div class="stat-bar-bg"><div id="bar2" class="stat-bar-fill"></div></div>
                 </div>
-                <p style="margin-top: 30px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.</p>
-                <p><em>(Placeholder para scroll)</em> Cras ultricies ligula sed magna dictum porta. Nulla quis lorem ut libero malesuada feugiat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada. </p>
+                <p style="margin-top: 30px;">Los reportes presentados permiten a los equipos directivos observar tendencias de asistencia y matrícula en tiempo real, facilitando la intervención temprana.</p>
             </div>
         </section>
 
@@ -151,7 +149,6 @@
             <h2>3. ¿Quiénes la conforman?</h2>
             <div class="section-content">
                 <div id="contact-grid" class="contact-grid"></div>
-                <p style="margin-top: 50px;"><em>(Placeholder para scroll)</em> Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Proin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ut libero malesuada feugiat.</p>
                 <p style="font-size: 0.85rem; color: #b0bec5; margin-top: 60px;"><em>Versión 1.0 - SLEP Costa Central (2026).</em></p>
             </div>
         </section>
@@ -164,9 +161,9 @@
         ];
 
         const lineasDeTrabajo = {
-            establecimientos: "<strong>Monitoreo de establecimientos educacionales:</strong> Seguimiento sistemático de indicadores clave a nivel de escuela y liceo para apoyar la gestión pedagógica local.",
-            central: "<strong>Monitoreo del nivel central del Servicio Local:</strong> Sistematización de datos macro para la planificación estratégica y cumplimiento de metas del SLEP.",
-            capacidades: "<strong>Fortalecimiento de capacidades en la toma de decisiones:</strong> Talleres y herramientas técnicas para que los equipos directivos utilicen la evidencia en sus planes de mejora."
+            establecimientos: "<strong>Monitoreo de establecimientos educacionales:</strong> Seguimiento sistemático de indicadores clave a nivel de escuela y liceo para apoyar la gestión pedagógica local y el diseño de planes de mejora (PME).",
+            central: "<strong>Monitoreo del nivel central del Servicio Local:</strong> Sistematización y análisis de datos agregados para la planificación estratégica institucional y el reporte de cumplimiento de metas ante la DEP.",
+            capacidades: "<strong>Fortalecimiento de capacidades en la toma de decisiones:</strong> Desarrollo de herramientas, talleres y metodologías orientadas a que los equipos territoriales utilicen la evidencia de datos de manera autónoma."
         };
 
         function showTab(linea, btn) {
@@ -193,7 +190,7 @@
                         <span>${p.cargo}</span>
                     </div>
                     <div class="contact-item">
-                        <svg class="icon-mail" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path></svg>
+                        <svg class="icon-mail" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         <span class="copy-email" onclick="copyEmail(this, '${p.mail}')">${p.mail}<span class="copy-feedback">Copiado</span></span>
                     </div>
                 </div>
