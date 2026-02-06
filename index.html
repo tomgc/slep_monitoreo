@@ -50,61 +50,64 @@
         .section-content { color: var(--text-gray); font-size: 1.05rem; line-height: 1.8; }
         .section-content p { margin-bottom: 30px; }
 
-        /* --- TABS EVOLUCIONADAS (GRID + ENUMERACIÓN) --- */
+        /* --- TABS EVOLUCIONADAS --- */
         .tab-menu { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
             gap: 12px; 
-            margin: 30px 0; 
+            margin: 35px 0; 
             counter-reset: tab-counter;
         }
 
         .tab-btn { 
             background: var(--bg-active); 
             border: 1px solid var(--light-border); 
-            padding: 18px; 
+            padding: 22px; 
             border-radius: 12px; 
             cursor: pointer; 
             color: var(--text-gray); 
             font-weight: 600; 
             transition: all 0.3s ease; 
-            font-size: 0.82rem; 
+            font-size: 0.95rem; /* Agrandado para armonía */
             text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             height: 100%;
+            line-height: 1.3;
         }
 
         .tab-btn::before {
-            content: "Ámbito 0" counter(tab-counter);
+            content: "Ámbito " counter(tab-counter); /* Sin el 0 inicial */
             counter-increment: tab-counter;
             font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             color: var(--accent-blue);
-            font-weight: 700;
+            font-weight: 800;
+            margin-bottom: 4px;
         }
 
-        .tab-btn:hover { border-color: var(--accent-blue); transform: translateY(-2px); background: #fff; }
+        .tab-btn:hover { border-color: var(--accent-blue); transform: translateY(-3px); background: #fff; }
 
         .tab-btn.active-tab { 
             background: var(--primary-navy); 
             color: white; 
             border-color: var(--primary-navy); 
-            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.12);
+            box-shadow: 0 10px 25px rgba(44, 62, 80, 0.15);
         }
 
-        .tab-btn.active-tab::before { color: var(--accent-blue); }
+        .tab-btn.active-tab::before { color: var(--accent-blue); opacity: 1; }
 
         #tab-description { 
-            padding: 25px; 
+            padding: 30px; 
             background: var(--bg-active); 
             border-radius: 12px; 
             transition: opacity 0.3s; 
             margin-bottom: 30px; 
             border-left: 4px solid var(--accent-blue);
-            min-height: 80px;
+            min-height: 100px;
+            line-height: 1.7;
         }
 
         /* --- GRÁFICOS --- */
@@ -117,7 +120,7 @@
         .card-person:hover { border-color: var(--light-border); background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         .contact-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 400; color: var(--text-gray); }
         .name-text { font-size: 1rem; font-weight: 700; color: var(--primary-navy); }
-        .contact-item svg { color: var(--accent-blue); transition: transform 0.4s; flex-shrink: 0; }
+        .contact-item svg { color: var(--accent-blue); flex-shrink: 0; }
         
         .copy-email { cursor: pointer; position: relative; }
         .copy-feedback { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background: var(--primary-navy); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; opacity: 0; transition: 0.3s; }
@@ -125,7 +128,7 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) { nav#side-nav { display: none; } main { margin-left: 0; padding: 20px; } }
-        @media (max-width: 650px) { .tab-menu { grid-template-columns: 1fr; } }
+        @media (max-width: 700px) { .tab-menu { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body onload="initApp()">
