@@ -50,12 +50,62 @@
         .section-content { color: var(--text-gray); font-size: 1.05rem; line-height: 1.8; }
         .section-content p { margin-bottom: 30px; }
 
-        /* --- TABS (MENÚ SECCIÓN 1) --- */
-        .tab-menu { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--light-border); padding-bottom: 10px; flex-wrap: wrap; }
-        .tab-btn { background: none; border: 1px solid transparent; padding: 10px 16px; border-radius: 8px; cursor: pointer; color: var(--text-gray); font-weight: 500; transition: 0.3s; font-size: 0.85rem; text-align: left; }
-        .tab-btn:hover { background: var(--bg-active); }
-        .tab-btn.active-tab { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
-        #tab-description { padding: 25px; background: var(--bg-active); border-radius: 12px; transition: opacity 0.3s; margin-bottom: 30px; border-left: 4px solid var(--accent-blue); min-height: 60px; }
+        /* --- TABS EVOLUCIONADAS (GRID + ENUMERACIÓN) --- */
+        .tab-menu { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 12px; 
+            margin: 30px 0; 
+            counter-reset: tab-counter;
+        }
+
+        .tab-btn { 
+            background: var(--bg-active); 
+            border: 1px solid var(--light-border); 
+            padding: 18px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            color: var(--text-gray); 
+            font-weight: 600; 
+            transition: all 0.3s ease; 
+            font-size: 0.82rem; 
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            height: 100%;
+        }
+
+        .tab-btn::before {
+            content: "Ámbito 0" counter(tab-counter);
+            counter-increment: tab-counter;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .tab-btn:hover { border-color: var(--accent-blue); transform: translateY(-2px); background: #fff; }
+
+        .tab-btn.active-tab { 
+            background: var(--primary-navy); 
+            color: white; 
+            border-color: var(--primary-navy); 
+            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.12);
+        }
+
+        .tab-btn.active-tab::before { color: var(--accent-blue); }
+
+        #tab-description { 
+            padding: 25px; 
+            background: var(--bg-active); 
+            border-radius: 12px; 
+            transition: opacity 0.3s; 
+            margin-bottom: 30px; 
+            border-left: 4px solid var(--accent-blue);
+            min-height: 80px;
+        }
 
         /* --- GRÁFICOS --- */
         .stat-bar-bg { background: var(--light-border); height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0 25px; }
@@ -67,26 +117,15 @@
         .card-person:hover { border-color: var(--light-border); background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         .contact-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 400; color: var(--text-gray); }
         .name-text { font-size: 1rem; font-weight: 700; color: var(--primary-navy); }
-        .contact-item svg { color: var(--accent-blue); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); flex-shrink: 0; }
-        .card-person:hover .icon-tag { transform: rotate(15deg) scale(1.1); }
-        .card-person:hover .icon-hammer { transform: rotate(-20deg); }
-        .card-person:hover .icon-mail { transform: translateY(-3px); }
-
-        .copy-email { cursor: pointer; position: relative; text-decoration: none; color: var(--text-gray); }
-        .copy-feedback { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background: var(--primary-navy); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; opacity: 0; transition: 0.3s; pointer-events: none; }
+        .contact-item svg { color: var(--accent-blue); transition: transform 0.4s; flex-shrink: 0; }
+        
+        .copy-email { cursor: pointer; position: relative; }
+        .copy-feedback { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background: var(--primary-navy); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; opacity: 0; transition: 0.3s; }
         .copy-feedback.show { opacity: 1; }
 
-        /* --- MODO IMPRESIÓN --- */
-        @media print {
-            nav#side-nav, #progress-container, .tab-menu, .copy-feedback { display: none !important; }
-            main { margin-left: 0 !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
-            h2 { position: relative !important; border-bottom: 2px solid #000 !important; background: transparent !important; }
-            #tab-description { background: transparent !important; border-left: 4px solid #000 !important; padding: 10px 0 10px 20px !important; }
-            .card-person { border: 1px solid #eee !important; background: transparent !important; page-break-inside: avoid; }
-            body { font-size: 12pt; }
-        }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) { nav#side-nav { display: none; } main { margin-left: 0; padding: 20px; } }
+        @media (max-width: 650px) { .tab-menu { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body onload="initApp()">
@@ -113,21 +152,21 @@
                     La Nueva Educación Pública, en su esfuerzo por impulsar un entorno institucional caracterizado por una mirada estratégica de los procesos educativos, propone una <strong>cultura de monitoreo de datos</strong> que permita impulsar una mejora continua informada y sistemática.
                 </p>
                 <p>
-                    En este contexto, ésta área tiene como objetivo producir, recopilar, sistematizar, interpretar y difundir información clave sobre procesos y resultados educativos del territorio que den cuenta de la <strong>trayectoria educativa y aprendizaje</strong> de las y los estudiantes de los establecimientos que conforman el SLEP Costa Central.
+                    En este contexto, esta área tiene como objetivo producir, recopilar, sistematizar, interpretar y difundir información clave sobre procesos y resultados educativos del territorio que den cuenta de la <strong>trayectoria educativa y aprendizaje</strong> de las y los estudiantes de los establecimientos que conforman el SLEP Costa Central.
                 </p>
                 <p>
                     El Área de Monitoreo busca transformar la información en conocimiento que permita, tanto a las comunidades educativas como al nivel central del Servicio Local, entender mejor su realidad, visibilizar sus logros, detectar a tiempo sus desafíos y alimentar la toma de decisiones informadas.
                 </p>
                 
                 <p>Su quehacer se organiza en tres ámbitos de actuación:</p>
+                
                 <div class="tab-menu">
-                    <button class="tab-btn active-tab" onclick="showTab('establecimientos', this)">Monitoreo de los Establecimientos Educacionales</button>
-                    <button class="tab-btn" onclick="showTab('central', this)">Monitoreo del Nivel Central del SLEP</button>
+                    <button class="tab-btn active-tab" onclick="showTab('establecimientos', this)">Monitoreo de Establecimientos</button>
+                    <button class="tab-btn" onclick="showTab('central', this)">Monitoreo del Nivel Central</button>
                     <button class="tab-btn" onclick="showTab('capacidades', this)">Fortalecimiento de Capacidades</button>
                 </div>
-                <div id="tab-description"></div>
 
-                <p><em>(Información complementaria)</em> El equipo técnico trabaja en estrecha colaboración con las unidades de acompañamiento para asegurar que el dato se traduzca en acciones pedagógicas concretas.</p>
+                <div id="tab-description"></div>
             </div>
         </section>
 
@@ -141,7 +180,6 @@
                     <div class="stat-bar-label" style="display:flex; justify-content:space-between; font-size:0.85rem;"><span>Asistencia Territorial</span><span>78%</span></div>
                     <div class="stat-bar-bg"><div id="bar2" class="stat-bar-fill"></div></div>
                 </div>
-                <p style="margin-top: 30px;">Los reportes presentados permiten a los equipos directivos observar tendencias de asistencia y matrícula en tiempo real, facilitando la intervención temprana.</p>
             </div>
         </section>
 
@@ -162,7 +200,7 @@
 
         const lineasDeTrabajo = {
             establecimientos: "<strong>Monitoreo de establecimientos educacionales:</strong> Seguimiento sistemático de indicadores clave a nivel de escuela y liceo para apoyar la gestión pedagógica local y el diseño de planes de mejora (PME).",
-            central: "<strong>Monitoreo del nivel central del Servicio Local:</strong> Sistematización y análisis de datos agregados para la planificación estratégica institucional y el reporte de cumplimiento de metas ante la DEP.",
+            central: "<strong>Monitoreo del nivel central del Servicio Local:</strong> Sistematización y análisis de datos agregados para la planificación estratégica institucional y el reporte de cumplimiento de metas.",
             capacidades: "<strong>Fortalecimiento de capacidades en la toma de decisiones:</strong> Desarrollo de herramientas, talleres y metodologías orientadas a que los equipos territoriales utilicen la evidencia de datos de manera autónoma."
         };
 
@@ -182,15 +220,15 @@
             grid.innerHTML = equipo.map(p => `
                 <div class="card-person">
                     <div class="contact-item">
-                        <svg class="icon-tag" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
                         <span class="name-text">${p.nombre}</span>
                     </div>
                     <div class="contact-item">
-                        <svg class="icon-hammer" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0-.83-.83-.83-2.17 0-3L12 9"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0-.83-.83-.83-2.17 0-3L12 9"/></svg>
                         <span>${p.cargo}</span>
                     </div>
                     <div class="contact-item">
-                        <svg class="icon-mail" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         <span class="copy-email" onclick="copyEmail(this, '${p.mail}')">${p.mail}<span class="copy-feedback">Copiado</span></span>
                     </div>
                 </div>
@@ -209,8 +247,10 @@
             renderContactos();
             showTab('establecimientos', document.querySelector('.tab-btn'));
             setTimeout(() => {
-                document.getElementById('bar1').style.width = '92%';
-                document.getElementById('bar2').style.width = '78%';
+                const b1 = document.getElementById('bar1');
+                const b2 = document.getElementById('bar2');
+                if(b1) b1.style.width = '92%';
+                if(b2) b2.style.width = '78%';
             }, 800);
         }
 
