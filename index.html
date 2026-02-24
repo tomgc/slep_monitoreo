@@ -451,12 +451,6 @@
                         (2026).</em></p>
             </div>
         </section>
-
-        <!-- Contador de visitas simple y autocontenido -->
-        <div
-            style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--light-border); color: var(--text-gray); font-size: 0.9rem;">
-            <p id="visit-counter"></p>
-        </div>
     </main>
 
     <script>
@@ -524,24 +518,8 @@
             }
         }
 
-        function initVisitCounter() {
-            let visits = localStorage.getItem('slep_visitas_locales');
-            if (!visits) {
-                visits = 1;
-            } else {
-                visits = parseInt(visits) + 1;
-            }
-            localStorage.setItem('slep_visitas_locales', visits);
-
-            const counterElement = document.getElementById('visit-counter');
-            if (counterElement) {
-                counterElement.innerHTML = `Tus visitas a esta página: <strong>${visits}</strong>`;
-            }
-        }
-
         function initApp() {
             renderApp();
-            initVisitCounter();
             showTab('establecimientos', document.querySelector('.tab-btn'));
             setTimeout(() => {
                 const b1 = document.getElementById('bar1');
