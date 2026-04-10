@@ -26,10 +26,8 @@
             --text-secondary:  #5a5a5a;
             --text-muted:      #9a9a9a;
             --accent:          var(--brand-blue);
-            --accent-hover:    #0d6cc7;
             --surface:         #ffffff;
             --surface-alt:     #f6f7fa;
-            --surface-soft:    #fbfcfd;
             --border:          #ececec;
             --border-strong:   #d8d8d8;
 
@@ -45,7 +43,6 @@
         }
 
         * { box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -68,16 +65,13 @@
             margin: 0 auto;
             padding: 48px 40px 40px;
             text-align: center;
-            position: relative;
         }
-
         .page-title {
-            margin-top: 0;
+            margin: 0 0 14px;
             font-size: clamp(1.4rem, 2.6vw, 1.9rem);
             font-weight: 800;
             color: var(--text-primary);
             letter-spacing: -0.5px;
-            margin-bottom: 14px;
         }
         .page-title .accent-underline {
             display: inline-block;
@@ -86,20 +80,11 @@
         .page-title .accent-underline::after {
             content: "";
             position: absolute;
-            left: 0;
-            right: 0;
+            left: 0; right: 0;
             bottom: -6px;
             height: 6px;
             background: var(--brand-blue);
             border-radius: 4px;
-        }
-        .page-desc {
-            max-width: 700px;
-            margin: 18px auto 0;
-            color: var(--text-secondary);
-            font-size: 1.02rem;
-            font-weight: 500;
-            line-height: 1.75;
         }
 
         /* =========================================================
@@ -110,7 +95,6 @@
             margin: 60px auto 0;
             padding: 0 40px 100px;
         }
-
         .org-chart {
             display: flex;
             flex-direction: column;
@@ -217,7 +201,6 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 22px;
-            margin-top: 0;
             padding-top: 40px;
             position: relative;
             width: 100%;
@@ -227,11 +210,36 @@
             content: "";
             position: absolute;
             top: 0;
-            left: 10%;
-            right: 10%;
+            left: 10%; right: 10%;
             height: 2px;
             background: var(--border-strong);
         }
+
+        /* columna: subdir-card + área cards */
+        .subdir-col {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            position: relative;
+            --card-accent: var(--brand-blue);
+        }
+        .subdir-col::before {
+            content: "";
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background: var(--border-strong);
+            transform: translateX(-50%);
+        }
+
+        /* accents por columna */
+        .subdir-col.c-blue   { --card-accent: var(--brand-blue); }
+        .subdir-col.c-green  { --card-accent: var(--brand-green); }
+        .subdir-col.c-yellow { --card-accent: var(--brand-yellow); }
+        .subdir-col.c-pink   { --card-accent: var(--brand-pink); }
+        .subdir-col.c-red    { --card-accent: var(--brand-red); }
 
         .subdir-card {
             position: relative;
@@ -245,17 +253,6 @@
             flex-direction: column;
             gap: 12px;
             overflow: hidden;
-            --card-accent: var(--brand-blue);
-        }
-        .subdir-card::before {
-            content: "";
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            width: 2px;
-            height: 40px;
-            background: var(--border-strong);
-            transform: translateX(-50%);
         }
         .subdir-card::after {
             content: "";
@@ -268,7 +265,7 @@
             transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
         }
         .subdir-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             border-color: var(--card-accent);
             box-shadow: var(--shadow-md);
         }
@@ -277,13 +274,6 @@
             background: var(--card-accent);
             color: #fff;
         }
-
-        /* accents por tarjeta usando TODA la paleta oficial */
-        .subdir-card.c-blue   { --card-accent: var(--brand-blue); }
-        .subdir-card.c-green  { --card-accent: var(--brand-green); }
-        .subdir-card.c-yellow { --card-accent: var(--brand-yellow); }
-        .subdir-card.c-pink   { --card-accent: var(--brand-pink); }
-        .subdir-card.c-red    { --card-accent: var(--brand-red); }
 
         .subdir-icon {
             width: 46px;
@@ -295,6 +285,7 @@
             align-items: center;
             justify-content: center;
             transition: 0.3s;
+            flex-shrink: 0;
         }
         .subdir-tag {
             font-size: 0.62rem;
@@ -319,126 +310,50 @@
             margin: 4px 0 0;
         }
 
-        /* =========================================================
-           TERRITORY STRIP
-           ========================================================= */
-        .territory {
-            background: var(--surface-alt);
-            padding: 54px 40px;
-            border-top: 1px solid var(--border);
-        }
-        .territory-inner {
-            max-width: 1240px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .territory-eyebrow {
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-        .territory-title {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-            margin: 0 0 26px;
-        }
-        .comunas-row {
+        /* --- Área cards --- */
+        .area-list {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 14px;
+            flex-direction: column;
+            gap: 6px;
+            padding-top: 6px;
+            position: relative;
         }
-        .comuna-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 22px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 0.92rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            box-shadow: var(--shadow-sm);
-            transition: 0.3s;
-        }
-        .comuna-chip::before {
+        .area-list::before {
             content: "";
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+            display: block;
+            width: 2px;
+            height: 14px;
+            background: var(--border-strong);
+            margin: 0 auto;
             flex-shrink: 0;
         }
-        .comuna-chip.c1::before { background: var(--brand-red); }
-        .comuna-chip.c2::before { background: var(--brand-yellow); }
-        .comuna-chip.c3::before { background: var(--brand-green); }
-        .comuna-chip.c4::before { background: var(--brand-blue); }
-        .comuna-chip:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--text-primary);
-        }
 
-        /* =========================================================
-           FOOTER
-           ========================================================= */
-        footer {
-            background: var(--brand-dark);
-            color: rgba(255, 255, 255, 0.75);
-            padding: 48px 40px 40px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 500;
+        .area-card {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--card-accent);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            transition: 0.25s;
         }
-        footer .foot-mark {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
+        .area-card:hover {
+            background: var(--surface);
+            border-color: var(--card-accent);
+            transform: translateX(2px);
+            box-shadow: var(--shadow-sm);
         }
-        footer .foot-mark svg { width: 36px; height: 36px; }
-        footer .foot-mark-text {
-            text-align: left;
-            line-height: 1.1;
-        }
-        footer .foot-mark-top {
-            font-size: 0.55rem;
+        .area-name {
+            font-size: 0.78rem;
             font-weight: 800;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.55);
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 3px;
         }
-        footer .foot-mark-bot {
-            font-size: 0.92rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: -0.2px;
-            margin-top: 2px;
-        }
-        footer p { margin: 8px 0; }
-        footer a {
-            color: var(--brand-sky);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        footer a:hover { text-decoration: underline; }
-        footer .foot-rainbow {
-            height: 4px;
-            background: linear-gradient(90deg,
-                var(--brand-red) 0%,
-                var(--brand-pink) 17%,
-                var(--brand-yellow) 34%,
-                var(--brand-green) 51%,
-                var(--brand-sky) 68%,
-                var(--brand-blue) 100%);
-            margin-bottom: 40px;
-            margin-left: -40px;
-            margin-right: -40px;
+        .area-desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-weight: 500;
         }
 
         /* =========================================================
@@ -450,16 +365,13 @@
                 padding-top: 0;
             }
             .subdir-grid::before { display: none; }
-            .subdir-card::before { display: none; }
+            .subdir-col::before { display: none; }
         }
         @media (max-width: 720px) {
             .hero { padding: 32px 20px 24px; }
             .chart-wrap { padding: 0 20px 70px; }
             .subdir-grid { grid-template-columns: 1fr; }
             .director-card { padding: 30px 32px; max-width: 100%; }
-            .territory { padding: 44px 20px; }
-            footer { padding: 44px 20px 32px; }
-            footer .foot-rainbow { margin-left: -20px; margin-right: -20px; }
         }
     </style>
 </head>
@@ -475,7 +387,6 @@
 
     <!-- ============== ORG CHART ============== -->
     <section class="chart-wrap" id="organigrama">
-
         <div class="org-chart">
 
             <!-- Órganos deliberativos (Ley 21.040) -->
@@ -501,53 +412,138 @@
 
             <div class="connector-v"></div>
 
-            <!-- Subdirecciones con color de la paleta oficial por tarjeta -->
+            <!-- Subdirecciones -->
             <div class="subdir-grid" role="list">
 
-                <article class="subdir-card c-blue" role="listitem">
-                    <div class="subdir-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                <!-- 1. Apoyo Técnico Pedagógico -->
+                <div class="subdir-col c-blue" role="listitem">
+                    <article class="subdir-card">
+                        <div class="subdir-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                        </div>
+                        <div class="subdir-tag">Subdirección</div>
+                        <h3 class="subdir-title">Apoyo Técnico Pedagógico</h3>
+                        <p class="subdir-desc">Acompañamiento técnico a los establecimientos y monitoreo de procesos educativos.</p>
+                    </article>
+                    <div class="area-list">
+                        <div class="area-card">
+                            <div class="area-name">Currículum y Evaluación</div>
+                            <div class="area-desc">Diseño curricular y sistemas de evaluación de aprendizajes.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Convivencia Escolar</div>
+                            <div class="area-desc">Clima escolar, resolución de conflictos y bienestar estudiantil.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Educación Especial e Inclusión</div>
+                            <div class="area-desc">Atención a NEE y programas de integración escolar.</div>
+                        </div>
                     </div>
-                    <div class="subdir-tag">Subdirección</div>
-                    <h3 class="subdir-title">Apoyo Técnico Pedagógico</h3>
-                    <p class="subdir-desc">Acompañamiento técnico a los establecimientos y monitoreo de procesos y resultados educativos.</p>
-                </article>
+                </div>
 
-                <article class="subdir-card c-green" role="listitem">
-                    <div class="subdir-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 4 5-5"/></svg>
+                <!-- 2. Planificación y Control de Gestión -->
+                <div class="subdir-col c-green" role="listitem">
+                    <article class="subdir-card">
+                        <div class="subdir-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 4 5-5"/></svg>
+                        </div>
+                        <div class="subdir-tag">Subdirección</div>
+                        <h3 class="subdir-title">Planificación y Control de Gestión</h3>
+                        <p class="subdir-desc">Planificación estratégica, seguimiento de metas y control de gestión institucional.</p>
+                    </article>
+                    <div class="area-list">
+                        <div class="area-card">
+                            <div class="area-name">Planificación Estratégica</div>
+                            <div class="area-desc">Elaboración y seguimiento del Plan Estratégico y planes anuales.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Control de Gestión</div>
+                            <div class="area-desc">Monitoreo de indicadores, reportes de desempeño y mejora continua.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Tecnologías de Información</div>
+                            <div class="area-desc">Sistemas institucionales, infraestructura TI y soporte digital.</div>
+                        </div>
                     </div>
-                    <div class="subdir-tag">Subdirección</div>
-                    <h3 class="subdir-title">Planificación y Control de Gestión</h3>
-                    <p class="subdir-desc">Planificación estratégica, seguimiento de metas y control de gestión institucional.</p>
-                </article>
+                </div>
 
-                <article class="subdir-card c-yellow" role="listitem">
-                    <div class="subdir-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                <!-- 3. Administración y Finanzas -->
+                <div class="subdir-col c-yellow" role="listitem">
+                    <article class="subdir-card">
+                        <div class="subdir-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                        </div>
+                        <div class="subdir-tag">Subdirección</div>
+                        <h3 class="subdir-title">Administración y Finanzas</h3>
+                        <p class="subdir-desc">Gestión presupuestaria, financiera, contable, de abastecimiento y servicios generales.</p>
+                    </article>
+                    <div class="area-list">
+                        <div class="area-card">
+                            <div class="area-name">Presupuesto y Contabilidad</div>
+                            <div class="area-desc">Formulación presupuestaria, contabilidad y gestión financiera.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Adquisiciones</div>
+                            <div class="area-desc">Procesos de compra, licitaciones y gestión de contratos.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Servicios Generales</div>
+                            <div class="area-desc">Gestión de activos, logística y servicios de apoyo institucional.</div>
+                        </div>
                     </div>
-                    <div class="subdir-tag">Subdirección</div>
-                    <h3 class="subdir-title">Administración y Finanzas</h3>
-                    <p class="subdir-desc">Gestión presupuestaria, financiera, contable, de abastecimiento y servicios generales.</p>
-                </article>
+                </div>
 
-                <article class="subdir-card c-pink" role="listitem">
-                    <div class="subdir-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <!-- 4. Gestión y Desarrollo de las Personas -->
+                <div class="subdir-col c-pink" role="listitem">
+                    <article class="subdir-card">
+                        <div class="subdir-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="subdir-tag">Subdirección</div>
+                        <h3 class="subdir-title">Gestión y Desarrollo de las Personas</h3>
+                        <p class="subdir-desc">Selección, desarrollo, bienestar y formación del capital humano del Servicio Local.</p>
+                    </article>
+                    <div class="area-list">
+                        <div class="area-card">
+                            <div class="area-name">Selección y Contratación</div>
+                            <div class="area-desc">Reclutamiento, selección y vinculación de personal docente y administrativo.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Capacitación y Desarrollo</div>
+                            <div class="area-desc">Formación continua, evaluación del desempeño y carrera funcionaria.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Bienestar Funcionario</div>
+                            <div class="area-desc">Beneficios, salud ocupacional y calidad de vida laboral.</div>
+                        </div>
                     </div>
-                    <div class="subdir-tag">Subdirección</div>
-                    <h3 class="subdir-title">Gestión y Desarrollo de las Personas</h3>
-                    <p class="subdir-desc">Selección, desarrollo, bienestar y formación del capital humano del Servicio Local.</p>
-                </article>
+                </div>
 
-                <article class="subdir-card c-red" role="listitem">
-                    <div class="subdir-icon" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M14 9h1"/><path d="M14 13h1"/><path d="M9 17h6"/></svg>
+                <!-- 5. Infraestructura y Mantenimiento -->
+                <div class="subdir-col c-red" role="listitem">
+                    <article class="subdir-card">
+                        <div class="subdir-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M14 9h1"/><path d="M14 13h1"/><path d="M9 17h6"/></svg>
+                        </div>
+                        <div class="subdir-tag">Subdirección</div>
+                        <h3 class="subdir-title">Infraestructura y Mantenimiento</h3>
+                        <p class="subdir-desc">Proyectos, conservación e infraestructura de los establecimientos educacionales.</p>
+                    </article>
+                    <div class="area-list">
+                        <div class="area-card">
+                            <div class="area-name">Proyectos de Infraestructura</div>
+                            <div class="area-desc">Diseño, licitación y supervisión de obras en establecimientos.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Mantenimiento Preventivo</div>
+                            <div class="area-desc">Mantención programada y atención de emergencias en planta física.</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Seguridad Escolar</div>
+                            <div class="area-desc">Planes de emergencia, seguridad estructural y gestión de riesgos.</div>
+                        </div>
                     </div>
-                    <div class="subdir-tag">Subdirección</div>
-                    <h3 class="subdir-title">Infraestructura y Mantenimiento</h3>
-                    <p class="subdir-desc">Proyectos, conservación e infraestructura de los establecimientos educacionales.</p>
-                </article>
+                </div>
 
             </div>
         </div>
