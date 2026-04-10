@@ -1,0 +1,17 @@
+# TMDB API key — nunca commitear
+.tmdb_key
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Editores
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
