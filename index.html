@@ -102,42 +102,6 @@
         }
         .connector-v.short { height: 20px; }
 
-        /* ── ADVISORY (CDL / CLEP) ── */
-        .level-advisory {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            gap: 22px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-        .advisory-card {
-            background: var(--surface);
-            border: 2px dashed var(--border-strong);
-            border-radius: var(--radius-md);
-            padding: 16px 24px;
-            width: 270px;
-            text-align: center;
-            transition: .3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .advisory-card:hover { border-color: var(--brand-blue); transform: translateY(-2px); }
-        .advisory-card .role-tag {
-            font-size: .62rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: var(--text-muted);
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .advisory-card .role-name {
-            font-size: .92rem;
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-
         /* ── DIRECTOR ── */
         .director-card {
             position: relative;
@@ -430,20 +394,6 @@
 
     <section class="chart-wrap" id="organigrama">
         <div class="org-chart">
-
-            <!-- Órganos deliberativos -->
-            <div class="level-advisory">
-                <div class="advisory-card">
-                    <div class="role-tag">Órgano resolutivo</div>
-                    <div class="role-name">Comité Directivo Local (CDL)</div>
-                </div>
-                <div class="advisory-card">
-                    <div class="role-tag">Órgano consultivo</div>
-                    <div class="role-name">Consejo Local de Educación Pública (CLEP)</div>
-                </div>
-            </div>
-
-            <div class="connector-v dashed"></div>
 
             <!-- Dirección Ejecutiva -->
             <div class="director-card">
