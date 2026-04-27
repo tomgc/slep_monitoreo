@@ -55,7 +55,7 @@
         .hero {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 48px 40px 40px;
+            padding: 48px 40px 12px;
             text-align: center;
         }
         .page-title {
@@ -80,7 +80,7 @@
         /* ── CHART WRAPPER ── */
         .chart-wrap {
             max-width: 1400px;
-            margin: 60px auto 0;
+            margin: 20px auto 0;
             padding: 0 40px 100px;
         }
         .org-chart {
@@ -184,8 +184,8 @@
         .left-branch .dep-item::after {
             content: "";
             position: absolute;
-            right: 0; top: 50%;
-            width: 36px; height: 2px;
+            right: -2px; top: 50%; /* -2px overlaps trunk to close subpixel gap */
+            width: 38px; height: 2px;
             background: var(--border-strong);
             transform: translateY(-50%);
         }
@@ -200,8 +200,8 @@
         .right-branch .dep-item::before {
             content: "";
             position: absolute;
-            left: 0; top: 50%;
-            width: 36px; height: 2px;
+            left: -2px; top: 50%; /* -2px overlaps trunk to close subpixel gap */
+            width: 38px; height: 2px;
             background: var(--border-strong);
             transform: translateY(-50%);
         }
