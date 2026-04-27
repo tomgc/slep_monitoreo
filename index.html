@@ -5,46 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organigrama Institucional | SLEP Costa Central</title>
-    <meta name="description" content="Organigrama del Servicio Local de Educación Pública Costa Central (SLEP Costa Central), que atiende establecimientos educacionales de Concón, Puchuncaví, Quintero y Viña del Mar.">
-    <!-- Nunito: alternativa libre a MuseoSans/gobCL, geométrica y amigable -->
+    <meta name="description" content="Organigrama del Servicio Local de Educación Pública Costa Central.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* === PALETA OFICIAL SLEP / DEP === */
-            --brand-red:       #ff3c4c;
-            --brand-green:     #90d039;
-            --brand-yellow:    #f8d63c;
-            --brand-blue:      #1f84ec;
-            --brand-sky:       #3abff0;
-            --brand-pink:      #ff798a;
-            --brand-dark:      #282828;
+            --brand-red:     #ff3c4c;
+            --brand-green:   #90d039;
+            --brand-yellow:  #f8d63c;
+            --brand-blue:    #1f84ec;
+            --brand-sky:     #3abff0;
+            --brand-pink:    #ff798a;
+            --brand-dark:    #282828;
 
-            /* === ALIAS FUNCIONALES === */
-            --text-primary:    #282828;
-            --text-secondary:  #5a5a5a;
-            --text-muted:      #9a9a9a;
-            --accent:          var(--brand-blue);
-            --surface:         #ffffff;
-            --surface-alt:     #f6f7fa;
-            --border:          #ececec;
-            --border-strong:   #d8d8d8;
+            --text-primary:   #282828;
+            --text-secondary: #5a5a5a;
+            --text-muted:     #9a9a9a;
+            --surface:        #ffffff;
+            --surface-alt:    #f6f7fa;
+            --border:         #ececec;
+            --border-strong:  #d8d8d8;
 
-            --shadow-sm: 0 1px 2px rgba(40, 40, 40, 0.04), 0 2px 8px rgba(40, 40, 40, 0.04);
-            --shadow-md: 0 4px 12px rgba(40, 40, 40, 0.06), 0 12px 32px rgba(40, 40, 40, 0.06);
-            --shadow-lg: 0 12px 32px rgba(40, 40, 40, 0.08), 0 24px 60px rgba(40, 40, 40, 0.10);
+            --shadow-sm: 0 1px 2px rgba(40,40,40,.04), 0 2px 8px rgba(40,40,40,.04);
+            --shadow-md: 0 4px 12px rgba(40,40,40,.06), 0 12px 32px rgba(40,40,40,.06);
+            --shadow-lg: 0 12px 32px rgba(40,40,40,.08), 0 24px 60px rgba(40,40,40,.10);
 
             --radius-sm: 8px;
             --radius-md: 14px;
             --radius-lg: 20px;
-
-            --font: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            --font: 'Nunito', system-ui, sans-serif;
         }
 
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
         body {
             font-family: var(--font);
             margin: 0;
@@ -54,12 +48,9 @@
             line-height: 1.6;
             font-weight: 500;
         }
-
         a { color: inherit; }
 
-        /* =========================================================
-           HERO
-           ========================================================= */
+        /* ── HERO ── */
         .hero {
             max-width: 1240px;
             margin: 0 auto;
@@ -70,8 +61,7 @@
             margin: 0 0 14px;
             font-size: clamp(1.4rem, 2.6vw, 1.9rem);
             font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
+            letter-spacing: -.5px;
         }
         .page-title .accent-underline {
             display: inline-block;
@@ -80,16 +70,13 @@
         .page-title .accent-underline::after {
             content: "";
             position: absolute;
-            left: 0; right: 0;
-            bottom: -6px;
+            left: 0; right: 0; bottom: -6px;
             height: 6px;
             background: var(--brand-blue);
             border-radius: 4px;
         }
 
-        /* =========================================================
-           ORG CHART
-           ========================================================= */
+        /* ── CHART WRAPPER ── */
         .chart-wrap {
             max-width: 1240px;
             margin: 60px auto 0;
@@ -101,7 +88,21 @@
             align-items: center;
         }
 
-        /* --- Órganos deliberativos --- */
+        /* ── CONNECTORS ── */
+        .connector-v {
+            width: 2px;
+            height: 40px;
+            background: var(--border-strong);
+            flex-shrink: 0;
+        }
+        .connector-v.dashed {
+            background: transparent;
+            border-left: 2.5px dashed var(--text-muted);
+            width: 0;
+        }
+        .connector-v.short { height: 20px; }
+
+        /* ── ADVISORY CARDS (CDL / CLEP) ── */
         .level-advisory {
             display: flex;
             justify-content: center;
@@ -117,17 +118,14 @@
             padding: 16px 24px;
             width: 270px;
             text-align: center;
-            transition: 0.3s;
+            transition: .3s;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        .advisory-card:hover {
-            border-color: var(--brand-blue);
-            transform: translateY(-2px);
-        }
+        .advisory-card:hover { border-color: var(--brand-blue); transform: translateY(-2px); }
         .advisory-card .role-tag {
-            font-size: 0.62rem;
+            font-size: .62rem;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             color: var(--text-muted);
@@ -135,25 +133,12 @@
             margin-bottom: 6px;
         }
         .advisory-card .role-name {
-            font-size: 0.92rem;
+            font-size: .92rem;
             font-weight: 800;
             color: var(--text-primary);
-            letter-spacing: -0.2px;
         }
 
-        /* --- Connectors --- */
-        .connector-v {
-            width: 2px;
-            height: 40px;
-            background: var(--border-strong);
-        }
-        .connector-v.dashed {
-            background: transparent;
-            border-left: 2.5px dashed var(--text-muted);
-            width: 0;
-        }
-
-        /* --- Director card --- */
+        /* ── DIRECTOR CARD ── */
         .director-card {
             position: relative;
             background: var(--surface);
@@ -164,7 +149,7 @@
             box-shadow: var(--shadow-md);
             text-align: center;
             max-width: 520px;
-            transition: 0.35s;
+            transition: .35s;
             overflow: hidden;
         }
         .director-card::before {
@@ -176,7 +161,7 @@
         }
         .director-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
         .director-card .role-tag {
-            font-size: 0.68rem;
+            font-size: .68rem;
             text-transform: uppercase;
             letter-spacing: 2.4px;
             color: var(--text-muted);
@@ -187,8 +172,7 @@
             font-size: 1.5rem;
             font-weight: 900;
             margin: 0 0 6px;
-            letter-spacing: -0.6px;
-            color: var(--text-primary);
+            letter-spacing: -.6px;
         }
         .director-card .role-name {
             font-size: 1.02rem;
@@ -196,7 +180,40 @@
             color: var(--text-secondary);
         }
 
-        /* --- Subdirecciones grid --- */
+        /* ── DIRECT DEPARTMENTS (Gabinete, Vinculación, Auditoría) ── */
+        .direct-deps {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .dep-card {
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-md);
+            padding: 14px 20px;
+            text-align: center;
+            transition: .3s;
+            min-width: 180px;
+            max-width: 220px;
+        }
+        .dep-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--brand-dark); }
+        .dep-card .dep-tag {
+            font-size: .6rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        .dep-card .dep-name {
+            font-size: .85rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        /* ── SUBDIRECCIONES GRID ── */
         .subdir-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -209,13 +226,12 @@
         .subdir-grid::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 10%; right: 10%;
+            top: 0; left: 10%; right: 10%;
             height: 2px;
             background: var(--border-strong);
         }
 
-        /* columna: subdir-card + área cards */
+        /* ── SUBDIRECCIÓN COLUMN ── */
         .subdir-col {
             display: flex;
             flex-direction: column;
@@ -226,33 +242,32 @@
         .subdir-col::before {
             content: "";
             position: absolute;
-            top: -40px;
-            left: 50%;
-            width: 2px;
-            height: 40px;
+            top: -40px; left: 50%;
+            width: 2px; height: 40px;
             background: var(--border-strong);
             transform: translateX(-50%);
         }
-
-        /* accents por columna */
         .subdir-col.c-blue   { --card-accent: var(--brand-blue); }
         .subdir-col.c-green  { --card-accent: var(--brand-green); }
         .subdir-col.c-yellow { --card-accent: var(--brand-yellow); }
         .subdir-col.c-pink   { --card-accent: var(--brand-pink); }
         .subdir-col.c-red    { --card-accent: var(--brand-red); }
 
+        /* ── SUBDIRECCIÓN CARD ── */
         .subdir-card {
             position: relative;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 28px 22px 24px;
+            padding: 24px 20px 20px;
             box-shadow: var(--shadow-sm);
-            transition: 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+            transition: .35s cubic-bezier(.2,.7,.2,1);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             overflow: hidden;
+            cursor: pointer;
+            user-select: none;
         }
         .subdir-card::after {
             content: "";
@@ -260,72 +275,87 @@
             top: 0; left: 0; right: 0;
             height: 4px;
             background: var(--card-accent);
-            transform: scaleX(0.35);
+            transform: scaleX(.35);
             transform-origin: left;
-            transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+            transition: transform .4s cubic-bezier(.2,.7,.2,1);
         }
-        .subdir-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--card-accent);
-            box-shadow: var(--shadow-md);
-        }
+        .subdir-card:hover { transform: translateY(-4px); border-color: var(--card-accent); box-shadow: var(--shadow-md); }
         .subdir-card:hover::after { transform: scaleX(1); }
-        .subdir-card:hover .subdir-icon {
-            background: var(--card-accent);
-            color: #fff;
-        }
+        .subdir-card:hover .subdir-icon { background: var(--card-accent); color: #fff; }
 
         .subdir-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
+            width: 42px; height: 42px;
+            border-radius: 10px;
             background: var(--surface-alt);
             color: var(--card-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+            transition: .3s;
             flex-shrink: 0;
         }
         .subdir-tag {
-            font-size: 0.62rem;
+            font-size: .6rem;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             color: var(--text-muted);
             font-weight: 800;
         }
         .subdir-title {
-            font-size: 0.98rem;
+            font-size: .95rem;
             font-weight: 900;
             color: var(--text-primary);
             line-height: 1.25;
-            letter-spacing: -0.3px;
+            letter-spacing: -.3px;
             margin: 0;
         }
         .subdir-desc {
-            font-size: 0.8rem;
+            font-size: .78rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.55;
             font-weight: 500;
-            margin: 4px 0 0;
+            margin: 2px 0 0;
         }
 
-        /* --- Área cards --- */
+        /* Toggle chevron */
+        .toggle-btn {
+            position: absolute;
+            bottom: 10px; right: 10px;
+            width: 22px; height: 22px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: .3s;
+            flex-shrink: 0;
+        }
+        .toggle-icon {
+            transition: transform .3s;
+            color: var(--text-muted);
+        }
+        .subdir-col.collapsed .toggle-icon { transform: rotate(-90deg); }
+
+        /* ── AREA CARDS ── */
         .area-list {
             display: flex;
             flex-direction: column;
             gap: 6px;
             padding-top: 6px;
-            position: relative;
+            overflow: hidden;
+            max-height: 600px;
+            opacity: 1;
+            transition: max-height .4s ease, opacity .3s ease, padding .3s ease;
         }
         .area-list::before {
             content: "";
             display: block;
-            width: 2px;
-            height: 14px;
+            width: 2px; height: 14px;
             background: var(--border-strong);
             margin: 0 auto;
             flex-shrink: 0;
+        }
+        .subdir-col.collapsed .area-list {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
         }
 
         .area-card {
@@ -333,8 +363,8 @@
             border: 1px solid var(--border);
             border-left: 3px solid var(--card-accent);
             border-radius: var(--radius-sm);
-            padding: 10px 14px;
-            transition: 0.25s;
+            padding: 10px 13px;
+            transition: .25s;
         }
         .area-card:hover {
             background: var(--surface);
@@ -343,29 +373,16 @@
             box-shadow: var(--shadow-sm);
         }
         .area-name {
-            font-size: 0.78rem;
+            font-size: .76rem;
             font-weight: 800;
             color: var(--text-primary);
             line-height: 1.3;
-            margin-bottom: 3px;
-        }
-        .area-desc {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            font-weight: 500;
         }
 
-        /* =========================================================
-           RESPONSIVE
-           ========================================================= */
+        /* ── RESPONSIVE ── */
         @media (max-width: 1000px) {
-            .subdir-grid {
-                grid-template-columns: repeat(2, 1fr);
-                padding-top: 0;
-            }
-            .subdir-grid::before { display: none; }
-            .subdir-col::before { display: none; }
+            .subdir-grid { grid-template-columns: repeat(2, 1fr); padding-top: 0; }
+            .subdir-grid::before, .subdir-col::before { display: none; }
         }
         @media (max-width: 720px) {
             .hero { padding: 32px 20px 24px; }
@@ -378,18 +395,16 @@
 
 <body>
 
-    <!-- ============== HERO ============== -->
     <section class="hero">
         <h1 class="page-title">
             <span class="accent-underline">Organigrama institucional</span>
         </h1>
     </section>
 
-    <!-- ============== ORG CHART ============== -->
     <section class="chart-wrap" id="organigrama">
         <div class="org-chart">
 
-            <!-- Órganos deliberativos (Ley 21.040) -->
+            <!-- Órganos deliberativos -->
             <div class="level-advisory">
                 <div class="advisory-card">
                     <div class="role-tag">Órgano resolutivo</div>
@@ -410,6 +425,24 @@
                 <div class="role-name">Nelson Zárate Hervera</div>
             </div>
 
+            <div class="connector-v short"></div>
+
+            <!-- Departamentos dependientes directos -->
+            <div class="direct-deps">
+                <div class="dep-card">
+                    <div class="dep-tag">Departamento</div>
+                    <div class="dep-name">Gabinete Jurídico y Transparencia</div>
+                </div>
+                <div class="dep-card">
+                    <div class="dep-tag">Departamento</div>
+                    <div class="dep-name">Vinculación Territorial</div>
+                </div>
+                <div class="dep-card">
+                    <div class="dep-tag">Departamento</div>
+                    <div class="dep-name">Auditoría</div>
+                </div>
+            </div>
+
             <div class="connector-v"></div>
 
             <!-- Subdirecciones -->
@@ -417,130 +450,136 @@
 
                 <!-- 1. Apoyo Técnico Pedagógico -->
                 <div class="subdir-col c-blue" role="listitem">
-                    <article class="subdir-card">
+                    <article class="subdir-card" title="Clic para expandir / colapsar">
                         <div class="subdir-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
                         </div>
                         <div class="subdir-tag">Subdirección</div>
                         <h3 class="subdir-title">Apoyo Técnico Pedagógico</h3>
-                        <p class="subdir-desc">Acompañamiento técnico a los establecimientos y monitoreo de procesos educativos.</p>
+                        <p class="subdir-desc">Acompañamiento técnico a establecimientos y monitoreo de procesos educativos.</p>
+                        <div class="toggle-btn" aria-hidden="true">
+                            <svg class="toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
                     </article>
                     <div class="area-list">
                         <div class="area-card">
-                            <div class="area-name">Mejora Continua</div>
-                            <div class="area-desc">Acompañamiento técnico y mejora de prácticas pedagógicas en establecimientos.</div>
+                            <div class="area-name">Mejora Continua y Acompañamiento Técnico Pedagógico EE - JI</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Convivencia, Inclusión y Programas Educativos</div>
-                            <div class="area-desc">Clima escolar, NEE, integración e implementación de programas institucionales.</div>
+                            <div class="area-name">Programas, Inclusión, Convivencia y Apoyo Psicosocial</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Desarrollo Profesional</div>
-                            <div class="area-desc">Formación y fortalecimiento de competencias de docentes y asistentes.</div>
+                            <div class="area-name">Formación y Desarrollo Profesional de los Establecimientos Educacionales</div>
                         </div>
                         <div class="area-card">
                             <div class="area-name">Monitoreo y Seguimiento de Procesos y Resultados Educativos</div>
-                            <div class="area-desc">Análisis de datos, indicadores de resultados y reportes de gestión educativa.</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 2. Planificación y Control de Gestión -->
                 <div class="subdir-col c-green" role="listitem">
-                    <article class="subdir-card">
+                    <article class="subdir-card" title="Clic para expandir / colapsar">
                         <div class="subdir-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 4 5-5"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 4 5-5"/></svg>
                         </div>
                         <div class="subdir-tag">Subdirección</div>
                         <h3 class="subdir-title">Planificación y Control de Gestión</h3>
                         <p class="subdir-desc">Planificación estratégica, seguimiento de metas y control de gestión institucional.</p>
+                        <div class="toggle-btn" aria-hidden="true">
+                            <svg class="toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
                     </article>
                     <div class="area-list">
                         <div class="area-card">
-                            <div class="area-name">Planificación Estratégica</div>
-                            <div class="area-desc">Elaboración y seguimiento del Plan Estratégico y planes anuales.</div>
+                            <div class="area-name">Planificación y Gestión</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Control de Gestión</div>
-                            <div class="area-desc">Monitoreo de indicadores, reportes de desempeño y mejora continua.</div>
+                            <div class="area-name">Estudios Prospectivos, Diseño y Evaluación de Proyectos de Inversión</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Tecnologías de Información</div>
-                            <div class="area-desc">Sistemas institucionales, infraestructura TI y soporte digital.</div>
+                            <div class="area-name">Desarrollo y Soporte de Tecnologías de Información</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 3. Administración y Finanzas -->
                 <div class="subdir-col c-yellow" role="listitem">
-                    <article class="subdir-card">
+                    <article class="subdir-card" title="Clic para expandir / colapsar">
                         <div class="subdir-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                         </div>
                         <div class="subdir-tag">Subdirección</div>
                         <h3 class="subdir-title">Administración y Finanzas</h3>
-                        <p class="subdir-desc">Gestión presupuestaria, financiera, contable, de abastecimiento y servicios generales.</p>
+                        <p class="subdir-desc">Gestión presupuestaria, financiera, contable, de compras y servicios generales.</p>
+                        <div class="toggle-btn" aria-hidden="true">
+                            <svg class="toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
                     </article>
                     <div class="area-list">
                         <div class="area-card">
-                            <div class="area-name">Presupuesto y Contabilidad</div>
-                            <div class="area-desc">Formulación presupuestaria, contabilidad y gestión financiera.</div>
+                            <div class="area-name">Finanzas</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Compras</div>
-                            <div class="area-desc">Procesos de compra, licitaciones y gestión de contratos.</div>
+                            <div class="area-name">Compras y Logística</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Servicios Generales</div>
-                            <div class="area-desc">Gestión de activos, logística y servicios de apoyo institucional.</div>
+                            <div class="area-name">Presupuesto</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 4. Gestión y Desarrollo de las Personas -->
                 <div class="subdir-col c-pink" role="listitem">
-                    <article class="subdir-card">
+                    <article class="subdir-card" title="Clic para expandir / colapsar">
                         <div class="subdir-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         </div>
                         <div class="subdir-tag">Subdirección</div>
                         <h3 class="subdir-title">Gestión y Desarrollo de las Personas</h3>
                         <p class="subdir-desc">Selección, desarrollo, bienestar y formación del capital humano del Servicio Local.</p>
+                        <div class="toggle-btn" aria-hidden="true">
+                            <svg class="toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
                     </article>
                     <div class="area-list">
                         <div class="area-card">
-                            <div class="area-name">Selección y Contratación</div>
-                            <div class="area-desc">Reclutamiento, selección y vinculación de personal docente y administrativo.</div>
+                            <div class="area-name">Procesos Administrativos de Gestión de Personas</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Capacitación y Desarrollo</div>
-                            <div class="area-desc">Formación continua, evaluación del desempeño y carrera funcionaria.</div>
+                            <div class="area-name">Remuneraciones</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Bienestar</div>
-                            <div class="area-desc">Beneficios, salud ocupacional y calidad de vida laboral.</div>
+                            <div class="area-name">Formación y Desarrollo Organizacional</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Prevención de Riesgos</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 5. Infraestructura y Mantenimiento -->
                 <div class="subdir-col c-red" role="listitem">
-                    <article class="subdir-card">
+                    <article class="subdir-card" title="Clic para expandir / colapsar">
                         <div class="subdir-icon" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M14 9h1"/><path d="M14 13h1"/><path d="M9 17h6"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M14 9h1"/><path d="M14 13h1"/><path d="M9 17h6"/></svg>
                         </div>
                         <div class="subdir-tag">Subdirección</div>
                         <h3 class="subdir-title">Infraestructura y Mantenimiento</h3>
                         <p class="subdir-desc">Proyectos, conservación e infraestructura de los establecimientos educacionales.</p>
+                        <div class="toggle-btn" aria-hidden="true">
+                            <svg class="toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
                     </article>
                     <div class="area-list">
                         <div class="area-card">
-                            <div class="area-name">Proyectos</div>
-                            <div class="area-desc">Diseño, licitación y supervisión de obras en establecimientos.</div>
+                            <div class="area-name">Diseño y Seguimiento de Proyectos de Infraestructura y Mantenimiento</div>
                         </div>
                         <div class="area-card">
-                            <div class="area-name">Mantenimiento</div>
-                            <div class="area-desc">Mantención programada y atención de emergencias en planta física.</div>
+                            <div class="area-name">Ejecución de Proyectos de Infraestructura</div>
+                        </div>
+                        <div class="area-card">
+                            <div class="area-name">Ejecución de Proyectos de Mantenimiento</div>
                         </div>
                     </div>
                 </div>
@@ -548,6 +587,14 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.querySelectorAll('.subdir-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.closest('.subdir-col').classList.toggle('collapsed');
+            });
+        });
+    </script>
 
 </body>
 </html>
