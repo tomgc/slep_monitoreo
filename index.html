@@ -178,6 +178,7 @@
             display: flex;
             justify-content: flex-end;
             padding-right: 36px; /* space for horizontal arm */
+            width: 100%;         /* must extend to trunk edge */
         }
         .left-branch .dep-item::after {
             content: "";
@@ -193,6 +194,7 @@
             display: flex;
             justify-content: flex-start;
             padding-left: 36px;
+            width: 100%;
         }
         .right-branch .dep-item::before {
             content: "";
@@ -203,14 +205,19 @@
             transform: translateY(-50%);
         }
 
-        /* Department card */
+        /* Department card — fixed size so all three are identical */
         .dep-card {
             background: var(--surface);
             border: 1px solid var(--border-strong);
             border-radius: var(--radius-md);
             padding: 12px 16px;
             text-align: center;
-            max-width: 210px;
+            width: 200px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             transition: .3s;
         }
         .dep-card:hover {
