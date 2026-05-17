@@ -232,40 +232,72 @@
             transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- LÍNEA DE TIEMPO --- */
+        /* --- LÍNEA DE TIEMPO HORIZONTAL --- */
         .timeline {
             position: relative;
             margin-top: 30px;
-            padding-left: 28px;
+            padding: 30px 4px 18px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--blue) transparent;
         }
-        .timeline::before {
+        .timeline::-webkit-scrollbar { height: 6px; }
+        .timeline::-webkit-scrollbar-track { background: transparent; }
+        .timeline::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+        .timeline::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+        .timeline-track {
+            display: flex;
+            gap: 18px;
+            position: relative;
+            padding-top: 26px;
+            min-width: min-content;
+        }
+        .timeline-track::before {
             content: "";
             position: absolute;
-            left: 7px;
-            top: 8px;
-            bottom: 8px;
-            width: 2px;
+            top: 32px;
+            left: 24px;
+            right: 24px;
+            height: 2px;
             background: var(--border);
+            z-index: 0;
         }
         .timeline-item {
             position: relative;
-            padding-bottom: 28px;
+            flex: 0 0 240px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px 20px 22px;
+            scroll-snap-align: start;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            z-index: 1;
         }
-        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--blue);
+            box-shadow: var(--shadow);
+        }
         .timeline-item::before {
             content: "";
             position: absolute;
-            left: -28px;
-            top: 6px;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 14px;
             height: 14px;
             border-radius: 50%;
             background: var(--white);
             border: 3px solid var(--blue);
             transition: transform 0.25s, background 0.25s;
+            z-index: 2;
         }
         .timeline-item:hover::before {
-            transform: scale(1.2);
+            transform: translateX(-50%) scale(1.2);
             background: var(--blue);
         }
         .timeline-date {
@@ -276,15 +308,16 @@
             text-transform: uppercase;
         }
         .timeline-title {
-            font-size: 1.02rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--navy);
-            margin: 4px 0 6px;
+            margin: 6px 0 8px;
+            line-height: 1.35;
         }
         .timeline-desc {
             color: var(--gray);
-            font-size: 0.92rem;
-            line-height: 1.6;
+            font-size: 0.88rem;
+            line-height: 1.55;
             margin: 0;
         }
 
@@ -699,13 +732,17 @@
         }
 
         function renderTimeline() {
-            document.getElementById('timeline').innerHTML = hitos.map(h => `
-                <div class="timeline-item">
-                    <div class="timeline-date">${escapeHtml(h.fecha)}</div>
-                    <div class="timeline-title">${escapeHtml(h.titulo)}</div>
-                    <p class="timeline-desc">${escapeHtml(h.desc)}</p>
+            document.getElementById('timeline').innerHTML = `
+                <div class="timeline-track">
+                    ${hitos.map(h => `
+                        <article class="timeline-item">
+                            <div class="timeline-date">${escapeHtml(h.fecha)}</div>
+                            <div class="timeline-title">${escapeHtml(h.titulo)}</div>
+                            <p class="timeline-desc">${escapeHtml(h.desc)}</p>
+                        </article>
+                    `).join('')}
                 </div>
-            `).join('');
+            `;
         }
 
         function renderProductos() {
