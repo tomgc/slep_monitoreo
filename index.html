@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Área de Monitoreo de Procesos y Resultados Educativos del SLEP Costa Central. Producción y análisis de datos para la mejora educativa.">
-    <meta name="theme-color" content="#2c3e50">
+    <meta name="theme-color" content="#2c3e50" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e1620" media="(prefers-color-scheme: dark)">
     <title>Área de Monitoreo | SLEP Costa Central</title>
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Área de Monitoreo | SLEP Costa Central">
+    <meta property="og:description" content="Producción y análisis de datos para la mejora educativa territorial. Subdirección de Apoyo Técnico Pedagógico.">
+    <meta property="og:url" content="https://tomgc.github.io/monitoreo/">
+    <meta property="og:image" content="https://tomgc.github.io/monitoreo/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:site_name" content="SLEP Costa Central">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Área de Monitoreo | SLEP Costa Central">
+    <meta name="twitter:description" content="Producción y análisis de datos para la mejora educativa territorial.">
+    <meta name="twitter:image" content="https://tomgc.github.io/monitoreo/og-image.png">
 
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='3' y='12' width='4' height='9' rx='1' fill='%232c3e50'/><rect x='10' y='7' width='4' height='14' rx='1' fill='%233498db'/><rect x='17' y='3' width='4' height='18' rx='1' fill='%232c3e50'/></svg>">
@@ -38,12 +56,49 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --navy: #e8eef5;
+                --blue: #5dade2;
+                --gray: #b0bec5;
+                --muted: #6c7a85;
+                --border: #2a3640;
+                --bg-soft: #18222d;
+                --white: #0e1620;
+                --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+                --popover-bg: #e8eef5;
+                --popover-fg: #0e1620;
+            }
+            h2 { background: rgba(14, 22, 32, 0.92); }
+            #progress-bar { background: rgba(255, 255, 255, 0.06); }
+            .stat-bar-bg { background: #2a3640; }
+            /* Mantener miniaturas claras (las mockups simulan capturas en fondo blanco) */
+            .product-thumb {
+                background: linear-gradient(135deg, #eef2f7, #dbe6f0);
+                color: #2c3e50;
+            }
+            .product-thumb::after {
+                background: rgba(255, 255, 255, 0.7);
+                color: #546e7a;
+            }
+            /* Tooltips y feedback de copia conservan contraste invertido */
+            .glossary-term::after { background: var(--popover-bg); color: var(--popover-fg); }
+            .glossary-term::before { border-top-color: var(--popover-bg); }
+            .copy-feedback { background: var(--popover-bg); color: var(--popover-fg); }
+            /* Tab seleccionado: bg claro con texto oscuro funciona bien */
+            .tab-btn[aria-selected="true"] {
+                background: var(--navy);
+                color: var(--white);
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 transition: none !important;
                 animation: none !important;
                 scroll-behavior: auto !important;
             }
+            .timeline-item { opacity: 1 !important; transform: none !important; }
         }
 
         /* --- BARRA DE PROGRESO --- */
@@ -233,6 +288,32 @@
         }
 
         /* --- LÍNEA DE TIEMPO HORIZONTAL --- */
+        .timeline-wrapper {
+            position: relative;
+            margin: 0 -4px;
+        }
+        .timeline-wrapper::before,
+        .timeline-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 30px;
+            bottom: 18px;
+            width: 48px;
+            pointer-events: none;
+            z-index: 3;
+            transition: opacity 0.25s;
+        }
+        .timeline-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, var(--white) 25%, transparent);
+        }
+        .timeline-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, var(--white) 25%, transparent);
+        }
+        .timeline-wrapper.at-start::before { opacity: 0; }
+        .timeline-wrapper.at-end::after { opacity: 0; }
+
         .timeline {
             position: relative;
             margin-top: 30px;
@@ -274,9 +355,24 @@
             border-radius: var(--radius);
             padding: 26px 20px 22px;
             scroll-snap-align: start;
-            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.45s ease,
+                        box-shadow 0.25s,
+                        border-color 0.25s;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(14px);
         }
+        .timeline-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-item.is-visible:nth-child(2) { transition-delay: 0.08s; }
+        .timeline-item.is-visible:nth-child(3) { transition-delay: 0.16s; }
+        .timeline-item.is-visible:nth-child(4) { transition-delay: 0.24s; }
+        .timeline-item.is-visible:nth-child(5) { transition-delay: 0.32s; }
+        .timeline-item.is-visible:nth-child(6) { transition-delay: 0.40s; }
+        .timeline-item.is-visible:nth-child(n+7) { transition-delay: 0.48s; }
         .timeline-item:hover {
             transform: translateY(-3px);
             border-color: var(--blue);
@@ -351,7 +447,7 @@
             color: var(--navy);
             position: relative;
         }
-        .product-thumb svg { width: 52px; height: 52px; opacity: 0.55; }
+        .product-thumb svg { width: 75%; max-width: 220px; height: auto; display: block; }
         .product-thumb::after {
             content: "Imagen referencial";
             position: absolute;
@@ -539,6 +635,13 @@
             padding-top: 24px;
             border-top: 1px solid var(--border);
         }
+        footer.site-footer a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        footer.site-footer a:hover { color: var(--navy); text-decoration: underline; }
 
         @media (max-width: 900px) {
             nav#side-nav { display: none; }
@@ -549,6 +652,94 @@
         @media (max-width: 700px) {
             .tab-menu { grid-template-columns: 1fr; }
             header h1 { font-size: 1.8rem; }
+        }
+
+        /* --- IMPRESIÓN / PDF --- */
+        @media print {
+            @page { margin: 18mm 16mm; }
+
+            body { background: #fff; color: #000; font-size: 11pt; line-height: 1.45; }
+            nav#side-nav, #progress-bar { display: none !important; }
+            main { margin: 0; padding: 0; max-width: none; width: 100%; }
+
+            header { padding: 0 0 18pt; break-after: avoid; }
+            header h1 { font-size: 22pt; color: #000; }
+            .sub-title { color: #2c3e50; }
+
+            section { margin-bottom: 24pt; break-inside: avoid; }
+            h2 {
+                position: static;
+                background: none;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                border-bottom: 1pt solid #999;
+                color: #000;
+                font-size: 14pt;
+                padding: 6pt 0;
+                margin: 0 0 12pt;
+                break-after: avoid;
+            }
+
+            .section-content, .section-content p, .timeline-desc, .product-desc, .glossary-item { color: #000; }
+
+            /* Tabs → mostrar todas las descripciones */
+            .tab-menu { display: none; }
+            #tab-description { background: none; border-left: 2pt solid #2c3e50; padding: 8pt 12pt; }
+            #tab-description::after {
+                content: "Nota: en versión impresa se muestra solo el ámbito seleccionado al imprimir.";
+                display: block;
+                margin-top: 8pt;
+                font-size: 9pt;
+                color: #666;
+            }
+
+            /* Timeline → grilla en lugar de scroll horizontal */
+            .timeline-wrapper::before, .timeline-wrapper::after { display: none; }
+            .timeline { overflow: visible; padding: 0; }
+            .timeline-track {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10pt;
+                padding-top: 0;
+            }
+            .timeline-track::before { display: none; }
+            .timeline-item {
+                flex: none;
+                border: 1pt solid #999;
+                box-shadow: none !important;
+                padding: 10pt 12pt;
+                break-inside: avoid;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .timeline-item::before { display: none; }
+
+            /* Productos */
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10pt; }
+            .product-card { border: 1pt solid #999; box-shadow: none !important; break-inside: avoid; }
+            .product-thumb { aspect-ratio: 16 / 8; background: #eef2f7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .product-thumb::after { display: none; }
+
+            /* Indicadores */
+            .stat-card { border: 1pt solid #999; box-shadow: none !important; break-inside: avoid; }
+            .stat-bar-bg { background: #ddd !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .stat-bar-fill { background: #2c3e50 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* Equipo */
+            .card-person { border: 1pt solid #999; background: none; break-inside: avoid; }
+
+            /* Glosario */
+            .glossary-grid { grid-template-columns: repeat(2, 1fr); gap: 6pt; }
+            .glossary-item { background: none; border-left: 2pt solid #2c3e50; padding: 6pt 8pt; box-shadow: none !important; }
+            .glossary-term { border-bottom: none; }
+            .glossary-term::after, .glossary-term::before { display: none !important; }
+
+            /* Botones de email → texto plano */
+            .copy-email { color: #000; }
+            .copy-feedback { display: none; }
+
+            a { color: #000; text-decoration: underline; }
+            .site-footer { color: #666; }
         }
     </style>
 </head>
@@ -608,7 +799,9 @@
             <h2>2. Trayectoria</h2>
             <div class="section-content">
                 <p>Hitos institucionales del Área desde su conformación, en el marco de la implementación de la Nueva Educación Pública en el SLEP Costa Central:</p>
-                <div id="timeline" class="timeline"></div>
+                <div class="timeline-wrapper">
+                    <div id="timeline" class="timeline"></div>
+                </div>
             </div>
         </section>
 
@@ -644,7 +837,7 @@
             <div class="section-content">
                 <p>Definiciones y siglas clave utilizadas en la gestión de monitoreo:</p>
                 <div id="glossary-container" class="glossary-grid"></div>
-                <footer class="site-footer">Versión 1.3 — SLEP Costa Central · 2026</footer>
+                <footer class="site-footer">Versión 1.4 — <a href="https://slepcostacentral.gob.cl" target="_blank" rel="noopener">SLEP Costa Central</a> · 2026</footer>
             </div>
         </section>
     </main>
@@ -678,10 +871,61 @@
             user:      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>',
             briefcase: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
             mail:      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
-            report:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="11" y2="9"/></svg>',
-            chart:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg>',
-            trend:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
-            users:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
+            report: `<svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
+                <rect x="34" y="14" width="92" height="76" rx="4" fill="#fff" stroke="#2c3e50" stroke-width="1.4"/>
+                <rect x="40" y="22" width="44" height="4" rx="1" fill="#2c3e50"/>
+                <rect x="40" y="32" width="80" height="2" rx="1" fill="#cfd8dc"/>
+                <rect x="40" y="38" width="66" height="2" rx="1" fill="#cfd8dc"/>
+                <rect x="40" y="44" width="80" height="2" rx="1" fill="#cfd8dc"/>
+                <rect x="40" y="50" width="60" height="2" rx="1" fill="#cfd8dc"/>
+                <rect x="40" y="58" width="80" height="26" rx="2" fill="#f0f4f8"/>
+                <rect x="46" y="74" width="8" height="8" fill="#3498db"/>
+                <rect x="58" y="68" width="8" height="14" fill="#2c3e50"/>
+                <rect x="70" y="71" width="8" height="11" fill="#3498db"/>
+                <rect x="82" y="64" width="8" height="18" fill="#2c3e50"/>
+                <rect x="94" y="70" width="8" height="12" fill="#3498db"/>
+                <rect x="106" y="66" width="8" height="16" fill="#2c3e50"/>
+            </svg>`,
+            chart: `<svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
+                <rect x="28" y="12" width="104" height="76" rx="4" fill="#fff" stroke="#2c3e50" stroke-width="1.4"/>
+                <rect x="34" y="18" width="36" height="3" rx="1" fill="#2c3e50"/>
+                <rect x="34" y="24" width="22" height="2" rx="1" fill="#cfd8dc"/>
+                <line x1="36" y1="78" x2="126" y2="78" stroke="#cfd8dc" stroke-width="1"/>
+                <line x1="36" y1="78" x2="36" y2="32" stroke="#cfd8dc" stroke-width="1"/>
+                <rect x="42" y="58" width="10" height="20" fill="#3498db"/>
+                <rect x="58" y="48" width="10" height="30" fill="#2c3e50"/>
+                <rect x="74" y="40" width="10" height="38" fill="#3498db"/>
+                <rect x="90" y="52" width="10" height="26" fill="#2c3e50"/>
+                <rect x="106" y="44" width="10" height="34" fill="#3498db"/>
+            </svg>`,
+            trend: `<svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
+                <rect x="28" y="12" width="104" height="76" rx="4" fill="#fff" stroke="#2c3e50" stroke-width="1.4"/>
+                <rect x="34" y="18" width="40" height="3" rx="1" fill="#2c3e50"/>
+                <line x1="36" y1="78" x2="126" y2="78" stroke="#cfd8dc" stroke-width="1"/>
+                <line x1="36" y1="78" x2="36" y2="30" stroke="#cfd8dc" stroke-width="1"/>
+                <path d="M42,68 L58,62 L74,64 L90,50 L106,42 L122,32 L122,78 L42,78 Z" fill="#3498db" fill-opacity="0.18"/>
+                <path d="M42,68 L58,62 L74,64 L90,50 L106,42 L122,32" stroke="#3498db" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="42" cy="68" r="2.5" fill="#2c3e50"/>
+                <circle cx="58" cy="62" r="2.5" fill="#2c3e50"/>
+                <circle cx="74" cy="64" r="2.5" fill="#2c3e50"/>
+                <circle cx="90" cy="50" r="2.5" fill="#2c3e50"/>
+                <circle cx="106" cy="42" r="2.5" fill="#2c3e50"/>
+                <circle cx="122" cy="32" r="2.5" fill="#2c3e50"/>
+            </svg>`,
+            users: `<svg viewBox="0 0 160 100" fill="none" aria-hidden="true">
+                <rect x="22" y="14" width="50" height="32" rx="3" fill="#fff" stroke="#2c3e50" stroke-width="1.4"/>
+                <line x1="28" y1="22" x2="52" y2="22" stroke="#3498db" stroke-width="2" stroke-linecap="round"/>
+                <line x1="28" y1="30" x2="64" y2="30" stroke="#cfd8dc" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="28" y1="38" x2="58" y2="38" stroke="#cfd8dc" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="48" cy="60" r="5" fill="#2c3e50"/>
+                <path d="M40,82 Q40,70 48,70 Q56,70 56,82 L56,88 L40,88 Z" fill="#2c3e50"/>
+                <circle cx="92" cy="56" r="5" fill="#3498db"/>
+                <path d="M84,78 Q84,66 92,66 Q100,66 100,78 L100,84 L84,84 Z" fill="#3498db"/>
+                <circle cx="110" cy="56" r="5" fill="#3498db"/>
+                <path d="M102,78 Q102,66 110,66 Q118,66 118,78 L118,84 L102,84 Z" fill="#3498db"/>
+                <circle cx="128" cy="56" r="5" fill="#3498db"/>
+                <path d="M120,78 Q120,66 128,66 Q136,66 136,78 L136,84 L120,84 Z" fill="#3498db"/>
+            </svg>`
         };
 
         // Editable: hitos de la trayectoria del Área
@@ -813,6 +1057,19 @@
                 if (btn) copyEmail(btn);
             });
 
+            // Fades laterales de la timeline según posición de scroll
+            const timelineEl = document.getElementById('timeline');
+            const timelineWrap = timelineEl.parentElement;
+            const updateTimelineFades = () => {
+                const max = timelineEl.scrollWidth - timelineEl.clientWidth;
+                const x = timelineEl.scrollLeft;
+                timelineWrap.classList.toggle('at-start', x <= 2);
+                timelineWrap.classList.toggle('at-end', x >= max - 2);
+            };
+            updateTimelineFades();
+            timelineEl.addEventListener('scroll', updateTimelineFades, { passive: true });
+            window.addEventListener('resize', updateTimelineFades);
+
             // Animación de barras al entrar en viewport
             const barObserver = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -823,6 +1080,17 @@
                 });
             }, { threshold: 0.4 });
             document.querySelectorAll('.stat-bar-fill').forEach(b => barObserver.observe(b));
+
+            // Animación de entrada de los hitos de la timeline
+            const timelineObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.25 });
+            document.querySelectorAll('.timeline-item').forEach(item => timelineObserver.observe(item));
 
             // Barra de progreso (con requestAnimationFrame)
             const progress = document.getElementById('progress-bar');
