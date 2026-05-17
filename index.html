@@ -232,6 +232,137 @@
             transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* --- LÍNEA DE TIEMPO --- */
+        .timeline {
+            position: relative;
+            margin-top: 30px;
+            padding-left: 28px;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 28px;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -28px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--blue);
+            transition: transform 0.25s, background 0.25s;
+        }
+        .timeline-item:hover::before {
+            transform: scale(1.2);
+            background: var(--blue);
+        }
+        .timeline-date {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--blue);
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+        .timeline-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 4px 0 6px;
+        }
+        .timeline-desc {
+            color: var(--gray);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- TARJETAS DE PRODUCTOS --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 30px 0 40px;
+        }
+        .product-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            border-color: var(--blue);
+        }
+        .product-thumb {
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(135deg, #eef2f7, #dbe6f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            position: relative;
+        }
+        .product-thumb svg { width: 52px; height: 52px; opacity: 0.55; }
+        .product-thumb::after {
+            content: "Imagen referencial";
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-size: 0.62rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .product-body { padding: 18px 20px 22px; }
+        .product-cat {
+            font-size: 0.66rem;
+            color: var(--blue);
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+        .product-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 6px 0 8px;
+            line-height: 1.35;
+        }
+        .product-desc {
+            font-size: 0.88rem;
+            color: var(--gray);
+            line-height: 1.55;
+            margin: 0;
+        }
+        .subsection-title {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--gray);
+            font-weight: 700;
+            margin: 10px 0 16px;
+        }
+
         /* --- TOOLTIPS DE GLOSARIO (CSS, INSTANTÁNEOS) --- */
         .glossary-term {
             position: relative;
@@ -395,9 +526,10 @@
     <nav id="side-nav" aria-label="Secciones del sitio">
         <div class="nav-title">Navegación</div>
         <a href="#que-hace" class="nav-item active-nav">1. ¿Qué hace?</a>
-        <a href="#ejemplos" class="nav-item">2. Ejemplos de trabajo</a>
-        <a href="#quienes-somos" class="nav-item">3. ¿Quiénes la conforman?</a>
-        <a href="#glosario" class="nav-item">4. Glosario técnico</a>
+        <a href="#trayectoria" class="nav-item">2. Trayectoria</a>
+        <a href="#ejemplos" class="nav-item">3. Ejemplos de trabajo</a>
+        <a href="#quienes-somos" class="nav-item">4. ¿Quiénes la conforman?</a>
+        <a href="#glosario" class="nav-item">5. Glosario técnico</a>
     </nav>
 
     <main>
@@ -439,33 +571,47 @@
             </div>
         </section>
 
-        <section id="ejemplos">
-            <h2>2. Ejemplos de trabajo</h2>
+        <section id="trayectoria">
+            <h2>2. Trayectoria</h2>
             <div class="section-content">
-                <p>Visualización de indicadores clave para la gestión educativa territorial:</p>
+                <p>Hitos institucionales del Área desde su conformación, en el marco de la implementación de la Nueva Educación Pública en el SLEP Costa Central:</p>
+                <div id="timeline" class="timeline"></div>
+            </div>
+        </section>
+
+        <section id="ejemplos">
+            <h2>3. Ejemplos de trabajo</h2>
+            <div class="section-content">
+                <p>El Área produce distintos tipos de entregables orientados a entregar evidencia útil para la toma de decisiones en los niveles territorial, central y de comunidades educativas:</p>
+
+                <div id="products-grid" class="products-grid"></div>
+
+                <div class="subsection-title">Indicadores territoriales destacados</div>
                 <div class="stat-card">
-                    <div class="stat-card-title">Indicadores territoriales</div>
+                    <div class="stat-card-title">Cumplimiento territorial</div>
                     <div class="stat-row"><span>Reporte Matrícula AEL</span><span>92%</span></div>
                     <div class="stat-bar-bg"><div class="stat-bar-fill" data-fill="92"></div></div>
                     <div class="stat-row"><span>Asistencia Territorial</span><span>78%</span></div>
                     <div class="stat-bar-bg"><div class="stat-bar-fill" data-fill="78"></div></div>
+                    <div class="stat-row"><span>Aprobación promedio</span><span>85%</span></div>
+                    <div class="stat-bar-bg"><div class="stat-bar-fill" data-fill="85"></div></div>
                 </div>
             </div>
         </section>
 
         <section id="quienes-somos">
-            <h2>3. ¿Quiénes la conforman?</h2>
+            <h2>4. ¿Quiénes la conforman?</h2>
             <div class="section-content">
                 <div id="contact-grid" class="contact-grid"></div>
             </div>
         </section>
 
         <section id="glosario">
-            <h2>4. Glosario técnico</h2>
+            <h2>5. Glosario técnico</h2>
             <div class="section-content">
                 <p>Definiciones y siglas clave utilizadas en la gestión de monitoreo:</p>
                 <div id="glossary-container" class="glossary-grid"></div>
-                <footer class="site-footer">Versión 1.2 — SLEP Costa Central · 2026</footer>
+                <footer class="site-footer">Versión 1.3 — SLEP Costa Central · 2026</footer>
             </div>
         </section>
     </main>
@@ -498,8 +644,30 @@
         const ICONS = {
             user:      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>',
             briefcase: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
-            mail:      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>'
+            mail:      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+            report:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="11" y2="9"/></svg>',
+            chart:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg>',
+            trend:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
+            users:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
         };
+
+        // Editable: hitos de la trayectoria del Área
+        const hitos = [
+            { fecha: "2017",  titulo: "Promulgación de la Ley NEP",            desc: "La Ley 21.040 crea el Sistema de Educación Pública y los Servicios Locales como nuevos sostenedores de la educación estatal." },
+            { fecha: "2024",  titulo: "Inicio operativo del SLEP Costa Central", desc: "Traspaso progresivo de establecimientos educacionales desde los municipios al Servicio Local." },
+            { fecha: "2024",  titulo: "Constitución del Área de Monitoreo",     desc: "Conformación del equipo dentro de la SATP, con foco en producir evidencia para la mejora educativa territorial." },
+            { fecha: "2025",  titulo: "Primer reporte territorial",             desc: "Difusión del boletín inicial de indicadores agregados a las comunidades educativas del Servicio Local." },
+            { fecha: "2025",  titulo: "Tableros de indicadores en línea",       desc: "Implementación de paneles de seguimiento de matrícula, asistencia y aprobación para uso del nivel central y los equipos territoriales." },
+            { fecha: "2026",  titulo: "Estrategia de fortalecimiento",          desc: "Lanzamiento del ciclo de talleres y guías metodológicas para integrar el uso de evidencia en la gestión de los establecimientos." }
+        ];
+
+        // Editable: productos / entregables del Área
+        const productos = [
+            { categoria: "Reporte territorial",  titulo: "Boletín mensual de indicadores", desc: "Síntesis de matrícula, asistencia, aprobación y desvinculación por establecimiento, comuna y territorio.", icono: "report" },
+            { categoria: "Tablero interactivo",  titulo: "Dashboard de asistencia escolar", desc: "Visualización con filtros por nivel, dependencia y rango de fechas para monitoreo continuo del SLEP.",     icono: "chart"  },
+            { categoria: "Análisis estratégico", titulo: "Estudio de trayectorias educativas", desc: "Análisis longitudinal de cohortes para identificar puntos críticos de desvinculación y rezago académico.",   icono: "trend"  },
+            { categoria: "Fortalecimiento",      titulo: "Talleres de uso de evidencia",    desc: "Instancias formativas con equipos directivos y técnicos para integrar datos en su toma de decisiones.",         icono: "users"  }
+        ];
 
         const escapeHtml = str => str.replace(/[&<>"']/g, c =>
             ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
@@ -527,6 +695,29 @@
                     <div class="contact-item">${ICONS.briefcase}<span>${escapeHtml(p.cargo)}</span></div>
                     <div class="contact-item">${ICONS.mail}<button type="button" class="copy-email" data-mail="${escapeHtml(p.mail)}" aria-label="Copiar correo de ${escapeHtml(p.nombre)}">${escapeHtml(p.mail)}<span class="copy-feedback">Copiado</span></button></div>
                 </div>
+            `).join('');
+        }
+
+        function renderTimeline() {
+            document.getElementById('timeline').innerHTML = hitos.map(h => `
+                <div class="timeline-item">
+                    <div class="timeline-date">${escapeHtml(h.fecha)}</div>
+                    <div class="timeline-title">${escapeHtml(h.titulo)}</div>
+                    <p class="timeline-desc">${escapeHtml(h.desc)}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderProductos() {
+            document.getElementById('products-grid').innerHTML = productos.map(p => `
+                <article class="product-card">
+                    <div class="product-thumb" role="img" aria-label="Imagen referencial de ${escapeHtml(p.titulo)}">${ICONS[p.icono] || ICONS.report}</div>
+                    <div class="product-body">
+                        <div class="product-cat">${escapeHtml(p.categoria)}</div>
+                        <div class="product-title">${escapeHtml(p.titulo)}</div>
+                        <p class="product-desc">${escapeHtml(p.desc)}</p>
+                    </div>
+                </article>
             `).join('');
         }
 
@@ -564,9 +755,11 @@
         function init() {
             renderEquipo();
             renderGlossary();
+            renderTimeline();
+            renderProductos();
 
-            // Auto-tooltips en los párrafos estáticos de la primera sección
-            document.querySelectorAll('#que-hace .section-content p').forEach(applyTooltipsTo);
+            // Auto-tooltips en contenido estático y dinámico que pueda contener siglas
+            document.querySelectorAll('#que-hace .section-content p, .timeline-desc, .product-desc').forEach(applyTooltipsTo);
 
             // Tab inicial
             showTab('establecimientos');
