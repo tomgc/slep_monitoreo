@@ -813,15 +813,7 @@
                 <div id="products-grid" class="products-grid"></div>
 
                 <div class="subsection-title">Indicadores territoriales destacados</div>
-                <div class="stat-card">
-                    <div class="stat-card-title">Cumplimiento territorial</div>
-                    <div class="stat-row"><span>Reporte Matrícula AEL</span><span>92%</span></div>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill" data-fill="92"></div></div>
-                    <div class="stat-row"><span>Asistencia Territorial</span><span>78%</span></div>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill" data-fill="78"></div></div>
-                    <div class="stat-row"><span>Aprobación promedio</span><span>85%</span></div>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill" data-fill="85"></div></div>
-                </div>
+                <div id="indicadores-card" class="stat-card"></div>
             </div>
         </section>
 
@@ -938,6 +930,16 @@
             { fecha: "2026",  titulo: "Estrategia de fortalecimiento",          desc: "Lanzamiento del ciclo de talleres y guías metodológicas para integrar el uso de evidencia en la gestión de los establecimientos." }
         ];
 
+        // Editable: indicadores territoriales destacados (rango 0-100)
+        const indicadores = {
+            titulo: "Cumplimiento territorial",
+            items: [
+                { label: "Reporte Matrícula AEL",  valor: 92 },
+                { label: "Asistencia Territorial", valor: 78 },
+                { label: "Aprobación promedio",    valor: 85 }
+            ]
+        };
+
         // Editable: productos / entregables del Área
         const productos = [
             { categoria: "Reporte territorial",  titulo: "Boletín mensual de indicadores", desc: "Síntesis de matrícula, asistencia, aprobación y desvinculación por establecimiento, comuna y territorio.", icono: "report" },
@@ -989,6 +991,17 @@
             `;
         }
 
+        function renderIndicadores() {
+            const filas = indicadores.items.map(it => `
+                <div class="stat-row"><span>${escapeHtml(it.label)}</span><span>${it.valor}%</span></div>
+                <div class="stat-bar-bg"><div class="stat-bar-fill" data-fill="${it.valor}"></div></div>
+            `).join('');
+            document.getElementById('indicadores-card').innerHTML = `
+                <div class="stat-card-title">${escapeHtml(indicadores.titulo)}</div>
+                ${filas}
+            `;
+        }
+
         function renderProductos() {
             document.getElementById('products-grid').innerHTML = productos.map(p => `
                 <article class="product-card">
@@ -1037,6 +1050,7 @@
             renderEquipo();
             renderGlossary();
             renderTimeline();
+            renderIndicadores();
             renderProductos();
 
             // Auto-tooltips en contenido estático y dinámico que pueda contener siglas
