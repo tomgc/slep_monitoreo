@@ -4,15 +4,20 @@ Sitio institucional de presentación del Área de Monitoreo de Procesos y Result
 
 ## Stack
 
-Página única, estática, sin dependencias externas. Todo el CSS y JS vive inline en `index.html`. Compatible con cualquier navegador moderno.
+Página única, estática, sin dependencias externas. Todo el CSS y JS vive inline en `index.html`. Compatible con cualquier navegador moderno. Layout en bento grid (6 columnas) con sidebar fija a la izquierda y paleta oficial SLEP Costa Central.
 
 ```
 .
-├── index.html              # Sitio completo (HTML + CSS + JS inline)
+├── index.html              # Sitio principal (bento, v2.0)
 ├── og-image.svg            # Fuente del preview social (1200x630)
 ├── og-image.png            # Renderizado para Open Graph / Twitter
 ├── scripts/
 │   └── regenerate-og-image.sh
+├── variants/               # Direcciones visuales alternativas
+│   ├── index.html          # Galería de variantes
+│   ├── classic.html        # v1.4 navy/azul (sitio anterior)
+│   ├── editorial.html      # Long-form serifa
+│   └── institucional.html  # Documento institucional
 └── README.md
 ```
 
@@ -22,14 +27,14 @@ Todos los datos están como `const` al inicio del bloque `<script>` en `index.ht
 
 | Dato | Variable | Campos |
 |---|---|---|
-| Equipo | `equipo` | `nombre`, `cargo`, `mail` |
+| Equipo | `equipo` | `nombre`, `cargo`, `mail`, `color`, `iniciales` |
 | Glosario | `glosario` | `sigla`, `def` |
-| Ámbitos de actuación | `lineasDeTrabajo` | clave (`establecimientos`, `central`, `capacidades`) → texto HTML |
 | Hitos de la trayectoria | `hitos` | `fecha`, `titulo`, `desc` |
-| Productos / entregables | `productos` | `categoria`, `titulo`, `desc`, `icono` (clave de `ICONS`) |
-| Indicadores destacados | `indicadores` | `titulo`, `items[]` con `label` y `valor` (0–100) |
+| Productos / entregables | `productos` | `tag`, `color`, `barColor`, `titulo`, `desc`, `bars[]` |
+| Indicadores (KPIs) | hardcoded en HTML | tarjetas `.card.kpi.{blue,green,coral}` con `data-fill` |
+| Ámbitos de actuación | hardcoded en HTML | tarjetas `.ambito-card.{purple,blue,green}` |
 
-Las siglas declaradas en `glosario` reciben tooltips automáticos en todo párrafo de la primera sección, en las descripciones de hitos y en las de productos.
+Las variantes en `variants/` replican estos datos en cada archivo. Si actualizás contenido del sitio principal, hay que propagar los cambios manualmente.
 
 ## Cómo regenerar el preview social
 
@@ -39,40 +44,58 @@ Las siglas declaradas en `glosario` reciben tooltips automáticos en todo párra
 bash scripts/regenerate-og-image.sh
 ```
 
-Requiere Google Chrome o Chromium instalado. El script busca el binario en rutas estándar de macOS y Linux. La salida es un PNG de 1200×630 en la raíz del repo.
-
-Editar el diseño en `og-image.svg` y volver a correr el script para propagar cambios.
+Requiere Google Chrome o Chromium instalado. La salida es un PNG de 1200×630 en la raíz del repo.
 
 ## Variantes de diseño
 
-En `variants/` viven tres direcciones visuales alternativas del sitio. Sirven como exploración paralela; el sitio "oficial" sigue siendo `index.html`.
+En `variants/` viven tres direcciones visuales alternativas. Sirven como exploración paralela del mismo contenido.
 
 | Variante | URL | Dirección |
 |---|---|---|
-| Editorial | `variants/editorial.html` | Long-form serifa, columna única, paleta cálida |
-| Dashboard / Bento | `variants/dashboard.html` | Grilla de tarjetas multi-color, KPIs prominentes |
+| Clásico | `variants/classic.html` | Navy/azul, sidebar fija, sticky h2 (el sitio anterior) |
+| Editorial | `variants/editorial.html` | Long-form serifa, columna angosta, paleta cálida |
 | Institucional | `variants/institucional.html` | Alto contraste, geométrico, tono documento oficial |
 
-Índice de las tres: `variants/index.html`. Comparten los mismos datasets (equipo, glosario, hitos, productos, indicadores) que el sitio principal, replicados en cada archivo.
+Índice de las tres: `variants/index.html`.
+
+## Paleta oficial SLEP Costa Central
+
+| Hex | Uso |
+|---|---|
+| `#4A2746` | Morado — texto, brand |
+| `#FFF6E0` | Crema — tinte de acento (no bg) |
+| `#0062A0` | Azul — primario, enlaces |
+| `#747474` | Gris — muted |
+| `#75924E` | Verde — indicadores positivos |
+| `#BCA493` | Beige — hairlines |
+| `#E88663` | Coral — acento cálido |
+
+Fondo de página siempre blanco.
 
 ## Versionado
 
-La versión visible aparece en el footer de `index.html` (actualmente `1.4`). Convención: bump menor por cambios visuales o de contenido, bump mayor por reescrituras.
+La versión visible aparece en el footer y en la meta del hero (actualmente `2.0`). Convención: bump menor por cambios visuales o de contenido, bump mayor por reescrituras o cambios de identidad.
 
 ## Changelog
+
+### 2.0 — 2026-05
+
+- Promoción del diseño bento/dashboard a sitio principal: grilla compacta de tarjetas, KPIs prominentes en morado, azul, verde y coral.
+- Paleta oficial SLEP Costa Central adoptada como sistema de diseño.
+- `og-image.png` regenerado con la nueva identidad (morado + coral).
+- Sidebar reemplaza el patrón de nav del clásico con brand mark y pills de navegación.
+- El diseño anterior (v1.4 navy/azul) preservado como `variants/classic.html`.
 
 ### 1.4 — 2026-05
 
 - Open Graph + Twitter Card con `og-image.png` (1200×630).
 - Modo oscuro automático vía `prefers-color-scheme`.
-- Modo impresión (`@media print`): timeline en grilla, glosario en dos columnas, ocultamiento de nav y barra de progreso.
-- Mini-mockups SVG específicos por categoría de producto (reporte, dashboard, análisis, taller).
+- Modo impresión (`@media print`): timeline en grilla, glosario en dos columnas.
+- Mini-mockups SVG específicos por categoría de producto.
 - Fades laterales en la timeline con detección de scroll en los extremos.
 - Animación de entrada con stagger para los hitos.
-- Enlace al sitio institucional del SLEP Costa Central en el footer.
-- Refactor: indicadores destacados pasan a renderizarse desde `const indicadores`, consistente con el resto de los datasets.
-- `scripts/regenerate-og-image.sh` para reproducir el preview social desde `og-image.svg`.
-- README expandido.
+- Refactor: indicadores destacados pasan a renderizarse desde `const indicadores`.
+- `scripts/regenerate-og-image.sh` para reproducir el preview social.
 
 ### 1.3 — 2026-05
 

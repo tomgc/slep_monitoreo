@@ -132,36 +132,48 @@
             background: var(--coral);
         }
 
-        /* Preview: dashboard (cream bg, KPI tiles) */
-        .preview.dashboard {
-            background: #ffffff;
-            padding: 12px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: 1fr 1fr;
-            gap: 6px;
-        }
-        .preview.dashboard .tile {
+        /* Preview: classic (navy/blue, sidebar + bars) */
+        .preview.classic {
             background: #fff;
-            border-radius: 5px;
-            padding: 7px 8px;
+            display: grid;
+            grid-template-columns: 38px 1fr;
+            height: 150px;
         }
-        .preview.dashboard .t1 { background: #d6e7f3; }
-        .preview.dashboard .t1 .num { font-size: 0.95rem; font-weight: 800; color: var(--blue); }
-        .preview.dashboard .t2 { background: #e0e9d3; }
-        .preview.dashboard .t2 .num { font-size: 0.95rem; font-weight: 800; color: var(--green); }
-        .preview.dashboard .t3 { background: #fbe1d4; }
-        .preview.dashboard .t3 .num { font-size: 0.95rem; font-weight: 800; color: var(--coral); }
-        .preview.dashboard .tile .lbl { font-size: 0.5rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 2px; }
-        .preview.dashboard .wide {
-            grid-column: span 3;
+        .preview.classic .cls-side {
+            background: #f8faff;
+            border-right: 1px solid #f0f2f5;
+            padding: 12px 7px;
             display: flex;
-            align-items: flex-end;
-            gap: 5px;
-            padding: 8px 10px;
-            border: 1px solid #e3d6bc;
+            flex-direction: column;
+            gap: 7px;
         }
-        .preview.dashboard .wide .bar { width: 11px; background: var(--blue); border-radius: 2px 2px 0 0; opacity: 0.75; }
+        .preview.classic .cls-side .dot {
+            width: 100%;
+            height: 5px;
+            background: #3498db;
+            border-radius: 1px;
+        }
+        .preview.classic .cls-side .line {
+            width: 100%;
+            height: 3px;
+            background: #d8dde5;
+            border-radius: 1px;
+        }
+        .preview.classic .cls-main {
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .preview.classic .cls-title {
+            color: #2c3e50;
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        .preview.classic .cls-bars { display: flex; flex-direction: column; gap: 5px; }
+        .preview.classic .cls-bar { height: 5px; background: #3498db; border-radius: 2px; }
 
         /* Preview: institucional (cream + purple + coral) */
         .preview.institucional {
@@ -249,10 +261,35 @@
         <header>
             <div class="breadcrumb"><a href="../">← Sitio original</a></div>
             <h1>Variantes de diseño</h1>
-            <p class="lead">Tres direcciones visuales alternativas, en formato compacto y con la paleta oficial del SLEP Costa Central. El contenido es idéntico en las tres.</p>
+            <p class="lead">Direcciones visuales alternativas al sitio principal, en formato compacto y con la paleta oficial del SLEP. El contenido es idéntico en todas — solo cambia el tratamiento de diseño.</p>
         </header>
 
         <div class="grid">
+
+            <a class="variant" href="classic.html">
+                <div class="preview classic">
+                    <div class="cls-side">
+                        <div class="dot"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="cls-main">
+                        <div class="cls-title">Área de Monitoreo</div>
+                        <div class="cls-bars">
+                            <div class="cls-bar" style="width: 92%"></div>
+                            <div class="cls-bar" style="width: 78%"></div>
+                            <div class="cls-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="tag">Variante 1</div>
+                    <div class="titulo">Clásico</div>
+                    <div class="desc">Diseño previo del sitio: paleta navy y azul, sidebar fija con scroll-spy. Era la versión 1.4 antes de migrar a bento.</div>
+                    <div class="cta">Abrir variante →</div>
+                </div>
+            </a>
 
             <a class="variant" href="editorial.html">
                 <div class="preview editorial">
@@ -261,31 +298,9 @@
                     <div class="rule"></div>
                 </div>
                 <div class="body">
-                    <div class="tag">Variante 1</div>
-                    <div class="titulo">Editorial</div>
-                    <div class="desc">Columna angosta, tipografía serifa, drop cap y notas al margen. Paleta cálida sobre crema. Para lectura reposada.</div>
-                    <div class="cta">Abrir variante →</div>
-                </div>
-            </a>
-
-            <a class="variant" href="dashboard.html">
-                <div class="preview dashboard">
-                    <div class="tile t1"><div class="lbl">AEL</div><div class="num">92%</div></div>
-                    <div class="tile t2"><div class="lbl">Aprob</div><div class="num">85%</div></div>
-                    <div class="tile t3"><div class="lbl">Asist</div><div class="num">78%</div></div>
-                    <div class="tile wide">
-                        <div class="bar" style="height:30%"></div>
-                        <div class="bar" style="height:55%"></div>
-                        <div class="bar" style="height:70%"></div>
-                        <div class="bar" style="height:45%"></div>
-                        <div class="bar" style="height:85%"></div>
-                        <div class="bar" style="height:60%"></div>
-                    </div>
-                </div>
-                <div class="body">
                     <div class="tag">Variante 2</div>
-                    <div class="titulo">Dashboard / Bento</div>
-                    <div class="desc">Grilla compacta de tarjetas con KPIs en morado, azul, verde y coral. Nav superior. Sensación data-céntrica.</div>
+                    <div class="titulo">Editorial</div>
+                    <div class="desc">Columna angosta, tipografía serifa, drop cap y notas al margen. Sidebar lateral con índice. Para lectura reposada.</div>
                     <div class="cta">Abrir variante →</div>
                 </div>
             </a>
