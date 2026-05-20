@@ -7,13 +7,23 @@
     <title>Área de Monitoreo · Institucional | SLEP Costa Central</title>
 
     <style>
+        /* Paleta oficial SLEP Costa Central */
         :root {
-            --ink: #0a0a0a;
-            --paper: #ffffff;
-            --rule: #0a0a0a;
-            --hair: #d4d4d4;
-            --red: #c41e3a;
-            --muted: #6b6b6b;
+            --purple: #4A2746;
+            --cream:  #FFF6E0;
+            --blue:   #0062A0;
+            --gray:   #747474;
+            --green:  #75924E;
+            --beige:  #BCA493;
+            --coral:  #E88663;
+
+            --ink: var(--purple);
+            --paper: var(--cream);
+            --rule: var(--purple);
+            --hair: #e3d6bc;
+            --accent: var(--coral);
+            --muted: var(--gray);
+
             --sans: 'Helvetica Neue', Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif;
             --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
         }
@@ -26,200 +36,200 @@
             font-family: var(--sans);
             margin: 0;
             line-height: 1.5;
-            font-size: 16px;
+            font-size: 14px;
             -webkit-font-smoothing: antialiased;
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                transition: none !important;
-                animation: none !important;
-            }
+            *, *::before, *::after { transition: none !important; animation: none !important; }
         }
 
-        /* Banner superior institucional */
+        /* Banner */
         .banner {
             background: var(--ink);
             color: var(--paper);
             font-family: var(--mono);
-            font-size: 0.7rem;
-            letter-spacing: 2px;
+            font-size: 0.62rem;
+            letter-spacing: 1.6px;
             text-transform: uppercase;
-            padding: 10px 24px;
+            padding: 8px 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid var(--red);
+            border-bottom: 3px solid var(--accent);
         }
         .banner a { color: var(--paper); text-decoration: none; }
-        .banner a:hover { color: var(--red); }
-        .banner .right { color: var(--red); }
+        .banner a:hover { color: var(--accent); }
+        .banner .right { color: var(--accent); }
 
-        /* Container */
+        /* Container compacto */
         .container {
-            max-width: 1080px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 24px;
         }
 
         /* Cabecera */
         header.documento {
-            padding: 80px 0 50px;
-            border-bottom: 4px solid var(--ink);
+            padding: 50px 0 28px;
+            border-bottom: 3px solid var(--ink);
         }
         .doc-meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 16px;
             font-family: var(--mono);
-            font-size: 0.72rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.6px;
             color: var(--muted);
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
-        .doc-meta .right { text-align: right; color: var(--red); font-weight: 700; }
+        .doc-meta .right { text-align: right; color: var(--accent); font-weight: 700; }
         header.documento h1 {
-            font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+            font-size: clamp(1.9rem, 4.5vw, 2.6rem);
             font-weight: 900;
-            line-height: 0.95;
-            letter-spacing: -2px;
-            margin: 0 0 24px;
+            line-height: 1;
+            letter-spacing: -1.2px;
+            margin: 0 0 14px;
             text-transform: uppercase;
         }
-        header.documento h1 span.red { color: var(--red); }
+        header.documento h1 span.accent { color: var(--accent); }
         header.documento .lead {
-            font-size: 1.15rem;
-            max-width: 720px;
+            font-size: 0.92rem;
+            max-width: 580px;
             color: var(--muted);
             line-height: 1.55;
         }
 
         /* Secciones */
         section {
-            padding: 60px 0;
+            padding: 36px 0;
             border-bottom: 1px solid var(--hair);
         }
         section:last-of-type { border-bottom: none; }
 
         .seccion-head {
             display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 32px;
+            grid-template-columns: 64px 1fr;
+            gap: 20px;
             align-items: baseline;
-            margin-bottom: 40px;
+            margin-bottom: 22px;
         }
         .seccion-numeral {
             font-family: var(--mono);
-            font-size: 3.2rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            color: var(--red);
+            color: var(--accent);
             line-height: 1;
         }
         h2 {
-            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-size: clamp(1.2rem, 2.6vw, 1.5rem);
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
             margin: 0;
-            border-top: 4px solid var(--ink);
-            padding-top: 16px;
+            border-top: 3px solid var(--ink);
+            padding-top: 10px;
         }
 
         .seccion-body {
             display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 32px;
+            grid-template-columns: 64px 1fr;
+            gap: 20px;
         }
-        .seccion-body > .content { font-size: 1.02rem; line-height: 1.7; }
-        .seccion-body > .content > p { margin: 0 0 18px; }
+        .seccion-body > .content { font-size: 0.92rem; line-height: 1.6; }
+        .seccion-body > .content > p { margin: 0 0 12px; }
         .seccion-body > .content > p:last-child { margin-bottom: 0; }
         .seccion-body > .content strong { font-weight: 800; }
 
-        /* Ámbitos: bloque tabular */
+        /* Ámbitos */
         .ambitos {
-            margin-top: 36px;
-            border-top: 2px solid var(--ink);
+            margin-top: 22px;
+            border-top: 1.5px solid var(--ink);
         }
         .ambito-row {
             display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 24px;
-            padding: 24px 0;
+            grid-template-columns: 50px 1fr;
+            gap: 16px;
+            padding: 14px 0;
             border-bottom: 1px solid var(--hair);
             align-items: baseline;
         }
         .ambito-row .num {
             font-family: var(--mono);
-            font-size: 1.4rem;
+            font-size: 1rem;
             font-weight: 700;
-            color: var(--red);
+            color: var(--accent);
         }
         .ambito-row .titulo {
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            font-size: 1rem;
+            letter-spacing: 0.4px;
+            margin-bottom: 4px;
+            font-size: 0.88rem;
         }
         .ambito-row .desc {
-            font-size: 0.92rem;
+            font-size: 0.82rem;
             color: var(--muted);
-            line-height: 1.6;
+            line-height: 1.55;
         }
 
-        /* Trayectoria: tabla cronológica */
+        /* Cronología */
         .cronologia {
             width: 100%;
             border-collapse: collapse;
-            border-top: 2px solid var(--ink);
-            border-bottom: 2px solid var(--ink);
+            border-top: 1.5px solid var(--ink);
+            border-bottom: 1.5px solid var(--ink);
+            margin-top: 4px;
         }
         .cronologia tr { border-bottom: 1px solid var(--hair); }
         .cronologia tr:last-child { border-bottom: none; }
         .cronologia th {
             text-align: left;
             font-family: var(--mono);
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.6px;
             color: var(--muted);
-            padding: 12px 16px 12px 0;
-            border-bottom: 1px solid var(--ink);
+            padding: 8px 12px 8px 0;
+            border-bottom: 1.5px solid var(--ink);
             font-weight: 700;
         }
         .cronologia td {
-            padding: 18px 16px 18px 0;
+            padding: 11px 12px 11px 0;
             vertical-align: top;
         }
         .cronologia td.year {
             font-family: var(--mono);
             font-weight: 800;
-            color: var(--red);
+            color: var(--accent);
             white-space: nowrap;
-            width: 80px;
+            width: 60px;
+            font-size: 0.86rem;
         }
         .cronologia td.tit {
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            width: 28%;
+            letter-spacing: 0.4px;
+            width: 36%;
+            font-size: 0.84rem;
         }
         .cronologia td.des {
             color: var(--muted);
-            font-size: 0.92rem;
-            line-height: 1.55;
+            font-size: 0.82rem;
+            line-height: 1.5;
         }
 
-        /* Productos: grid 2x2 brutalist */
+        /* Productos */
         .productos {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            border-top: 2px solid var(--ink);
+            border-top: 1.5px solid var(--ink);
             border-left: 1px solid var(--ink);
         }
         .producto {
-            padding: 28px;
+            padding: 16px;
             border-right: 1px solid var(--ink);
             border-bottom: 1px solid var(--ink);
             position: relative;
@@ -227,48 +237,48 @@
         .producto::before {
             content: attr(data-num);
             position: absolute;
-            top: 14px;
-            right: 18px;
+            top: 10px;
+            right: 12px;
             font-family: var(--mono);
-            font-size: 0.7rem;
-            color: var(--red);
-            letter-spacing: 2px;
+            font-size: 0.6rem;
+            color: var(--accent);
+            letter-spacing: 1.5px;
         }
         .producto .cat {
             font-family: var(--mono);
-            font-size: 0.7rem;
-            letter-spacing: 2px;
+            font-size: 0.6rem;
+            letter-spacing: 1.6px;
             text-transform: uppercase;
             color: var(--muted);
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
         .producto .titulo {
             font-weight: 900;
             text-transform: uppercase;
-            font-size: 1.1rem;
-            letter-spacing: -0.3px;
-            margin-bottom: 12px;
+            font-size: 0.92rem;
+            letter-spacing: -0.2px;
+            margin-bottom: 6px;
             line-height: 1.2;
         }
         .producto .desc {
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.78rem;
+            line-height: 1.55;
             color: var(--muted);
         }
 
-        /* Indicadores: tabla */
+        /* Indicadores */
         .indicadores-bloque {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 2px solid var(--ink);
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1.5px solid var(--ink);
         }
         .indicadores-titulo {
             font-family: var(--mono);
-            font-size: 0.72rem;
-            letter-spacing: 2px;
+            font-size: 0.62rem;
+            letter-spacing: 1.6px;
             text-transform: uppercase;
             color: var(--muted);
-            margin-bottom: 18px;
+            margin-bottom: 10px;
         }
         .indicadores-tabla {
             width: 100%;
@@ -276,127 +286,122 @@
         }
         .indicadores-tabla tr { border-bottom: 1px solid var(--hair); }
         .indicadores-tabla tr:last-child { border-bottom: none; }
-        .indicadores-tabla td { padding: 16px 0; }
+        .indicadores-tabla td { padding: 10px 0; }
         .indicadores-tabla td.label {
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
+            font-size: 0.78rem;
+            letter-spacing: 0.4px;
         }
-        .indicadores-tabla td.bar-cell { width: 50%; padding: 0 24px; }
+        .indicadores-tabla td.bar-cell { width: 50%; padding: 0 16px; }
         .indicadores-tabla .bar {
-            height: 8px;
-            background: #ebebeb;
-            position: relative;
+            height: 6px;
+            background: var(--hair);
         }
         .indicadores-tabla .bar .fill {
             height: 100%;
-            background: var(--red);
+            background: var(--accent);
             width: 0;
             transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .indicadores-tabla td.val {
             font-family: var(--mono);
             font-weight: 800;
-            color: var(--red);
+            color: var(--accent);
             text-align: right;
-            width: 70px;
-            font-size: 1.1rem;
+            width: 50px;
+            font-size: 0.92rem;
         }
 
-        /* Equipo: registro institucional */
-        .equipo {
-            border-top: 2px solid var(--ink);
-        }
+        /* Equipo */
+        .equipo { border-top: 1.5px solid var(--ink); }
         .persona-row {
             display: grid;
-            grid-template-columns: 56px 1fr auto;
-            gap: 24px;
-            padding: 22px 0;
+            grid-template-columns: 44px 1fr auto;
+            gap: 16px;
+            padding: 14px 0;
             border-bottom: 1px solid var(--hair);
             align-items: center;
         }
         .persona-row .id {
             font-family: var(--mono);
-            font-size: 0.72rem;
-            color: var(--red);
-            letter-spacing: 2px;
+            font-size: 0.62rem;
+            color: var(--accent);
+            letter-spacing: 1.6px;
             font-weight: 700;
         }
         .persona-row .nombre {
             font-weight: 800;
             text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 0.3px;
+            font-size: 0.88rem;
+            letter-spacing: 0.2px;
         }
         .persona-row .cargo {
-            font-size: 0.82rem;
+            font-size: 0.7rem;
             color: var(--muted);
             font-family: var(--mono);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 4px;
+            letter-spacing: 0.8px;
+            margin-top: 2px;
         }
         .persona-row .mail {
             font-family: var(--mono);
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             color: var(--ink);
             text-decoration: none;
             border-bottom: 1px solid var(--ink);
         }
-        .persona-row .mail:hover { color: var(--red); border-color: var(--red); }
+        .persona-row .mail:hover { color: var(--accent); border-color: var(--accent); }
 
-        /* Glosario: tabla */
+        /* Glosario */
         .glosario {
             width: 100%;
             border-collapse: collapse;
-            border-top: 2px solid var(--ink);
-            border-bottom: 2px solid var(--ink);
+            border-top: 1.5px solid var(--ink);
+            border-bottom: 1.5px solid var(--ink);
         }
         .glosario tr { border-bottom: 1px solid var(--hair); }
         .glosario tr:last-child { border-bottom: none; }
         .glosario td {
-            padding: 14px 16px 14px 0;
-            font-size: 0.92rem;
+            padding: 9px 12px 9px 0;
+            font-size: 0.82rem;
             vertical-align: top;
         }
         .glosario td.sigla {
             font-family: var(--mono);
             font-weight: 800;
-            color: var(--red);
-            width: 90px;
-            letter-spacing: 1px;
+            color: var(--accent);
+            width: 76px;
+            letter-spacing: 0.6px;
         }
-        .glosario td.def { color: var(--muted); line-height: 1.55; }
+        .glosario td.def { color: var(--muted); line-height: 1.5; }
 
         /* Footer */
         footer.documento {
             background: var(--ink);
             color: var(--paper);
-            padding: 32px;
-            margin-top: 60px;
+            padding: 22px;
+            margin-top: 36px;
         }
         footer.documento .inner {
-            max-width: 1080px;
+            max-width: 720px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 16px;
             font-family: var(--mono);
-            font-size: 0.72rem;
-            letter-spacing: 2px;
+            font-size: 0.62rem;
+            letter-spacing: 1.6px;
             text-transform: uppercase;
         }
-        footer.documento .right { text-align: right; color: var(--red); }
+        footer.documento .right { text-align: right; color: var(--accent); }
         footer.documento a { color: inherit; text-decoration: underline; }
 
-        @media (max-width: 800px) {
-            .seccion-head, .seccion-body { grid-template-columns: 1fr; gap: 16px; }
-            .seccion-numeral { font-size: 2.2rem; }
+        @media (max-width: 600px) {
+            .seccion-head, .seccion-body { grid-template-columns: 1fr; gap: 10px; }
+            .seccion-numeral { font-size: 1.5rem; }
             .productos { grid-template-columns: 1fr; border-left: none; }
             .producto { border-right: none; }
-            .cronologia td.tit { width: auto; }
-            .indicadores-tabla td.bar-cell { padding: 0 12px; }
             footer.documento .inner { grid-template-columns: 1fr; }
             footer.documento .right { text-align: left; }
         }
@@ -405,19 +410,19 @@
 <body>
 
     <div class="banner">
-        <span><a href="../">← Inicio</a> · <span class="right">Variante Institucional</span></span>
-        <span>Documento de presentación · v1.4</span>
+        <span><a href="../">← Inicio</a> · <span class="right">Institucional</span></span>
+        <span>v1.4 · Documento de presentación</span>
     </div>
 
     <div class="container">
 
         <header class="documento">
             <div class="doc-meta">
-                <div>SLEP Costa Central · Subdirección de Apoyo Técnico Pedagógico</div>
+                <div>SLEP Costa Central · SATP</div>
                 <div class="right">Edición 2026</div>
             </div>
-            <h1>Área de Monitoreo<br><span class="red">de Procesos y Resultados Educativos</span></h1>
-            <p class="lead">Documento institucional de presentación del Área, sus ámbitos de actuación, su trayectoria, sus entregables y su equipo.</p>
+            <h1>Área de Monitoreo<br><span class="accent">de Procesos y Resultados</span></h1>
+            <p class="lead">Documento institucional de presentación del Área, sus ámbitos, su trayectoria, sus entregables y su equipo.</p>
         </header>
 
         <section id="que-hace">
@@ -429,8 +434,8 @@
                 <div></div>
                 <div class="content">
                     <p>La Nueva Educación Pública propone una <strong>cultura de monitoreo de datos</strong> centrada en impulsar procesos de mejora sistemáticos e informados.</p>
-                    <p>El <strong>Área de Monitoreo de Procesos y Resultados Educativos</strong> del SLEP Costa Central produce, recopila, sistematiza, interpreta y difunde información clave sobre la <strong>trayectoria educativa</strong> de las y los estudiantes.</p>
-                    <p>Busca transformar la información en conocimiento para que las comunidades educativas y el nivel central <strong>entiendan su realidad, visibilicen logros, detecten desafíos y alimenten decisiones basadas en evidencia</strong>.</p>
+                    <p>El <strong>Área de Monitoreo</strong> del SLEP Costa Central produce, sistematiza, interpreta y difunde información clave sobre la <strong>trayectoria educativa</strong> de las y los estudiantes del Servicio Local.</p>
+                    <p>Busca transformar la información en conocimiento para que las comunidades educativas y el nivel central tomen decisiones basadas en evidencia.</p>
 
                     <div class="ambitos" id="ambitos"></div>
                 </div>
@@ -445,7 +450,6 @@
             <div class="seccion-body">
                 <div></div>
                 <div class="content">
-                    <p>Hitos institucionales desde la promulgación de la Ley de Nueva Educación Pública.</p>
                     <table class="cronologia">
                         <thead>
                             <tr><th>Año</th><th>Hito</th><th>Descripción</th></tr>
@@ -464,7 +468,6 @@
             <div class="seccion-body">
                 <div></div>
                 <div class="content">
-                    <p>El Área produce los siguientes tipos de productos para los niveles territorial, central y de comunidades educativas.</p>
                     <div class="productos" id="productos"></div>
 
                     <div class="indicadores-bloque">
@@ -496,7 +499,6 @@
             <div class="seccion-body">
                 <div></div>
                 <div class="content">
-                    <p>Siglas y términos técnicos utilizados en la gestión del Área.</p>
                     <table class="glosario" id="glosario"></table>
                 </div>
             </div>
@@ -524,32 +526,32 @@
             { sigla: "ENEP",  def: "Estrategia Nacional de Educación Pública." },
             { sigla: "IDPS",  def: "Indicadores de Desarrollo Personal y Social." },
             { sigla: "PAL",   def: "Plan Anual Local." },
-            { sigla: "SATP",  def: "Subdirección de Apoyo Técnico-Pedagógico del SLEP." },
+            { sigla: "SATP",  def: "Subdirección de Apoyo Técnico-Pedagógico." },
             { sigla: "Simce", def: "Sistema Nacional de Evaluación de Aprendizaje." },
             { sigla: "PEI",   def: "Proyecto Educativo Institucional." },
             { sigla: "PME",   def: "Plan de Mejoramiento Educativo." }
         ];
 
         const ambitos = [
-            { titulo: "Monitoreo de establecimientos", desc: "Seguimiento de indicadores de trayectoria —matrícula, asistencia, aprobación, desvinculación, aprendizajes y desarrollo personal— y de los instrumentos de gestión (PEI, PME y otros)." },
-            { titulo: "Monitoreo del nivel central",   desc: "Sistematización y análisis de datos agregados para la planificación estratégica institucional y el reporte de cumplimiento de metas." },
-            { titulo: "Fortalecimiento de capacidades", desc: "Desarrollo de herramientas, talleres y metodologías orientadas a que los equipos territoriales utilicen la evidencia de manera autónoma." }
+            { titulo: "Monitoreo de establecimientos", desc: "Seguimiento de indicadores de trayectoria y revisión de instrumentos de gestión (PEI, PME)." },
+            { titulo: "Monitoreo del nivel central",   desc: "Análisis de datos agregados para planificación estratégica y reporte de metas." },
+            { titulo: "Fortalecimiento de capacidades", desc: "Herramientas, talleres y metodologías para uso autónomo de evidencia." }
         ];
 
         const hitos = [
-            { fecha: "2017", titulo: "Promulgación de la Ley NEP", desc: "Ley 21.040 crea el Sistema de Educación Pública y los Servicios Locales." },
+            { fecha: "2017", titulo: "Promulgación de la Ley NEP", desc: "Ley 21.040 crea el Sistema de Educación Pública." },
             { fecha: "2024", titulo: "Inicio operativo del SLEP", desc: "Traspaso progresivo de establecimientos al Servicio Local." },
             { fecha: "2024", titulo: "Constitución del Área", desc: "Conformación del equipo dentro de la SATP." },
             { fecha: "2025", titulo: "Primer reporte territorial", desc: "Boletín inicial de indicadores agregados." },
-            { fecha: "2025", titulo: "Tableros en línea", desc: "Paneles de seguimiento de matrícula, asistencia y aprobación." },
+            { fecha: "2025", titulo: "Tableros en línea", desc: "Paneles de matrícula, asistencia y aprobación." },
             { fecha: "2026", titulo: "Fortalecimiento de capacidades", desc: "Ciclo de talleres y guías metodológicas." }
         ];
 
         const productos = [
             { categoria: "Reporte territorial",  titulo: "Boletín mensual de indicadores",   desc: "Síntesis de matrícula, asistencia, aprobación y desvinculación por establecimiento, comuna y territorio." },
-            { categoria: "Tablero interactivo",  titulo: "Dashboard de asistencia escolar",  desc: "Visualización con filtros por nivel, dependencia y rango de fechas para monitoreo continuo del SLEP." },
-            { categoria: "Análisis estratégico", titulo: "Estudio de trayectorias",          desc: "Análisis longitudinal de cohortes para identificar puntos críticos de desvinculación y rezago." },
-            { categoria: "Fortalecimiento",      titulo: "Talleres de uso de evidencia",     desc: "Instancias formativas con equipos directivos y técnicos para integrar datos en la toma de decisiones." }
+            { categoria: "Tablero interactivo",  titulo: "Dashboard de asistencia escolar",  desc: "Filtros por nivel, dependencia y rango de fechas para monitoreo continuo del SLEP." },
+            { categoria: "Análisis estratégico", titulo: "Estudio de trayectorias",          desc: "Análisis longitudinal de cohortes para identificar puntos críticos de desvinculación." },
+            { categoria: "Fortalecimiento",      titulo: "Talleres de uso de evidencia",     desc: "Instancias formativas con equipos directivos y técnicos." }
         ];
 
         const indicadores = {
@@ -615,7 +617,6 @@
             .map(g => `<tr><td class="sigla">${esc(g.sigla)}</td><td class="def">${esc(g.def)}</td></tr>`)
             .join('');
 
-        // Animar barras de indicadores
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
