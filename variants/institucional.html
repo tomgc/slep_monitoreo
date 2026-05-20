@@ -29,6 +29,7 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background: var(--paper);
@@ -37,8 +38,90 @@
             margin: 0;
             line-height: 1.5;
             font-size: 14px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
+
+        .banner { grid-column: 1 / -1; }
+        nav#side-nav { grid-column: 1; grid-row: 2; }
+        .container { grid-column: 2; grid-row: 2; }
+        footer.documento { grid-column: 1 / -1; grid-row: 3; }
+
+        /* Sidebar institucional */
+        nav#side-nav {
+            position: sticky;
+            top: 0;
+            align-self: start;
+            height: calc(100vh - 36px);
+            padding: 28px 18px;
+            border-right: 2px solid var(--ink);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        nav#side-nav .nav-top {
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--hair);
+        }
+        nav#side-nav .back {
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+        }
+        nav#side-nav .back:hover { color: var(--accent); }
+        nav#side-nav .nav-variant {
+            font-family: var(--mono);
+            font-size: 0.66rem;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        nav#side-nav .nav-title {
+            font-family: var(--mono);
+            font-size: 0.56rem;
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid var(--ink);
+        }
+        nav#side-nav a.nav-item {
+            text-decoration: none;
+            color: var(--ink);
+            padding: 9px 0;
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            border-bottom: 1px solid var(--hair);
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 8px;
+            align-items: baseline;
+            transition: color 0.16s;
+        }
+        nav#side-nav a.nav-item .num {
+            font-family: var(--mono);
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        nav#side-nav a.nav-item:hover { color: var(--accent); }
+        nav#side-nav a.nav-item.active-nav { color: var(--accent); }
+        nav#side-nav a.nav-item.active-nav .num { color: #fff; background: var(--accent); padding: 2px 0; text-align: center; }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -397,6 +480,10 @@
         footer.documento .right { text-align: right; color: var(--accent); }
         footer.documento a { color: inherit; text-decoration: underline; }
 
+        @media (max-width: 900px) {
+            body { display: block; }
+            nav#side-nav { display: none; }
+        }
         @media (max-width: 600px) {
             .seccion-head, .seccion-body { grid-template-columns: 1fr; gap: 10px; }
             .seccion-numeral { font-size: 1.5rem; }
@@ -410,9 +497,22 @@
 <body>
 
     <div class="banner">
-        <span><a href="../">← Inicio</a> · <span class="right">Institucional</span></span>
-        <span>v1.4 · Documento de presentación</span>
+        <span>SLEP Costa Central · Subdirección de Apoyo Técnico Pedagógico</span>
+        <span class="right">Documento de presentación · v1.4</span>
     </div>
+
+    <nav id="side-nav" aria-label="Secciones del sitio">
+        <div class="nav-top">
+            <a href="../" class="back">← Variantes</a>
+            <div class="nav-variant">Institucional</div>
+        </div>
+        <div class="nav-title">Índice</div>
+        <a href="#que-hace" class="nav-item active-nav"><span class="num">I</span><span>Función</span></a>
+        <a href="#trayectoria" class="nav-item"><span class="num">II</span><span>Trayectoria</span></a>
+        <a href="#ejemplos" class="nav-item"><span class="num">III</span><span>Entregables</span></a>
+        <a href="#quienes-somos" class="nav-item"><span class="num">IV</span><span>Equipo</span></a>
+        <a href="#glosario" class="nav-item"><span class="num">V</span><span>Glosario</span></a>
+    </nav>
 
     <div class="container">
 
@@ -626,6 +726,19 @@
             });
         }, { threshold: 0.4 });
         document.querySelectorAll('.fill').forEach(b => obs.observe(b));
+
+        // Scroll-spy
+        const navObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.nav-item').forEach(link => {
+                        link.classList.toggle('active-nav', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px' });
+        document.querySelectorAll('section').forEach(s => navObserver.observe(s));
     </script>
 
 </body>
