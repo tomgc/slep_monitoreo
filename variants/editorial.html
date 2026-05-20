@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Área de Monitoreo de Procesos y Resultados Educativos del SLEP Costa Central. Variante de diseño editorial.">
+    <title>Área de Monitoreo · Editorial | SLEP Costa Central</title>
+
+    <style>
+        :root {
+            --paper: #faf7f1;
+            --ink: #1f1a17;
+            --muted: #6b5d54;
+            --rule: #d8cfc4;
+            --accent: #a8553a;
+            --soft: #f3eee5;
+            --serif: 'Iowan Old Style', 'Palatino Linotype', 'Georgia', 'Times New Roman', serif;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--serif);
+            font-size: 18px;
+            line-height: 1.65;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+                animation: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        article.page {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 28px 120px;
+        }
+
+        .masthead {
+            text-align: center;
+            padding-bottom: 50px;
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 70px;
+        }
+        .masthead .kicker {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+        .masthead h1 {
+            font-size: clamp(2.4rem, 6vw, 3.4rem);
+            line-height: 1.1;
+            font-weight: 400;
+            font-style: italic;
+            margin: 0 0 18px;
+            letter-spacing: -0.5px;
+        }
+        .masthead .subtitle {
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+
+        section {
+            margin: 70px 0;
+        }
+
+        .section-numeral {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(1.7rem, 4vw, 2.1rem);
+            text-align: center;
+            margin: 0 0 40px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        section p {
+            margin: 0 0 1.2em;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Drop cap en el primer párrafo de la primera sección */
+        #que-hace .drop-cap::first-letter {
+            font-size: 4.2em;
+            line-height: 0.85;
+            float: left;
+            padding: 4px 12px 0 0;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        strong { font-weight: 700; }
+
+        /* Ámbitos como definiciones */
+        .ambitos {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0;
+            border-top: 1px solid var(--rule);
+        }
+        .ambitos li {
+            padding: 22px 0 22px 70px;
+            border-bottom: 1px solid var(--rule);
+            position: relative;
+        }
+        .ambitos .label {
+            position: absolute;
+            left: 0;
+            top: 26px;
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .ambitos .titulo {
+            display: block;
+            font-weight: 700;
+            font-style: normal;
+            margin-bottom: 4px;
+        }
+        .ambitos .desc {
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        /* Timeline vertical en formato de notas al margen */
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .timeline li {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 30px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--rule);
+            align-items: baseline;
+        }
+        .timeline li:last-child { border-bottom: none; }
+        .timeline .year {
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+        }
+        .timeline .titulo {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .timeline .desc {
+            color: var(--muted);
+            font-size: 0.96rem;
+            line-height: 1.55;
+        }
+
+        /* Productos: bloques editoriales */
+        .productos {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .productos li {
+            padding: 36px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+        .productos li:first-child { padding-top: 0; }
+        .productos li:last-child { border-bottom: none; }
+        .productos .cat {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .productos .titulo {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-style: italic;
+            font-size: 1.5rem;
+            line-height: 1.25;
+            margin: 0 0 14px;
+        }
+        .productos .desc {
+            color: var(--ink);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Indicadores: tabla editorial */
+        .indicadores {
+            margin: 50px 0 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--rule);
+        }
+        .indicadores-titulo {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+        .indicadores-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: baseline;
+            padding: 14px 0;
+            border-bottom: 1px dotted var(--rule);
+        }
+        .indicadores-row:last-child { border-bottom: none; }
+        .indicadores-label { font-size: 1rem; }
+        .indicadores-valor {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        /* Equipo en bios */
+        .equipo {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 36px;
+        }
+        .equipo li {
+            padding-left: 28px;
+            border-left: 2px solid var(--accent);
+        }
+        .equipo .nombre {
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.4rem;
+            margin: 0 0 4px;
+        }
+        .equipo .cargo {
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+        .equipo .mail {
+            font-family: var(--sans);
+            font-size: 0.92rem;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid currentColor;
+        }
+        .equipo .mail:hover { color: var(--ink); }
+
+        /* Glosario en dos columnas */
+        .glosario {
+            columns: 2;
+            column-gap: 40px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .glosario li {
+            break-inside: avoid;
+            padding: 12px 0;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+        .glosario .sigla {
+            font-family: var(--sans);
+            font-weight: 700;
+            color: var(--accent);
+            margin-right: 6px;
+        }
+
+        footer.colophon {
+            text-align: center;
+            margin-top: 90px;
+            padding-top: 30px;
+            border-top: 1px solid var(--rule);
+            font-family: var(--sans);
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+        footer.colophon a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        footer.colophon a:hover { text-decoration: underline; }
+
+        .variant-tag {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: var(--soft);
+            padding: 6px 12px;
+            border-radius: 2px;
+        }
+        .variant-tag a { color: inherit; text-decoration: none; }
+        .variant-tag a:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            article.page { padding: 60px 22px 80px; }
+            .timeline li { grid-template-columns: 60px 1fr; gap: 18px; }
+            .glosario { columns: 1; }
+            section p { text-align: left; hyphens: none; }
+        }
+
+        @media print {
+            .variant-tag { display: none; }
+            body { font-size: 11pt; }
+            article.page { max-width: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="variant-tag"><a href="../">← Inicio</a> · Variante Editorial</div>
+
+    <article class="page">
+
+        <header class="masthead">
+            <div class="kicker">SLEP Costa Central · SATP</div>
+            <h1>Área de Monitoreo de Procesos y Resultados Educativos</h1>
+            <div class="subtitle">Producción y análisis de evidencia para la mejora educativa territorial</div>
+        </header>
+
+        <section id="que-hace">
+            <div class="section-numeral">I — ¿Qué hace?</div>
+            <h2>El propósito del Área</h2>
+
+            <p class="drop-cap">La Nueva Educación Pública, en su compromiso por fomentar un entorno institucional con una visión estratégica de los procesos educativos, propone una <strong>cultura de monitoreo de datos</strong> centrada en impulsar procesos de mejora sistemáticos e informados.</p>
+
+            <p>En este contexto, el <strong>Área de Monitoreo de Procesos y Resultados Educativos</strong> del SLEP Costa Central tiene como principal objetivo producir, recopilar, sistematizar, interpretar y difundir información clave que dé cuenta de la <strong>trayectoria educativa</strong> de las y los estudiantes de los establecimientos que conforman este Servicio Local.</p>
+
+            <p>El Área busca transformar la información en conocimiento que permita, tanto a las comunidades educativas como al nivel central del SLEP, entender mejor su realidad, visibilizar sus logros, detectar a tiempo sus desafíos y alimentar la toma de decisiones informada, basada en evidencia.</p>
+
+            <ul class="ambitos" id="ambitos"></ul>
+        </section>
+
+        <section id="trayectoria">
+            <div class="section-numeral">II — Trayectoria</div>
+            <h2>Hitos del Área</h2>
+            <p>Desde la promulgación de la Ley de Nueva Educación Pública hasta el presente, el Área ha consolidado progresivamente su función dentro de la Subdirección de Apoyo Técnico Pedagógico.</p>
+            <ul class="timeline" id="timeline"></ul>
+        </section>
+
+        <section id="ejemplos">
+            <div class="section-numeral">III — Ejemplos de trabajo</div>
+            <h2>Productos y entregables</h2>
+            <p>El Área produce distintos tipos de entregables orientados a entregar evidencia útil para la toma de decisiones en los niveles territorial, central y de comunidades educativas.</p>
+            <ul class="productos" id="productos"></ul>
+
+            <div class="indicadores">
+                <div class="indicadores-titulo" id="indicadores-titulo"></div>
+                <div id="indicadores-rows"></div>
+            </div>
+        </section>
+
+        <section id="quienes-somos">
+            <div class="section-numeral">IV — ¿Quiénes la conforman?</div>
+            <h2>El equipo</h2>
+            <ul class="equipo" id="equipo"></ul>
+        </section>
+
+        <section id="glosario">
+            <div class="section-numeral">V — Glosario</div>
+            <h2>Definiciones técnicas</h2>
+            <p>Siglas y términos utilizados de forma recurrente en la gestión de monitoreo.</p>
+            <ul class="glosario" id="glosario"></ul>
+        </section>
+
+        <footer class="colophon">
+            Versión 1.4 — Editorial · <a href="https://slepcostacentral.gob.cl" target="_blank" rel="noopener">SLEP Costa Central</a> · 2026
+        </footer>
+
+    </article>
+
+    <script>
+        // Datos compartidos con la versión original
+        const equipo = [
+            { nombre: "Tomás González Cifuentes", cargo: "Profesional encargado", mail: "tomas.gonzalez@slepcostacentral.gob.cl" },
+            { nombre: "Javier Pizarro Morales",   cargo: "Profesional del área",  mail: "javier.pizarro@slepcostacentral.gob.cl" }
+        ];
+
+        const glosario = [
+            { sigla: "SLEP",  def: "Servicio Local de Educación Pública." },
+            { sigla: "DEP",   def: "Dirección de Educación Pública." },
+            { sigla: "PEL",   def: "Plan Estratégico Local." },
+            { sigla: "ENEP",  def: "Estrategia Nacional de Educación Pública." },
+            { sigla: "IDPS",  def: "Indicadores de Desarrollo Personal y Social." },
+            { sigla: "PAL",   def: "Plan Anual Local." },
+            { sigla: "SATP",  def: "Subdirección de Apoyo Técnico-Pedagógico del SLEP." },
+            { sigla: "Simce", def: "Sistema Nacional de Evaluación de Resultados de Aprendizaje." },
+            { sigla: "PEI",   def: "Proyecto Educativo Institucional." },
+            { sigla: "PME",   def: "Plan de Mejoramiento Educativo." }
+        ];
+
+        const ambitos = [
+            { label: "Ámbito 1", titulo: "Monitoreo de establecimientos", desc: "Seguimiento de indicadores de trayectoria —matrícula, asistencia, aprobación, desvinculación, aprendizajes y desarrollo personal— y de los instrumentos de gestión (PEI, PME y otros)." },
+            { label: "Ámbito 2", titulo: "Monitoreo del nivel central",   desc: "Sistematización y análisis de datos agregados para la planificación estratégica institucional y el reporte de cumplimiento de metas." },
+            { label: "Ámbito 3", titulo: "Fortalecimiento de capacidades", desc: "Desarrollo de herramientas, talleres y metodologías orientadas a que los equipos territoriales utilicen la evidencia de manera autónoma." }
+        ];
+
+        const hitos = [
+            { fecha: "2017", titulo: "Promulgación de la Ley NEP", desc: "La Ley 21.040 crea el Sistema de Educación Pública y los Servicios Locales como nuevos sostenedores." },
+            { fecha: "2024", titulo: "Inicio operativo del SLEP", desc: "Traspaso progresivo de establecimientos educacionales desde los municipios al Servicio Local." },
+            { fecha: "2024", titulo: "Constitución del Área", desc: "Conformación del equipo dentro de la SATP, con foco en producir evidencia para la mejora educativa." },
+            { fecha: "2025", titulo: "Primer reporte territorial", desc: "Difusión del boletín inicial de indicadores agregados a las comunidades educativas." },
+            { fecha: "2025", titulo: "Tableros en línea", desc: "Implementación de paneles de seguimiento de matrícula, asistencia y aprobación." },
+            { fecha: "2026", titulo: "Estrategia de fortalecimiento", desc: "Lanzamiento del ciclo de talleres y guías metodológicas para integrar el uso de evidencia." }
+        ];
+
+        const productos = [
+            { categoria: "Reporte territorial",  titulo: "Boletín mensual de indicadores", desc: "Síntesis de matrícula, asistencia, aprobación y desvinculación por establecimiento, comuna y territorio." },
+            { categoria: "Tablero interactivo",  titulo: "Dashboard de asistencia escolar", desc: "Visualización con filtros por nivel, dependencia y rango de fechas para monitoreo continuo del SLEP." },
+            { categoria: "Análisis estratégico", titulo: "Estudio de trayectorias educativas", desc: "Análisis longitudinal de cohortes para identificar puntos críticos de desvinculación y rezago académico." },
+            { categoria: "Fortalecimiento",      titulo: "Talleres de uso de evidencia", desc: "Instancias formativas con equipos directivos y técnicos para integrar datos en su toma de decisiones." }
+        ];
+
+        const indicadores = {
+            titulo: "Cumplimiento territorial",
+            items: [
+                { label: "Reporte Matrícula AEL",  valor: 92 },
+                { label: "Asistencia Territorial", valor: 78 },
+                { label: "Aprobación promedio",    valor: 85 }
+            ]
+        };
+
+        const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+        document.getElementById('ambitos').innerHTML = ambitos.map(a => `
+            <li>
+                <span class="label">${esc(a.label)}</span>
+                <span class="titulo">${esc(a.titulo)}</span>
+                <span class="desc">${esc(a.desc)}</span>
+            </li>
+        `).join('');
+
+        document.getElementById('timeline').innerHTML = hitos.map(h => `
+            <li>
+                <div class="year">${esc(h.fecha)}</div>
+                <div>
+                    <span class="titulo">${esc(h.titulo)}</span>
+                    <span class="desc">${esc(h.desc)}</span>
+                </div>
+            </li>
+        `).join('');
+
+        document.getElementById('productos').innerHTML = productos.map(p => `
+            <li>
+                <span class="cat">${esc(p.categoria)}</span>
+                <h3 class="titulo">${esc(p.titulo)}</h3>
+                <p class="desc">${esc(p.desc)}</p>
+            </li>
+        `).join('');
+
+        document.getElementById('indicadores-titulo').textContent = indicadores.titulo;
+        document.getElementById('indicadores-rows').innerHTML = indicadores.items.map(it => `
+            <div class="indicadores-row">
+                <span class="indicadores-label">${esc(it.label)}</span>
+                <span class="indicadores-valor">${it.valor}%</span>
+            </div>
+        `).join('');
+
+        document.getElementById('equipo').innerHTML = equipo.map(p => `
+            <li>
+                <div class="nombre">${esc(p.nombre)}</div>
+                <div class="cargo">${esc(p.cargo)}</div>
+                <a href="mailto:${esc(p.mail)}" class="mail">${esc(p.mail)}</a>
+            </li>
+        `).join('');
+
+        document.getElementById('glosario').innerHTML = [...glosario]
+            .sort((a, b) => a.sigla.localeCompare(b.sigla))
+            .map(g => `<li><span class="sigla">${esc(g.sigla)}</span>${esc(g.def)}</li>`)
+            .join('');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Área de Monitoreo de Procesos y Resultados Educativos del SLEP Costa Central. Variante de diseño institucional.">
+    <title>Área de Monitoreo · Institucional | SLEP Costa Central</title>
+
+    <style>
+        :root {
+            --ink: #0a0a0a;
+            --paper: #ffffff;
+            --rule: #0a0a0a;
+            --hair: #d4d4d4;
+            --red: #c41e3a;
+            --muted: #6b6b6b;
+            --sans: 'Helvetica Neue', Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--sans);
+            margin: 0;
+            line-height: 1.5;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Banner superior institucional */
+        .banner {
+            background: var(--ink);
+            color: var(--paper);
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--red);
+        }
+        .banner a { color: var(--paper); text-decoration: none; }
+        .banner a:hover { color: var(--red); }
+        .banner .right { color: var(--red); }
+
+        /* Container */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Cabecera */
+        header.documento {
+            padding: 80px 0 50px;
+            border-bottom: 4px solid var(--ink);
+        }
+        .doc-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-bottom: 40px;
+        }
+        .doc-meta .right { text-align: right; color: var(--red); font-weight: 700; }
+        header.documento h1 {
+            font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -2px;
+            margin: 0 0 24px;
+            text-transform: uppercase;
+        }
+        header.documento h1 span.red { color: var(--red); }
+        header.documento .lead {
+            font-size: 1.15rem;
+            max-width: 720px;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* Secciones */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--hair);
+        }
+        section:last-of-type { border-bottom: none; }
+
+        .seccion-head {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 32px;
+            align-items: baseline;
+            margin-bottom: 40px;
+        }
+        .seccion-numeral {
+            font-family: var(--mono);
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin: 0;
+            border-top: 4px solid var(--ink);
+            padding-top: 16px;
+        }
+
+        .seccion-body {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 32px;
+        }
+        .seccion-body > .content { font-size: 1.02rem; line-height: 1.7; }
+        .seccion-body > .content > p { margin: 0 0 18px; }
+        .seccion-body > .content > p:last-child { margin-bottom: 0; }
+        .seccion-body > .content strong { font-weight: 800; }
+
+        /* Ámbitos: bloque tabular */
+        .ambitos {
+            margin-top: 36px;
+            border-top: 2px solid var(--ink);
+        }
+        .ambito-row {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 24px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--hair);
+            align-items: baseline;
+        }
+        .ambito-row .num {
+            font-family: var(--mono);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--red);
+        }
+        .ambito-row .titulo {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+        .ambito-row .desc {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* Trayectoria: tabla cronológica */
+        .cronologia {
+            width: 100%;
+            border-collapse: collapse;
+            border-top: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+        }
+        .cronologia tr { border-bottom: 1px solid var(--hair); }
+        .cronologia tr:last-child { border-bottom: none; }
+        .cronologia th {
+            text-align: left;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            padding: 12px 16px 12px 0;
+            border-bottom: 1px solid var(--ink);
+            font-weight: 700;
+        }
+        .cronologia td {
+            padding: 18px 16px 18px 0;
+            vertical-align: top;
+        }
+        .cronologia td.year {
+            font-family: var(--mono);
+            font-weight: 800;
+            color: var(--red);
+            white-space: nowrap;
+            width: 80px;
+        }
+        .cronologia td.tit {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 28%;
+        }
+        .cronologia td.des {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        /* Productos: grid 2x2 brutalist */
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border-top: 2px solid var(--ink);
+            border-left: 1px solid var(--ink);
+        }
+        .producto {
+            padding: 28px;
+            border-right: 1px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
+            position: relative;
+        }
+        .producto::before {
+            content: attr(data-num);
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--red);
+            letter-spacing: 2px;
+        }
+        .producto .cat {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+        .producto .titulo {
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        .producto .desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        /* Indicadores: tabla */
+        .indicadores-bloque {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--ink);
+        }
+        .indicadores-titulo {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+        .indicadores-tabla {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .indicadores-tabla tr { border-bottom: 1px solid var(--hair); }
+        .indicadores-tabla tr:last-child { border-bottom: none; }
+        .indicadores-tabla td { padding: 16px 0; }
+        .indicadores-tabla td.label {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        .indicadores-tabla td.bar-cell { width: 50%; padding: 0 24px; }
+        .indicadores-tabla .bar {
+            height: 8px;
+            background: #ebebeb;
+            position: relative;
+        }
+        .indicadores-tabla .bar .fill {
+            height: 100%;
+            background: var(--red);
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .indicadores-tabla td.val {
+            font-family: var(--mono);
+            font-weight: 800;
+            color: var(--red);
+            text-align: right;
+            width: 70px;
+            font-size: 1.1rem;
+        }
+
+        /* Equipo: registro institucional */
+        .equipo {
+            border-top: 2px solid var(--ink);
+        }
+        .persona-row {
+            display: grid;
+            grid-template-columns: 56px 1fr auto;
+            gap: 24px;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--hair);
+            align-items: center;
+        }
+        .persona-row .id {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--red);
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        .persona-row .nombre {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+        }
+        .persona-row .cargo {
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-family: var(--mono);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .persona-row .mail {
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--ink);
+        }
+        .persona-row .mail:hover { color: var(--red); border-color: var(--red); }
+
+        /* Glosario: tabla */
+        .glosario {
+            width: 100%;
+            border-collapse: collapse;
+            border-top: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+        }
+        .glosario tr { border-bottom: 1px solid var(--hair); }
+        .glosario tr:last-child { border-bottom: none; }
+        .glosario td {
+            padding: 14px 16px 14px 0;
+            font-size: 0.92rem;
+            vertical-align: top;
+        }
+        .glosario td.sigla {
+            font-family: var(--mono);
+            font-weight: 800;
+            color: var(--red);
+            width: 90px;
+            letter-spacing: 1px;
+        }
+        .glosario td.def { color: var(--muted); line-height: 1.55; }
+
+        /* Footer */
+        footer.documento {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 32px;
+            margin-top: 60px;
+        }
+        footer.documento .inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        footer.documento .right { text-align: right; color: var(--red); }
+        footer.documento a { color: inherit; text-decoration: underline; }
+
+        @media (max-width: 800px) {
+            .seccion-head, .seccion-body { grid-template-columns: 1fr; gap: 16px; }
+            .seccion-numeral { font-size: 2.2rem; }
+            .productos { grid-template-columns: 1fr; border-left: none; }
+            .producto { border-right: none; }
+            .cronologia td.tit { width: auto; }
+            .indicadores-tabla td.bar-cell { padding: 0 12px; }
+            footer.documento .inner { grid-template-columns: 1fr; }
+            footer.documento .right { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <span><a href="../">← Inicio</a> · <span class="right">Variante Institucional</span></span>
+        <span>Documento de presentación · v1.4</span>
+    </div>
+
+    <div class="container">
+
+        <header class="documento">
+            <div class="doc-meta">
+                <div>SLEP Costa Central · Subdirección de Apoyo Técnico Pedagógico</div>
+                <div class="right">Edición 2026</div>
+            </div>
+            <h1>Área de Monitoreo<br><span class="red">de Procesos y Resultados Educativos</span></h1>
+            <p class="lead">Documento institucional de presentación del Área, sus ámbitos de actuación, su trayectoria, sus entregables y su equipo.</p>
+        </header>
+
+        <section id="que-hace">
+            <div class="seccion-head">
+                <div class="seccion-numeral">I.</div>
+                <h2>Función</h2>
+            </div>
+            <div class="seccion-body">
+                <div></div>
+                <div class="content">
+                    <p>La Nueva Educación Pública propone una <strong>cultura de monitoreo de datos</strong> centrada en impulsar procesos de mejora sistemáticos e informados.</p>
+                    <p>El <strong>Área de Monitoreo de Procesos y Resultados Educativos</strong> del SLEP Costa Central produce, recopila, sistematiza, interpreta y difunde información clave sobre la <strong>trayectoria educativa</strong> de las y los estudiantes.</p>
+                    <p>Busca transformar la información en conocimiento para que las comunidades educativas y el nivel central <strong>entiendan su realidad, visibilicen logros, detecten desafíos y alimenten decisiones basadas en evidencia</strong>.</p>
+
+                    <div class="ambitos" id="ambitos"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trayectoria">
+            <div class="seccion-head">
+                <div class="seccion-numeral">II.</div>
+                <h2>Trayectoria</h2>
+            </div>
+            <div class="seccion-body">
+                <div></div>
+                <div class="content">
+                    <p>Hitos institucionales desde la promulgación de la Ley de Nueva Educación Pública.</p>
+                    <table class="cronologia">
+                        <thead>
+                            <tr><th>Año</th><th>Hito</th><th>Descripción</th></tr>
+                        </thead>
+                        <tbody id="cronologia"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="ejemplos">
+            <div class="seccion-head">
+                <div class="seccion-numeral">III.</div>
+                <h2>Entregables</h2>
+            </div>
+            <div class="seccion-body">
+                <div></div>
+                <div class="content">
+                    <p>El Área produce los siguientes tipos de productos para los niveles territorial, central y de comunidades educativas.</p>
+                    <div class="productos" id="productos"></div>
+
+                    <div class="indicadores-bloque">
+                        <div class="indicadores-titulo" id="ind-titulo"></div>
+                        <table class="indicadores-tabla" id="ind-tabla"></table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quienes-somos">
+            <div class="seccion-head">
+                <div class="seccion-numeral">IV.</div>
+                <h2>Equipo</h2>
+            </div>
+            <div class="seccion-body">
+                <div></div>
+                <div class="content">
+                    <div class="equipo" id="equipo"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="glosario">
+            <div class="seccion-head">
+                <div class="seccion-numeral">V.</div>
+                <h2>Glosario</h2>
+            </div>
+            <div class="seccion-body">
+                <div></div>
+                <div class="content">
+                    <p>Siglas y términos técnicos utilizados en la gestión del Área.</p>
+                    <table class="glosario" id="glosario"></table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="documento">
+        <div class="inner">
+            <div>SLEP Costa Central · SATP · Área de Monitoreo</div>
+            <div class="right"><a href="https://slepcostacentral.gob.cl" target="_blank" rel="noopener">slepcostacentral.gob.cl</a> · 2026</div>
+        </div>
+    </footer>
+
+    <script>
+        const equipo = [
+            { id: "001", nombre: "Tomás González Cifuentes", cargo: "Profesional encargado", mail: "tomas.gonzalez@slepcostacentral.gob.cl" },
+            { id: "002", nombre: "Javier Pizarro Morales",   cargo: "Profesional del área",  mail: "javier.pizarro@slepcostacentral.gob.cl" }
+        ];
+
+        const glosario = [
+            { sigla: "SLEP",  def: "Servicio Local de Educación Pública." },
+            { sigla: "DEP",   def: "Dirección de Educación Pública." },
+            { sigla: "PEL",   def: "Plan Estratégico Local." },
+            { sigla: "ENEP",  def: "Estrategia Nacional de Educación Pública." },
+            { sigla: "IDPS",  def: "Indicadores de Desarrollo Personal y Social." },
+            { sigla: "PAL",   def: "Plan Anual Local." },
+            { sigla: "SATP",  def: "Subdirección de Apoyo Técnico-Pedagógico del SLEP." },
+            { sigla: "Simce", def: "Sistema Nacional de Evaluación de Aprendizaje." },
+            { sigla: "PEI",   def: "Proyecto Educativo Institucional." },
+            { sigla: "PME",   def: "Plan de Mejoramiento Educativo." }
+        ];
+
+        const ambitos = [
+            { titulo: "Monitoreo de establecimientos", desc: "Seguimiento de indicadores de trayectoria —matrícula, asistencia, aprobación, desvinculación, aprendizajes y desarrollo personal— y de los instrumentos de gestión (PEI, PME y otros)." },
+            { titulo: "Monitoreo del nivel central",   desc: "Sistematización y análisis de datos agregados para la planificación estratégica institucional y el reporte de cumplimiento de metas." },
+            { titulo: "Fortalecimiento de capacidades", desc: "Desarrollo de herramientas, talleres y metodologías orientadas a que los equipos territoriales utilicen la evidencia de manera autónoma." }
+        ];
+
+        const hitos = [
+            { fecha: "2017", titulo: "Promulgación de la Ley NEP", desc: "Ley 21.040 crea el Sistema de Educación Pública y los Servicios Locales." },
+            { fecha: "2024", titulo: "Inicio operativo del SLEP", desc: "Traspaso progresivo de establecimientos al Servicio Local." },
+            { fecha: "2024", titulo: "Constitución del Área", desc: "Conformación del equipo dentro de la SATP." },
+            { fecha: "2025", titulo: "Primer reporte territorial", desc: "Boletín inicial de indicadores agregados." },
+            { fecha: "2025", titulo: "Tableros en línea", desc: "Paneles de seguimiento de matrícula, asistencia y aprobación." },
+            { fecha: "2026", titulo: "Fortalecimiento de capacidades", desc: "Ciclo de talleres y guías metodológicas." }
+        ];
+
+        const productos = [
+            { categoria: "Reporte territorial",  titulo: "Boletín mensual de indicadores",   desc: "Síntesis de matrícula, asistencia, aprobación y desvinculación por establecimiento, comuna y territorio." },
+            { categoria: "Tablero interactivo",  titulo: "Dashboard de asistencia escolar",  desc: "Visualización con filtros por nivel, dependencia y rango de fechas para monitoreo continuo del SLEP." },
+            { categoria: "Análisis estratégico", titulo: "Estudio de trayectorias",          desc: "Análisis longitudinal de cohortes para identificar puntos críticos de desvinculación y rezago." },
+            { categoria: "Fortalecimiento",      titulo: "Talleres de uso de evidencia",     desc: "Instancias formativas con equipos directivos y técnicos para integrar datos en la toma de decisiones." }
+        ];
+
+        const indicadores = {
+            titulo: "Cumplimiento territorial",
+            items: [
+                { label: "Reporte Matrícula AEL",  valor: 92 },
+                { label: "Asistencia Territorial", valor: 78 },
+                { label: "Aprobación promedio",    valor: 85 }
+            ]
+        };
+
+        const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        const pad = (n, w) => String(n).padStart(w, '0');
+
+        document.getElementById('ambitos').innerHTML = ambitos.map((a, i) => `
+            <div class="ambito-row">
+                <div class="num">${pad(i + 1, 2)}</div>
+                <div>
+                    <div class="titulo">${esc(a.titulo)}</div>
+                    <div class="desc">${esc(a.desc)}</div>
+                </div>
+            </div>
+        `).join('');
+
+        document.getElementById('cronologia').innerHTML = hitos.map(h => `
+            <tr>
+                <td class="year">${esc(h.fecha)}</td>
+                <td class="tit">${esc(h.titulo)}</td>
+                <td class="des">${esc(h.desc)}</td>
+            </tr>
+        `).join('');
+
+        document.getElementById('productos').innerHTML = productos.map((p, i) => `
+            <div class="producto" data-num="N.º ${pad(i + 1, 2)}">
+                <div class="cat">${esc(p.categoria)}</div>
+                <div class="titulo">${esc(p.titulo)}</div>
+                <div class="desc">${esc(p.desc)}</div>
+            </div>
+        `).join('');
+
+        document.getElementById('ind-titulo').textContent = indicadores.titulo;
+        document.getElementById('ind-tabla').innerHTML = indicadores.items.map(it => `
+            <tr>
+                <td class="label">${esc(it.label)}</td>
+                <td class="bar-cell"><div class="bar"><div class="fill" data-fill="${it.valor}"></div></div></td>
+                <td class="val">${it.valor}%</td>
+            </tr>
+        `).join('');
+
+        document.getElementById('equipo').innerHTML = equipo.map(p => `
+            <div class="persona-row">
+                <div class="id">N.º ${esc(p.id)}</div>
+                <div>
+                    <div class="nombre">${esc(p.nombre)}</div>
+                    <div class="cargo">${esc(p.cargo)}</div>
+                </div>
+                <a href="mailto:${esc(p.mail)}" class="mail">${esc(p.mail)}</a>
+            </div>
+        `).join('');
+
+        document.getElementById('glosario').innerHTML = [...glosario]
+            .sort((a, b) => a.sigla.localeCompare(b.sigla))
+            .map(g => `<tr><td class="sigla">${esc(g.sigla)}</td><td class="def">${esc(g.def)}</td></tr>`)
+            .join('');
+
+        // Animar barras de indicadores
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.width = e.target.dataset.fill + '%';
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('.fill').forEach(b => obs.observe(b));
+    </script>
+
+</body>
+</html>
