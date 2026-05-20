@@ -43,6 +43,18 @@ Requiere Google Chrome o Chromium instalado. El script busca el binario en rutas
 
 Editar el diseño en `og-image.svg` y volver a correr el script para propagar cambios.
 
+## Variantes de diseño
+
+En `variants/` viven tres direcciones visuales alternativas del sitio. Sirven como exploración paralela; el sitio "oficial" sigue siendo `index.html`.
+
+| Variante | URL | Dirección |
+|---|---|---|
+| Editorial | `variants/editorial.html` | Long-form serifa, columna única, paleta cálida |
+| Dashboard / Bento | `variants/dashboard.html` | Grilla de tarjetas multi-color, KPIs prominentes |
+| Institucional | `variants/institucional.html` | Alto contraste, geométrico, tono documento oficial |
+
+Índice de las tres: `variants/index.html`. Comparten los mismos datasets (equipo, glosario, hitos, productos, indicadores) que el sitio principal, replicados en cada archivo.
+
 ## Versionado
 
 La versión visible aparece en el footer de `index.html` (actualmente `1.4`). Convención: bump menor por cambios visuales o de contenido, bump mayor por reescrituras.
