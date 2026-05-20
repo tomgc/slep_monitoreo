@@ -7,207 +7,239 @@
     <title>Variantes de diseño · Área de Monitoreo</title>
 
     <style>
+        /* Paleta oficial SLEP Costa Central */
         :root {
+            --purple: #4A2746;
+            --cream:  #FFF6E0;
+            --blue:   #0062A0;
+            --gray:   #747474;
+            --green:  #75924E;
+            --beige:  #BCA493;
+            --coral:  #E88663;
             --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
         }
         *, *::before, *::after { box-sizing: border-box; }
         body {
             font-family: var(--font);
             margin: 0;
-            background: #fafafa;
-            color: #111;
+            background: var(--cream);
+            color: var(--purple);
             -webkit-font-smoothing: antialiased;
             line-height: 1.5;
+            font-size: 15px;
         }
         .wrap {
-            max-width: 980px;
+            max-width: 820px;
             margin: 0 auto;
-            padding: 70px 28px 80px;
+            padding: 50px 24px 60px;
         }
-        header {
-            margin-bottom: 50px;
-        }
+        header { margin-bottom: 32px; }
         .breadcrumb {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 12px;
+            font-size: 0.78rem;
+            color: var(--gray);
+            margin-bottom: 8px;
         }
-        .breadcrumb a { color: #3498db; text-decoration: none; }
+        .breadcrumb a { color: var(--blue); text-decoration: none; }
         .breadcrumb a:hover { text-decoration: underline; }
         h1 {
-            font-size: 2.2rem;
+            font-size: 1.7rem;
             font-weight: 800;
-            margin: 0 0 12px;
-            letter-spacing: -0.5px;
+            margin: 0 0 8px;
+            letter-spacing: -0.4px;
         }
         .lead {
-            font-size: 1.05rem;
-            color: #555;
-            max-width: 640px;
+            font-size: 0.94rem;
+            color: var(--gray);
+            max-width: 560px;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
         }
         .variant {
             display: block;
             text-decoration: none;
             color: inherit;
-            border-radius: 14px;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #e3d6bc;
             background: #fff;
-            transition: transform 0.22s, box-shadow 0.22s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .variant:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 26px rgba(74, 39, 70, 0.10);
         }
         .preview {
-            height: 180px;
+            height: 150px;
             position: relative;
             overflow: hidden;
         }
-        .body {
-            padding: 22px;
-        }
+        .body { padding: 16px; }
         .tag {
-            font-size: 0.7rem;
+            font-size: 0.62rem;
             font-weight: 700;
-            letter-spacing: 1.3px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            color: #6b7280;
-            margin-bottom: 8px;
+            color: var(--gray);
+            margin-bottom: 6px;
         }
-        .titulo { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
-        .desc { font-size: 0.9rem; color: #6b7280; line-height: 1.55; margin-bottom: 14px; }
+        .titulo { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .desc { font-size: 0.8rem; color: var(--gray); line-height: 1.5; margin-bottom: 10px; }
         .cta {
-            font-size: 0.82rem;
+            font-size: 0.74rem;
             font-weight: 600;
-            color: #3498db;
+            color: var(--blue);
         }
         .variant:hover .cta { text-decoration: underline; }
 
-        /* Preview: editorial */
+        /* Preview: editorial (cream + coral, serifa) */
         .preview.editorial {
-            background: #faf7f1;
+            background: var(--cream);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
             font-style: italic;
-            color: #1f1a17;
+            color: var(--purple);
         }
         .preview.editorial .title {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             text-align: center;
             line-height: 1.1;
-            padding: 0 24px;
+            padding: 0 22px;
         }
         .preview.editorial .kicker {
             position: absolute;
-            top: 16px;
+            top: 14px;
             left: 50%;
             transform: translateX(-50%);
             font-family: var(--font);
             font-style: normal;
-            font-size: 0.62rem;
-            letter-spacing: 3px;
+            font-size: 0.55rem;
+            letter-spacing: 2.4px;
             text-transform: uppercase;
-            color: #a8553a;
+            color: var(--coral);
         }
         .preview.editorial .rule {
             position: absolute;
-            bottom: 30px;
+            bottom: 22px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
+            width: 32px;
             height: 1px;
-            background: #a8553a;
+            background: var(--coral);
         }
 
-        /* Preview: dashboard */
+        /* Preview: dashboard (cream bg, KPI tiles) */
         .preview.dashboard {
-            background: #f6f7fb;
-            padding: 16px;
+            background: var(--cream);
+            padding: 12px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: 1fr 1fr;
-            gap: 8px;
+            gap: 6px;
         }
         .preview.dashboard .tile {
             background: #fff;
-            border-radius: 6px;
-            border: 1px solid #e5e7eb;
-            padding: 8px;
+            border-radius: 5px;
+            padding: 7px 8px;
         }
-        .preview.dashboard .t1 { background: #e0ecff; }
-        .preview.dashboard .t1 .num { font-size: 1.1rem; font-weight: 800; color: #3b82f6; }
-        .preview.dashboard .t2 { background: #d4f4e6; }
-        .preview.dashboard .t2 .num { font-size: 1.1rem; font-weight: 800; color: #10b981; }
-        .preview.dashboard .t3 { background: #fef0d4; }
-        .preview.dashboard .t3 .num { font-size: 1.1rem; font-weight: 800; color: #b45309; }
-        .preview.dashboard .tile .lbl { font-size: 0.55rem; color: #6b7280; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .preview.dashboard .wide { grid-column: span 3; display: flex; align-items: flex-end; gap: 6px; padding: 10px 12px; }
-        .preview.dashboard .wide .bar { width: 14px; background: #3b82f6; border-radius: 2px 2px 0 0; opacity: 0.6; }
+        .preview.dashboard .t1 { background: #d6e7f3; }
+        .preview.dashboard .t1 .num { font-size: 0.95rem; font-weight: 800; color: var(--blue); }
+        .preview.dashboard .t2 { background: #e0e9d3; }
+        .preview.dashboard .t2 .num { font-size: 0.95rem; font-weight: 800; color: var(--green); }
+        .preview.dashboard .t3 { background: #fbe1d4; }
+        .preview.dashboard .t3 .num { font-size: 0.95rem; font-weight: 800; color: var(--coral); }
+        .preview.dashboard .tile .lbl { font-size: 0.5rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 2px; }
+        .preview.dashboard .wide {
+            grid-column: span 3;
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            padding: 8px 10px;
+            border: 1px solid #e3d6bc;
+        }
+        .preview.dashboard .wide .bar { width: 11px; background: var(--blue); border-radius: 2px 2px 0 0; opacity: 0.75; }
 
-        /* Preview: institucional */
+        /* Preview: institucional (cream + purple + coral) */
         .preview.institucional {
-            background: #fff;
+            background: var(--cream);
             position: relative;
         }
         .preview.institucional .banner {
-            background: #0a0a0a;
-            color: #fff;
+            background: var(--purple);
+            color: var(--cream);
             font-family: 'SF Mono', Menlo, monospace;
-            font-size: 0.55rem;
-            padding: 6px 14px;
-            letter-spacing: 1.5px;
+            font-size: 0.5rem;
+            padding: 5px 12px;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
-            border-bottom: 3px solid #c41e3a;
+            border-bottom: 2px solid var(--coral);
         }
         .preview.institucional .doc {
-            padding: 20px 24px;
+            padding: 16px 18px;
         }
         .preview.institucional .meta {
             font-family: 'SF Mono', Menlo, monospace;
-            font-size: 0.55rem;
-            color: #c41e3a;
-            letter-spacing: 1.5px;
+            font-size: 0.5rem;
+            color: var(--coral);
+            letter-spacing: 1.3px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .preview.institucional .title {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.4px;
             line-height: 1;
-            color: #0a0a0a;
+            color: var(--purple);
         }
-        .preview.institucional .title span { color: #c41e3a; }
+        .preview.institucional .title span { color: var(--coral); }
         .preview.institucional .roman {
             position: absolute;
-            bottom: 14px;
-            right: 18px;
+            bottom: 12px;
+            right: 16px;
             font-family: 'SF Mono', Menlo, monospace;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            color: #c41e3a;
+            color: var(--coral);
         }
 
         footer {
-            margin-top: 50px;
-            padding-top: 24px;
-            border-top: 1px solid #e5e7eb;
-            font-size: 0.85rem;
-            color: #6b7280;
+            margin-top: 36px;
+            padding-top: 18px;
+            border-top: 1px solid #e3d6bc;
+            font-size: 0.78rem;
+            color: var(--gray);
             text-align: center;
         }
-        footer a { color: #3498db; text-decoration: none; }
+        footer a { color: var(--blue); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
+
+        /* Tira de paleta abajo */
+        .palette {
+            margin-top: 30px;
+            display: flex;
+            gap: 4px;
+        }
+        .palette .swatch {
+            flex: 1;
+            height: 28px;
+            border-radius: 3px;
+            position: relative;
+            font-family: 'SF Mono', Menlo, monospace;
+            font-size: 0.58rem;
+            color: rgba(255, 255, 255, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+        }
+        .palette .swatch.light { color: var(--purple); }
     </style>
 </head>
 <body>
@@ -217,7 +249,7 @@
         <header>
             <div class="breadcrumb"><a href="../">← Sitio original</a></div>
             <h1>Variantes de diseño</h1>
-            <p class="lead">Tres direcciones visuales alternativas para el sitio del Área de Monitoreo. El contenido es idéntico en las tres; solo cambia el tratamiento de diseño.</p>
+            <p class="lead">Tres direcciones visuales alternativas, en formato compacto y con la paleta oficial del SLEP Costa Central. El contenido es idéntico en las tres.</p>
         </header>
 
         <div class="grid">
@@ -231,7 +263,7 @@
                 <div class="body">
                     <div class="tag">Variante 1</div>
                     <div class="titulo">Editorial</div>
-                    <div class="desc">Long-form de columna única con tipografía serifa. Paleta cálida, ritmo reposado, drop caps y notas al margen. Para presentaciones reflexivas o lecturas dirigidas.</div>
+                    <div class="desc">Columna angosta, tipografía serifa, drop cap y notas al margen. Paleta cálida sobre crema. Para lectura reposada.</div>
                     <div class="cta">Abrir variante →</div>
                 </div>
             </a>
@@ -253,14 +285,14 @@
                 <div class="body">
                     <div class="tag">Variante 2</div>
                     <div class="titulo">Dashboard / Bento</div>
-                    <div class="desc">Grilla de tarjetas tipo Notion/Bento con KPIs prominentes y paleta multi-color. Nav superior pegado. Sensación moderna, data-céntrica y exploratoria.</div>
+                    <div class="desc">Grilla compacta de tarjetas con KPIs en morado, azul, verde y coral. Nav superior. Sensación data-céntrica.</div>
                     <div class="cta">Abrir variante →</div>
                 </div>
             </a>
 
             <a class="variant" href="institucional.html">
                 <div class="preview institucional">
-                    <div class="banner">REPÚBLICA DE CHILE · SLEP COSTA CENTRAL</div>
+                    <div class="banner">SLEP COSTA CENTRAL · SATP</div>
                     <div class="doc">
                         <div class="meta">DOCUMENTO INSTITUCIONAL · 2026</div>
                         <div class="title">Área de<br>Monitoreo <span>Educativo</span></div>
@@ -270,15 +302,25 @@
                 <div class="body">
                     <div class="tag">Variante 3</div>
                     <div class="titulo">Institucional</div>
-                    <div class="desc">Alto contraste, sin esquinas redondeadas, acento rojo. Tipografía geométrica, numerales romanos, tablas estrictas. Tono de documento oficial.</div>
+                    <div class="desc">Alto contraste sobre crema, morado y coral, hairlines visibles. Numerales romanos y tablas estrictas. Tono documento oficial.</div>
                     <div class="cta">Abrir variante →</div>
                 </div>
             </a>
 
         </div>
 
+        <div class="palette" title="Paleta oficial SLEP Costa Central">
+            <div class="swatch" style="background:#4A2746">#4A2746</div>
+            <div class="swatch light" style="background:#FFF6E0">#FFF6E0</div>
+            <div class="swatch" style="background:#0062A0">#0062A0</div>
+            <div class="swatch" style="background:#747474">#747474</div>
+            <div class="swatch" style="background:#75924E">#75924E</div>
+            <div class="swatch" style="background:#BCA493">#BCA493</div>
+            <div class="swatch" style="background:#E88663">#E88663</div>
+        </div>
+
         <footer>
-            Versión exploratoria · <a href="../">Volver al sitio original</a>
+            Paleta oficial SLEP · <a href="../">Volver al sitio original</a>
         </footer>
 
     </div>

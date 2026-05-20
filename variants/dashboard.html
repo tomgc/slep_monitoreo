@@ -7,25 +7,30 @@
     <title>Área de Monitoreo · Dashboard | SLEP Costa Central</title>
 
     <style>
+        /* Paleta oficial SLEP Costa Central */
         :root {
-            --bg: #f6f7fb;
-            --ink: #0f172a;
-            --muted: #64748b;
-            --line: #e2e8f0;
+            --purple:      #4A2746;
+            --purple-soft: #ece0e9;
+            --cream:       #FFF6E0;
+            --blue:        #0062A0;
+            --blue-soft:   #d6e7f3;
+            --gray:        #747474;
+            --green:       #75924E;
+            --green-soft:  #e0e9d3;
+            --beige:       #BCA493;
+            --beige-soft:  #ede4dc;
+            --coral:       #E88663;
+            --coral-soft:  #fbe1d4;
+
+            --bg: var(--cream);
+            --ink: var(--purple);
+            --muted: var(--gray);
+            --line: var(--beige-soft);
             --card: #ffffff;
-            --blue: #3b82f6;
-            --blue-soft: #e0ecff;
-            --green: #10b981;
-            --green-soft: #d4f4e6;
-            --amber: #f59e0b;
-            --amber-soft: #fef0d4;
-            --purple: #8b5cf6;
-            --purple-soft: #ece4ff;
-            --rose: #f43f5e;
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-            --radius: 16px;
-            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
-            --shadow: 0 4px 16px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, 'Inter', sans-serif;
+            --radius: 10px;
+            --shadow: 0 1px 3px rgba(74, 39, 70, 0.06);
         }
 
         *, *::before, *::after { box-sizing: border-box; }
@@ -36,6 +41,7 @@
             font-family: var(--font);
             margin: 0;
             line-height: 1.5;
+            font-size: 15px;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -47,259 +53,252 @@
             }
         }
 
-        /* Top nav */
+        /* Top nav compacta */
         nav.topbar {
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: saturate(180%) blur(12px);
-            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            background: rgba(255, 246, 224, 0.88);
+            backdrop-filter: saturate(180%) blur(10px);
+            -webkit-backdrop-filter: saturate(180%) blur(10px);
             border-bottom: 1px solid var(--line);
             z-index: 100;
-            padding: 14px 28px;
+            padding: 10px 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 24px;
+            gap: 18px;
         }
         .topbar .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-weight: 700;
-            font-size: 0.92rem;
+            font-size: 0.82rem;
         }
         .topbar .brand-logo {
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: flex-end;
             gap: 2px;
         }
         .topbar .brand-logo span {
-            background: var(--blue);
+            width: 4px;
             border-radius: 1px;
-            width: 5px;
         }
-        .topbar .brand-logo span:nth-child(1) { height: 50%; background: var(--ink); }
+        .topbar .brand-logo span:nth-child(1) { height: 50%; background: var(--purple); }
         .topbar .brand-logo span:nth-child(2) { height: 75%; background: var(--blue); }
-        .topbar .brand-logo span:nth-child(3) { height: 100%; background: var(--ink); }
+        .topbar .brand-logo span:nth-child(3) { height: 100%; background: var(--purple); }
         .topbar nav ul {
             list-style: none;
             display: flex;
-            gap: 6px;
+            gap: 2px;
             margin: 0;
             padding: 0;
         }
         .topbar nav a {
             color: var(--muted);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             font-weight: 500;
-            padding: 8px 14px;
+            padding: 6px 10px;
             border-radius: 999px;
             transition: background 0.18s, color 0.18s;
         }
-        .topbar nav a:hover { color: var(--ink); background: var(--bg); }
+        .topbar nav a:hover { color: var(--purple); background: var(--purple-soft); }
         .variant-tag {
-            font-size: 0.7rem;
+            font-size: 0.62rem;
             font-weight: 700;
-            letter-spacing: 1.4px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            color: var(--purple);
-            background: var(--purple-soft);
-            padding: 5px 10px;
-            border-radius: 6px;
+            color: var(--coral);
+            background: var(--coral-soft);
+            padding: 4px 8px;
+            border-radius: 4px;
         }
         .variant-tag a { color: inherit; text-decoration: none; }
 
-        /* Container y grid */
+        /* Container */
         .container {
-            max-width: 1180px;
+            max-width: 860px;
             margin: 0 auto;
-            padding: 28px;
+            padding: 22px;
         }
 
         .hero {
-            margin-bottom: 24px;
+            margin-bottom: 18px;
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 24px;
+            gap: 18px;
             align-items: end;
         }
         .hero .kicker {
-            font-size: 0.75rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: var(--blue);
             letter-spacing: 1.2px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         .hero h1 {
-            font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+            font-size: clamp(1.35rem, 2.6vw, 1.7rem);
             font-weight: 800;
             margin: 0;
-            letter-spacing: -0.5px;
-            line-height: 1.15;
+            letter-spacing: -0.4px;
+            line-height: 1.2;
         }
         .hero .meta {
-            font-size: 0.82rem;
+            font-size: 0.74rem;
             color: var(--muted);
             text-align: right;
-            padding-bottom: 4px;
+            padding-bottom: 2px;
         }
         .hero .dot {
             display: inline-block;
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--green);
-            margin-right: 6px;
-            box-shadow: 0 0 0 4px var(--green-soft);
+            margin-right: 5px;
+            box-shadow: 0 0 0 3px var(--green-soft);
             animation: pulse 2.4s ease-in-out infinite;
         }
         @keyframes pulse {
-            50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.15); }
+            50% { box-shadow: 0 0 0 6px rgba(117, 146, 78, 0.18); }
         }
 
-        /* Bento grid */
+        /* Bento grid: 6 columnas */
         .grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 18px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
             grid-auto-rows: min-content;
         }
         .card {
             background: var(--card);
             border-radius: var(--radius);
-            padding: 22px;
-            box-shadow: var(--shadow-sm);
+            padding: 16px;
+            box-shadow: var(--shadow);
             border: 1px solid var(--line);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.18s, box-shadow 0.18s;
         }
-        .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .card:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(74, 39, 70, 0.08); }
         .card h2 {
-            font-size: 0.78rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--muted);
             letter-spacing: 1.2px;
             text-transform: uppercase;
-            margin: 0 0 14px;
-        }
-        .card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin: 0 0 8px;
+            margin: 0 0 10px;
         }
 
-        /* Spans */
+        /* Spans en grid 6-col */
+        .span-2 { grid-column: span 2; }
         .span-3 { grid-column: span 3; }
         .span-4 { grid-column: span 4; }
-        .span-5 { grid-column: span 5; }
         .span-6 { grid-column: span 6; }
-        .span-7 { grid-column: span 7; }
-        .span-8 { grid-column: span 8; }
-        .span-12 { grid-column: span 12; }
 
-        /* KPI cards */
-        .kpi { padding: 20px; }
+        /* KPIs */
+        .kpi { padding: 14px 16px; }
         .kpi .label {
-            font-size: 0.72rem;
+            font-size: 0.64rem;
             font-weight: 700;
-            letter-spacing: 1.3px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            margin-bottom: 14px;
+            margin-bottom: 8px;
         }
         .kpi .valor {
-            font-size: 2.4rem;
+            font-size: 1.7rem;
             font-weight: 800;
             line-height: 1;
-            letter-spacing: -1px;
+            letter-spacing: -0.6px;
         }
+        .kpi .valor .pct { font-size: 0.85rem; opacity: 0.6; margin-left: 1px; }
         .kpi .barra {
-            height: 6px;
-            border-radius: 3px;
-            background: rgba(15, 23, 42, 0.06);
-            margin-top: 18px;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(74, 39, 70, 0.06);
+            margin-top: 10px;
             overflow: hidden;
         }
         .kpi .barra .fill {
             height: 100%;
-            border-radius: 3px;
+            border-radius: 2px;
             width: 0;
             transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .kpi.blue   { background: linear-gradient(135deg, var(--blue-soft), #f4f8ff); }
-        .kpi.blue .label, .kpi.blue .valor { color: var(--blue); }
-        .kpi.blue .fill { background: var(--blue); }
-        .kpi.green  { background: linear-gradient(135deg, var(--green-soft), #f3fbf7); }
+        .kpi.blue  { background: linear-gradient(135deg, var(--blue-soft), #eef4f9); }
+        .kpi.blue  .label, .kpi.blue  .valor { color: var(--blue); }
+        .kpi.blue  .fill { background: var(--blue); }
+        .kpi.green { background: linear-gradient(135deg, var(--green-soft), #f0f3e9); }
         .kpi.green .label, .kpi.green .valor { color: var(--green); }
         .kpi.green .fill { background: var(--green); }
-        .kpi.amber  { background: linear-gradient(135deg, var(--amber-soft), #fef9ec); }
-        .kpi.amber .label, .kpi.amber .valor { color: #b45309; }
-        .kpi.amber .fill { background: var(--amber); }
+        .kpi.coral { background: linear-gradient(135deg, var(--coral-soft), #fbece2); }
+        .kpi.coral .label, .kpi.coral .valor { color: var(--coral); }
+        .kpi.coral .fill { background: var(--coral); }
 
         /* Sobre */
         .sobre p {
-            margin: 0 0 14px;
-            color: #334155;
-            font-size: 0.95rem;
-            line-height: 1.65;
+            margin: 0 0 10px;
+            color: var(--purple);
+            font-size: 0.88rem;
+            line-height: 1.55;
         }
         .sobre p:last-child { margin-bottom: 0; }
-        .sobre strong { color: var(--ink); }
+        .sobre strong { font-weight: 700; }
 
         /* Ámbitos */
         .ambito-card {
-            padding: 18px 20px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 130px;
+            min-height: 110px;
         }
         .ambito-card .num {
-            font-size: 1.7rem;
+            font-size: 1.3rem;
             font-weight: 800;
             line-height: 1;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
         .ambito-card .titulo {
             font-weight: 700;
-            font-size: 0.92rem;
-            margin-top: 14px;
+            font-size: 0.84rem;
+            margin-top: 12px;
+            line-height: 1.3;
         }
         .ambito-card .desc {
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             color: var(--muted);
-            margin-top: 6px;
-            line-height: 1.5;
+            margin-top: 4px;
+            line-height: 1.45;
         }
+        .ambito-card.purple { background: var(--purple-soft); }
+        .ambito-card.purple .num, .ambito-card.purple .titulo { color: var(--purple); }
         .ambito-card.blue   { background: var(--blue-soft); }
         .ambito-card.blue   .num, .ambito-card.blue .titulo   { color: var(--blue); }
         .ambito-card.green  { background: var(--green-soft); }
         .ambito-card.green  .num, .ambito-card.green .titulo  { color: var(--green); }
-        .ambito-card.purple { background: var(--purple-soft); }
-        .ambito-card.purple .num, .ambito-card.purple .titulo { color: var(--purple); }
 
         /* Timeline horizontal */
         .timeline-wrap {
             overflow-x: auto;
-            margin: 0 -22px -22px;
-            padding: 0 22px 22px;
+            margin: 0 -16px -16px;
+            padding: 0 16px 14px;
             scroll-snap-type: x mandatory;
         }
         .timeline-list {
             display: grid;
             grid-auto-flow: column;
-            grid-auto-columns: 200px;
-            gap: 14px;
+            grid-auto-columns: 170px;
+            gap: 10px;
             position: relative;
-            padding-top: 22px;
+            padding-top: 18px;
         }
         .timeline-list::before {
             content: "";
             position: absolute;
-            top: 28px;
+            top: 22px;
             left: 0;
             right: 0;
             height: 2px;
@@ -312,119 +311,120 @@
         .timeline-item::before {
             content: "";
             position: absolute;
-            top: -22px;
+            top: -18px;
             left: 0;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--card);
-            border: 3px solid var(--blue);
+            border: 2.5px solid var(--blue);
         }
         .timeline-item .year {
-            font-size: 0.72rem;
+            font-size: 0.66rem;
             font-weight: 700;
             color: var(--blue);
-            letter-spacing: 1.3px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
         }
         .timeline-item .titulo {
             font-weight: 700;
-            font-size: 0.92rem;
-            margin: 4px 0 6px;
+            font-size: 0.84rem;
+            margin: 3px 0 4px;
             line-height: 1.3;
         }
         .timeline-item .desc {
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             color: var(--muted);
-            line-height: 1.5;
+            line-height: 1.45;
         }
 
         /* Productos */
         .producto-card {
-            padding: 18px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         .producto-tag {
             display: inline-block;
-            font-size: 0.66rem;
+            font-size: 0.6rem;
             font-weight: 700;
-            letter-spacing: 1.2px;
+            letter-spacing: 1.1px;
             text-transform: uppercase;
-            padding: 3px 8px;
+            padding: 3px 7px;
             border-radius: 999px;
             align-self: flex-start;
         }
+        .producto-tag.t-purple { color: var(--purple); background: var(--purple-soft); }
         .producto-tag.t-blue   { color: var(--blue); background: var(--blue-soft); }
         .producto-tag.t-green  { color: var(--green); background: var(--green-soft); }
-        .producto-tag.t-purple { color: var(--purple); background: var(--purple-soft); }
-        .producto-tag.t-amber  { color: #b45309; background: var(--amber-soft); }
+        .producto-tag.t-coral  { color: var(--coral); background: var(--coral-soft); }
         .producto-card .titulo {
             font-weight: 700;
-            font-size: 0.98rem;
+            font-size: 0.88rem;
             line-height: 1.3;
         }
         .producto-card .desc {
-            font-size: 0.85rem;
+            font-size: 0.76rem;
             color: var(--muted);
-            line-height: 1.55;
+            line-height: 1.5;
             flex: 1;
         }
         .producto-mini {
-            height: 60px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            height: 48px;
+            border-radius: 6px;
+            background: var(--bg);
             display: flex;
             align-items: flex-end;
             justify-content: space-around;
-            padding: 6px 10px;
+            padding: 5px 8px;
+            border: 1px solid var(--line);
         }
         .producto-mini .bar {
-            width: 8px;
-            background: var(--blue);
+            width: 6px;
             border-radius: 2px 2px 0 0;
-            opacity: 0.7;
+            opacity: 0.85;
         }
 
         /* Equipo */
         .persona-card {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
+            padding: 14px;
         }
         .avatar {
-            width: 52px;
-            height: 52px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: var(--card);
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
+            color: #fff;
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
             flex-shrink: 0;
         }
+        .avatar.purple { background: var(--purple); }
         .avatar.blue { background: var(--blue); }
-        .avatar.green { background: var(--green); }
-        .persona-card .nombre { font-weight: 700; font-size: 0.95rem; }
-        .persona-card .cargo { font-size: 0.78rem; color: var(--muted); margin: 2px 0 4px; }
-        .persona-card .mail { font-size: 0.78rem; color: var(--blue); text-decoration: none; }
+        .persona-card .nombre { font-weight: 700; font-size: 0.86rem; }
+        .persona-card .cargo { font-size: 0.7rem; color: var(--muted); margin: 1px 0 3px; }
+        .persona-card .mail { font-size: 0.7rem; color: var(--blue); text-decoration: none; }
         .persona-card .mail:hover { text-decoration: underline; }
 
-        /* Glosario chips */
+        /* Glosario */
         .glosario-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 6px;
         }
         .glosario-chip {
-            background: #f8fafc;
+            background: var(--bg);
             border: 1px solid var(--line);
-            border-radius: 10px;
-            padding: 10px 12px;
-            font-size: 0.78rem;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 0.72rem;
             line-height: 1.4;
             transition: background 0.18s, border-color 0.18s;
         }
@@ -432,30 +432,29 @@
         .glosario-chip .sigla {
             font-weight: 800;
             color: var(--blue);
-            font-size: 0.82rem;
+            font-size: 0.76rem;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         footer.site {
-            margin-top: 40px;
-            padding: 24px;
+            margin-top: 28px;
+            padding: 16px;
             text-align: center;
             color: var(--muted);
-            font-size: 0.78rem;
+            font-size: 0.72rem;
         }
         footer.site a { color: var(--blue); text-decoration: none; font-weight: 600; }
         footer.site a:hover { text-decoration: underline; }
 
-        @media (max-width: 900px) {
+        @media (max-width: 760px) {
             .topbar nav ul { display: none; }
-            .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 6; }
+            .span-2, .span-3, .span-4 { grid-column: span 6; }
             .hero { grid-template-columns: 1fr; }
             .hero .meta { text-align: left; }
         }
-        @media (max-width: 560px) {
-            .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
-            .container { padding: 18px; }
+        @media (max-width: 500px) {
+            .container { padding: 16px; }
         }
     </style>
 </head>
@@ -483,83 +482,82 @@
         <div class="hero">
             <div>
                 <div class="kicker">SLEP Costa Central · SATP</div>
-                <h1>Área de Monitoreo de Procesos<br>y Resultados Educativos</h1>
+                <h1>Área de Monitoreo de Procesos y Resultados Educativos</h1>
             </div>
-            <div class="meta"><span class="dot"></span>Operación activa · v1.4</div>
+            <div class="meta"><span class="dot"></span>v1.4</div>
         </div>
 
         <div class="grid">
 
             <!-- KPIs -->
-            <div class="card kpi blue span-4" id="kpi-0">
-                <div class="label">Reporte Matrícula AEL</div>
-                <div class="valor">92<span style="font-size:1.2rem;opacity:0.6">%</span></div>
+            <div class="card kpi blue span-2">
+                <div class="label">Reporte AEL</div>
+                <div class="valor">92<span class="pct">%</span></div>
                 <div class="barra"><div class="fill" data-fill="92"></div></div>
             </div>
-            <div class="card kpi green span-4" id="kpi-1">
-                <div class="label">Aprobación promedio</div>
-                <div class="valor">85<span style="font-size:1.2rem;opacity:0.6">%</span></div>
+            <div class="card kpi green span-2">
+                <div class="label">Aprobación</div>
+                <div class="valor">85<span class="pct">%</span></div>
                 <div class="barra"><div class="fill" data-fill="85"></div></div>
             </div>
-            <div class="card kpi amber span-4" id="kpi-2">
-                <div class="label">Asistencia Territorial</div>
-                <div class="valor">78<span style="font-size:1.2rem;opacity:0.6">%</span></div>
+            <div class="card kpi coral span-2">
+                <div class="label">Asistencia</div>
+                <div class="valor">78<span class="pct">%</span></div>
                 <div class="barra"><div class="fill" data-fill="78"></div></div>
             </div>
 
             <!-- ¿Qué hace? -->
-            <div class="card sobre span-7" id="que-hace">
+            <div class="card sobre span-3" id="que-hace">
                 <h2>Qué hace</h2>
-                <p>La Nueva Educación Pública propone una <strong>cultura de monitoreo de datos</strong> centrada en impulsar procesos de mejora sistemáticos e informados.</p>
-                <p>El Área del SLEP Costa Central produce, recopila, sistematiza, interpreta y difunde información clave que da cuenta de la <strong>trayectoria educativa</strong> de las y los estudiantes.</p>
-                <p>Busca transformar la información en conocimiento para que las comunidades educativas y el nivel central <strong>entiendan su realidad, visibilicen logros, detecten desafíos y alimenten decisiones basadas en evidencia</strong>.</p>
+                <p>La Nueva Educación Pública propone una <strong>cultura de monitoreo de datos</strong> centrada en impulsar procesos de mejora informados.</p>
+                <p>El Área del SLEP Costa Central produce, sistematiza e interpreta información sobre la <strong>trayectoria educativa</strong> de las y los estudiantes, para que comunidades educativas y nivel central tomen decisiones basadas en evidencia.</p>
             </div>
 
             <!-- Ámbitos -->
-            <div class="card ambito-card blue span-5" style="grid-row: span 1;">
+            <div class="card ambito-card purple span-3">
                 <div class="num">01</div>
                 <div>
                     <div class="titulo">Monitoreo de establecimientos</div>
                     <div class="desc">Indicadores de trayectoria y revisión de instrumentos de gestión (PEI, PME).</div>
                 </div>
             </div>
-            <div class="card ambito-card green span-5">
+            <div class="card ambito-card blue span-3">
                 <div class="num">02</div>
                 <div>
                     <div class="titulo">Monitoreo del nivel central</div>
                     <div class="desc">Datos agregados para planificación estratégica y reporte de metas.</div>
                 </div>
             </div>
-            <div class="card ambito-card purple span-5">
+            <div class="card ambito-card green span-3">
                 <div class="num">03</div>
                 <div>
-                    <div class="titulo">Fortalecimiento de capacidades</div>
-                    <div class="desc">Talleres, herramientas y metodologías para uso autónomo de evidencia.</div>
+                    <div class="titulo">Fortalecimiento</div>
+                    <div class="desc">Talleres y metodologías para uso autónomo de evidencia.</div>
                 </div>
             </div>
 
             <!-- Trayectoria -->
-            <div class="card span-12" id="trayectoria">
+            <div class="card span-6" id="trayectoria">
                 <h2>Trayectoria</h2>
                 <div class="timeline-wrap">
                     <div class="timeline-list" id="timeline"></div>
                 </div>
             </div>
 
-            <!-- Ejemplos: encabezado -->
-            <div class="card span-12" id="ejemplos">
+            <!-- Productos -->
+            <div class="card span-6" id="ejemplos">
                 <h2>Productos y entregables</h2>
-                <div class="grid" id="productos-grid" style="margin-top: 6px;"></div>
+                <div class="grid" id="productos-grid" style="margin-top: 4px;"></div>
             </div>
 
             <!-- Equipo -->
-            <div class="card span-12" id="equipo">
+            <div class="card span-6" id="equipo">
                 <h2>Equipo</h2>
-                <div class="grid" id="equipo-grid" style="margin-top: 6px;"></div>
+                <div class="grid" id="equipo-grid" style="margin-top: 4px;"></div>
             </div>
 
             <!-- Glosario -->
-            <div class="card span-12" id="glosario">
+            <div class="card span-6" id="glosario">
                 <h2>Glosario técnico</h2>
                 <div class="glosario-grid" id="glosario-grid"></div>
             </div>
@@ -574,8 +572,8 @@
 
     <script>
         const equipo = [
-            { nombre: "Tomás González Cifuentes", cargo: "Profesional encargado", mail: "tomas.gonzalez@slepcostacentral.gob.cl", color: "blue", iniciales: "TG" },
-            { nombre: "Javier Pizarro Morales",   cargo: "Profesional del área",  mail: "javier.pizarro@slepcostacentral.gob.cl",  color: "green", iniciales: "JP" }
+            { nombre: "Tomás González Cifuentes", cargo: "Profesional encargado", mail: "tomas.gonzalez@slepcostacentral.gob.cl", color: "purple", iniciales: "TG" },
+            { nombre: "Javier Pizarro Morales",   cargo: "Profesional del área",  mail: "javier.pizarro@slepcostacentral.gob.cl",  color: "blue", iniciales: "JP" }
         ];
 
         const glosario = [
@@ -596,20 +594,19 @@
             { fecha: "2024", titulo: "Inicio operativo", desc: "Traspaso de establecimientos al SLEP." },
             { fecha: "2024", titulo: "Constitución del Área", desc: "Conformación del equipo en la SATP." },
             { fecha: "2025", titulo: "Primer reporte", desc: "Boletín inicial de indicadores territoriales." },
-            { fecha: "2025", titulo: "Tableros en línea", desc: "Paneles de matrícula, asistencia y aprobación." },
-            { fecha: "2026", titulo: "Fortalecimiento", desc: "Talleres y guías metodológicas para equipos." }
+            { fecha: "2025", titulo: "Tableros en línea", desc: "Paneles de matrícula y asistencia." },
+            { fecha: "2026", titulo: "Fortalecimiento", desc: "Talleres y guías metodológicas." }
         ];
 
         const productos = [
-            { tag: "Reporte",     color: "blue",   titulo: "Boletín mensual de indicadores",   desc: "Síntesis de matrícula, asistencia, aprobación y desvinculación por establecimiento.", bars: [40, 70, 55, 80, 45, 65] },
-            { tag: "Dashboard",   color: "green",  titulo: "Dashboard de asistencia escolar",  desc: "Filtros por nivel, dependencia y fechas para monitoreo continuo.", bars: [60, 75, 50, 85, 70, 90] },
-            { tag: "Análisis",    color: "purple", titulo: "Estudio de trayectorias",          desc: "Análisis longitudinal de cohortes para identificar puntos críticos.", bars: [30, 50, 65, 75, 80, 85] },
-            { tag: "Taller",      color: "amber",  titulo: "Uso de evidencia en gestión",      desc: "Instancias formativas con equipos directivos y técnicos.", bars: [50, 60, 70, 55, 75, 80] }
+            { tag: "Reporte",   color: "blue",   barColor: "#0062A0", titulo: "Boletín mensual de indicadores", desc: "Matrícula, asistencia, aprobación y desvinculación por establecimiento.", bars: [40, 70, 55, 80, 45, 65] },
+            { tag: "Dashboard", color: "green",  barColor: "#75924E", titulo: "Dashboard de asistencia",        desc: "Filtros por nivel, dependencia y fechas para monitoreo continuo.",         bars: [60, 75, 50, 85, 70, 90] },
+            { tag: "Análisis",  color: "purple", barColor: "#4A2746", titulo: "Estudio de trayectorias",        desc: "Análisis longitudinal de cohortes y puntos críticos.",                     bars: [30, 50, 65, 75, 80, 85] },
+            { tag: "Taller",    color: "coral",  barColor: "#E88663", titulo: "Uso de evidencia en gestión",    desc: "Instancias formativas con equipos directivos y técnicos.",                 bars: [50, 60, 70, 55, 75, 80] }
         ];
 
         const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-        // Timeline
         document.getElementById('timeline').innerHTML = hitos.map(h => `
             <div class="timeline-item">
                 <div class="year">${esc(h.fecha)}</div>
@@ -618,9 +615,8 @@
             </div>
         `).join('');
 
-        // Productos
         document.getElementById('productos-grid').innerHTML = productos.map(p => {
-            const bars = p.bars.map(h => `<div class="bar" style="height:${h}%; background: var(--${p.color === 'amber' ? 'amber' : p.color});"></div>`).join('');
+            const bars = p.bars.map(h => `<div class="bar" style="height:${h}%; background:${p.barColor};"></div>`).join('');
             return `
                 <div class="card producto-card span-3">
                     <div class="producto-mini">${bars}</div>
@@ -631,9 +627,8 @@
             `;
         }).join('');
 
-        // Equipo
         document.getElementById('equipo-grid').innerHTML = equipo.map(p => `
-            <div class="card persona-card span-6">
+            <div class="card persona-card span-3">
                 <div class="avatar ${p.color}">${esc(p.iniciales)}</div>
                 <div>
                     <div class="nombre">${esc(p.nombre)}</div>
@@ -643,13 +638,11 @@
             </div>
         `).join('');
 
-        // Glosario
         document.getElementById('glosario-grid').innerHTML = [...glosario]
             .sort((a, b) => a.sigla.localeCompare(b.sigla))
             .map(g => `<div class="glosario-chip"><span class="sigla">${esc(g.sigla)}</span>${esc(g.def)}</div>`)
             .join('');
 
-        // Animar barras KPI
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
