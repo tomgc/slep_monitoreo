@@ -316,7 +316,7 @@
             position: absolute;
             top: 0;
             bottom: 10px;
-            width: 24px;
+            width: 14px;
             pointer-events: none;
             z-index: 3;
             transition: opacity 0.2s;
@@ -332,12 +332,21 @@
         .timeline-frame.at-start::before { opacity: 0; }
         .timeline-frame.at-end::after { opacity: 0; }
 
+        .timeline-hint {
+            font-size: 0.62rem;
+            font-weight: 500;
+            color: var(--muted);
+            letter-spacing: 0.3px;
+            text-transform: none;
+            margin-left: 6px;
+        }
+
         .timeline-list {
             display: grid;
             grid-auto-flow: column;
-            grid-auto-columns: 152px;
-            gap: 12px;
-            padding: 22px 4px 12px;
+            grid-auto-columns: 132px;
+            gap: 10px;
+            padding: 22px 2px 12px;
             overflow-x: auto;
             scrollbar-width: thin;
             scrollbar-color: var(--beige) transparent;
@@ -370,12 +379,38 @@
             position: absolute;
             top: -12px;
             left: 13px;
-            right: -12px;
+            right: -10px;
             height: 2px;
             background: var(--line);
             z-index: 0;
         }
         .timeline-item:last-child::after { display: none; }
+
+        /* En viewports angostos: timeline vertical para no recortar */
+        @media (max-width: 700px) {
+            .timeline-hint { display: none; }
+            .timeline-frame::before, .timeline-frame::after { display: none; }
+            .timeline-list {
+                display: flex;
+                flex-direction: column;
+                grid-auto-flow: unset;
+                grid-auto-columns: unset;
+                gap: 14px;
+                padding: 4px 0 4px 22px;
+                overflow-x: visible;
+                scroll-snap-type: none;
+            }
+            .timeline-item { padding: 4px 0 4px 0; scroll-snap-align: none; }
+            .timeline-item::before { top: 6px; left: -22px; }
+            .timeline-item::after {
+                top: 16px;
+                left: -18px;
+                right: auto;
+                bottom: -16px;
+                width: 2px;
+                height: auto;
+            }
+        }
         .timeline-item .year {
             font-size: 0.66rem;
             font-weight: 700;
@@ -594,7 +629,7 @@
 
             <!-- Trayectoria -->
             <div class="card span-6" id="trayectoria">
-                <h2>Trayectoria <span style="font-size: 0.66rem; font-weight: 500; color: var(--muted); letter-spacing: 0.3px; text-transform: none; margin-left: 4px;">← desplaza para ver al pasado</span></h2>
+                <h2>Trayectoria <span class="timeline-hint">← desplaza para ver al pasado</span></h2>
                 <div class="timeline-frame">
                     <div class="timeline-list" id="timeline"></div>
                 </div>
