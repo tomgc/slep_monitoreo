@@ -306,45 +306,39 @@
         .ambito-card.green  { background: var(--green-soft); }
         .ambito-card.green  .num, .ambito-card.green .titulo  { color: var(--green); }
 
-        /* Timeline horizontal */
-        .timeline-wrap {
-            overflow-x: auto;
-            margin: 0 -16px -16px;
-            padding: 0 16px 14px;
-            scroll-snap-type: x mandatory;
-        }
+        /* Timeline horizontal en wrap-grid (sin scroll) */
         .timeline-list {
             display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: 170px;
-            gap: 10px;
-            position: relative;
-            padding-top: 18px;
-        }
-        .timeline-list::before {
-            content: "";
-            position: absolute;
-            top: 22px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--line);
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 12px;
+            padding-top: 22px;
         }
         .timeline-item {
             position: relative;
-            scroll-snap-align: start;
+            padding-top: 4px;
         }
         .timeline-item::before {
             content: "";
             position: absolute;
-            top: -18px;
+            top: -16px;
             left: 0;
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
             background: var(--card);
             border: 2.5px solid var(--blue);
         }
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: 13px;
+            right: -12px;
+            height: 2px;
+            background: var(--line);
+            z-index: -1;
+        }
+        .timeline-item:last-child::after { display: none; }
         .timeline-item .year {
             font-size: 0.66rem;
             font-weight: 700;
@@ -354,7 +348,7 @@
         }
         .timeline-item .titulo {
             font-weight: 700;
-            font-size: 0.84rem;
+            font-size: 0.82rem;
             margin: 3px 0 4px;
             line-height: 1.3;
         }
@@ -564,9 +558,7 @@
             <!-- Trayectoria -->
             <div class="card span-6" id="trayectoria">
                 <h2>Trayectoria</h2>
-                <div class="timeline-wrap">
-                    <div class="timeline-list" id="timeline"></div>
-                </div>
+                <div class="timeline-list" id="timeline"></div>
             </div>
 
             <!-- Productos -->
