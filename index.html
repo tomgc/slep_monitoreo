@@ -306,16 +306,52 @@
         .ambito-card.green  { background: var(--green-soft); }
         .ambito-card.green  .num, .ambito-card.green .titulo  { color: var(--green); }
 
-        /* Timeline horizontal en wrap-grid (sin scroll) */
+        /* Timeline horizontal: más reciente a la izquierda, scroll hacia el pasado */
+        .timeline-frame {
+            position: relative;
+        }
+        .timeline-frame::before,
+        .timeline-frame::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 10px;
+            width: 24px;
+            pointer-events: none;
+            z-index: 3;
+            transition: opacity 0.2s;
+        }
+        .timeline-frame::before {
+            left: 0;
+            background: linear-gradient(to right, var(--card), transparent);
+        }
+        .timeline-frame::after {
+            right: 0;
+            background: linear-gradient(to left, var(--card), transparent);
+        }
+        .timeline-frame.at-start::before { opacity: 0; }
+        .timeline-frame.at-end::after { opacity: 0; }
+
         .timeline-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            grid-auto-flow: column;
+            grid-auto-columns: 152px;
             gap: 12px;
-            padding-top: 22px;
+            padding: 22px 4px 12px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--beige) transparent;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
+        .timeline-list::-webkit-scrollbar { height: 6px; }
+        .timeline-list::-webkit-scrollbar-track { background: transparent; }
+        .timeline-list::-webkit-scrollbar-thumb { background: var(--beige); border-radius: 3px; }
+        .timeline-list::-webkit-scrollbar-thumb:hover { background: var(--blue); }
         .timeline-item {
             position: relative;
             padding-top: 4px;
+            scroll-snap-align: start;
         }
         .timeline-item::before {
             content: "";
@@ -327,6 +363,7 @@
             border-radius: 50%;
             background: var(--card);
             border: 2.5px solid var(--blue);
+            z-index: 1;
         }
         .timeline-item::after {
             content: "";
@@ -336,7 +373,7 @@
             right: -12px;
             height: 2px;
             background: var(--line);
-            z-index: -1;
+            z-index: 0;
         }
         .timeline-item:last-child::after { display: none; }
         .timeline-item .year {
@@ -557,8 +594,10 @@
 
             <!-- Trayectoria -->
             <div class="card span-6" id="trayectoria">
-                <h2>Trayectoria</h2>
-                <div class="timeline-list" id="timeline"></div>
+                <h2>Trayectoria <span style="font-size: 0.66rem; font-weight: 500; color: var(--muted); letter-spacing: 0.3px; text-transform: none; margin-left: 4px;">← desplaza para ver al pasado</span></h2>
+                <div class="timeline-frame">
+                    <div class="timeline-list" id="timeline"></div>
+                </div>
             </div>
 
             <!-- Productos -->
@@ -624,13 +663,27 @@
 
         const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-        document.getElementById('timeline').innerHTML = hitos.map(h => `
+        // Timeline: render en orden inverso (más reciente a la izquierda)
+        document.getElementById('timeline').innerHTML = [...hitos].reverse().map(h => `
             <div class="timeline-item">
                 <div class="year">${esc(h.fecha)}</div>
                 <div class="titulo">${esc(h.titulo)}</div>
                 <div class="desc">${esc(h.desc)}</div>
             </div>
         `).join('');
+
+        // Fades del timeline según posición de scroll
+        const tlList = document.getElementById('timeline');
+        const tlFrame = tlList.parentElement;
+        const updateTlFades = () => {
+            const max = tlList.scrollWidth - tlList.clientWidth;
+            const x = tlList.scrollLeft;
+            tlFrame.classList.toggle('at-start', x <= 2);
+            tlFrame.classList.toggle('at-end', x >= max - 2);
+        };
+        updateTlFades();
+        tlList.addEventListener('scroll', updateTlFades, { passive: true });
+        window.addEventListener('resize', updateTlFades);
 
         document.getElementById('productos-grid').innerHTML = productos.map(p => {
             const bars = p.bars.map(h => `<div class="bar" style="height:${h}%; background:${p.barColor};"></div>`).join('');
