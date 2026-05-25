@@ -1,6 +1,6 @@
 # Área de Monitoreo — SLEP Costa Central
 
-Sitio institucional de presentación del Área de Monitoreo de Procesos y Resultados Educativos. Publicado en **<https://tomgc.github.io/monitoreo/>** vía GitHub Pages desde la rama `main`.
+Sitio institucional de presentación del Área de Monitoreo de Procesos y Resultados Educativos. Publicado en **<https://tomgc.github.io/slep_monitoreo/>** vía GitHub Pages desde la rama `main`.
 
 ## Stack
 
