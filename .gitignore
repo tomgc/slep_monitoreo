@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Archivo local (snapshots pre-reorganización, no se versionan)
+_archivo/

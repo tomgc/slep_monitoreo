@@ -36,6 +36,29 @@ Todos los datos están como `const` al inicio del bloque `<script>` en `index.ht
 
 Las variantes en `variants/` replican estos datos en cada archivo. Si actualizás contenido del sitio principal, hay que propagar los cambios manualmente.
 
+## Estructura del repositorio
+
+Además de los archivos del sitio (listados arriba), el repo está organizado en "decenas" temáticas para separar insumos, procesamiento y documentación:
+
+```
+.
+├── 10_insumos/          # Datos crudos, fuentes externas
+│   └── fuentes/
+├── 20_procesamiento/    # Scripts de transformación, notebooks, pipelines
+├── 30_documentacion/    # Documentación del proyecto y de procesos
+│   ├── activa/          # Documentación viva (specs, notas en curso)
+│   ├── traspasos/       # Traspasos de cierre y entregas formales
+│   └── estructura/      # Decisiones de arquitectura / convenciones
+└── _archivo/            # Snapshots locales (no versionados)
+```
+
+Convenciones:
+
+- Las carpetas se numeran de a 10 (`10_`, `20_`, `30_`) para permitir intercalar nuevas decenas sin renombrar las existentes.
+- Solo se crean decenas cuando hay contenido real para alojar (sin saltos).
+- Las subcarpetas vacías mantienen un archivo `.gitkeep` para que git las preserve.
+- `_archivo/` queda fuera del repo (`.gitignore`) y aloja snapshots locales pre-refactor.
+
 ## Cómo regenerar el preview social
 
 `og-image.png` es la imagen que muestran WhatsApp, Facebook, LinkedIn y otros al compartir el link. Se genera a partir de `og-image.svg`:
