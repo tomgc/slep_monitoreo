@@ -551,6 +551,393 @@
         @media (max-width: 500px) {
             .container { padding: 16px; }
         }
+
+        /* === Fuentes utilizadas === */
+        .fuentes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+        .fuentes-bajada {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.5;
+            max-width: 560px;
+        }
+        .fuentes-contador {
+            font-size: 0.7rem;
+            color: var(--purple);
+            background: var(--purple-soft);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-weight: 500;
+            white-space: nowrap;
+            line-height: 1.4;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .fuentes-contador strong { font-weight: 800; }
+
+        .fuentes-matriz-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 4px;
+            padding-bottom: 4px;
+        }
+        .fuentes-matriz {
+            border-collapse: separate;
+            border-spacing: 3px;
+            margin: 0;
+            width: 100%;
+            table-layout: fixed;
+        }
+        .fuentes-matriz thead th.col-corner { width: 140px; }
+        .fuentes-matriz thead th.col-total-head { width: 64px; }
+        .fuentes-matriz th,
+        .fuentes-matriz td {
+            padding: 6px;
+            text-align: center;
+            font-size: 0.78rem;
+            border-radius: 6px;
+            height: 46px;
+            vertical-align: middle;
+        }
+        .fuentes-matriz thead th {
+            background: transparent;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 0.6rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            user-select: none;
+        }
+        .fuentes-matriz thead th .fn-num {
+            display: block;
+            font-size: 1.15rem;
+            color: var(--purple);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1px;
+        }
+        .fuentes-matriz thead th.col-corner,
+        .fuentes-matriz thead th.col-total-head {
+            cursor: default;
+            color: var(--gray);
+            font-weight: 600;
+        }
+        .fuentes-matriz thead th.col-funcion:hover {
+            background: var(--purple-soft);
+        }
+        .fuentes-matriz tbody th {
+            text-align: left;
+            cursor: pointer;
+            background: transparent;
+            color: var(--purple);
+            padding-left: 4px;
+            padding-right: 10px;
+            white-space: nowrap;
+            transition: background 0.15s;
+            user-select: none;
+        }
+        .fuentes-matriz tbody th:hover {
+            background: var(--purple-soft);
+        }
+        .fuentes-matriz tbody th .amb-letra-grande {
+            font-size: 1rem;
+            color: var(--purple);
+            font-weight: 800;
+            line-height: 1;
+        }
+        .fuentes-matriz tbody th .amb-label {
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: var(--gray);
+            line-height: 1.1;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Heatmap discreto: 6 niveles (0 + 5) sobre var(--purple) */
+        .fuentes-matriz td.cell {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--purple);
+            transition: transform 0.1s;
+            user-select: none;
+        }
+        .fuentes-matriz td.cell:not(.level-0):hover { transform: scale(1.06); }
+        .fuentes-matriz td.cell.level-0 {
+            background: color-mix(in srgb, var(--purple) 3%, var(--card));
+            color: var(--gray);
+            font-weight: 400;
+            cursor: default;
+        }
+        .fuentes-matriz td.cell.level-1 { background: color-mix(in srgb, var(--purple) 10%, var(--card)); color: var(--purple); }
+        .fuentes-matriz td.cell.level-2 { background: color-mix(in srgb, var(--purple) 22%, var(--card)); color: var(--purple); }
+        .fuentes-matriz td.cell.level-3 { background: color-mix(in srgb, var(--purple) 40%, var(--card)); color: var(--purple); }
+        .fuentes-matriz td.cell.level-4 { background: color-mix(in srgb, var(--purple) 65%, var(--card)); color: #fff; }
+        .fuentes-matriz td.cell.level-5 { background: var(--purple); color: #fff; }
+
+        /* Estado activo (filtro aplicado) */
+        .fuentes-matriz td.cell.cell-active,
+        .fuentes-matriz thead th.head-active,
+        .fuentes-matriz tbody th.row-active {
+            outline: 2.5px solid var(--blue);
+            outline-offset: -2px;
+        }
+        .fuentes-matriz thead th.head-active,
+        .fuentes-matriz tbody th.row-active {
+            background: var(--blue-soft);
+        }
+        .fuentes-matriz thead th.head-active .fn-num,
+        .fuentes-matriz tbody th.row-active .amb-letra-grande {
+            color: var(--blue);
+        }
+
+        /* Totales marginales */
+        .fuentes-matriz td.col-total-cell,
+        .fuentes-matriz tfoot td.cell-col-total {
+            background: var(--cream);
+            color: var(--purple);
+            font-weight: 700;
+            cursor: default;
+        }
+        .fuentes-matriz tfoot th.col-total-foot {
+            background: transparent;
+            text-align: left;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--gray);
+            font-weight: 600;
+            cursor: default;
+            padding-left: 4px;
+        }
+        .fuentes-matriz td.cell-grand-total {
+            background: var(--purple);
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .fuentes-nota {
+            font-size: 0.68rem;
+            color: var(--muted);
+            margin: 6px 0 14px;
+            font-style: italic;
+            line-height: 1.45;
+        }
+
+        /* Buscador */
+        .fuentes-search-row { margin-bottom: 10px; }
+        .fuentes-search {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: inherit;
+            background: var(--card);
+            color: var(--ink);
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .fuentes-search:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px var(--blue-soft);
+        }
+        .fuentes-search::placeholder { color: var(--muted); }
+
+        /* Chips de filtros activos */
+        .fuentes-filtros-activos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .fuente-chip-filtro {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--blue);
+            background: var(--blue-soft);
+            padding: 3px 4px 3px 10px;
+            border-radius: 999px;
+        }
+        .fuente-chip-filtro button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: var(--blue);
+            font-size: 1rem;
+            line-height: 1;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-family: inherit;
+            transition: background 0.15s;
+        }
+        .fuente-chip-filtro button:hover {
+            background: rgba(0, 98, 160, 0.2);
+        }
+        .fuentes-limpiar-todo {
+            margin-left: auto;
+            background: none;
+            border: 1px solid var(--line);
+            color: var(--muted);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .fuentes-limpiar-todo:hover {
+            color: var(--purple);
+            border-color: var(--purple-soft);
+        }
+
+        .fuentes-resultados-contador {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .fuentes-vacia {
+            text-align: center;
+            color: var(--muted);
+            padding: 22px 16px;
+            font-size: 0.8rem;
+            background: var(--cream);
+            border: 1px dashed var(--line);
+            border-radius: 8px;
+            margin: 0;
+        }
+
+        /* Tarjetas de la lista */
+        .fuente-tarjeta {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            background: var(--card);
+            transition: border-color 0.15s, box-shadow 0.15s;
+            cursor: pointer;
+        }
+        .fuente-tarjeta:hover {
+            border-color: var(--purple-soft);
+            box-shadow: 0 2px 6px rgba(74, 39, 70, 0.06);
+        }
+        .fuente-tarjeta.expanded {
+            border-color: var(--purple-soft);
+            background: #fbfafb;
+        }
+        .fuente-tarjeta-cabecera {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .fuente-tarjeta-titulo {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--purple);
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+        }
+        .fuente-tarjeta-institucion {
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-align: right;
+            flex-shrink: 0;
+            max-width: 42%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .fuente-tarjeta-chevron {
+            display: inline-block;
+            color: var(--gray);
+            font-size: 0.6rem;
+            transition: transform 0.15s;
+            margin-left: 2px;
+            flex-shrink: 0;
+        }
+        .fuente-tarjeta.expanded .fuente-tarjeta-chevron { transform: rotate(90deg); }
+
+        .fuente-tarjeta-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+        .fuente-badge {
+            display: inline-block;
+            font-size: 0.62rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 999px;
+            line-height: 1.5;
+        }
+        .fuente-badge.acceso-publica    { background: var(--green-soft);  color: var(--green); }
+        .fuente-badge.acceso-privada    { background: var(--coral-soft);  color: var(--coral); }
+        .fuente-badge.acceso-indefinido { background: var(--beige-soft);  color: var(--gray); }
+        .fuente-badge.periodicidad      { background: transparent;        color: var(--gray); border: 1px solid var(--line); }
+        .fuente-badge.funcion           { background: var(--purple-soft); color: var(--purple); }
+        .fuente-badge.uso               { background: var(--blue-soft);   color: var(--blue); font-weight: 700; }
+
+        .fuente-tarjeta-detalle {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 6px 14px;
+            font-size: 0.76rem;
+        }
+        /* Forzar ocultamiento de elementos con [hidden] sobre display: grid/flex */
+        .fuente-tarjeta-detalle[hidden],
+        .fuentes-filtros-activos[hidden],
+        .fuentes-resultados-contador[hidden] { display: none; }
+        .fuente-tarjeta-detalle .lbl {
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            letter-spacing: 0.5px;
+            padding-top: 2px;
+        }
+        .fuente-tarjeta-detalle .val {
+            color: var(--purple);
+            line-height: 1.5;
+        }
+
+        /* Responsive Fuentes */
+        @media (max-width: 760px) {
+            .fuentes-header { flex-direction: column; align-items: flex-start; }
+            .fuentes-contador { align-self: flex-start; text-align: left; }
+        }
+        @media (max-width: 700px) {
+            .fuentes-matriz { min-width: 420px; }
+            .fuente-tarjeta-institucion { max-width: 50%; }
+            .fuente-tarjeta-detalle { grid-template-columns: 1fr; gap: 2px 0; }
+            .fuente-tarjeta-detalle .lbl { margin-top: 6px; }
+        }
     </style>
 </head>
 <body>
@@ -565,7 +952,8 @@
         <a href="#trayectoria" class="nav-item">2. Trayectoria</a>
         <a href="#ejemplos" class="nav-item">3. Ejemplos</a>
         <a href="#equipo" class="nav-item">4. Equipo</a>
-        <a href="#glosario" class="nav-item">5. Glosario</a>
+        <a href="#fuentes" class="nav-item">5. Fuentes</a>
+        <a href="#glosario" class="nav-item">6. Glosario</a>
     </nav>
 
     <div class="container">
@@ -647,6 +1035,33 @@
                 <div class="grid" id="equipo-grid" style="margin-top: 4px;"></div>
             </div>
 
+            <!-- Fuentes utilizadas -->
+            <div class="card span-6" id="fuentes">
+                <div class="fuentes-header">
+                    <div>
+                        <h2 style="margin-bottom: 4px;">Fuentes utilizadas</h2>
+                        <p class="fuentes-bajada">Bases e indicadores que el Subdepartamento de Monitoreo del DEP consume, sistematiza o reporta. Catálogo vigente en 2026.</p>
+                    </div>
+                    <div class="fuentes-contador" id="fuentes-contador" aria-live="polite">…</div>
+                </div>
+
+                <div class="fuentes-matriz-wrap">
+                    <table class="fuentes-matriz" id="fuentes-matriz" aria-label="Matriz de fuentes por ámbito y función"></table>
+                </div>
+                <p class="fuentes-nota">2 fuentes (DIA y Cuestionarios SIMCE) monitorean simultáneamente las funciones 2 y 3, por lo que aparecen en ambas columnas; el total global se mantiene en 67.</p>
+
+                <div class="fuentes-search-row">
+                    <input type="text" class="fuentes-search" id="fuentes-search" placeholder="Buscar por nombre, institución o base de datos…" aria-label="Buscar fuentes" autocomplete="off">
+                </div>
+
+                <div class="fuentes-filtros-activos" id="fuentes-filtros-activos" hidden></div>
+                <div class="fuentes-resultados-contador" id="fuentes-resultados-contador" hidden></div>
+
+                <div class="fuentes-lista" id="fuentes-lista">
+                    <p class="fuentes-vacia">Seleccioná una celda de la matriz o usá el buscador para ver fuentes.</p>
+                </div>
+            </div>
+
             <!-- Glosario -->
             <div class="card span-6" id="glosario">
                 <h2>Glosario técnico</h2>
@@ -661,6 +1076,7 @@
 
     </div>
 
+    <script src="datos/fuentes.js"></script>
     <script>
         const equipo = [
             { nombre: "Tomás González Cifuentes", cargo: "Profesional encargado", mail: "tomas.gonzalez@slepcostacentral.gob.cl", color: "purple", iniciales: "TG" },
@@ -769,7 +1185,324 @@
                 }
             });
         }, { rootMargin: '-30% 0px -60% 0px' });
-        document.querySelectorAll('#que-hace, #trayectoria, #ejemplos, #equipo, #glosario').forEach(s => navObserver.observe(s));
+        document.querySelectorAll('#que-hace, #trayectoria, #ejemplos, #equipo, #fuentes, #glosario').forEach(s => navObserver.observe(s));
+
+        // === Sección "Fuentes utilizadas" ===
+        // Datos desde datos/fuentes.js (window.FUENTES). Si no cargó, fallback abajo.
+        const FUENTES = Array.isArray(window.FUENTES) ? window.FUENTES : [];
+
+        // Funciones únicas detectadas (orden numérico)
+        const FUENTES_FUNCIONES = (() => {
+            const map = new Map();
+            FUENTES.forEach(f => {
+                (f.funcion_num || []).forEach((num, i) => {
+                    if (num != null && !map.has(num)) {
+                        map.set(num, (f.funcion_label || [])[i] || '');
+                    }
+                });
+            });
+            return [...map.entries()].sort((a, b) => a[0] - b[0]).map(([num, label]) => ({ num, label }));
+        })();
+        const FUENTES_AMBITOS = ['A', 'B'];
+        const FUENTES_AMBITOS_LABEL = { A: 'Comunidades educativas', B: 'SLEP' };
+
+        const fuentesFiltros = { ambito: null, funcion: null, busqueda: '' };
+        const fuentesExpandidas = new Set();
+
+        const normTexto = s => (s || '').toString().normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+        function contarFuentes() {
+            const contador = {};
+            FUENTES_AMBITOS.forEach(a => FUENTES_FUNCIONES.forEach(fn => contador[`${a}-${fn.num}`] = 0));
+            const totales = { porFila: {}, porCol: {}, global: 0 };
+            FUENTES_AMBITOS.forEach(a => totales.porFila[a] = 0);
+            FUENTES_FUNCIONES.forEach(fn => totales.porCol[fn.num] = 0);
+
+            FUENTES.forEach(f => {
+                if (!f.ambito || !Array.isArray(f.funcion_num) || f.funcion_num.length === 0) return;
+                totales.global++;
+                if (totales.porFila[f.ambito] !== undefined) totales.porFila[f.ambito]++;
+                f.funcion_num.forEach(num => {
+                    const key = `${f.ambito}-${num}`;
+                    if (contador[key] !== undefined) contador[key]++;
+                    if (totales.porCol[num] !== undefined) totales.porCol[num]++;
+                });
+            });
+            return { contador, totales };
+        }
+
+        function nivelHeatmap(n) {
+            if (n === 0)  return 0;
+            if (n <= 3)   return 1;
+            if (n <= 7)   return 2;
+            if (n <= 14)  return 3;
+            if (n <= 25)  return 4;
+            return 5;
+        }
+
+        function renderFuentesContador() {
+            const totalFuentes = FUENTES.length;
+            const totalInst = new Set(FUENTES.map(f => f.institucion).filter(Boolean)).size;
+            document.getElementById('fuentes-contador').innerHTML =
+                `<strong>${totalFuentes}</strong> fuentes · <strong>${totalInst}</strong> instituciones`;
+        }
+
+        function renderFuentesMatriz() {
+            const { contador, totales } = contarFuentes();
+            const tabla = document.getElementById('fuentes-matriz');
+
+            const headerCols = FUENTES_FUNCIONES.map(fn =>
+                `<th class="col-funcion" data-funcion="${fn.num}" title="Función ${fn.num} — ${esc(fn.label)}">
+                    <span class="fn-num">${fn.num}</span>
+                 </th>`
+            ).join('');
+
+            const filas = FUENTES_AMBITOS.map(amb => {
+                const celdas = FUENTES_FUNCIONES.map(fn => {
+                    const conteo = contador[`${amb}-${fn.num}`] || 0;
+                    const nivel = nivelHeatmap(conteo);
+                    return `<td class="cell level-${nivel}" data-ambito="${amb}" data-funcion="${fn.num}" title="Ámbito ${amb} · Función ${fn.num}: ${conteo} fuente${conteo === 1 ? '' : 's'}">${conteo}</td>`;
+                }).join('');
+                const totalFila = totales.porFila[amb] || 0;
+                return `<tr>
+                    <th scope="row" class="row-ambito" data-ambito="${amb}" title="Ámbito ${amb} — ${esc(FUENTES_AMBITOS_LABEL[amb] || '')}">
+                        <div class="amb-letra-grande">${esc(amb)}</div>
+                        <div class="amb-label">${esc(FUENTES_AMBITOS_LABEL[amb] || '')}</div>
+                    </th>
+                    ${celdas}
+                    <td class="col-total-cell" title="Total ámbito ${esc(amb)}">${totalFila}</td>
+                </tr>`;
+            }).join('');
+
+            const footerCols = FUENTES_FUNCIONES.map(fn =>
+                `<td class="cell-col-total" title="Total función ${fn.num}">${totales.porCol[fn.num] || 0}</td>`
+            ).join('');
+
+            tabla.innerHTML = `
+                <thead>
+                    <tr>
+                        <th class="col-corner" aria-label="Ámbito por función"></th>
+                        ${headerCols}
+                        <th class="col-total-head">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${filas}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="col-total-foot">Total</th>
+                        ${footerCols}
+                        <td class="cell-grand-total" title="Total global">${totales.global}</td>
+                    </tr>
+                </tfoot>
+            `;
+
+            tabla.querySelectorAll('td.cell').forEach(td => {
+                td.addEventListener('click', () => {
+                    const amb = td.dataset.ambito;
+                    const fn = parseInt(td.dataset.funcion, 10);
+                    const conteo = parseInt(td.textContent, 10);
+                    if (conteo === 0) return;
+                    const yaActivo = fuentesFiltros.ambito === amb && fuentesFiltros.funcion === fn;
+                    actualizarFiltros({
+                        ambito:  yaActivo ? null : amb,
+                        funcion: yaActivo ? null : fn
+                    });
+                });
+            });
+            tabla.querySelectorAll('th.col-funcion').forEach(th => {
+                th.addEventListener('click', () => {
+                    const fn = parseInt(th.dataset.funcion, 10);
+                    const yaActivo = fuentesFiltros.funcion === fn && fuentesFiltros.ambito === null;
+                    actualizarFiltros({ ambito: null, funcion: yaActivo ? null : fn });
+                });
+            });
+            tabla.querySelectorAll('th.row-ambito').forEach(th => {
+                th.addEventListener('click', () => {
+                    const amb = th.dataset.ambito;
+                    const yaActivo = fuentesFiltros.ambito === amb && fuentesFiltros.funcion === null;
+                    actualizarFiltros({ ambito: yaActivo ? null : amb, funcion: null });
+                });
+            });
+        }
+
+        function actualizarHighlightMatriz() {
+            const tabla = document.getElementById('fuentes-matriz');
+            tabla.querySelectorAll('.cell-active, .head-active, .row-active').forEach(el => {
+                el.classList.remove('cell-active', 'head-active', 'row-active');
+            });
+            if (fuentesFiltros.ambito && fuentesFiltros.funcion != null) {
+                const cell = tabla.querySelector(`td.cell[data-ambito="${fuentesFiltros.ambito}"][data-funcion="${fuentesFiltros.funcion}"]`);
+                if (cell) cell.classList.add('cell-active');
+            } else if (fuentesFiltros.funcion != null) {
+                const th = tabla.querySelector(`th.col-funcion[data-funcion="${fuentesFiltros.funcion}"]`);
+                if (th) th.classList.add('head-active');
+            } else if (fuentesFiltros.ambito) {
+                const th = tabla.querySelector(`th.row-ambito[data-ambito="${fuentesFiltros.ambito}"]`);
+                if (th) th.classList.add('row-active');
+            }
+        }
+
+        function aplicarFiltros() {
+            const q = normTexto(fuentesFiltros.busqueda).trim();
+            return FUENTES.filter(f => {
+                if (fuentesFiltros.ambito && f.ambito !== fuentesFiltros.ambito) return false;
+                if (fuentesFiltros.funcion != null) {
+                    if (!Array.isArray(f.funcion_num) || !f.funcion_num.includes(fuentesFiltros.funcion)) return false;
+                }
+                if (q) {
+                    const blob = normTexto([f.nombre_largo, f.base_datos, f.institucion, f.proveedor].filter(Boolean).join(' '));
+                    if (!blob.includes(q)) return false;
+                }
+                return true;
+            });
+        }
+
+        function hayFiltrosActivos() {
+            return !!(fuentesFiltros.ambito || fuentesFiltros.funcion != null || (fuentesFiltros.busqueda || '').trim());
+        }
+
+        function renderFuentesChipsFiltro() {
+            const cont = document.getElementById('fuentes-filtros-activos');
+            if (!hayFiltrosActivos()) { cont.hidden = true; cont.innerHTML = ''; return; }
+            cont.hidden = false;
+            const chips = [];
+            if (fuentesFiltros.ambito) {
+                chips.push(`<span class="fuente-chip-filtro">Ámbito ${esc(fuentesFiltros.ambito)} <button type="button" data-key="ambito" aria-label="Quitar filtro de ámbito">×</button></span>`);
+            }
+            if (fuentesFiltros.funcion != null) {
+                chips.push(`<span class="fuente-chip-filtro">Función ${fuentesFiltros.funcion} <button type="button" data-key="funcion" aria-label="Quitar filtro de función">×</button></span>`);
+            }
+            const q = (fuentesFiltros.busqueda || '').trim();
+            if (q) {
+                chips.push(`<span class="fuente-chip-filtro">Búsqueda: "${esc(q)}" <button type="button" data-key="busqueda" aria-label="Quitar búsqueda">×</button></span>`);
+            }
+            const limpiarBtn = chips.length >= 2
+                ? `<button type="button" class="fuentes-limpiar-todo" data-key="todos">Limpiar filtros</button>`
+                : '';
+            cont.innerHTML = chips.join(' ') + limpiarBtn;
+            cont.querySelectorAll('button[data-key]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const k = btn.dataset.key;
+                    if (k === 'todos') {
+                        document.getElementById('fuentes-search').value = '';
+                        actualizarFiltros({ ambito: null, funcion: null, busqueda: '' });
+                    } else if (k === 'busqueda') {
+                        document.getElementById('fuentes-search').value = '';
+                        actualizarFiltros({ busqueda: '' });
+                    } else {
+                        actualizarFiltros({ [k]: null });
+                    }
+                });
+            });
+        }
+
+        function renderFuentesLista() {
+            const lista = document.getElementById('fuentes-lista');
+            const contadorEl = document.getElementById('fuentes-resultados-contador');
+
+            if (!hayFiltrosActivos()) {
+                lista.innerHTML = '<p class="fuentes-vacia">Seleccioná una celda de la matriz o usá el buscador para ver fuentes.</p>';
+                contadorEl.hidden = true;
+                return;
+            }
+
+            const filtradas = aplicarFiltros();
+            contadorEl.hidden = false;
+            contadorEl.textContent = `Mostrando ${filtradas.length} de ${FUENTES.length}`;
+
+            if (filtradas.length === 0) {
+                lista.innerHTML = '<p class="fuentes-vacia">Sin resultados para los filtros actuales.</p>';
+                return;
+            }
+
+            lista.innerHTML = filtradas.map(renderTarjetaFuente).join('');
+
+            lista.querySelectorAll('.fuente-tarjeta').forEach(card => {
+                card.addEventListener('click', e => {
+                    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+                    const id = card.dataset.id;
+                    if (fuentesExpandidas.has(id)) fuentesExpandidas.delete(id);
+                    else fuentesExpandidas.add(id);
+                    card.classList.toggle('expanded');
+                    const det = card.querySelector('.fuente-tarjeta-detalle');
+                    if (det) det.hidden = !card.classList.contains('expanded');
+                });
+            });
+        }
+
+        function renderTarjetaFuente(f) {
+            const expandida = fuentesExpandidas.has(f.id);
+            const acceso = f.acceso || 'indefinido';
+            const accesoLbl = acceso === 'publica' ? 'Pública' : acceso === 'privada' ? 'Privada' : 'Acceso indefinido';
+
+            const badgesFuncion = (f.funcion_num || []).map((num, i) => {
+                const label = (f.funcion_label || [])[i] || '';
+                return `<span class="fuente-badge funcion" title="${esc(label)}">f.${num}</span>`;
+            }).join('');
+
+            const badgesUso = (Array.isArray(f.usos_unidad) ? f.usos_unidad : [])
+                .map(u => `<span class="fuente-badge uso">${esc(String(u))}</span>`)
+                .join('');
+
+            const detalleFilas = [
+                ['Nombre completo',      f.nombre_largo],
+                ['Base de datos',        f.base_datos],
+                ['Proveedor',            f.proveedor],
+                ['Modalidad',            f.modalidad],
+                ['Unidad de análisis',   f.unidad_analisis],
+                ['Fecha de corte',       f.fecha_corte],
+                ['Fecha de extracción',  f.fecha_extraccion],
+                ['Fecha de publicación', f.fecha_publicacion],
+                ['Nota',                 f.nota]
+            ].filter(([, v]) => v != null && String(v).trim() !== '');
+
+            const detalleHtml = detalleFilas.map(([lbl, val]) =>
+                `<div class="lbl">${esc(lbl)}</div><div class="val">${esc(String(val))}</div>`
+            ).join('');
+
+            return `
+                <article class="fuente-tarjeta${expandida ? ' expanded' : ''}" data-id="${esc(f.id || '')}">
+                    <div class="fuente-tarjeta-cabecera">
+                        <div class="fuente-tarjeta-titulo" title="${esc(f.nombre_largo || '')}">${esc(f.nombre_corto || '(sin nombre)')}</div>
+                        <div class="fuente-tarjeta-institucion" title="${esc(f.institucion || '')}">${esc(f.institucion || '')}</div>
+                        <span class="fuente-tarjeta-chevron" aria-hidden="true">▶</span>
+                    </div>
+                    <div class="fuente-tarjeta-badges">
+                        ${badgesUso}
+                        <span class="fuente-badge acceso-${esc(acceso)}">${esc(accesoLbl)}</span>
+                        ${f.periodicidad ? `<span class="fuente-badge periodicidad">${esc(f.periodicidad)}</span>` : ''}
+                        ${badgesFuncion}
+                    </div>
+                    <div class="fuente-tarjeta-detalle" ${expandida ? '' : 'hidden'}>
+                        ${detalleHtml}
+                    </div>
+                </article>
+            `;
+        }
+
+        function actualizarFiltros(cambio) {
+            Object.assign(fuentesFiltros, cambio);
+            fuentesExpandidas.clear();
+            actualizarHighlightMatriz();
+            renderFuentesChipsFiltro();
+            renderFuentesLista();
+        }
+
+        if (FUENTES.length > 0 && FUENTES_FUNCIONES.length > 0) {
+            renderFuentesContador();
+            renderFuentesMatriz();
+            renderFuentesLista();
+            document.getElementById('fuentes-search').addEventListener('input', e => {
+                actualizarFiltros({ busqueda: e.target.value });
+            });
+        } else {
+            const sec = document.getElementById('fuentes');
+            if (sec) {
+                sec.innerHTML = '<h2>Fuentes utilizadas</h2><p class="fuentes-vacia">No se pudieron cargar los datos (verificar que datos/fuentes.js esté disponible).</p>';
+            }
+        }
     </script>
 
 </body>

@@ -3,3 +3,6 @@
 
 # Archivo local (snapshots pre-reorganización, no se versionan)
 _archivo/
+
+# Config local del editor / MCP
+.claude/
