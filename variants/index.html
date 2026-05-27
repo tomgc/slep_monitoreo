@@ -175,6 +175,31 @@
         .preview.classic .cls-bars { display: flex; flex-direction: column; gap: 5px; }
         .preview.classic .cls-bar { height: 5px; background: #3498db; border-radius: 2px; }
 
+        /* Preview: galaxia (nodos morados/azules agrupados) */
+        .preview.galaxia {
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        .preview.galaxia svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .preview.galaxia .kicker {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--coral);
+            z-index: 2;
+        }
+
         /* Preview: institucional (cream + purple + coral) */
         .preview.institucional {
             background: #ffffff;
@@ -319,6 +344,42 @@
                     <div class="titulo">Institucional</div>
                     <div class="desc">Alto contraste sobre crema, morado y coral, hairlines visibles. Numerales romanos y tablas estrictas. Tono documento oficial.</div>
                     <div class="cta">Abrir variante →</div>
+                </div>
+            </a>
+
+            <a class="variant" href="fuentes-galaxia.html">
+                <div class="preview galaxia">
+                    <div class="kicker">Prototipo</div>
+                    <svg viewBox="0 0 240 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                        <!-- Cluster grande morado (CEM) -->
+                        <circle cx="90" cy="78" r="4.5" fill="#4A2746" opacity="0.55"/>
+                        <circle cx="78" cy="86" r="4.5" fill="#4A2746" opacity="0.55"/>
+                        <circle cx="100" cy="90" r="4.5" fill="#4A2746" opacity="0.55"/>
+                        <circle cx="86" cy="100" r="4.5" fill="#4A2746" opacity="0.55"/>
+                        <circle cx="74" cy="76" r="4.5" fill="#4A2746" opacity="0.55"/>
+                        <circle cx="98" cy="78" r="4.5" fill="#4A2746" opacity="0.55"/>
+                        <circle cx="90" cy="92" r="4.5" fill="#4A2746" opacity="0.55"/>
+                        <!-- Cluster mediano azul (ACE) -->
+                        <circle cx="155" cy="60" r="4.5" fill="#0062A0" opacity="0.55"/>
+                        <circle cx="166" cy="68" r="4.5" fill="#0062A0" opacity="0.55"/>
+                        <circle cx="158" cy="74" r="4.5" fill="#0062A0" opacity="0.55"/>
+                        <circle cx="170" cy="60" r="4.5" fill="#0062A0" opacity="0.55"/>
+                        <!-- Cluster verde (Junji) -->
+                        <circle cx="165" cy="108" r="4.5" fill="#75924E" opacity="0.55"/>
+                        <circle cx="174" cy="116" r="4.5" fill="#75924E" opacity="0.55"/>
+                        <circle cx="158" cy="118" r="4.5" fill="#75924E" opacity="0.55"/>
+                        <!-- Algunos satélites coral / beige -->
+                        <circle cx="50" cy="45" r="4.5" fill="#E88663" opacity="0.55"/>
+                        <circle cx="58" cy="38" r="4.5" fill="#E88663" opacity="0.55"/>
+                        <circle cx="210" cy="100" r="4.5" fill="#BCA493" opacity="0.55"/>
+                        <circle cx="40" cy="118" r="4.5" fill="#747474" opacity="0.55"/>
+                    </svg>
+                </div>
+                <div class="body">
+                    <div class="tag">Prototipo · Fuentes</div>
+                    <div class="titulo">Galaxia de fuentes</div>
+                    <div class="desc">Las 67 fuentes como nodos agrupados por institución. Layout force-directed determinista; responde "¿de qué instituciones depende el monitoreo?" en vez de cobertura por función.</div>
+                    <div class="cta">Abrir prototipo →</div>
                 </div>
             </a>
 

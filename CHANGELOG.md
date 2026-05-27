@@ -7,6 +7,8 @@ en la sección "Changelog" del [README.md](README.md).
 
 ### Agregado
 
+- Prototipo `variants/fuentes-galaxia.html`: visualización alternativa de las 67 fuentes como galaxia de nodos agrupados por institución. Responde una pregunta distinta a la matriz del index (dependencias institucionales en vez de cobertura por función).
+- Galería `variants/index.html`: cuarta entrada apuntando al prototipo.
 - Sección "Fuentes utilizadas" en `index.html`: matriz interactiva ámbito × función con buscador y lista de detalle. Consume `datos/fuentes.js`. 67 fuentes, 12 instituciones, 6 funciones presentes (la 5 está ausente del catálogo).
 - Script `20_procesamiento/21_generar_fuentes.R` que genera `datos/fuentes.js` desde el Excel maestro en `10_insumos/fuentes/`. 67 fuentes mapeadas con modelo de arrays en `funcion_num` y `funcion_label` para soportar fuentes con múltiples funciones (2 casos: DIA y Cuestionarios de contexto SIMCE, ambos en funciones 2 y 3).
 - Normalización de instituciones vía diccionario explícito en el script: 10 filas normalizadas (1 CEM-SIGE + 9 variantes Junji). Resultado: 12 instituciones únicas.
