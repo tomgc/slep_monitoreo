@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galaxia de fuentes: las 67 fuentes del catálogo SLEP Monitoreo agrupadas como nodos por institución. Prototipo experimental.">
+    <meta name="theme-color" content="#4A2746">
+    <title>Galaxia de fuentes · SLEP Monitoreo</title>
+
+    <style>
+        /* Paleta oficial SLEP Costa Central */
+        :root {
+            --purple:      #4A2746;
+            --purple-soft: #ece0e9;
+            --cream:       #FFF6E0;
+            --blue:        #0062A0;
+            --blue-soft:   #d6e7f3;
+            --gray:        #747474;
+            --green:       #75924E;
+            --green-soft:  #e0e9d3;
+            --beige:       #BCA493;
+            --beige-soft:  #ede4dc;
+            --coral:       #E88663;
+            --coral-soft:  #fbe1d4;
+
+            --bg: #ffffff;
+            --ink: var(--purple);
+            --muted: var(--gray);
+            --line: var(--beige-soft);
+            --card: #ffffff;
+
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, 'Inter', sans-serif;
+            --radius: 10px;
+            --shadow: 0 1px 3px rgba(74, 39, 70, 0.06);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font);
+            margin: 0;
+            line-height: 1.5;
+            font-size: 15px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Sidebar */
+        nav#side-nav {
+            position: sticky;
+            top: 0;
+            align-self: start;
+            height: 100vh;
+            padding: 24px 20px;
+            border-right: 1px solid var(--line);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            overflow-y: auto;
+        }
+        nav#side-nav .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.84rem;
+            color: var(--purple);
+            margin-bottom: 6px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--line);
+        }
+        nav#side-nav .brand-logo {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+        nav#side-nav .brand-logo span { width: 3.5px; border-radius: 1px; }
+        nav#side-nav .brand-logo span:nth-child(1) { height: 50%; background: var(--purple); }
+        nav#side-nav .brand-logo span:nth-child(2) { height: 75%; background: var(--blue); }
+        nav#side-nav .brand-logo span:nth-child(3) { height: 100%; background: var(--purple); }
+
+        nav#side-nav .back-link {
+            text-decoration: none;
+            color: var(--muted);
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border-radius: 999px;
+            transition: background 0.18s, color 0.18s;
+        }
+        nav#side-nav .back-link:hover {
+            color: var(--blue);
+            background: var(--blue-soft);
+        }
+
+        nav#side-nav .nav-title {
+            font-size: 0.62rem;
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin: 18px 0 6px;
+            padding-left: 12px;
+        }
+        nav#side-nav .nav-item {
+            color: var(--blue);
+            background: var(--blue-soft);
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border-radius: 999px;
+        }
+
+        nav#side-nav .nav-foot {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            font-size: 0.66rem;
+            color: var(--muted);
+            line-height: 1.5;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        nav#side-nav .nav-foot strong { color: var(--purple); }
+
+        /* Container */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 22px;
+            width: 100%;
+        }
+
+        .hero {
+            margin-bottom: 18px;
+        }
+        .hero .kicker {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--coral);
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .hero h1 {
+            font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+            font-weight: 800;
+            margin: 0 0 8px;
+            letter-spacing: -0.4px;
+            line-height: 1.15;
+        }
+        .hero .lead {
+            font-size: 0.88rem;
+            color: var(--muted);
+            max-width: 640px;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* Galaxia */
+        .galaxia-wrap {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 12px;
+            box-shadow: var(--shadow);
+        }
+        .galaxia-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            user-select: none;
+        }
+        .galaxia-svg circle {
+            cursor: pointer;
+            transition: r 0.15s, opacity 0.18s;
+        }
+        .galaxia-svg circle:hover {
+            r: 11;
+        }
+        .galaxia-svg .label-grupo {
+            cursor: pointer;
+        }
+        .galaxia-svg .label-grupo:hover rect {
+            stroke-width: 1.5;
+        }
+        .galaxia-svg .label-text {
+            font-family: var(--font);
+            font-size: 10.5px;
+            font-weight: 600;
+            fill: var(--purple);
+            pointer-events: none;
+        }
+
+        .galaxia-leyenda {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: var(--cream);
+            border-radius: 6px;
+        }
+        .galaxia-leyenda .leyenda-titulo {
+            font-weight: 700;
+            color: var(--purple);
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+        }
+        .galaxia-leyenda .leyenda-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .galaxia-leyenda .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--purple);
+        }
+        .galaxia-leyenda .dot.dim { opacity: 0.35; }
+        .galaxia-leyenda .dot.full { opacity: 1; }
+
+        .galaxia-hint {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin: 14px 0 0;
+            font-style: italic;
+        }
+
+        /* Fallback mobile */
+        .galaxia-mobile-fallback { display: none; }
+        .fallback-grupo {
+            margin-bottom: 16px;
+        }
+        .fallback-grupo-cabecera {
+            padding: 6px 12px;
+            background: var(--cream);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+        }
+        .fallback-grupo-cabecera strong { color: var(--purple); }
+        .fallback-grupo-cabecera span {
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-weight: 600;
+        }
+        .fallback-grupo ul {
+            list-style: none;
+            margin: 6px 0 0;
+            padding: 0;
+        }
+        .fallback-grupo li {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: var(--purple);
+            border-bottom: 1px solid var(--line);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .fallback-grupo li:hover { background: var(--purple-soft); }
+
+        /* Panel lateral de detalle */
+        .panel-fuente {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            max-width: 92vw;
+            height: 100vh;
+            background: #fff;
+            border-left: 1px solid var(--line);
+            box-shadow: -4px 0 18px rgba(74, 39, 70, 0.08);
+            padding: 28px 24px 24px;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 50;
+        }
+        .panel-fuente.open { transform: translateX(0); }
+        .panel-fuente[hidden] { display: none !important; }
+
+        .panel-cerrar {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: var(--purple-soft);
+            color: var(--purple);
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-family: inherit;
+            line-height: 1;
+            transition: background 0.15s;
+        }
+        .panel-cerrar:hover { background: var(--purple); color: #fff; }
+
+        .panel-encabezado { margin-bottom: 14px; }
+        .panel-encabezado h2 {
+            font-size: 1.05rem;
+            margin: 8px 0 4px;
+            color: var(--purple);
+            line-height: 1.25;
+        }
+        .panel-inst {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+        .panel-funciones {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 14px;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 999px;
+            line-height: 1.5;
+        }
+        .badge.acceso-publica    { background: var(--green-soft); color: var(--green); }
+        .badge.acceso-privada    { background: var(--coral-soft); color: var(--coral); }
+        .badge.acceso-indefinido { background: var(--beige-soft); color: var(--gray); }
+        .badge.funcion { background: var(--purple-soft); color: var(--purple); align-self: flex-start; }
+        .badge.badge-inst { font-weight: 700; }
+
+        .panel-datos {
+            margin: 12px 0 0;
+            font-size: 0.78rem;
+        }
+        .panel-datos dt {
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+        .panel-datos dd {
+            margin: 2px 0 0;
+            color: var(--purple);
+            line-height: 1.5;
+        }
+
+        .panel-listado {
+            list-style: none;
+            margin: 12px 0 0;
+            padding: 0;
+        }
+        .panel-fuente-item {
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .panel-fuente-item:hover {
+            border-color: var(--purple-soft);
+            background: var(--purple-soft);
+        }
+        .panel-item-titulo {
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: var(--purple);
+        }
+        .panel-item-base {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .galaxia-error {
+            padding: 40px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        footer.site {
+            grid-column: 1 / -1;
+            margin-top: 28px;
+            padding: 16px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.72rem;
+        }
+        footer.site a { color: var(--blue); text-decoration: none; font-weight: 600; }
+        footer.site a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body { display: block; }
+            nav#side-nav { display: none; }
+        }
+        @media (max-width: 700px) {
+            /* La galaxia no funciona bien con 67 nodos en pantalla chica.
+               Decisión documentada: caer a listado agrupado por institución,
+               que es honesto sobre la limitación visual.
+               El panel de detalle sigue funcionando para click en items. */
+            .galaxia-svg { display: none; }
+            .galaxia-leyenda { display: none; }
+            .galaxia-hint { display: none; }
+            .galaxia-mobile-fallback { display: block; }
+            .galaxia-wrap { padding: 0; background: transparent; border: none; box-shadow: none; }
+            .panel-fuente { width: 100vw; max-width: 100vw; border-left: none; }
+        }
+        @media (max-width: 500px) {
+            .container { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="side-nav" aria-label="Navegación">
+        <div class="brand">
+            <div class="brand-logo"><span></span><span></span><span></span></div>
+            <span>Área de Monitoreo</span>
+        </div>
+
+        <a href="../" class="back-link">← Sitio principal</a>
+        <a href="./" class="back-link">← Galería de variantes</a>
+
+        <div class="nav-title">Variante actual</div>
+        <span class="nav-item">Galaxia de fuentes</span>
+
+        <div class="nav-foot">
+            <strong>Prototipo experimental.</strong><br>
+            Vista alternativa de las 67 fuentes del catálogo, agrupadas por institución.
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="hero">
+            <div class="kicker">Variante experimental</div>
+            <h1>Galaxia de fuentes</h1>
+            <p class="lead">¿De qué instituciones depende el monitoreo del SLEP? Las <strong>67 fuentes</strong> del catálogo agrupadas como una galaxia de nodos por <strong>institución</strong>. Complementario al heatmap por función del sitio principal.</p>
+        </div>
+
+        <div class="galaxia-wrap">
+            <svg class="galaxia-svg" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Galaxia de fuentes agrupadas por institución">
+                <g class="enlaces"></g>
+                <g class="nodos"></g>
+                <g class="labels"></g>
+            </svg>
+
+            <div class="galaxia-mobile-fallback"></div>
+
+            <div class="galaxia-leyenda" role="note">
+                <span class="leyenda-titulo">Opacidad:</span>
+                <span class="leyenda-item"><span class="dot dim"></span>Catalogada (sin uso declarado)</span>
+                <span class="leyenda-item"><span class="dot full"></span>En uso declarado por una unidad</span>
+            </div>
+            <p class="galaxia-hint">Click en un nodo abre el detalle. Hover sobre la etiqueta de una institución resalta su grupo. Click en la etiqueta lista todas sus fuentes.</p>
+        </div>
+
+    </div>
+
+    <aside class="panel-fuente" id="panel-fuente" hidden aria-label="Detalle de fuente">
+        <button class="panel-cerrar" aria-label="Cerrar panel" type="button">×</button>
+        <div class="panel-contenido"></div>
+    </aside>
+
+    <footer class="site">
+        Variante experimental · <a href="../">Sitio principal</a> · <a href="./">Galería de variantes</a>
+    </footer>
+
+    <script src="../datos/fuentes.js"></script>
+    <script>
+        // === Galaxia de fuentes ===
+        // Datos desde datos/fuentes.js (window.FUENTES). Layout force-directed
+        // determinista: mismo input → mismo render píxel a píxel.
+
+        const FUENTES = Array.isArray(window.FUENTES) ? window.FUENTES : [];
+
+        const esc = s => (s == null ? '' : String(s)).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+        // --- Asignación estable de colores por institución ---
+        // 5 colores plenos para las instituciones grandes. Las de 1-2 nodos
+        // reutilizan colores (la posición espacial las desambigua).
+        const COLORES_INSTITUCION = {
+            "Centro de Estudios Mineduc (CEM)":                                                     "var(--purple)",
+            "Agencia de la Calidad de la Educación (ACE)":                                          "var(--blue)",
+            "Junta Nacional de Jardines Infantiles y Salas Cunas (Junji)":                          "var(--green)",
+            "Base de datos SIGE - CNT / DEP":                                                       "var(--coral)",
+            "Datos Abiertos Superintendencia de Educación":                                         "var(--beige)",
+            "CNT-CEM":                                                                              "var(--gray)",
+            "Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP)":   "var(--purple)",
+            "Departamento de Evaluación, Medición y Registro Educacional":                          "var(--blue)",
+            "División de Educación General":                                                        "var(--green)",
+            "Junta Nacional de Auxilio Escolar y Becas":                                            "var(--coral)",
+            "Ministerio de Medio Ambiente":                                                         "var(--beige)",
+            "SIES":                                                                                 "var(--gray)"
+        };
+        const COLOR_FALLBACK = "var(--gray)";
+
+        // Hash determinista del id (suma rotacional de char codes)
+        function hashId(id) {
+            let h = 0;
+            const s = id || '';
+            for (let i = 0; i < s.length; i++) {
+                h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+            }
+            return Math.abs(h);
+        }
+
+        // --- Agrupar fuentes por institución ---
+        const instituciones = (() => {
+            const m = new Map();
+            FUENTES.forEach(f => {
+                const k = f.institucion || '(sin institución)';
+                if (!m.has(k)) m.set(k, []);
+                m.get(k).push(f);
+            });
+            return [...m.entries()]
+                .map(([nombre, fuentes]) => ({ nombre, fuentes, count: fuentes.length }))
+                .sort((a, b) => b.count - a.count);
+        })();
+
+        // --- Anchors de cluster: distribución angular proporcional a sqrt(count) ---
+        const CX = 500, CY = 360, RADIO_ANCHOR = 215;
+        const anchors = {};
+        {
+            const totalPeso = instituciones.reduce((s, i) => s + Math.sqrt(i.count), 0) || 1;
+            let acumAng = -Math.PI / 2; // empezar arriba
+            instituciones.forEach(inst => {
+                const peso = Math.sqrt(inst.count);
+                const ang = (peso / totalPeso) * Math.PI * 2;
+                const centroAng = acumAng + ang / 2;
+                anchors[inst.nombre] = {
+                    x: CX + Math.cos(centroAng) * RADIO_ANCHOR,
+                    y: CY + Math.sin(centroAng) * RADIO_ANCHOR,
+                    count: inst.count,
+                    angCentral: centroAng
+                };
+                acumAng += ang;
+            });
+        }
+
+        // --- Posiciones iniciales deterministas: hash(id) → ángulo + radio ---
+        FUENTES.forEach(f => {
+            const a = anchors[f.institucion] || { x: CX, y: CY };
+            const h = hashId(f.id);
+            const offAng = ((h % 360) / 360) * Math.PI * 2;
+            const offRad = ((h >> 9) % 22) + 6;
+            f._x = a.x + Math.cos(offAng) * offRad;
+            f._y = a.y + Math.sin(offAng) * offRad;
+            f._vx = 0;
+            f._vy = 0;
+        });
+
+        // --- Force-directed (sin Math.random, totalmente determinista) ---
+        function iterarFisica(iter) {
+            const ATTRACT = 0.028;
+            const REPULSE = 280;
+            const DAMPING = 0.84;
+            const CUTOFF = 48;
+            const PAD = 32;
+            const W = 1000, H = 700;
+            const N = FUENTES.length;
+
+            for (let it = 0; it < iter; it++) {
+                // Atracción al anchor de su institución
+                for (let i = 0; i < N; i++) {
+                    const f = FUENTES[i];
+                    const a = anchors[f.institucion];
+                    if (!a) continue;
+                    f._vx += (a.x - f._x) * ATTRACT;
+                    f._vy += (a.y - f._y) * ATTRACT;
+                }
+
+                // Repulsión entre pares cercanos (O(n²) pero n=67, OK)
+                for (let i = 0; i < N; i++) {
+                    const a = FUENTES[i];
+                    for (let j = i + 1; j < N; j++) {
+                        const b = FUENTES[j];
+                        const dx = b._x - a._x;
+                        const dy = b._y - a._y;
+                        const dsq = dx * dx + dy * dy;
+                        if (dsq > CUTOFF * CUTOFF) continue;
+                        const d = Math.sqrt(dsq) || 0.01;
+                        const force = REPULSE / Math.max(dsq, 4);
+                        const fx = (dx / d) * force;
+                        const fy = (dy / d) * force;
+                        a._vx -= fx; a._vy -= fy;
+                        b._vx += fx; b._vy += fy;
+                    }
+                }
+
+                // Aplicar velocidad + damping + clip al viewBox
+                for (let i = 0; i < N; i++) {
+                    const f = FUENTES[i];
+                    f._x = Math.max(PAD, Math.min(W - PAD, f._x + f._vx));
+                    f._y = Math.max(PAD, Math.min(H - PAD, f._y + f._vy));
+                    f._vx *= DAMPING;
+                    f._vy *= DAMPING;
+                }
+            }
+        }
+
+        iterarFisica(250);
+
+        // --- Render SVG ---
+        function renderGalaxia() {
+            const svg = document.querySelector('.galaxia-svg');
+            if (!svg) return;
+            const gNodos = svg.querySelector('.nodos');
+            const gLabels = svg.querySelector('.labels');
+            const R_NODO = 7;
+
+            // Nodos
+            gNodos.innerHTML = FUENTES.map(f => {
+                const color = COLORES_INSTITUCION[f.institucion] || COLOR_FALLBACK;
+                const enUso = Array.isArray(f.usos_unidad) && f.usos_unidad.length > 0;
+                const opac = enUso ? 1.0 : 0.35;
+                return `<circle data-id="${esc(f.id)}" data-institucion="${esc(f.institucion || '')}" cx="${f._x.toFixed(1)}" cy="${f._y.toFixed(1)}" r="${R_NODO}" fill="${color}" opacity="${opac}"><title>${esc(f.nombre_corto || '')} — ${esc(f.institucion || '')}</title></circle>`;
+            }).join('');
+
+            // Centroides reales (post-física) para posicionar labels
+            const centroides = {};
+            instituciones.forEach(inst => {
+                const fs = inst.fuentes;
+                if (fs.length === 0) return;
+                const cx = fs.reduce((s, f) => s + f._x, 0) / fs.length;
+                const cy = fs.reduce((s, f) => s + f._y, 0) / fs.length;
+                centroides[inst.nombre] = { x: cx, y: cy, count: fs.length };
+            });
+
+            // Acortar nombres largos para que entren en el rect
+            function labelCorto(nombre) {
+                let txt = nombre;
+                // Quitar paréntesis para ahorrar espacio (ej. "Centro de Estudios Mineduc (CEM)" → "Centro de Estudios Mineduc")
+                if (txt.length > 26) txt = txt.replace(/\s*\([^)]+\)\s*$/, '').trim();
+                if (txt.length > 26) txt = txt.slice(0, 24) + '…';
+                return txt;
+            }
+
+            gLabels.innerHTML = Object.entries(centroides).map(([nombre, c]) => {
+                const txt = labelCorto(nombre);
+                const count = c.count;
+                const displayTxt = `${txt} · ${count}`;
+                // ancho del rect proporcional al texto (estimación gruesa)
+                const w = Math.max(80, displayTxt.length * 6 + 18);
+                // Desplazar label arriba o abajo según posición vertical del cluster
+                const offsetY = c.y < CY ? -28 : 28;
+                const color = COLORES_INSTITUCION[nombre] || COLOR_FALLBACK;
+                return `<g class="label-grupo" data-institucion="${esc(nombre)}">
+                    <rect x="${(c.x - w/2).toFixed(1)}" y="${(c.y + offsetY - 10).toFixed(1)}" width="${w.toFixed(1)}" height="20" rx="10" fill="rgba(255,255,255,0.94)" stroke="${color}" stroke-width="0.8"/>
+                    <text x="${c.x.toFixed(1)}" y="${(c.y + offsetY + 4).toFixed(1)}" text-anchor="middle" class="label-text">${esc(displayTxt)}</text>
+                </g>`;
+            }).join('');
+
+            // Handlers nodos
+            gNodos.querySelectorAll('circle').forEach(c => {
+                c.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const id = c.getAttribute('data-id');
+                    const f = FUENTES.find(x => x.id === id);
+                    if (f) abrirPanelFuente(f);
+                });
+            });
+
+            // Handlers labels
+            gLabels.querySelectorAll('.label-grupo').forEach(g => {
+                const inst = g.getAttribute('data-institucion');
+                g.addEventListener('mouseenter', () => destacarInstitucion(inst));
+                g.addEventListener('mouseleave', () => destacarInstitucion(null));
+                g.addEventListener('click', e => {
+                    e.stopPropagation();
+                    abrirPanelInstitucion(inst);
+                });
+            });
+        }
+
+        // --- Destacar / restaurar opacidades ---
+        function opacidadBase(f) {
+            return (Array.isArray(f.usos_unidad) && f.usos_unidad.length > 0) ? 1.0 : 0.35;
+        }
+        function destacarInstitucion(nombre) {
+            const gNodos = document.querySelector('.galaxia-svg .nodos');
+            if (!gNodos) return;
+            gNodos.querySelectorAll('circle').forEach(c => {
+                if (nombre == null) {
+                    const f = FUENTES.find(x => x.id === c.getAttribute('data-id'));
+                    c.setAttribute('opacity', opacidadBase(f));
+                } else {
+                    const i = c.getAttribute('data-institucion');
+                    c.setAttribute('opacity', i === nombre ? 1.0 : 0.12);
+                }
+            });
+        }
+
+        // --- Panel lateral ---
+        const panel = document.getElementById('panel-fuente');
+        const panelContenido = panel.querySelector('.panel-contenido');
+        panel.querySelector('.panel-cerrar').addEventListener('click', cerrarPanel);
+
+        function abrirPanelFuente(f) {
+            const acceso = f.acceso || 'indefinido';
+            const accesoLbl = acceso === 'publica' ? 'Pública' : acceso === 'privada' ? 'Privada' : 'Acceso indefinido';
+            const funcionesHtml = (f.funcion_num || []).map((n, i) =>
+                `<span class="badge funcion">f.${n} — ${esc((f.funcion_label || [])[i] || '')}</span>`
+            ).join('');
+            const filas = [
+                ['Nombre completo',      f.nombre_largo],
+                ['Base de datos',        f.base_datos],
+                ['Proveedor',            f.proveedor],
+                ['Ámbito',               f.ambito],
+                ['Modalidad',            f.modalidad],
+                ['Unidad de análisis',   f.unidad_analisis],
+                ['Periodicidad',         f.periodicidad],
+                ['Fecha de corte',       f.fecha_corte],
+                ['Fecha de extracción',  f.fecha_extraccion],
+                ['Fecha de publicación', f.fecha_publicacion],
+                ['Nota',                 f.nota]
+            ].filter(([, v]) => v != null && String(v).trim() !== '');
+
+            panelContenido.innerHTML = `
+                <div class="panel-encabezado">
+                    <div class="badge acceso-${esc(acceso)}">${esc(accesoLbl)}</div>
+                    <h2>${esc(f.nombre_corto || '(sin nombre)')}</h2>
+                    <div class="panel-inst">${esc(f.institucion || '')}</div>
+                </div>
+                <div class="panel-funciones">${funcionesHtml}</div>
+                <dl class="panel-datos">
+                    ${filas.map(([lbl, val]) => `<dt>${esc(lbl)}</dt><dd>${esc(String(val))}</dd>`).join('')}
+                </dl>
+            `;
+            panel.hidden = false;
+            requestAnimationFrame(() => panel.classList.add('open'));
+        }
+
+        function abrirPanelInstitucion(nombre) {
+            const fs = FUENTES.filter(f => f.institucion === nombre);
+            const color = COLORES_INSTITUCION[nombre] || COLOR_FALLBACK;
+
+            panelContenido.innerHTML = `
+                <div class="panel-encabezado">
+                    <div class="badge badge-inst" style="background:${color}; color:#fff;">Institución</div>
+                    <h2>${esc(nombre)}</h2>
+                    <div class="panel-inst">${fs.length} fuente${fs.length === 1 ? '' : 's'} catalogada${fs.length === 1 ? '' : 's'}</div>
+                </div>
+                <ul class="panel-listado">
+                    ${fs.map(f => `<li class="panel-fuente-item" data-id="${esc(f.id)}"><div class="panel-item-titulo">${esc(f.nombre_corto || '(sin nombre)')}</div><div class="panel-item-base">${esc(f.base_datos || '')}</div></li>`).join('')}
+                </ul>
+            `;
+            panelContenido.querySelectorAll('.panel-fuente-item').forEach(li => {
+                li.addEventListener('click', () => {
+                    const id = li.getAttribute('data-id');
+                    const f = FUENTES.find(x => x.id === id);
+                    if (f) abrirPanelFuente(f);
+                });
+            });
+            panel.hidden = false;
+            requestAnimationFrame(() => panel.classList.add('open'));
+        }
+
+        function cerrarPanel() {
+            panel.classList.remove('open');
+            setTimeout(() => { panel.hidden = true; }, 280);
+        }
+
+        // Click fuera del panel lo cierra (pero no si fue sobre un nodo o label)
+        document.addEventListener('click', e => {
+            if (panel.hidden) return;
+            if (e.target.closest('#panel-fuente')) return;
+            if (e.target.closest('circle[data-id]')) return;
+            if (e.target.closest('.label-grupo')) return;
+            if (e.target.closest('.fallback-grupo li')) return;
+            cerrarPanel();
+        });
+
+        // --- Fallback mobile: listado agrupado por institución ---
+        function renderFallbackMobile() {
+            const div = document.querySelector('.galaxia-mobile-fallback');
+            if (!div) return;
+            div.innerHTML = instituciones.map(inst => {
+                const color = COLORES_INSTITUCION[inst.nombre] || COLOR_FALLBACK;
+                return `<div class="fallback-grupo">
+                    <div class="fallback-grupo-cabecera" style="border-left: 4px solid ${color};">
+                        <strong>${esc(inst.nombre)}</strong>
+                        <span>${inst.count}</span>
+                    </div>
+                    <ul>
+                        ${inst.fuentes.map(f => `<li data-id="${esc(f.id)}">${esc(f.nombre_corto || '(sin nombre)')}</li>`).join('')}
+                    </ul>
+                </div>`;
+            }).join('');
+            div.querySelectorAll('li[data-id]').forEach(li => {
+                li.addEventListener('click', () => {
+                    const id = li.getAttribute('data-id');
+                    const f = FUENTES.find(x => x.id === id);
+                    if (f) abrirPanelFuente(f);
+                });
+            });
+        }
+
+        // Init
+        if (FUENTES.length > 0) {
+            renderGalaxia();
+            renderFallbackMobile();
+        } else {
+            const wrap = document.querySelector('.galaxia-wrap');
+            if (wrap) wrap.innerHTML = '<p class="galaxia-error">No se pudieron cargar los datos (verificar que <code>../datos/fuentes.js</code> esté disponible).</p>';
+        }
+    </script>
+
+</body>
+</html>
