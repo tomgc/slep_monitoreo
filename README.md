@@ -8,7 +8,9 @@ Página única, estática, sin dependencias externas. Todo el CSS y JS vive inli
 
 ```
 .
-├── index.html              # Sitio principal (bento, v2.0)
+├── index.html              # Sitio principal (bento, v2.1)
+├── datos/
+│   └── fuentes.js          # window.FUENTES — generado por R (no editar a mano)
 ├── og-image.svg            # Fuente del preview social (1200x630)
 ├── og-image.png            # Renderizado para Open Graph / Twitter
 ├── scripts/
@@ -17,7 +19,8 @@ Página única, estática, sin dependencias externas. Todo el CSS y JS vive inli
 │   ├── index.html          # Galería de variantes
 │   ├── classic.html        # v1.4 navy/azul (sitio anterior)
 │   ├── editorial.html      # Long-form serifa
-│   └── institucional.html  # Documento institucional
+│   ├── institucional.html  # Documento institucional
+│   └── fuentes-galaxia.html # Prototipo: galaxia de fuentes por institución
 └── README.md
 ```
 
@@ -59,6 +62,32 @@ Convenciones:
 - Las subcarpetas vacías mantienen un archivo `.gitkeep` para que git las preserve.
 - `_archivo/` queda fuera del repo (`.gitignore`) y aloja snapshots locales pre-refactor.
 
+### Pipeline de datos (Fuentes)
+
+La sección "Fuentes utilizadas" del sitio consume `datos/fuentes.js`, que se genera de manera reproducible desde el Excel maestro:
+
+```
+10_insumos/fuentes/fuentes_informacion_2026.xlsx
+        │
+        ▼ (Rscript con readxl + dplyr + janitor + jsonlite)
+20_procesamiento/21_generar_fuentes.R
+        │
+        ▼ (escribe window.FUENTES como .js)
+datos/fuentes.js
+        │
+        ▼ (<script src> en index.html y variants/fuentes-galaxia.html)
+sitio publicado
+```
+
+Para actualizar los datos del catálogo:
+
+1. Editar `10_insumos/fuentes/fuentes_informacion_2026.xlsx`.
+2. Correr `Rscript 20_procesamiento/21_generar_fuentes.R` desde la raíz del repo.
+3. Verificar el resumen impreso en stdout (totales por ámbito, función, institución).
+4. Commit del `.xlsx` modificado + `datos/fuentes.js` regenerado.
+
+**No editar `datos/fuentes.js` a mano** — sus 3 primeras líneas son el aviso. El script auto-instala paquetes faltantes en su primera corrida y fuerza locale UTF-8 al inicio para preservar tildes.
+
 ## Cómo regenerar el preview social
 
 `og-image.png` es la imagen que muestran WhatsApp, Facebook, LinkedIn y otros al compartir el link. Se genera a partir de `og-image.svg`:
@@ -97,9 +126,16 @@ Fondo de página siempre blanco.
 
 ## Versionado
 
-La versión visible aparece en el footer y en la meta del hero (actualmente `2.0`). Convención: bump menor por cambios visuales o de contenido, bump mayor por reescrituras o cambios de identidad.
+La versión visible aparece en el footer y en la meta del hero (actualmente `2.1`). Convención: bump menor por cambios visuales o de contenido, bump mayor por reescrituras o cambios de identidad.
 
 ## Changelog
+
+### 2.1 — 2026-05-27
+
+- Sección "Fuentes utilizadas" en el index: matriz interactiva ámbito × función + buscador + lista de detalle. 67 fuentes, 12 instituciones, 6 funciones presentes.
+- Pipeline de datos: Excel maestro en `10_insumos/fuentes/` → script R en `20_procesamiento/` → `datos/fuentes.js` consumido por el HTML.
+- Prototipo experimental `variants/fuentes-galaxia.html`: galaxia de nodos agrupados por institución como cuarta entrada de la galería de variantes.
+- Reorganización interna del repo en decenas (`10_insumos`, `20_procesamiento`, `30_documentacion`) — el sitio publicado y el workflow de Pages no cambiaron.
 
 ### 2.0 — 2026-05
 
