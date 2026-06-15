@@ -4,14 +4,20 @@
 #   slep_monitoreo y dejarlo en 50_documentacion/estructura/. Sirve para que
 #   futuras sesiones reconozcan rápido la disposición de archivos del proyecto.
 #
-# Salida: en 50_documentacion/estructura/
-#   - YYYYMMDD_HHMMSS_estructura.txt  (snapshot sellado, texto plano)
-#   - YYYYMMDD_HHMMSS_estructura.md   (snapshot sellado, markdown)
-#   - estructura_actual.txt / .md     (alias = copia del snapshot más reciente)
+# Salida: en 50_documentacion/estructura/ (solo dos versiones, sin timestamps)
+#   - estructura_actual.txt / .md     (inventario de la corrida más reciente)
+#   - estructura_anterior.txt / .md   (inventario de la corrida previa)
+#   Cada corrida pisa: lo que era "actual" pasa a "anterior" y el escaneo nuevo
+#   ocupa "actual". El directorio nunca acumula más de estos cuatro archivos.
 #
 # Excepción de R declarada (política sección 7): este es el ÚNICO script de R
 #   del proyecto. NO procesa datos; es una herramienta de estructura. El sitio
 #   no tiene pipeline de R (la feature Fuentes se retiró en v1.0).
+#
+# Excepción declarada a la política 7.3-7.4: la política define snapshots
+#   sellados con timestamp y poda de retención 2. Para este sitio estático, que
+#   cambia poco, se simplifica a dos versiones fijas (actual/anterior) que se
+#   pisan en cada corrida. Decisión registrada en CLAUDE.md y en el traspaso v03.
 #
 # Uso: Rscript 00_escanear_proyecto.R  (ejecutar desde la raíz del repo).
 # Solo base R (+ here si está disponible para anclar la raíz). Sin dependencias pesadas.
@@ -75,9 +81,8 @@ extensiones <- tolower(tools::file_ext(archivos))
 extensiones[extensiones == ""] <- "(sin extensión)"
 conteo_ext <- sort(table(extensiones), decreasing = TRUE)
 
-# --- Marca de tiempo ---
+# --- Marca de tiempo (solo para el contenido del inventario) ---
 ahora <- Sys.time()
-sello <- format(ahora, "%Y%m%d_%H%M%S")
 fecha_legible <- format(ahora, "%Y-%m-%d %H:%M:%S")
 
 # --- Construir el árbol indentado (carpetas + archivos, ordenado por ruta) ---
@@ -158,51 +163,48 @@ escribir_utf8 <- function(lineas, ruta) {
 dir_estructura <- file.path(raiz, "50_documentacion", "estructura")
 dir.create(dir_estructura, showWarnings = FALSE, recursive = TRUE)
 
-ruta_txt   <- file.path(dir_estructura, paste0(sello, "_estructura.txt"))
-ruta_md    <- file.path(dir_estructura, paste0(sello, "_estructura.md"))
-alias_txt  <- file.path(dir_estructura, "estructura_actual.txt")
-alias_md   <- file.path(dir_estructura, "estructura_actual.md")
+actual_txt    <- file.path(dir_estructura, "estructura_actual.txt")
+actual_md     <- file.path(dir_estructura, "estructura_actual.md")
+anterior_txt  <- file.path(dir_estructura, "estructura_anterior.txt")
+anterior_md   <- file.path(dir_estructura, "estructura_anterior.md")
 
-# --- Escritura atómica: si falla el snapshot nuevo, NO se poda nada ---
+# --- Rotacion actual -> anterior, luego escritura del nuevo "actual" ---
+# Esquema de dos versiones fijas (excepcion declarada a la politica 7.3-7.4):
+#   1. Lo que era "actual" pasa a "anterior" (pisando el anterior previo).
+#   2. El escaneo nuevo se escribe como "actual".
+# Atomico: la rotacion del paso 1 ocurre solo si "actual" existe; si la
+# escritura del paso 2 falla, se detiene con error (no deja el directorio
+# en estado inconsistente: "anterior" ya rotado, "actual" a medio escribir).
+rotar <- function(desde, hacia) {
+  if (file.exists(desde)) {
+    ok <- file.rename(desde, hacia)
+    if (!ok) stop("No se pudo rotar ", basename(desde), " -> ", basename(hacia))
+  }
+}
+rotar(actual_txt, anterior_txt)
+rotar(actual_md, anterior_md)
+
 escritura_ok <- tryCatch({
-  escribir_utf8(lineas_txt, ruta_txt)
-  escribir_utf8(lineas_md, ruta_md)
-  escribir_utf8(lineas_txt, alias_txt)
-  escribir_utf8(lineas_md, alias_md)
+  escribir_utf8(lineas_txt, actual_txt)
+  escribir_utf8(lineas_md, actual_md)
   TRUE
 }, error = function(e) {
-  message("ERROR al escribir el snapshot: ", conditionMessage(e))
+  message("ERROR al escribir el inventario nuevo: ", conditionMessage(e))
   FALSE
 })
 
 if (!escritura_ok) {
-  stop("La escritura del snapshot falló; no se poda nada (operación atómica).")
-}
-
-# --- Poda de retención = 2 (política sección 7.4) ---
-# Conserva solo los 2 sellos más recientes (cada uno con su par .txt/.md).
-# Los alias estructura_actual.* nunca se podan.
-patron_sellado <- "^[0-9]{8}_[0-9]{6}_estructura\\.(txt|md)$"
-sellados <- list.files(dir_estructura, pattern = patron_sellado)
-sellos_unicos <- unique(sub("_estructura\\.(txt|md)$", "", sellados))
-sellos_unicos <- sort(sellos_unicos, decreasing = TRUE)
-
-if (length(sellos_unicos) > 2) {
-  a_podar <- sellos_unicos[-(1:2)]
-  for (s in a_podar) {
-    for (ext in c("txt", "md")) {
-      f <- file.path(dir_estructura, paste0(s, "_estructura.", ext))
-      if (file.exists(f)) file.remove(f)
-    }
-  }
-  cat("Poda: eliminados", length(a_podar), "snapshot(s) antiguo(s).\n")
-} else {
-  cat("Poda: nada que podar (", length(sellos_unicos), "sello(s) <= 2).\n")
+  stop("La escritura del inventario fallo tras rotar. Revisar estructura_anterior.* ",
+       "(tiene la version previa) y volver a correr.")
 }
 
 # --- Resumen a stdout ---
-cat("Snapshot generado:\n")
-cat("  ", ruta_txt, "\n", sep = "")
-cat("  ", ruta_md, "\n", sep = "")
-cat("Alias actualizados: estructura_actual.txt / estructura_actual.md\n")
+cat("Inventario generado (esquema actual/anterior, sin timestamps):\n")
+cat("  ", actual_md, "\n", sep = "")
+cat("  ", actual_txt, "\n", sep = "")
+if (file.exists(anterior_md)) {
+  cat("Version previa rotada a: estructura_anterior.txt / estructura_anterior.md\n")
+} else {
+  cat("Primera corrida: aun no hay estructura_anterior.* (se creara en la proxima).\n")
+}
 cat("Carpetas: ", length(dirs), " | Archivos: ", length(archivos), "\n", sep = "")

@@ -1,9 +1,9 @@
 # Inventario de estructura — slep_monitoreo
 
 - **Raíz:** `/Users/tomgc/Projects/slep_monitoreo`
-- **Generado:** 2026-06-15 13:02:54
+- **Generado:** 2026-06-15 16:39:23
 - **Total de carpetas:** 9
-- **Total de archivos:** 24
+- **Total de archivos:** 28
 - **Exclusiones:** `.git/` `_archivo/` `handoff/` `.claude/` `node_modules/` `.DS_Store`
 
 ## Árbol
@@ -12,17 +12,21 @@
 .github/
   workflows/
     static.yml  (1.2 KB)
-.gitignore  (212 B)
+.gitignore  (328 B)
 .nojekyll  (0 B)
-00_escanear_proyecto.R  (7.3 KB)
+00_escanear_proyecto.R  (7.8 KB)
 50_documentacion/
   activa/
     .gitkeep  (0 B)
+    POLITICA_PROYECTO.md  (29.7 KB)
   estructura/
     .gitkeep  (0 B)
+    estructura_actual.md  (1.4 KB)
+    estructura_actual.txt  (1.7 KB)
+    estructura_anterior.md  (1.3 KB)
+    estructura_anterior.txt  (1.6 KB)
   traspasos/
-    traspaso_cierre_v01.md  (52.9 KB)
-    traspaso_cierre_v02.md  (25.5 KB)
+    .gitkeep  (0 B)
 app.js  (9.1 KB)
 assets/
   logo-color-stacked.png  (126.3 KB)
@@ -30,6 +34,7 @@ assets/
   logo-white-stacked.png  (143.5 KB)
   proyectos/
     .gitkeep  (0 B)
+CLAUDE.md  (2.9 KB)
 colors_and_type.css  (8.3 KB)
 data.js  (5.8 KB)
 fonts/
@@ -40,7 +45,6 @@ fonts/
   MuseoSans_700.otf  (62.1 KB)
   MuseoSans-300.otf  (61.4 KB)
 index.html  (6.5 KB)
-POLITICA_PROYECTO.md  (29.7 KB)
 styles.css  (22.2 KB)
 ```
 
@@ -49,11 +53,12 @@ styles.css  (22.2 KB)
 | Extensión | Archivos |
 | --- | ---: |
 | otf | 6 |
-| gitkeep | 3 |
-| md | 3 |
+| gitkeep | 4 |
+| md | 4 |
 | png | 3 |
 | css | 2 |
 | js | 2 |
+| txt | 2 |
 | gitignore | 1 |
 | html | 1 |
 | nojekyll | 1 |

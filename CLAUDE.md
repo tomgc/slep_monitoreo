@@ -38,9 +38,11 @@ Aplicación **pragmática** de `POLITICA_PROYECTO.md` (en `50_documentacion/acti
 
 ## Escáner de estructura
 
-`00_escanear_proyecto.R` regenera el inventario del repositorio en
-`50_documentacion/estructura/` (`estructura_actual.md` es el alias vigente).
-Conviene correrlo al abrir o cerrar sesión, o después de reorganizar:
+`00_escanear_proyecto.R` regenera el inventario del repositorio. Genera dos
+versiones fijas en `50_documentacion/estructura/`: `estructura_actual.*`
+(corrida más reciente) y `estructura_anterior.*` (corrida previa). Cada corrida
+pisa, sin acumular snapshots con timestamp. Conviene correrlo al abrir o cerrar
+sesión, o después de reorganizar:
 
 ```bash
 Rscript 00_escanear_proyecto.R
@@ -52,3 +54,9 @@ Rscript 00_escanear_proyecto.R
 - Sin `10_utils/` ni decenas de procesamiento: no hay código R de proceso.
 - El **único** script de R es el escáner de estructura (`00_escanear_proyecto.R`),
   que es herramienta de estructura, no procesamiento de datos.
+- El escáner usa dos versiones fijas (actual/anterior) en vez de snapshots sellados
+  con timestamp y poda de retención 2 (se aparta de la política 7.3-7.4; simplificación
+  para un sitio estático que cambia poco).
+- Los traspasos de sesión NO se versionan: viven en `_archivo/traspasos/` (gitignored)
+  porque GitHub Pages publica todo el repo y no deben ser públicos. La carpeta
+  `50_documentacion/traspasos/` se conserva vacía (`.gitkeep`) por convención.

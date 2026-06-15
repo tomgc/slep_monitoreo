@@ -9,3 +9,6 @@ _archivo/
 
 # Insumo de traspaso entregado (referencia local, no se versiona)
 handoff/
+
+# Traspasos de sesión: memoria interna, NO se publican (Pages sirve todo el repo)
+50_documentacion/traspasos/*.md
