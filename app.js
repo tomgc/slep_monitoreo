@@ -144,11 +144,8 @@
   const STORE = "am-variants-2";
 
   function applyStored() {
-    let v = {};
-    try { v = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) {}
-    if (v.variant) document.body.setAttribute("data-variant", v.variant);
-    if (v.density) document.body.setAttribute("data-density", v.density);
-    syncControls();
+    document.body.setAttribute("data-variant", "d2");
+    document.body.setAttribute("data-density", "comfortable");
   }
   function save() {
     const v = {
