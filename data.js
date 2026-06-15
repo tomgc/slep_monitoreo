@@ -5,77 +5,90 @@
    =========================================================== */
 
 /* Estado: "vigente" | "desarrollo"
-   thumb: tono del placeholder de captura → plum | ocean | olive | coral | sand */
+   thumb: tono del placeholder de captura → plum | ocean | olive | coral | sand
+   imgs: arreglo de rutas a capturas del proyecto (ej. ['assets/proyectos/x-1.jpg']).
+         La primera es la portada del banner; el lightbox las muestra todas en un pasador.
+         Si el arreglo está vacío, se muestra el marcador 'próximamente'. */
 const PROYECTOS = [
   {
     tipo: "Monitoreo",
     titulo: "Monitoreo de aprendizajes en la educación parvularia",
     objetivo: "Sistematiza evidencia sobre los aprendizajes de niñas y niños del nivel parvulario para apoyar las decisiones pedagógicas de los jardines infantiles del territorio.",
     estado: "desarrollo",
-    thumb: "plum"
+    thumb: "plum",
+    imgs: []
   },
   {
     tipo: "Seguimiento",
     titulo: "Seguimiento de trayectorias en la educación inicial",
     objetivo: "Acompaña la trayectoria de las y los párvulos a lo largo del ciclo inicial, anticipando alertas tempranas de asistencia y continuidad educativa.",
     estado: "vigente",
-    thumb: "ocean"
+    thumb: "ocean",
+    imgs: []
   },
   {
     tipo: "Plataforma · CostaPresente",
     titulo: "Seguimiento de trayectorias en establecimientos del SLEP",
     objetivo: "Plataforma territorial que integra los indicadores de trayectoria educativa de las y los estudiantes de los 97 establecimientos del Servicio Local.",
     estado: "vigente",
-    thumb: "plum"
+    thumb: "plum",
+    imgs: []
   },
   {
     tipo: "Minuta · Dirección Ejecutiva",
     titulo: "Minuta de asistencia mensual",
     objetivo: "Reporte mensual de asistencia consolidado para la Dirección Ejecutiva, con foco en las variaciones por comuna, nivel y establecimiento.",
     estado: "vigente",
-    thumb: "olive"
+    thumb: "olive",
+    imgs: []
   },
   {
     tipo: "Minuta · Dirección Ejecutiva",
     titulo: "Minutas de resultados Simce",
     objetivo: "Síntesis interpretada de los resultados Simce del territorio para apoyar la planificación estratégica de la Dirección Ejecutiva.",
     estado: "vigente",
-    thumb: "ocean"
+    thumb: "ocean",
+    imgs: []
   },
   {
     tipo: "Minuta · Dirección Ejecutiva",
     titulo: "Minuta sobre la desvinculación de estudiantes",
     objetivo: "Analiza la desvinculación y el abandono escolar para orientar acciones de retención y revinculación educativa en las comunidades.",
     estado: "vigente",
-    thumb: "coral"
+    thumb: "coral",
+    imgs: []
   },
   {
     tipo: "Reporte · Directores/as",
     titulo: "Reportes del modelo de resguardo de la asistencia",
     objetivo: "Reportes dirigidos a directoras y directores que identifican estudiantes en riesgo por inasistencia, según el modelo de resguardo de la asistencia.",
     estado: "vigente",
-    thumb: "plum"
+    thumb: "plum",
+    imgs: []
   },
   {
     tipo: "Motor de comparación",
     titulo: "Comparación de resultados nacionales en los Estándares de Aprendizaje",
     objetivo: "Herramienta que contrasta los Estándares de Aprendizaje del territorio con referencias nacionales para situar los resultados en contexto.",
     estado: "desarrollo",
-    thumb: "sand"
+    thumb: "sand",
+    imgs: []
   },
   {
     tipo: "Motor de comparación",
     titulo: "Comparación de categorías de desempeño a nivel nacional",
     objetivo: "Compara las Categorías de Desempeño de los establecimientos del Servicio Local con el panorama nacional para identificar brechas y fortalezas.",
     estado: "desarrollo",
-    thumb: "ocean"
+    thumb: "ocean",
+    imgs: []
   },
   {
     tipo: "Reporte AEL",
     titulo: "Reporte de Análisis del Entorno y los Logros (AEL)",
     objetivo: "Consolida indicadores de aprendizaje, asistencia y aprobación por establecimiento para nutrir los ciclos de mejora de cada comunidad educativa.",
     estado: "vigente",
-    thumb: "olive"
+    thumb: "olive",
+    imgs: []
   }
 ];
 

@@ -94,7 +94,14 @@
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Reseña del producto">
   <div class="lb-card">
     <button class="lb-close" id="lbClose" aria-label="Cerrar">&times;</button>
-    <div class="lb-shot" id="lbShot"><span class="shot-label">Reseña del producto · próximamente</span></div>
+    <div class="lb-gallery">
+      <div class="lb-stage" id="lbStage">
+        <button class="lb-nav prev" id="lbPrev" aria-label="Captura anterior">&#8249;</button>
+        <button class="lb-nav next" id="lbNext" aria-label="Captura siguiente">&#8250;</button>
+        <span class="lb-count" id="lbCount"></span>
+      </div>
+      <div class="lb-dots" id="lbDots"></div>
+    </div>
     <div class="lb-text">
       <span class="banner-type" id="lbType">Reporte</span>
       <h3 id="lbTitle">Título del proyecto</h3>
@@ -138,7 +145,6 @@
   </div>
 </div>
 
-<script src="image-slot.js"></script>
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>

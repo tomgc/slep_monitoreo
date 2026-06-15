@@ -31,18 +31,15 @@
   const bannerList = $("#bannerList");
   const estadoLabel = { vigente: "Vigente", desarrollo: "En desarrollo" };
 
-  function slug(s) {
-    return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 48);
-  }
-
   function bannerEl(p, i) {
     const node = el("div", "banner");
     node.setAttribute("role", "button");
     node.setAttribute("tabindex", "0");
     node.setAttribute("data-estado", p.estado);
     node.setAttribute("aria-label", "Ver reseña: " + p.titulo);
-    const sid = "pf-" + slug(p.titulo);
+    const media = (p.imgs && p.imgs.length)
+      ? `<img class="banner-shot" src="${esc(p.imgs[0])}" alt="${esc(p.titulo)}" loading="lazy">`
+      : `<div class="banner-ph"><span>Próximamente</span></div>`;
     node.innerHTML = `
       <div class="banner-body">
         <div class="banner-top">
@@ -53,16 +50,16 @@
         <p class="banner-obj">${esc(p.objetivo)}</p>
       </div>
       <div class="banner-media">
-        <image-slot id="${sid}" shape="rounded" radius="6" placeholder="Imagen del proyecto"></image-slot>
+        ${media}
       </div>`;
     node.addEventListener("click", () => openLightbox(p));
     node.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(p); }
     });
-    // let the image slot handle its own drag/drop/click without opening the lightbox
-    const media = node.querySelector(".banner-media");
-    ["click", "mousedown", "keydown", "dragover", "drop"].forEach((ev) =>
-      media.addEventListener(ev, (e) => e.stopPropagation()));
+    // evitar que un clic sobre el área de imagen dispare el lightbox dos veces
+    const mediaEl = node.querySelector(".banner-media");
+    ["click", "mousedown", "keydown"].forEach((ev) =>
+      mediaEl.addEventListener(ev, (e) => e.stopPropagation()));
     return node;
   }
 
@@ -81,11 +78,65 @@
      LIGHTBOX
      =========================================================== */
   const lightbox = $("#lightbox");
+  const lbStage = $("#lbStage");
+  const lbDots = $("#lbDots");
+  const lbCount = $("#lbCount");
+  const lbPrev = $("#lbPrev");
+  const lbNext = $("#lbNext");
+  let lbIndex = 0;
+
+  function lbRender() {
+    const slides = $$(".lb-slide", lbStage);
+    const dots = $$(".lb-dot", lbDots);
+    const n = slides.length;
+    const single = n <= 1;
+    slides.forEach((s, i) => s.classList.toggle("active", i === lbIndex));
+    dots.forEach((d, i) => d.classList.toggle("active", i === lbIndex));
+    lbPrev.disabled = lbIndex === 0;
+    lbNext.disabled = lbIndex === n - 1;
+    lbPrev.hidden = single;
+    lbNext.hidden = single;
+    lbCount.textContent = single ? "" : (lbIndex + 1) + " / " + n;
+    lbDots.style.display = single ? "none" : "";
+  }
+  function lbGo(delta) {
+    const n = $$(".lb-slide", lbStage).length;
+    lbIndex = Math.max(0, Math.min(n - 1, lbIndex + delta));
+    lbRender();
+  }
+  function buildGallery(p) {
+    // limpiar las slides del proyecto anterior
+    $$(".lb-slide", lbStage).forEach((s) => s.remove());
+    lbDots.innerHTML = "";
+    lbIndex = 0;
+    const shots = (p.imgs && p.imgs.length) ? p.imgs : [null];
+    shots.forEach((shot, i) => {
+      let slide;
+      if (shot) {
+        slide = el("img", "lb-slide");
+        slide.src = shot;
+        slide.alt = p.titulo;
+        slide.loading = "lazy";
+      } else {
+        slide = el("div", "lb-slide lb-ph", "<span>Reseña del producto · próximamente</span>");
+      }
+      // las slides van antes de los botones de navegación
+      lbStage.insertBefore(slide, lbPrev);
+      if (shots.length > 1) {
+        const dot = el("button", "lb-dot");
+        dot.setAttribute("aria-label", "Ir a la captura " + (i + 1));
+        dot.addEventListener("click", () => { lbIndex = i; lbRender(); });
+        lbDots.appendChild(dot);
+      }
+    });
+    lbRender();
+  }
 
   function openLightbox(p) {
     $("#lbType").textContent = p.tipo;
     $("#lbTitle").textContent = p.titulo;
     $("#lbObj").textContent = p.objetivo;
+    buildGallery(p);
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
     $("#lbClose").focus();
@@ -95,8 +146,15 @@
     document.body.style.overflow = "";
   }
   $("#lbClose").addEventListener("click", closeLightbox);
+  lbPrev.addEventListener("click", () => lbGo(-1));
+  lbNext.addEventListener("click", () => lbGo(1));
   lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    else if (e.key === "ArrowLeft") lbGo(-1);
+    else if (e.key === "ArrowRight") lbGo(1);
+  });
 
   /* ===========================================================
      TRAYECTORIA
