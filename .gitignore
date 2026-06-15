@@ -6,3 +6,6 @@ _archivo/
 
 # Config local del editor / MCP
 .claude/
+
+# Insumo de traspaso entregado (referencia local, no se versiona)
+handoff/
