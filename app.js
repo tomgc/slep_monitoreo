@@ -172,25 +172,4 @@
   /* ===========================================================
      EQUIPO — sección eliminada
      =========================================================== */
-
-  /* ===========================================================
-     NAV — mobile toggle + scrollspy + header shadow
-     =========================================================== */
-  const navToggle = $("#navToggle");
-  navToggle && navToggle.addEventListener("click", () => document.body.classList.toggle("nav-open"));
-  $$("#siteNav a").forEach((a) => a.addEventListener("click", () => document.body.classList.remove("nav-open")));
-
-  const sections = ["que-hace", "trayectoria", "portafolio"];
-  const navLinks = {};
-  $$("#siteNav a").forEach((a) => { navLinks[a.getAttribute("href").slice(1)] = a; });
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        Object.values(navLinks).forEach((l) => l.classList.remove("active"));
-        const l = navLinks[e.target.id];
-        if (l) l.classList.add("active");
-      }
-    });
-  }, { rootMargin: "-45% 0px -50% 0px" });
-  sections.forEach((id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
 })();

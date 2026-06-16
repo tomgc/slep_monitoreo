@@ -32,7 +32,9 @@ Aplicación **pragmática** de `POLITICA_PROYECTO.md` (en `50_documentacion/acti
 - El sitio queda en la raíz por la restricción de GitHub Pages.
 - `50_documentacion/` agrupa la documentación:
   - `activa/` — política y documentos vigentes.
-  - `traspasos/` — traspasos de cierre de sesión (snake_case).
+  - `traspasos/` — traspasos de cierre de sesión y `backlog_acumulado.md`
+    (snake_case). **Gitignored**: no se versionan (GitHub Pages publica todo
+    el repo y no deben ser públicos).
   - `estructura/` — snapshots del escáner.
 - **Sin pipeline de R:** la feature "Fuentes" y su procesamiento se retiraron en v1.0.
 
@@ -57,6 +59,7 @@ Rscript 00_escanear_proyecto.R
 - El escáner usa dos versiones fijas (actual/anterior) en vez de snapshots sellados
   con timestamp y poda de retención 2 (se aparta de la política 7.3-7.4; simplificación
   para un sitio estático que cambia poco).
-- Los traspasos de sesión NO se versionan: viven en `_archivo/traspasos/` (gitignored)
-  porque GitHub Pages publica todo el repo y no deben ser públicos. La carpeta
-  `50_documentacion/traspasos/` se conserva vacía (`.gitkeep`) por convención.
+- Los traspasos de sesión y `backlog_acumulado.md` NO se versionan: viven en
+  `50_documentacion/traspasos/` pero están **gitignored** porque GitHub Pages
+  publica todo el repo y no deben ser públicos. Se adjuntan a mano al abrir
+  cada sesión.
