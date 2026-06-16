@@ -193,49 +193,4 @@
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   sections.forEach((id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
-
-  /* ===========================================================
-     VARIANTS PANEL
-     =========================================================== */
-  const fab = $("#variantsFab");
-  const panel = $("#variantsPanel");
-  const STORE = "am-variants-2";
-
-  function applyStored() {
-    document.body.setAttribute("data-variant", "d2");
-    document.body.setAttribute("data-density", "comfortable");
-  }
-  function save() {
-    const v = {
-      variant: document.body.getAttribute("data-variant"),
-      density: document.body.getAttribute("data-density")
-    };
-    try { localStorage.setItem(STORE, JSON.stringify(v)); } catch (e) {}
-  }
-  function syncControls() {
-    $$(".vp-seg, .vp-swatches").forEach((group) => {
-      const prop = group.getAttribute("data-prop");
-      const cur = document.body.getAttribute("data-" + prop);
-      $$("button", group).forEach((b) => b.classList.toggle("active", b.getAttribute("data-val") === cur));
-    });
-  }
-  $$(".vp-seg, .vp-swatches").forEach((group) => {
-    const prop = group.getAttribute("data-prop");
-    $$("button", group).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.body.setAttribute("data-" + prop, btn.getAttribute("data-val"));
-        syncControls();
-        save();
-      });
-    });
-  });
-  function togglePanel(open) {
-    const show = open == null ? !panel.classList.contains("open") : open;
-    panel.classList.toggle("open", show);
-  }
-  fab.addEventListener("click", () => togglePanel());
-  $("#vpClose").addEventListener("click", () => togglePanel(false));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") togglePanel(false); });
-
-  applyStored();
 })();
