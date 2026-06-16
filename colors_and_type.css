@@ -34,13 +34,6 @@
 /* Museo Sans — secondary humanist sans for body copy, UI, captions. */
 @font-face {
   font-family: "Museo Sans";
-  src: url("fonts/MuseoSans-100.otf") format("opentype");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Museo Sans";
   src: url("fonts/MuseoSans-300.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
@@ -176,7 +169,7 @@
   --fs-body:      16px;
   --fs-body-lg:   18px;
   --fs-caption:   14px;
-  --fs-overline:  12px;
+  --fs-overline:  13px;
 
   --lh-tight:   1.05;
   --lh-snug:    1.2;
