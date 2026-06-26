@@ -336,6 +336,7 @@ body[data-density="compact"] .banner-obj { display: none; }
 .lb-text .banner-type { color: var(--accent-active); }
 .lb-text h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h3); color: var(--head); margin: 10px 0 12px; letter-spacing: -0.01em; }
 .lb-text p { margin: 0; color: var(--ink-2); font-size: var(--fs-body); line-height: 1.6; }
+.lb-obj p + p { margin-top: 0.9em; }
 .lb-close {
   position: absolute; top: 12px; right: 12px; z-index: 3; width: 36px; height: 36px;
   border-radius: var(--radius-2); border: 1px solid var(--line-strong); background: var(--cream-50); color: var(--plum);

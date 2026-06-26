@@ -5,89 +5,155 @@
    =========================================================== */
 
 /* Estado: "vigente" | "desarrollo"
+   orden: número de aparición en el sitio. Los proyectos "vigente" se
+          muestran primero, ordenados por este número; los "desarrollo"
+          van siempre al final, también ordenados entre sí por este número.
    thumb: tono del placeholder de captura → plum | ocean | olive | coral | sand
-   imgs: arreglo de rutas a capturas del proyecto (ej. ['assets/proyectos/x-1.jpg']).
+   imgs: arreglo de rutas a capturas del proyecto (ej. ['assets/proyectos/x-1.png']).
          La primera es la portada del banner; el lightbox las muestra todas en un pasador.
-         Si el arreglo está vacío, se muestra el marcador 'próximamente'. */
+         Si el arreglo está vacío, se muestra el marcador 'próximamente'.
+   sintesis: arreglo de párrafos que se muestra en la reseña (lightbox). */
 const PROYECTOS = [
   {
-    tipo: "Monitoreo",
-    titulo: "Monitoreo de aprendizajes en la educación parvularia",
-    objetivo: "Sistematiza evidencia sobre los aprendizajes de niñas y niños del nivel parvulario para apoyar las decisiones pedagógicas de los jardines infantiles del territorio.",
-    estado: "desarrollo",
-    thumb: "plum",
-    imgs: []
-  },
-  {
-    tipo: "Seguimiento",
-    titulo: "Seguimiento de trayectorias en la educación inicial",
-    objetivo: "Acompaña la trayectoria de las y los párvulos a lo largo del ciclo inicial, anticipando alertas tempranas de asistencia y continuidad educativa.",
-    estado: "vigente",
-    thumb: "ocean",
-    imgs: []
-  },
-  {
-    tipo: "Plataforma · CostaPresente",
-    titulo: "Seguimiento de trayectorias en establecimientos del SLEP",
-    objetivo: "Plataforma territorial que integra los indicadores de trayectoria educativa de las y los estudiantes de los 97 establecimientos del Servicio Local.",
-    estado: "vigente",
-    thumb: "plum",
-    imgs: []
-  },
-  {
+    orden: 1,
     tipo: "Minuta · Dirección Ejecutiva",
     titulo: "Minuta de asistencia mensual",
-    objetivo: "Reporte mensual de asistencia consolidado para la Dirección Ejecutiva, con foco en las variaciones por comuna, nivel y establecimiento.",
+    objetivo: "Reporte dirigido al Director Ejecutivo cuyo propósito es informar respecto a los principales indicadores que se desprenden de esta variable, segmentándola a nivel de territorio, comuna, tipo de enseñanza, establecimiento y nivel educativo.",
+    sintesis: [
+      "La asistencia escolar es uno de los principales barómetros de la trayectoria educativa de un estudiante. En este contexto, la minuta mensual de asistencia surge a partir de una necesidad concreta para la gestión del servicio educativo gestionado por el SLEP Costa Central en el territorio.",
+      "En este reporte, dirigido al Director Ejecutivo y construido a partir del análisis de los registros de asistencia diaria de cada estudiante del territorio, se le informa respecto a los principales indicadores que se desprenden de esta variable, segmentándola a nivel de territorio, comuna, tipo de enseñanza, establecimiento y nivel educativo, entre otros. Contiene una selección de alertas de inasistencia priorizadas para la toma de decisiones, así como una proyección de la asistencia anual basada en años anteriores."
+    ],
     estado: "vigente",
     thumb: "olive",
     imgs: []
   },
   {
-    tipo: "Minuta · Dirección Ejecutiva",
-    titulo: "Minutas de resultados Simce",
-    objetivo: "Síntesis interpretada de los resultados Simce del territorio para apoyar la planificación estratégica de la Dirección Ejecutiva.",
+    orden: 2,
+    tipo: "Reporte · Directores/as",
+    titulo: "Reportes del Modelo de Resguardo de la Asistencia Educativa del Territorio",
+    objetivo: "Dirigido a cada director y directora de los establecimientos del SLEP Costa Central, este reporte entrega información pertinente, oportuna, precisa y accionable sobre la asistencia de su unidad educativa. Tiene una frecuencia mensual e incluye, además de indicadores con distintos grados de segmentación, el detalle de cada estudiante que gatilla una de las alertas definidas como críticas para el resguardo de su trayectoria educativa.",
+    sintesis: [
+      "El Plan para el Fortalecimiento de la Asistencia Educativa del SLEP Costa Central fija como uno de sus objetivos establecer un marco institucional de trabajo en materia de asistencia para todos los establecimientos del territorio. Lo anterior se materializa a través del Modelo de Resguardo de la Asistencia Educativa del Territorio, el cual, además de orientaciones, planes de acción y actividades de socialización, evaluación y mejora, tiene como uno de sus componentes un reporte sobre esta temática dirigido a todos los directores y directoras del SLEP.",
+      "Este reporte entrega información pertinente, oportuna, precisa y accionable sobre la asistencia de cada establecimiento. Tiene una frecuencia mensual e incluye, además de indicadores con distintos grados de segmentación, el detalle de cada estudiante que gatilla una de las alertas definidas como críticas para el resguardo de su trayectoria educativa."
+    ],
     estado: "vigente",
-    thumb: "ocean",
+    thumb: "plum",
     imgs: []
   },
   {
-    tipo: "Minuta · Dirección Ejecutiva",
-    titulo: "Minuta sobre la desvinculación de estudiantes",
-    objetivo: "Analiza la desvinculación y el abandono escolar para orientar acciones de retención y revinculación educativa en las comunidades.",
+    orden: 3,
+    tipo: "Motor de comparación",
+    titulo: "Motor de comparación interactivo de los resultados de los estándares de aprendizaje medidos por las pruebas Simce",
+    objetivo: "Herramienta interactiva que organiza los resultados actuales e históricos de los estándares de aprendizaje medidos a través de las pruebas Simce, a escala nacional, permitiendo navegarlos por establecimiento, comuna, SLEP, región y nivel nacional, a lo largo de todos los años para los cuales existen resultados.",
+    sintesis: [
+      "Desarrollamos un motor de comparación interactivo de los resultados de las pruebas Simce expresados según los estándares de aprendizaje, que clasifican el logro de los estudiantes en tres niveles: Adecuado, Elemental e Insuficiente.",
+      "La herramienta organiza esta información a escala nacional, ponderando los resultados de cada prueba según el número de estudiantes que la rindió, permitiendo recorrer los resultados por establecimiento, comuna, SLEP, región y nivel nacional, a lo largo de todos los años para los cuales existen resultados.",
+      "Su pantalla única de visualización pone especial atención en el nivel Adecuado (el más exigente) como indicador de logro, con la mirada puesta en cómo evoluciona en cada territorio y cómo se compara entre grupos socioeconómicos equivalentes."
+    ],
+    estado: "vigente",
+    thumb: "sand",
+    imgs: []
+  },
+  {
+    orden: 4,
+    tipo: "Motor de comparación",
+    titulo: "Motor de comparación interactivo de los resultados en los Indicadores de Desarrollo Personal y Social (IDPS)",
+    objetivo: "Desarrollamos un motor de comparación interactivo que organiza y visualiza los resultados de los Indicadores de Desarrollo Personal y Social (IDPS) de todo el país y desde el inicio de su medición. De esta forma, es posible navegar por los resultados actuales e históricos de un establecimiento, además de explorar uno o múltiples territorios de manera simultánea y comparativa.",
+    sintesis: [
+      "Los Indicadores de Desarrollo Personal y Social (IDPS) que la Agencia mide junto al Simce capturan aspectos que, si bien están planteados como no estrictamente académicos, resultan fundamentales para comprender de manera integral la experiencia educativa de los estudiantes. Estos indicadores (autoestima académica y motivación, clima de convivencia, participación y formación ciudadana, y hábitos de vida saludable) sirven de barómetro para leer en contexto los resultados de las pruebas académicas del Simce.",
+      "Para analizar estos resultados, desarrollamos un motor de comparación interactivo que organiza y visualiza los resultados de todo el país y desde el inicio de su medición, a través del cual es posible navegar por los resultados actuales e históricos de un establecimiento, además de explorar uno o múltiples territorios de manera simultánea y comparativa."
+    ],
     estado: "vigente",
     thumb: "coral",
     imgs: []
   },
   {
-    tipo: "Reporte · Directores/as",
-    titulo: "Reportes del modelo de resguardo de la asistencia",
-    objetivo: "Reportes dirigidos a directoras y directores que identifican estudiantes en riesgo por inasistencia, según el modelo de resguardo de la asistencia.",
+    orden: 5,
+    tipo: "Motor de comparación",
+    titulo: "Motor de comparación interactivo de la Categoría de Desempeño de los establecimientos educacionales del país",
+    objetivo: "Desarrollamos un motor de comparación interactivo para las Categorías de Desempeño, uno de los componentes clave del Sistema de Aseguramiento de la Calidad de la Educación. Esta herramienta organiza la información en torno a este ordenamiento a escala nacional y permite explorarla de manera desagregada por comuna, SLEP y región.",
+    sintesis: [
+      "Las Categorías de Desempeño son uno de los componentes clave del Sistema de Aseguramiento de la Calidad de la Educación. Esta ordenación evalúa a cada establecimiento bajo un modelo de rendimiento ajustado al contexto, el cual cruza sus resultados educativos y formativos con el perfil de vulnerabilidad de sus estudiantes para determinar qué tan cerca o lejos están de lo esperado.",
+      "Para facilitar el análisis de estos datos, desarrollamos una herramienta interactiva que organiza la información a escala nacional y permite explorarla de manera dinámica por comuna, Servicio Local de Educación Pública (SLEP), región y nivel país, distinguiendo con precisión la educación básica de la media. Su aporte es ofrecer, en una sola herramienta, dos lecturas complementarias: la distribución de los establecimientos por categoría en cada territorio y la evolución de cada establecimiento en el tiempo. Como la Categoría de Desempeño ya incorpora el contexto socioeconómico en su construcción, el motor presenta las clasificaciones tal como las publica la Agencia de Calidad de la Educación, sin segmentaciones adicionales."
+    ],
+    estado: "vigente",
+    thumb: "ocean",
+    imgs: []
+  },
+  {
+    orden: 6,
+    tipo: "Monitoreo",
+    titulo: "Monitoreo de aprendizajes en la educación parvularia",
+    objetivo: "Sistema que organiza las evaluaciones realizadas por las educadoras de los jardines infantiles del territorio y los presenta en informes interactivos, segmentados por momento evaluativo y niveles de agrupación que van desde todo el territorio hasta cada párvulo.",
+    sintesis: [
+      "En conjunto con la coordinación de Educación Parvularia del Área de Mejora Continua y siguiendo los principios de las Bases Curriculares de la Educación Parvularia vigentes, construimos un sistema de monitoreo de aprendizajes para la educación inicial del SLEP Costa Central. Este sistema organiza las evaluaciones realizadas por las educadoras por ámbito, núcleo y objetivo de aprendizaje y los presenta en informes interactivos que permiten segmentar los resultados por momento evaluativo (diagnóstico, primer semestre y segundo semestre) y diversos niveles de agrupación (territorio, jardín infantil, educadora y párvulo).",
+      "Su aporte es hacer visible, en un mismo lugar, la cobertura curricular y el logro de los objetivos de aprendizaje a lo largo de los tres momentos de evaluación del año, lo que permite realizar un seguimiento longitudinal y una priorización pedagógica pertinente y oportuna para cada nivel de la educación inicial."
+    ],
     estado: "vigente",
     thumb: "plum",
     imgs: []
   },
   {
-    tipo: "Motor de comparación",
-    titulo: "Comparación de resultados nacionales en los Estándares de Aprendizaje",
-    objetivo: "Herramienta que contrasta los Estándares de Aprendizaje del territorio con referencias nacionales para situar los resultados en contexto.",
-    estado: "desarrollo",
-    thumb: "sand",
-    imgs: []
-  },
-  {
-    tipo: "Motor de comparación",
-    titulo: "Comparación de categorías de desempeño a nivel nacional",
-    objetivo: "Compara las Categorías de Desempeño de los establecimientos del Servicio Local con el panorama nacional para identificar brechas y fortalezas.",
-    estado: "desarrollo",
+    orden: 7,
+    tipo: "Análisis longitudinal",
+    titulo: "Análisis longitudinal de preferencias de matrícula de egresados de jardines infantiles",
+    objetivo: "¿Hacia dónde continúan su escolaridad los niños y niñas que egresan de nuestros jardines infantiles? Desarrollamos un sistema de análisis longitudinal que sigue, cohorte a cohorte, dónde eligen matricularse quienes egresan de los jardines infantiles del territorio.",
+    sintesis: [
+      "Para los párvulos y sus familias, las transiciones entre los niveles iniciales son momentos clave de su trayectoria educativa. Para un sostenedor, esta información es un insumo estratégico para la toma de decisiones en torno a las proyecciones del servicio educativo que ofrece.",
+      "A partir de la sistematización y análisis de las preferencias de matrícula de los egresados de jardines infantiles del SLEP Costa Central, identificamos y visualizamos los itinerarios de los párvulos desde los niveles medios hacia los niveles de transición en las escuelas. El resultado es una aplicación interactiva con diagramas de flujo y tablas comparativas que permiten cuantificar el número de niños y niñas que permanecen en nuestras comunidades, cuántos migran a establecimientos de otros sostenedores y cuántos no se logran localizar. Su aporte es ofrecer al territorio una mirada de la continuidad de las trayectorias en un tramo crítico, con información útil para decisiones de oferta y de captación."
+    ],
+    estado: "vigente",
     thumb: "ocean",
     imgs: []
   },
   {
-    tipo: "Reporte AEL",
-    titulo: "Reporte de Análisis del Entorno y los Logros (AEL)",
-    objetivo: "Consolida indicadores de aprendizaje, asistencia y aprobación por establecimiento para nutrir los ciclos de mejora de cada comunidad educativa.",
+    orden: 8,
+    tipo: "Plataforma · CostaPresente",
+    titulo: "CostaPresente",
+    objetivo: "Sistema que, de forma similar a la plataforma ministerial ChilePresente, permite realizar un seguimiento preciso de las trayectorias de los estudiantes que alguna vez han estado matriculados en alguno de los establecimientos del SLEP Costa Central.",
+    sintesis: [
+      "CostaPresente nace para apoyar el seguimiento de las trayectorias escolares de los estudiantes que, en algún momento de los últimos años, han pasado por algún establecimiento del SLEP Costa Central. A partir de registros mensuales de asistencia reconstruye, para cada estudiante, dónde ha estado matriculado y cómo ha evolucionado su escolaridad en términos de asistencia, promoción y retiros."
+    ],
+    estado: "vigente",
+    thumb: "plum",
+    imgs: []
+  },
+  {
+    orden: 9,
+    tipo: "Sistema de alertas",
+    titulo: "Sistema de alertas de Anótate en la Lista",
+    objetivo: "El sistema de alertas de Anótate en la Lista (AEL) identifica los establecimientos con vacantes sin asignar y prepara una comunicación personalizada para cada director o directora. Este mensaje incluye, para cada nivel del establecimiento, los cupos declarados, la matrícula actual y las vacantes sin asignar.",
+    sintesis: [
+      "El sistema de alertas de Anótate en la Lista (AEL) automatiza una tarea recurrente del trabajo de monitoreo de listas de espera: avisar a los establecimientos del territorio cuando registran vacantes sin asignar en AEL, que canaliza la búsqueda de cupos y matrícula. A partir del reporte quincenal que emite la Dirección de Educación Pública (DEP) a partir de los datos del Mineduc, el sistema identifica los establecimientos con vacantes y lista de espera y prepara, para cada uno, una comunicación personalizada lista para enviar a cada director o directora. Este mensaje incluye, para cada nivel del establecimiento, los cupos declarados, la matrícula actual y las vacantes sin asignar."
+    ],
     estado: "vigente",
     thumb: "olive",
+    imgs: []
+  },
+  {
+    orden: 10,
+    tipo: "Minuta · Dirección Ejecutiva",
+    titulo: "Análisis de trayectorias educativas interrumpidas",
+    objetivo: "Reporte dirigido al Director Ejecutivo cuyo propósito es informar respecto al comportamiento de la desvinculación (o abandono) escolar en el territorio, mediante el uso de modelos de alerta temprana y la priorización de los establecimientos según el nivel de riesgo de desvinculación de sus estudiantes.",
+    sintesis: [
+      "La desvinculación escolar, entendida como la interrupción de la trayectoria educativa de un estudiante, es uno de los fenómenos más sensibles para un servicio educativo y, habitualmente, se aborda cuando ya ha ocurrido. Para revertir esta lógica, este reporte analiza las trayectorias interrumpidas e irregulares de los estudiantes del SLEP Costa Central con el fin de caracterizar este fenómeno en el territorio y, fundamentalmente, anticipar su ocurrencia.",
+      "Este documento, dirigido al Director Ejecutivo, se alimenta de los “Reportes para el seguimiento de estudiantes con trayectorias interrumpidas o irregulares” que el Centro de Estudios del Mineduc (CEM) presenta con regularidad trimestral. A partir de su procesamiento y cruce con los datos de asistencia diaria, además de otras variables sociodemográficas, se generan alertas tempranas orientadas a la acción, permitiendo la identificación de cohortes vulnerables, la priorización de establecimientos educacionales según su nivel de riesgo y la presentación de evidencia clave para el diseño de estrategias de intervención."
+    ],
+    estado: "desarrollo",
+    thumb: "coral",
+    imgs: []
+  },
+  {
+    orden: 11,
+    tipo: "Diagnóstico",
+    titulo: "Diagnóstico histórico del rendimiento escolar",
+    objetivo: "Diagnóstico longitudinal y multidimensional de las bases de rendimiento escolar del Mineduc (2002-2025) con el propósito de caracterizar las trayectorias educativas de los estudiantes de los establecimientos educacionales del SLEP Costa Central y cuantificar las variaciones en las tasas de promoción y reprobación.",
+    sintesis: [
+      "Diagnóstico longitudinal y multidimensional de las bases de rendimiento escolar del Mineduc (2002-2025) con el propósito de caracterizar las trayectorias educativas de los estudiantes de los establecimientos educacionales del SLEP Costa Central y cuantificar las variaciones en las tasas de promoción y reprobación.",
+      "Al vincular estas variables de resultado con la caracterización socioeducativa del estudiante (sexo registral, edad, país de origen, pertenencia a pueblos originarios y condición de alumno integrado, entre otras) y con las particularidades de los establecimientos (emplazamiento rural o urbano, tipos de enseñanza y régimen de jornada, entre otros), buscamos identificar brechas de equidad intra-territoriales, contrastar el desempeño del SLEP frente a otros territorios de la Región de Valparaíso y el nivel nacional y modelar sistemas de alerta temprana basados en la asistencia crónica y el rendimiento académico, para focalizar de forma oportuna y precisa los recursos pedagógicos y de apoyo psicosocial."
+    ],
+    estado: "desarrollo",
+    thumb: "sand",
     imgs: []
   }
 ];

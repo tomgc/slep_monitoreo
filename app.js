@@ -65,9 +65,11 @@
 
   function renderBanners() {
     bannerList.innerHTML = "";
-    var order = { vigente: 0, desarrollo: 1 };
+    var grupo = { vigente: 0, desarrollo: 1 };
     var list = PROYECTOS.slice().sort(function (a, b) {
-      return (order[a.estado] || 0) - (order[b.estado] || 0);
+      var g = (grupo[a.estado] || 0) - (grupo[b.estado] || 0);
+      if (g !== 0) return g;
+      return (a.orden || 0) - (b.orden || 0);
     });
     list.forEach((p, i) => bannerList.appendChild(bannerEl(p, i)));
   }
@@ -135,7 +137,10 @@
   function openLightbox(p) {
     $("#lbType").textContent = p.tipo;
     $("#lbTitle").textContent = p.titulo;
-    $("#lbObj").textContent = p.objetivo;
+    const lbObj = $("#lbObj");
+    lbObj.innerHTML = "";
+    const parrafos = (p.sintesis && p.sintesis.length) ? p.sintesis : [p.objetivo];
+    parrafos.forEach((txt) => lbObj.appendChild(el("p", null, esc(txt))));
     buildGallery(p);
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
