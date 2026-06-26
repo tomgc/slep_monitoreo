@@ -87,6 +87,61 @@
   const lbNext = $("#lbNext");
   let lbIndex = 0;
 
+  /* visor full-res: overlay propio, creado una vez y reutilizado */
+  let fsShots = [];      // capturas del proyecto abierto (sin placeholder)
+  let fsAlt = "";
+  const fsViewer = el("div", "lb-full");
+  fsViewer.setAttribute("aria-hidden", "true");
+  const fsImg = el("img");
+  const fsClose = el("button", "lb-full-close", "&times;");
+  fsClose.setAttribute("type", "button");
+  fsClose.setAttribute("aria-label", "Cerrar imagen");
+  const fsPrev = el("button", "lb-full-nav prev", "&#8249;");
+  fsPrev.setAttribute("type", "button");
+  fsPrev.setAttribute("aria-label", "Captura anterior");
+  const fsNext = el("button", "lb-full-nav next", "&#8250;");
+  fsNext.setAttribute("type", "button");
+  fsNext.setAttribute("aria-label", "Captura siguiente");
+  fsViewer.appendChild(fsImg);
+  fsViewer.appendChild(fsPrev);
+  fsViewer.appendChild(fsNext);
+  fsViewer.appendChild(fsClose);
+  document.body.appendChild(fsViewer);
+
+  function fsRender() {
+    const n = fsShots.length;
+    const single = n <= 1;
+    fsImg.src = fsShots[lbIndex];
+    fsImg.alt = fsAlt;
+    fsPrev.hidden = single;
+    fsNext.hidden = single;
+    fsPrev.disabled = lbIndex === 0;
+    fsNext.disabled = lbIndex === n - 1;
+  }
+  function fsGo(delta) {
+    const n = fsShots.length;
+    lbIndex = Math.max(0, Math.min(n - 1, lbIndex + delta));
+    fsRender();   // mueve el visor full-res
+    lbRender();   // y sincroniza el slide de fondo
+  }
+  function openFull(i) {
+    lbIndex = i;
+    fsRender();
+    lbRender();
+    fsViewer.classList.add("open");
+    fsViewer.setAttribute("aria-hidden", "false");
+    fsClose.focus();
+  }
+  function closeFull() {
+    fsViewer.classList.remove("open");
+    fsViewer.setAttribute("aria-hidden", "true");
+    fsImg.removeAttribute("src");
+  }
+  fsClose.addEventListener("click", closeFull);
+  fsPrev.addEventListener("click", () => fsGo(-1));
+  fsNext.addEventListener("click", () => fsGo(1));
+  fsViewer.addEventListener("click", (e) => { if (e.target === fsViewer) closeFull(); });
+
   function lbRender() {
     const slides = $$(".lb-slide", lbStage);
     const dots = $$(".lb-dot", lbDots);
@@ -112,6 +167,8 @@
     lbDots.innerHTML = "";
     lbIndex = 0;
     const shots = (p.imgs && p.imgs.length) ? p.imgs : [null];
+    fsShots = (p.imgs && p.imgs.length) ? p.imgs.slice() : [];
+    fsAlt = p.titulo;
     shots.forEach((shot, i) => {
       let slide;
       if (shot) {
@@ -119,6 +176,7 @@
         slide.src = shot;
         slide.alt = p.titulo;
         slide.loading = "lazy";
+        slide.addEventListener("click", () => openFull(i));
       } else {
         slide = el("div", "lb-slide lb-ph", "<span>Reseña del producto · próximamente</span>");
       }
@@ -155,6 +213,12 @@
   lbNext.addEventListener("click", () => lbGo(1));
   lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener("keydown", (e) => {
+    if (fsViewer.classList.contains("open")) {
+      if (e.key === "Escape") { e.stopPropagation(); closeFull(); }
+      else if (e.key === "ArrowLeft") fsGo(-1);
+      else if (e.key === "ArrowRight") fsGo(1);
+      return;
+    }
     if (!lightbox.classList.contains("open")) return;
     if (e.key === "Escape") closeLightbox();
     else if (e.key === "ArrowLeft") lbGo(-1);
