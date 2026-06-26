@@ -8,7 +8,6 @@
    orden: número de aparición en el sitio. Los proyectos "vigente" se
           muestran primero, ordenados por este número; los "desarrollo"
           van siempre al final, también ordenados entre sí por este número.
-   thumb: tono del placeholder de captura → plum | ocean | olive | coral | sand
    imgs: arreglo de rutas a capturas del proyecto (ej. ['assets/proyectos/x-1.png']).
          La primera es la portada del banner; el lightbox las muestra todas en un pasador.
          Si el arreglo está vacío, se muestra el marcador 'próximamente'.
@@ -24,7 +23,6 @@ const PROYECTOS = [
       "En este reporte, dirigido al Director Ejecutivo y construido a partir del análisis de los registros de asistencia diaria de cada estudiante del territorio, se le informa respecto a los principales indicadores que se desprenden de esta variable, segmentándola a nivel de territorio, comuna, tipo de enseñanza, establecimiento y nivel educativo, entre otros. Contiene una selección de alertas de inasistencia priorizadas para la toma de decisiones, así como una proyección de la asistencia anual basada en años anteriores."
     ],
     estado: "vigente",
-    thumb: "olive",
     imgs: [
       "assets/proyectos/asistencia-1.png",
       "assets/proyectos/asistencia-2.png",
@@ -42,7 +40,6 @@ const PROYECTOS = [
       "Este reporte entrega información pertinente, oportuna, precisa y accionable sobre la asistencia de cada establecimiento. Tiene una frecuencia mensual e incluye, además de indicadores con distintos grados de segmentación, el detalle de cada estudiante que gatilla una de las alertas definidas como críticas para el resguardo de su trayectoria educativa."
     ],
     estado: "vigente",
-    thumb: "plum",
     imgs: [
       "assets/proyectos/resguardo-1.png",
       "assets/proyectos/resguardo-2.png",
@@ -61,7 +58,6 @@ const PROYECTOS = [
       "Su pantalla única de visualización pone especial atención en el nivel Adecuado (el más exigente) como indicador de logro, con la mirada puesta en cómo evoluciona en cada territorio y cómo se compara entre grupos socioeconómicos equivalentes."
     ],
     estado: "vigente",
-    thumb: "sand",
     imgs: [
       "assets/proyectos/estandares-1.png",
       "assets/proyectos/estandares-2.png",
@@ -78,7 +74,6 @@ const PROYECTOS = [
       "Para analizar estos resultados, desarrollamos un motor de comparación interactivo que organiza y visualiza los resultados de todo el país y desde el inicio de su medición, a través del cual es posible navegar por los resultados actuales e históricos de un establecimiento, además de explorar uno o múltiples territorios de manera simultánea y comparativa."
     ],
     estado: "vigente",
-    thumb: "coral",
     imgs: [
       "assets/proyectos/idps-1.png",
       "assets/proyectos/idps-2.png",
@@ -96,7 +91,6 @@ const PROYECTOS = [
       "Para facilitar el análisis de estos datos, desarrollamos una herramienta interactiva que organiza la información a escala nacional y permite explorarla de manera dinámica por comuna, Servicio Local de Educación Pública (SLEP), región y nivel país, distinguiendo con precisión la educación básica de la media. Su aporte es ofrecer, en una sola herramienta, dos lecturas complementarias: la distribución de los establecimientos por categoría en cada territorio y la evolución de cada establecimiento en el tiempo. Como la Categoría de Desempeño ya incorpora el contexto socioeconómico en su construcción, el motor presenta las clasificaciones tal como las publica la Agencia de Calidad de la Educación, sin segmentaciones adicionales."
     ],
     estado: "vigente",
-    thumb: "ocean",
     imgs: [
       "assets/proyectos/categorias-1.png",
       "assets/proyectos/categorias-2.png",
@@ -113,7 +107,6 @@ const PROYECTOS = [
       "Su aporte es hacer visible, en un mismo lugar, la cobertura curricular y el logro de los objetivos de aprendizaje a lo largo de los tres momentos de evaluación del año, lo que permite realizar un seguimiento longitudinal y una priorización pedagógica pertinente y oportuna para cada nivel de la educación inicial."
     ],
     estado: "vigente",
-    thumb: "plum",
     imgs: [
       "assets/proyectos/parvularia-1.png",
       "assets/proyectos/parvularia-2.png",
@@ -130,7 +123,6 @@ const PROYECTOS = [
       "A partir de la sistematización y análisis de las preferencias de matrícula de los egresados de jardines infantiles del SLEP Costa Central, identificamos y visualizamos los itinerarios de los párvulos desde los niveles medios hacia los niveles de transición en las escuelas. El resultado es una aplicación interactiva con diagramas de flujo y tablas comparativas que permiten cuantificar el número de niños y niñas que permanecen en nuestras comunidades, cuántos migran a establecimientos de otros sostenedores y cuántos no se logran localizar. Su aporte es ofrecer al territorio una mirada de la continuidad de las trayectorias en un tramo crítico, con información útil para decisiones de oferta y de captación."
     ],
     estado: "vigente",
-    thumb: "ocean",
     imgs: [
       "assets/proyectos/inicial-1.png",
       "assets/proyectos/inicial-2.png",
@@ -146,7 +138,6 @@ const PROYECTOS = [
       "CostaPresente nace para apoyar el seguimiento de las trayectorias escolares de los estudiantes que, en algún momento de los últimos años, han pasado por algún establecimiento del SLEP Costa Central. A partir de registros mensuales de asistencia reconstruye, para cada estudiante, dónde ha estado matriculado y cómo ha evolucionado su escolaridad en términos de asistencia, promoción y retiros."
     ],
     estado: "vigente",
-    thumb: "plum",
     imgs: [
       "assets/proyectos/costapresente-1.png"
     ]
@@ -160,7 +151,6 @@ const PROYECTOS = [
       "El sistema de alertas de Anótate en la Lista (AEL) automatiza una tarea recurrente del trabajo de monitoreo de listas de espera: avisar a los establecimientos del territorio cuando registran vacantes sin asignar en AEL, que canaliza la búsqueda de cupos y matrícula. A partir del reporte quincenal que emite la Dirección de Educación Pública (DEP) a partir de los datos del Mineduc, el sistema identifica los establecimientos con vacantes y lista de espera y prepara, para cada uno, una comunicación personalizada lista para enviar a cada director o directora. Este mensaje incluye, para cada nivel del establecimiento, los cupos declarados, la matrícula actual y las vacantes sin asignar."
     ],
     estado: "vigente",
-    thumb: "olive",
     imgs: [
       "assets/proyectos/ael-1.png"
     ]
@@ -175,7 +165,6 @@ const PROYECTOS = [
       "Este documento, dirigido al Director Ejecutivo, se alimenta de los “Reportes para el seguimiento de estudiantes con trayectorias interrumpidas o irregulares” que el Centro de Estudios del Mineduc (CEM) presenta con regularidad trimestral. A partir de su procesamiento y cruce con los datos de asistencia diaria, además de otras variables sociodemográficas, se generan alertas tempranas orientadas a la acción, permitiendo la identificación de cohortes vulnerables, la priorización de establecimientos educacionales según su nivel de riesgo y la presentación de evidencia clave para el diseño de estrategias de intervención."
     ],
     estado: "desarrollo",
-    thumb: "coral",
     imgs: []
   },
   {
@@ -188,7 +177,6 @@ const PROYECTOS = [
       "Al vincular estas variables de resultado con la caracterización socioeducativa del estudiante (sexo registral, edad, país de origen, pertenencia a pueblos originarios y condición de alumno integrado, entre otras) y con las particularidades de los establecimientos (emplazamiento rural o urbano, tipos de enseñanza y régimen de jornada, entre otros), buscamos identificar brechas de equidad intra-territoriales, contrastar el desempeño del SLEP frente a otros territorios de la Región de Valparaíso y el nivel nacional y modelar sistemas de alerta temprana basados en la asistencia crónica y el rendimiento académico, para focalizar de forma oportuna y precisa los recursos pedagógicos y de apoyo psicosocial."
     ],
     estado: "desarrollo",
-    thumb: "sand",
     imgs: []
   }
 ];
