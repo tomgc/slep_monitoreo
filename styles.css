@@ -84,6 +84,7 @@ body[data-variant="d5"] .eyebrow { justify-content: center; }
 @media (max-width: 720px){ .shell { padding: 0 22px; } }
 
 .section { padding: 48px 0; }
+.section[hidden] { display: none; }
 .section--alt { background: var(--page-alt); }
 #trayectoria .section-head { max-width: none; }
 #trayectoria .section-lede { max-width: none; font-size: var(--fs-caption); letter-spacing: -0.003em; }
