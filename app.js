@@ -56,10 +56,6 @@
     node.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(p); }
     });
-    // evitar que un clic sobre el área de imagen dispare el lightbox dos veces
-    const mediaEl = node.querySelector(".banner-media");
-    ["click", "mousedown", "keydown"].forEach((ev) =>
-      mediaEl.addEventListener(ev, (e) => e.stopPropagation()));
     return node;
   }
 
