@@ -25,7 +25,12 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "olive",
-    imgs: []
+    imgs: [
+      "assets/proyectos/asistencia-1.png",
+      "assets/proyectos/asistencia-2.png",
+      "assets/proyectos/asistencia-3.png",
+      "assets/proyectos/asistencia-4.png"
+    ]
   },
   {
     orden: 2,
@@ -38,7 +43,12 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "plum",
-    imgs: []
+    imgs: [
+      "assets/proyectos/resguardo-1.png",
+      "assets/proyectos/resguardo-2.png",
+      "assets/proyectos/resguardo-3.png",
+      "assets/proyectos/resguardo-4.png"
+    ]
   },
   {
     orden: 3,
@@ -52,7 +62,11 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "sand",
-    imgs: []
+    imgs: [
+      "assets/proyectos/estandares-1.png",
+      "assets/proyectos/estandares-2.png",
+      "assets/proyectos/estandares-3.png"
+    ]
   },
   {
     orden: 4,
@@ -65,7 +79,12 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "coral",
-    imgs: []
+    imgs: [
+      "assets/proyectos/idps-1.png",
+      "assets/proyectos/idps-2.png",
+      "assets/proyectos/idps-3.png",
+      "assets/proyectos/idps-4.png"
+    ]
   },
   {
     orden: 5,
@@ -78,7 +97,11 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "ocean",
-    imgs: []
+    imgs: [
+      "assets/proyectos/categorias-1.png",
+      "assets/proyectos/categorias-2.png",
+      "assets/proyectos/categorias-3.png"
+    ]
   },
   {
     orden: 6,
@@ -91,7 +114,11 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "plum",
-    imgs: []
+    imgs: [
+      "assets/proyectos/parvularia-1.png",
+      "assets/proyectos/parvularia-2.png",
+      "assets/proyectos/parvularia-3.png"
+    ]
   },
   {
     orden: 7,
@@ -104,7 +131,11 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "ocean",
-    imgs: []
+    imgs: [
+      "assets/proyectos/inicial-1.png",
+      "assets/proyectos/inicial-2.png",
+      "assets/proyectos/inicial-3.png"
+    ]
   },
   {
     orden: 8,
@@ -116,7 +147,9 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "plum",
-    imgs: []
+    imgs: [
+      "assets/proyectos/costapresente-1.png"
+    ]
   },
   {
     orden: 9,
@@ -128,7 +161,9 @@ const PROYECTOS = [
     ],
     estado: "vigente",
     thumb: "olive",
-    imgs: []
+    imgs: [
+      "assets/proyectos/ael-1.png"
+    ]
   },
   {
     orden: 10,
