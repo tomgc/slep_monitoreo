@@ -46,6 +46,17 @@
   font-style: normal;
   font-display: swap;
 }
+/* Museo Sans no tiene face 400 propia. Mapeo explícito del peso 400
+   al .otf 500 para eliminar la resolución silenciosa por font-matching
+   (antes, todo font-weight: 400 sobre --font-body caía a 500 sin control).
+   Revertir si más adelante se incorpora MuseoSans_400.otf real. */
+@font-face {
+  font-family: "Museo Sans";
+  src: url("fonts/MuseoSans_500.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: "Museo Sans";
   src: url("fonts/MuseoSans_700.otf") format("opentype");
