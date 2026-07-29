@@ -49,6 +49,21 @@ const PROYECTOS = [
   },
   {
     orden: 3,
+    tipo: "Minuta · Resultados Simce",
+    titulo: "Minutas de resultados Simce 2025 del territorio",
+    objetivo: "Serie de tres minutas que sistematiza los resultados del Simce 2025 de los establecimientos educacionales del SLEP Costa Central. Cada minuta aborda un ámbito distinto de la entrega de la Agencia de Calidad de la Educación: la variación de los puntajes, la distribución de los estudiantes en los Estándares de Aprendizaje y el comportamiento de los Indicadores de Desarrollo Personal y Social (IDPS).",
+    sintesis: [
+      "La Agencia de Calidad de la Educación publicó en marzo de 2026 los resultados del Simce 2025, aplicado a estudiantes de 4° básico, 8° básico y 2° medio. Contar con estos datos al inicio del año escolar abre una ventana breve para convertirlos en decisiones pedagógicas. Para aprovecharla, elaboramos una serie de tres minutas que traduce la entrega nacional a la escala del territorio y a las preguntas que efectivamente se hace el Servicio.",
+      "La primera minuta presenta el panorama de los establecimientos educacionales del territorio según la variación de sus puntajes en las pruebas de Lectura y Matemática de 4° básico y 2° medio, distinguiendo qué establecimientos mejoraron o retrocedieron de forma estadísticamente significativa respecto de la aplicación anterior y cómo se comparan con su grupo socioeconómico (GSE) de referencia.",
+      "La segunda minuta profundiza en los Estándares de Aprendizaje, que clasifican el logro de los estudiantes en tres niveles (Adecuado, Elemental e Insuficiente). Presenta la distribución de estudiantes por establecimiento educacional, segmentada por GSE y contrastada con la medición anterior, poniendo el foco en la proporción que alcanza el nivel Adecuado como indicador de logro.",
+      "La tercera minuta cubre los Indicadores de Desarrollo Personal y Social (autoestima académica y motivación escolar, clima de convivencia escolar, participación y formación ciudadana, y hábitos de vida saludable), consolidando los cuatro indicadores en una sola vista por establecimiento educacional para identificar cambios transversales y perfiles heterogéneos.",
+      "En conjunto, la serie entrega al Servicio una lectura completa y comparable de sus resultados, con las precauciones metodológicas declaradas de forma explícita, de modo que la conversación con cada comunidad educativa parta de evidencia común."
+    ],
+    estado: "vigente",
+    imgs: []
+  },
+  {
+    orden: 4,
     tipo: "Motor de comparación",
     titulo: "Motor de comparación interactivo de los resultados de los estándares de aprendizaje medidos por las pruebas Simce",
     objetivo: "Herramienta interactiva que organiza los resultados actuales e históricos de los estándares de aprendizaje medidos a través de las pruebas Simce, a escala nacional, permitiendo navegarlos por establecimiento, comuna, SLEP, región y nivel nacional, a lo largo de todos los años para los cuales existen resultados.",
@@ -65,7 +80,7 @@ const PROYECTOS = [
     ]
   },
   {
-    orden: 4,
+    orden: 5,
     tipo: "Motor de comparación",
     titulo: "Motor de comparación interactivo de los resultados en los Indicadores de Desarrollo Personal y Social (IDPS)",
     objetivo: "Desarrollamos un motor de comparación interactivo que organiza y visualiza los resultados de los Indicadores de Desarrollo Personal y Social (IDPS) de todo el país y desde el inicio de su medición. De esta forma, es posible navegar por los resultados actuales e históricos de un establecimiento, además de explorar uno o múltiples territorios de manera simultánea y comparativa.",
@@ -82,7 +97,7 @@ const PROYECTOS = [
     ]
   },
   {
-    orden: 5,
+    orden: 6,
     tipo: "Motor de comparación",
     titulo: "Motor de comparación interactivo de la Categoría de Desempeño de los establecimientos educacionales del país",
     objetivo: "Desarrollamos un motor de comparación interactivo para las Categorías de Desempeño, uno de los componentes clave del Sistema de Aseguramiento de la Calidad de la Educación. Esta herramienta organiza la información en torno a este ordenamiento a escala nacional y permite explorarla de manera desagregada por comuna, SLEP y región.",
@@ -98,7 +113,7 @@ const PROYECTOS = [
     ]
   },
   {
-    orden: 6,
+    orden: 7,
     tipo: "Monitoreo",
     titulo: "Monitoreo de aprendizajes en la educación parvularia",
     objetivo: "Sistema que organiza las evaluaciones realizadas por las educadoras de los jardines infantiles del territorio y los presenta en informes interactivos, segmentados por momento evaluativo y niveles de agrupación que van desde todo el territorio hasta cada párvulo.",
@@ -114,7 +129,7 @@ const PROYECTOS = [
     ]
   },
   {
-    orden: 7,
+    orden: 8,
     tipo: "Análisis longitudinal",
     titulo: "Análisis longitudinal de preferencias de matrícula de egresados de jardines infantiles",
     objetivo: "¿Hacia dónde continúan su escolaridad los niños y niñas que egresan de nuestros jardines infantiles? Desarrollamos un sistema de análisis longitudinal que sigue, cohorte a cohorte, dónde eligen matricularse quienes egresan de los jardines infantiles del territorio.",
@@ -130,7 +145,7 @@ const PROYECTOS = [
     ]
   },
   {
-    orden: 8,
+    orden: 9,
     tipo: "Plataforma · CostaPresente",
     titulo: "CostaPresente",
     objetivo: "Sistema que, de forma similar a la plataforma ministerial ChilePresente, permite realizar un seguimiento preciso de las trayectorias de los estudiantes que alguna vez han estado matriculados en alguno de los establecimientos del SLEP Costa Central.",
@@ -143,7 +158,7 @@ const PROYECTOS = [
     ]
   },
   {
-    orden: 9,
+    orden: 10,
     tipo: "Sistema de alertas",
     titulo: "Sistema de alertas de Anótate en la Lista",
     objetivo: "El sistema de alertas de Anótate en la Lista (AEL) identifica los establecimientos con vacantes sin asignar y prepara una comunicación personalizada para cada director o directora. Este mensaje incluye, para cada nivel del establecimiento, los cupos declarados, la matrícula actual y las vacantes sin asignar.",
@@ -156,7 +171,7 @@ const PROYECTOS = [
     ]
   },
   {
-    orden: 10,
+    orden: 11,
     tipo: "Minuta · Dirección Ejecutiva",
     titulo: "Análisis de trayectorias educativas interrumpidas",
     objetivo: "Reporte dirigido al Director Ejecutivo cuyo propósito es informar respecto al comportamiento de la desvinculación (o abandono) escolar en el territorio, mediante el uso de modelos de alerta temprana y la priorización de los establecimientos según el nivel de riesgo de desvinculación de sus estudiantes.",
@@ -168,7 +183,7 @@ const PROYECTOS = [
     imgs: []
   },
   {
-    orden: 11,
+    orden: 12,
     tipo: "Diagnóstico",
     titulo: "Diagnóstico histórico del rendimiento escolar",
     objetivo: "Diagnóstico longitudinal y multidimensional de las bases de rendimiento escolar del Mineduc (2002-2025) con el propósito de caracterizar las trayectorias educativas de los estudiantes de los establecimientos educacionales del SLEP Costa Central y cuantificar las variaciones en las tasas de promoción y reprobación.",
