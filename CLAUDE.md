@@ -3,7 +3,7 @@
 ## Qué es
 
 Sitio institucional estático del **Área de Monitoreo** del SLEP Costa Central.
-Publicado en GitHub Pages desde la **raíz** del repositorio (rama `main`):
+Publicado en GitHub Pages desde **`main` `/docs`**:
 <https://tomgc.github.io/slep_monitoreo/>.
 
 ## Stack
