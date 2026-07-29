@@ -12,7 +12,3 @@ handoff/
 
 # Traspasos de sesión: memoria interna, NO se publican (Pages sirve todo el repo)
 50_documentacion/traspasos/*.md
-
-# Documentos de protocolo interno: NO publicar via GitHub Pages
-50_documentacion/activa/POLITICA_PROYECTO.md
-50_documentacion/activa/SETTINGS_Y_PROMPTS_OPERACIONALES.md
