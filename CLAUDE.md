@@ -3,7 +3,7 @@
 ## Qué es
 
 Sitio institucional estático del **Área de Monitoreo** del SLEP Costa Central.
-Publicado en GitHub Pages desde la **raíz** del repositorio (rama `main`):
+Publicado en GitHub Pages desde **`main` `/docs`**:
 <https://tomgc.github.io/slep_monitoreo/>.
 
 ## Stack
@@ -15,9 +15,11 @@ Publicado en GitHub Pages desde la **raíz** del repositorio (rama `main`):
 
 ## Reglas duras
 
-- **El sitio vive en la RAÍZ.** No mover `index.html`, `app.js`, `styles.css`,
-  `colors_and_type.css`, `data.js`, `.nojekyll`, `assets/` ni `fonts/` a subcarpetas:
-  GitHub Pages los sirve desde `/` y moverlos rompe el deploy.
+- **El sitio vive en `docs/`.** `index.html`, `app.js`, `styles.css`,
+  `colors_and_type.css`, `data.js`, `.nojekyll`, `assets/` y `fonts/` viven ahí y no
+  se mueven ni a la raíz ni a otra subcarpeta: GitHub Pages los sirve desde
+  `main` `/docs` y moverlos rompe el deploy. La raíz dejó de ser el docroot para
+  que Pages no publique `50_documentacion/`, `CLAUDE.md` ni los `.R` (PR #4).
 - **Idioma: español neutro latinoamericano, SIN voseo.** Nada de "seleccioná", "usá",
   "reemplazá", "querés". Usar "tú" o formas impersonales. Aplica a código, comentarios,
   contenido del sitio y mensajes de commit.
@@ -29,12 +31,19 @@ Publicado en GitHub Pages desde la **raíz** del repositorio (rama `main`):
 
 Aplicación **pragmática** de `POLITICA_PROYECTO.md` (en `50_documentacion/activa/`):
 
-- El sitio queda en la raíz por la restricción de GitHub Pages.
+- El sitio vive en `docs/`, carpeta sin prefijo de decena: GitHub Pages solo
+  admite la raíz del repositorio o `/docs` como origen, y la raíz se descartó
+  para no publicar el resto del repositorio (PR #4).
 - `50_documentacion/` agrupa la documentación:
   - `activa/` — política y documentos vigentes.
   - `traspasos/` — traspasos de cierre de sesión y `backlog_acumulado.md`
-    (snake_case). **Gitignored**: no se versionan (GitHub Pages publica todo
-    el repo y no deben ser públicos).
+    (snake_case). **Gitignored**: no se versionan porque el repositorio es
+    público y su contenido no debe serlo. Al no versionarse, este repo queda
+    fuera de la regla 1.3.1 de `POLITICA_PROYECTO.md` v5.5 (traspaso vigente:
+    un solo archivo a la vista, el resto en `traspasos/archivo/`) y del
+    bloque 1 del protocolo §4.7 de `SETTINGS_Y_PROMPTS_OPERACIONALES.md` v14,
+    que la ejecuta. Revisar esa exclusión está pendiente de decisión del
+    titular.
   - `estructura/` — snapshots del escáner.
 - **Sin pipeline de R:** la feature "Fuentes" y su procesamiento se retiraron en v1.0.
 
