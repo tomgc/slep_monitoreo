@@ -31,7 +31,9 @@ Publicado en GitHub Pages desde **`main` `/docs`**:
 
 Aplicación **pragmática** de `POLITICA_PROYECTO.md` (en `50_documentacion/activa/`):
 
-- El sitio queda en la raíz por la restricción de GitHub Pages.
+- El sitio vive en `docs/`, carpeta sin prefijo de decena: GitHub Pages solo
+  admite la raíz del repositorio o `/docs` como origen, y la raíz se descartó
+  para no publicar el resto del repositorio (PR #4).
 - `50_documentacion/` agrupa la documentación:
   - `activa/` — política y documentos vigentes.
   - `traspasos/` — traspasos de cierre de sesión y `backlog_acumulado.md`
