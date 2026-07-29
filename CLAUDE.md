@@ -15,9 +15,11 @@ Publicado en GitHub Pages desde la **raíz** del repositorio (rama `main`):
 
 ## Reglas duras
 
-- **El sitio vive en la RAÍZ.** No mover `index.html`, `app.js`, `styles.css`,
-  `colors_and_type.css`, `data.js`, `.nojekyll`, `assets/` ni `fonts/` a subcarpetas:
-  GitHub Pages los sirve desde `/` y moverlos rompe el deploy.
+- **El sitio vive en `docs/`.** `index.html`, `app.js`, `styles.css`,
+  `colors_and_type.css`, `data.js`, `.nojekyll`, `assets/` y `fonts/` viven ahí y no
+  se mueven ni a la raíz ni a otra subcarpeta: GitHub Pages los sirve desde
+  `main` `/docs` y moverlos rompe el deploy. La raíz dejó de ser el docroot para
+  que Pages no publique `50_documentacion/`, `CLAUDE.md` ni los `.R` (PR #4).
 - **Idioma: español neutro latinoamericano, SIN voseo.** Nada de "seleccioná", "usá",
   "reemplazá", "querés". Usar "tú" o formas impersonales. Aplica a código, comentarios,
   contenido del sitio y mensajes de commit.
