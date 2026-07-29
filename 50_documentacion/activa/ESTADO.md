@@ -3,16 +3,18 @@ slug: slep_monitoreo
 nombre_real: Sitio institucional del Área de Monitoreo del SLEP Costa Central (portafolio web estático)
 categoria: activo
 semaforo: activo
-sesion_actual: v07
-ultima_actividad: 2026-07-27
+sesion_actual: v08
+ultima_actividad: 2026-07-29
 maneja_sensibles: false
-tipo_pendiente: nuevo
+tipo_pendiente: deuda_tecnica
 ---
 ## En que vamos
-La sesión 7 agregó un visor de imagen a resolución completa sobre el lightbox (con navegación por flechas y teclado, y cierre por X, fondo y Esc) y reorganizó el lightbox a dos columnas en desktop (captura 60% / reseña 40%) para dar protagonismo al texto, con reversión a columna apilada en móvil. En paralelo cerró tres pendientes diferidos de v06: sección Trayectoria oculta de forma reversible, campo `thumb` obsoleto eliminado de `data.js`, y peso 400 de Museo Sans mapeado explícitamente al `.otf` 500. Siete commits desplegados y verificados en producción; solo quedan pendientes diferidos, ninguno bloqueante.
+La sesión 8 construyó la entrada del proyecto de minutas Simce 2025 en `data.js` a partir de tres PDF y la desplegó verificada en producción, con `orden: 3` y sin capturas todavía. También versionó el registro documental del cierre de v07, absorbió una rama huérfana y encargó a Claude Design el rediseño del portafolio para dar protagonismo a las imágenes. La sesión cerró antes de tiempo al detectarse una sesión paralela de Claude Code escribiendo sobre el mismo repositorio, que movió el sitio a `docs/`, corrigió el workflow de Pages y actualizó los documentos de gobernanza a POLITICA v5.5 y SETTINGS v14.
 
 ## Proximo paso
-Construir el nuevo proyecto "Minuta Simce" en `data.js` (objetivo, síntesis, orden, id sugerido `simce_cc` y luego sus capturas) a partir de los 3 PDF que aportará el usuario.
+Reconciliar el estado de Git antes de cualquier escritura: `main` local quedó atrás de `origin/main`, `HEAD` en la rama `gobernanza/v14` y el árbol con cambios sin commitear.
 
 ## Bloqueantes
-ninguno
+- Sesión paralela de Claude Code sobre el mismo repositorio: se desconoce si terminó.
+- Knowledge base del Project desactualizada (tiene POLITICA v5.2 y SETTINGS v7; el repositorio ya tiene v5.5 y v14).
+- Handoff de Claude Design pendiente: bloquea el rediseño del portafolio y, con él, la decisión sobre las capturas del proyecto Simce.
