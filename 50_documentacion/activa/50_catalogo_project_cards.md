@@ -60,11 +60,17 @@ datos ya estarían normalizados.
 
 El documento fuente define seis categorías de color y un sistema de códigos,
 pero no los asigna a proyectos concretos. Propuesta a partir de los `titulo`
-y `tipo` reales de `docs/data.js` (fuente: `grep -nE '^\s*(orden|estado|tipo|titulo):' docs/data.js`,
-ejecutado en la sesión 9). Los `id` de la primera columna son hipótesis a
-confirmar con `grep -n 'id:' docs/data.js`.
+y `tipo` reales de `docs/data.js` (fuente: `grep -nE '^\s*(orden|estado|tipo|titulo):' docs/data.js`
+y `sed -n '10,35p' docs/data.js`, ejecutados en la sesión 9).
 
-| `orden` | `id` (hipótesis) | Título abreviado | Categoría propuesta | Código |
+**Corrección de un supuesto.** `data.js` **no tiene campo `id`**: cada
+proyecto es `orden`, `tipo`, `titulo`, `objetivo`, `sintesis`, `estado` e
+`imgs`. Los slugs que el backlog usa desde la sesión 6 (`asistencia`,
+`resguardo`) viven únicamente en los nombres de archivo de las capturas, y
+los tres proyectos con `imgs: []` no tienen ninguno. La columna `id` de la
+tabla es por lo tanto un **campo a crear** (§4), no un dato existente.
+
+| `orden` | `id` (campo nuevo) | Título abreviado | Categoría propuesta | Código |
 |---:|---|---|---|---|
 | 1 | `asistencia` | Minuta de asistencia mensual | 🟩 Gestión Educativa | GES-01 |
 | 2 | `resguardo` | Reportes del Modelo de Resguardo | 🟩 Gestión Educativa | GES-02 |
@@ -102,6 +108,7 @@ resto del archivo.
 
 | Campo | Tipo | Contenido | Tope | Origen |
 |---|---|---|---|---|
+| `id` | string | slug estable, `"asistencia"` | — | §3 |
 | `codigo` | string | `"GES-01"` | — | §3 |
 | `categoria` | string | `"Gestión Educativa"` | — | §3 |
 | `madurez` | string | enum de §5 | — | titular |
@@ -113,6 +120,14 @@ resto del archivo.
 | `evidencia` | array | resultados verificables | 1 línea c/u | titular, ver §7 |
 | `proximos` | array | qué viene ahora | 1 línea c/u | traspaso y titular |
 | `qr` | string | URL destino del QR | — | §6 |
+
+**Por qué `id` y `codigo` coexisten.** Son identificadores de audiencias
+distintas: `id` es la llave de la URL (legible, compartible por correo) y
+`codigo` es la referencia impresa que se dice en voz alta en una reunión
+("revisen la tarjeta DAT-03"). Colapsarlos en uno haría que reclasificar un
+proyecto de categoría rompiera enlaces ya compartidos. `id` se puebla para
+los doce proyectos antes que cualquier otro campo nuevo, porque es
+prerrequisito de la Fase 1.
 
 **Reutilización sin duplicar.** `titulo` y `tipo` se usan tal cual en el
 encabezado de la tarjeta; `imgs[0]` es la imagen principal de la cara
@@ -152,13 +167,18 @@ propia tarjeta; debe ampliar la experiencia.
 **Destino propuesto:** el proyecto abierto en el sitio,
 `https://tomgc.github.io/slep_monitoreo/#p=<id>`.
 
-**Prerrequisito técnico (bloqueante):** hoy el sitio no tiene enlaces
-profundos. Abrir la reseña de un proyecto por URL exige agregar en `app.js`
-la lectura del hash al cargar y su escritura al abrir el lightbox. Es un
-cambio acotado (una función de lectura, una línea en `openLightbox()`), pero
-**es prerrequisito de todo el sistema de QR** y conviene tratarlo como tarea
-propia, con valor por sí misma: también permite compartir un proyecto por
-correo.
+**Prerrequisito técnico (bloqueante), en dos partes:**
+
+1. **No existe la llave.** Hay que poblar el campo `id` de §4 en los doce
+   proyectos. Sin él no hay nada estable a lo que apuntar: `orden` se
+   renumera al insertar un proyecto (ocurrió en la sesión 8 con el Simce), y
+   un QR ya impreso apuntando a un número que se corrió es un enlace roto en
+   papel.
+2. **No existen los enlaces profundos.** Abrir la reseña de un proyecto por
+   URL exige agregar en `app.js` la lectura del hash al cargar y su escritura
+   al abrir el lightbox. Cambio acotado (una función de lectura, una línea en
+   `openLightbox()`), con valor por sí mismo: también permite compartir un
+   proyecto por correo.
 
 **Generación de los QR:** SVG generados una vez y versionados en
 `docs/assets/qr/<id>.svg`. No se usa un servicio en línea de generación,
@@ -219,7 +239,7 @@ conversión. Conviene imprimir **una** tarjeta de prueba antes de las doce.
 | Fase | Qué | Quién | Bloquea a |
 |---|---|---|---|
 | 0 | Aprobar la taxonomía de §3 y asignar los doce valores de `madurez` | titular | 2 |
-| 1 | Enlaces profundos `#p=<id>` en `app.js` | asistente + Claude Code | 4 |
+| 1 | Campo `id` en los 12 proyectos + enlaces profundos `#p=<id>` en `app.js` | asistente + Claude Code | 4 |
 | 2 | Extender `data.js` con los campos de §4, **solo 2 proyectos piloto** | asistente | 3 |
 | 3 | `cards.html` + `cards.css`, prueba de impresión de las 2 piloto | asistente + titular | 4 |
 | 4 | Completar los 12, generar los QR, portada e índice, PDF de la colección | asistente | — |
