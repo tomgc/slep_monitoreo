@@ -37,8 +37,13 @@ Aplicación **pragmática** de `POLITICA_PROYECTO.md` (en `50_documentacion/acti
 - `50_documentacion/` agrupa la documentación:
   - `activa/` — política y documentos vigentes.
   - `traspasos/` — traspasos de cierre de sesión y `backlog_acumulado.md`
-    (snake_case). **Gitignored**: no se versionan (GitHub Pages publica todo
-    el repo y no deben ser públicos).
+    (snake_case). **Gitignored**: no se versionan porque el repositorio es
+    público y su contenido no debe serlo. Al no versionarse, este repo queda
+    fuera de la regla 1.3.1 de `POLITICA_PROYECTO.md` v5.5 (traspaso vigente:
+    un solo archivo a la vista, el resto en `traspasos/archivo/`) y del
+    bloque 1 del protocolo §4.7 de `SETTINGS_Y_PROMPTS_OPERACIONALES.md` v14,
+    que la ejecuta. Revisar esa exclusión está pendiente de decisión del
+    titular.
   - `estructura/` — snapshots del escáner.
 - **Sin pipeline de R:** la feature "Fuentes" y su procesamiento se retiraron en v1.0.
 
