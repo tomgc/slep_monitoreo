@@ -1,7 +1,7 @@
 # Backlog acumulado — slep_monitoreo
 
-> Documento único de memoria de largo plazo. Consolida sesión 1 (v01), 2 (v02), 3 (v03) y 4 (en curso). Numeración correlativa global y permanente: nunca se reinicia ni renumera. Entradas previas copiadas íntegras. Cierra la deuda de consolidación arrastrada desde v02.
-> Generado: 2026-06-16. Origen: traspaso_cierre_v01/v02/v03.
+> Documento único de memoria de largo plazo. Consolida sesión 1 (v01), 2 (v02), 3 (v03), 4 (v04), 5 (v05), 6 (v06) y 7 (v07). Numeración correlativa global y permanente: nunca se reinicia ni renumera. Entradas previas copiadas íntegras. Cierra la deuda de consolidación arrastrada desde v02.
+> Generado: 2026-06-16. Origen: traspaso_cierre_v01/v02/v03. Actualizado hasta v07 (2026-07-27).
 
 ## 1. Objetivo del proyecto
 
@@ -41,7 +41,8 @@ Catálogo de 10 categorías de v01 (§5.3 original), recalculado sumando las 12 
 | 4 | v04 | 1 | Claude Opus 4.8 | eliminar chrome de variantes |
 | 5 | v05 | 4 | Claude Opus 4.8 | limpieza de nav muerta + poblado de portafolio |
 | 6 | v06 | 3 | Claude Opus 4.8 | capturas de producto + ajuste del visor del lightbox |
-| **Total** | | **46** | | |
+| 7 | v07 | 7 | Claude Opus 4.8 | visor full-res + lightbox dos columnas + limpieza de deuda diferida |
+| **Total** | | **53** | | |
 
 (El modelo de las sesiones 2 y 3 no figura en los traspasos de origen: "No registrado", sin inventar.)
 
@@ -156,6 +157,30 @@ Foco: poblar las capturas de producto de los proyectos vigentes (prioridad 1 her
 
 46. **Pendiente de optimización de las capturas** (sin ejecutar, registrado para sesión futura). Las 26 capturas suman ~9 MB; varias superan 400 KB (p. ej. `parvularia-1.png` ≈ 720 KB). Funcionan sin problema, pero engrosan el repo y el payload del deploy. Pendiente diferido: comprimir los PNG o migrar a WebP en una pasada de cosmética dedicada, junto con los otros diferidos (face 400 de Museo Sans, campo `thumb` obsoleto). No bloqueante. Categoría: Reproducibilidad y tooling.
 
+### Sesión 7 (Claude Opus 4.8) — 2026-07-27
+
+Foco: agregar un visor de imagen a resolución completa sobre el lightbox y darle más protagonismo a la reseña; de paso, cerrar tres de los pendientes diferidos de v06 (Trayectoria oculta, `thumb`, face 400). Siete solicitudes distinguibles, siete commits, todos desplegados y verificados en producción.
+
+**Bloque A — Visor de imagen a resolución completa**
+
+47. **Visor full-res sobre el lightbox** (commit del full-res básico). Solicitud: al hacer click en una captura del lightbox, verla a tamaño completo con una X para cerrar. Se agregó un overlay propio (`.lb-full`), creado una sola vez en `app.js` y reutilizado, con la imagen ajustada al viewport (`object-fit: contain`, sin scroll), botón X en la esquina superior derecha, y cierre por click en el fondo y por tecla Esc. Trampa resuelta: el handler global de Esc del lightbox debía cerrar primero el full-res si está abierto (guard `if (fsViewer.classList.contains("open"))` con `stopPropagation`), para no cerrar el lightbox de fondo. Las slides-imagen recibieron `cursor: zoom-in`. El placeholder "próximamente" no es clickeable. Categoría: Interacción y JS.
+
+48. **Navegación dentro del visor full-res** (`e335539`). Solicitud: poder navegar entre fotos dentro del zoom, con flechas y teclado. El visor pasó de mostrar un `src` suelto a conocer el arreglo de capturas (`fsShots`) y compartir el índice `lbIndex` con el lightbox, de modo que navegar en el full-res mueve también el slide de fondo (`fsGo()` llama a `fsRender()` + `lbRender()`). Flechas prev/next (`.lb-full-nav`, ocultas si hay una sola captura) y teclas ←/→ en modo full-res; Esc sigue cerrando. Categoría: Interacción y JS.
+
+**Bloque B — Cierre de deuda diferida de v06**
+
+49. **Ocultar la sección Trayectoria/Hitos** (`3b7d1bb`). Solicitud: quitar la sección del sitio, con intención de quizás reutilizarla más adelante. Resuelto como ocultamiento reversible en vez de borrado: atributo `hidden` en el `<section id="trayectoria">` de `index.html` más un guard `.section[hidden]{display:none}` en `styles.css` (blindaje ante la trampa conocida: `[hidden]` es inerte si una regla de autor fija `display` sobre `.section`; aquí `.section` solo fija `padding`, pero el guard previene reactivaciones futuras). El render del timeline en `app.js` y el arreglo `HITOS` en `data.js` se conservan intactos (corren en un nodo oculto, sin costo ni error). Revertir = quitar el atributo `hidden`. Categoría: Estructura de contenido.
+
+50. **Eliminar el campo `thumb` obsoleto de `data.js`** (`ac813e7`). Deuda heredada: el campo `thumb` (valores `plum`/`ocean`/`olive`/`coral`/`sand`) definía el tono del placeholder de captura, pero dejó de consumirse cuando los proyectos pasaron a tener capturas reales. Verificado que no se lee en `app.js` (el render `bannerEl` no lo referencia) ni en CSS (las coincidencias `scrollbar-thumb` y `.banner-thumb` no tienen relación con el campo). Se eliminaron los 11 campos `thumb` de los proyectos más la línea del comentario de cabecera que los documentaba. `node --check` verde. Cero impacto visual (código muerto). Categoría: Reproducibilidad y tooling.
+
+51. **Mapeo explícito de Museo Sans 400 → `.otf` 500** (`0c48a06`). Deuda heredada (defecto visual): `colors_and_type.css` no declara face 400 de Museo Sans (solo 300/500/700), así que todo `font-weight: 400` sobre `--font-body` resolvía a 500 por font-matching silencioso del navegador. Se agregó un `@font-face` de peso 400 apuntando a `MuseoSans_500.otf`, con comentario que lo declara mapeo deliberado y reversible cuando exista `MuseoSans_400.otf` real. Se eligió esta opción (A) sobre reasignar los 6 selectores `--font-body`+400 a 300/500 explícito (B, que habría cambiado el render y exigido decisiones de diseño caso por caso) y sobre conseguir la fuente real (C, requiere el archivo). Cero cambio visual: esos textos ya se veían en 500; ahora es explícito, no silencioso. Categoría: Identidad visual.
+
+**Bloque C — Ajustes de interacción del lightbox**
+
+52. **Click en la imagen del banner abre la reseña** (`3c10c3b`). Síntoma reportado: al hacer click en la captura de una tarjeta, no pasaba nada. Causa raíz: un bloque en `bannerEl` (`app.js`) aplicaba `stopPropagation` a click/mousedown/keydown sobre `.banner-media` para "evitar que un clic sobre el área de imagen dispare el lightbox dos veces", pero el handler de apertura vive en el nodo padre (la tarjeta), no había doble disparo real, y el `stopPropagation` solo bloqueaba la apertura desde la imagen. Se eliminó el bloque (−4 líneas); ahora el click en la imagen burbujea al handler de la tarjeta y abre la misma reseña. Categoría: Interacción y JS.
+
+53. **Lightbox reorganizado a dos columnas en desktop** (`c6e19b3`). Solicitud: la reseña quedaba con poco protagonismo, pequeña bajo la captura; mostrarla lado a lado. Solo CSS: `.lb-card` pasó de columna a fila (`flex-direction: row`) con `max-width` de 680→1040px; galería a la izquierda (`flex: 0 0 60%`, con `border-right` en vez de `border-bottom`), reseña a la derecha (`flex: 1 1 40%`) con scroll propio. El `.lb-stage` dejó la altura fija `min(58vh,460px)` por altura flexible (`flex: 1 1 auto; min-height: 0`, clave para que los dots no lo empujen fuera). Breakpoint `@media (max-width: 880px)` revierte a columna apilada (galería arriba con `min(52vh,420px)`, texto abajo) preservando el comportamiento móvil previo. `index.html` y `app.js` intactos. Categoría: Layout y composición.
+
 ---
 
 ## 6. Delta del backlog
@@ -165,4 +190,6 @@ Este documento consolida 4 sesiones (entradas 1-39), creado en la sesión 4, cer
 **Sesión 5 (v05):** 4 entradas nuevas (40-43), sin reescritura ni renumeración de las anteriores. Resumen estadístico actualizado (fila sesión 5, total 39 → 43). Sin cambios de taxonomía. Las categorías de las entradas nuevas (Interacción y JS ×2, Estructura de contenido ×1, Arquitectura del repositorio ×1) usan el catálogo existente; la tabla de clasificación temática §3 conserva la aproximación heredada y no se recalcula (su fuente de verdad es el detalle cronológico §5, no la tabla).
 
 **Sesión 6 (v06):** 3 entradas nuevas (44-46), sin reescritura ni renumeración de las anteriores. Resumen estadístico actualizado (fila sesión 6, total 43 → 46). Sin cambios de taxonomía. Categorías de las nuevas: Estructura de contenido ×1 (capturas), Interacción y JS ×1 (visor del lightbox), Reproducibilidad y tooling ×1 (pendiente de optimización registrado, sin ejecutar). La tabla §3 no se recalcula.
+
+**Sesión 7 (v07):** 7 entradas nuevas (47-53), sin reescritura ni renumeración de las anteriores. Resumen estadístico actualizado (fila sesión 7, total 46 → 53). Sin cambios de taxonomía. Categorías de las nuevas: Interacción y JS ×3 (visor full-res básico, navegación del visor, click en imagen), Estructura de contenido ×1 (Trayectoria oculta), Reproducibilidad y tooling ×1 (`thumb` eliminado), Identidad visual ×1 (mapeo Museo Sans 400), Layout y composición ×1 (lightbox dos columnas). Con esta sesión se cerraron tres de los pendientes diferidos de v06 (Trayectoria, `thumb`, face 400); quedan pendientes la minuta Simce (espera 3 PDF del usuario) y la optimización de las 26 capturas. La tabla §3 no se recalcula (su fuente de verdad es el detalle cronológico §5).
 
