@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Formación en uso de datos educativos | SLEP Costa Central</title>
+<meta name="description" content="Repositorio de fuentes de datos educativos públicos de Chile y espacio de formación en su uso para la toma de decisiones basada en evidencia. Área de Monitoreo, SLEP Costa Central." />
+<meta name="theme-color" content="#FFFBEF" />
+
+<!-- Open Graph (Facebook, WhatsApp, LinkedIn, Slack) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SLEP Costa Central" />
+<meta property="og:title" content="Formación en uso de datos educativos" />
+<meta property="og:description" content="Qué fuentes de datos educativos existen en Chile, quién las produce, desde cuándo y cómo se conectan entre sí." />
+<meta property="og:url" content="https://tomgc.github.io/slep_monitoreo/formacion.html" />
+<meta property="og:image" content="https://tomgc.github.io/slep_monitoreo/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Área de monitoreo y seguimiento de procesos y resultados educativos — SLEP Costa Central" />
+<meta property="og:locale" content="es_CL" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Formación en uso de datos educativos" />
+<meta name="twitter:description" content="Qué fuentes de datos educativos existen en Chile, quién las produce, desde cuándo y cómo se conectan entre sí." />
+<meta name="twitter:image" content="https://tomgc.github.io/slep_monitoreo/assets/og-image.png" />
+<meta name="twitter:image:alt" content="Área de monitoreo y seguimiento de procesos y resultados educativos — SLEP Costa Central" />
+
+<link rel="icon" href="assets/logo-mark-cc.png" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="formacion.css" />
+</head>
+<body data-variant="d2" data-density="comfortable">
+
+<!-- ====================== NAVEGACIÓN ====================== -->
+<nav class="topbar" aria-label="Secciones del sitio">
+  <div class="shell topbar-inner">
+    <a class="topbar-brand" href="index.html">Área de monitoreo</a>
+    <ul class="topbar-links">
+      <li><a href="index.html">Portafolio</a></li>
+      <li><a href="formacion.html" aria-current="page">Formación en datos</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero">
+  <div class="shell">
+    <p class="hero-eyebrow">Área de Monitoreo · SLEP Costa Central</p>
+    <h1>Formación en uso de <em>datos educativos</em></h1>
+    <p class="hero-lede">El problema no es la falta de datos: el sistema educativo chileno produce millones de registros al año. El problema es saber cuáles existen, quién los produce, desde cuándo y cómo se conectan entre sí.</p>
+  </div>
+</section>
+
+<!-- ====================== PARA QUÉ ====================== -->
+<section class="section" id="proposito">
+  <div class="shell">
+    <div class="fm-proposito">
+      <div>
+        <h3>Un mapa antes que un dato</h3>
+        <p>Una pregunta de gestión casi nunca se responde con una sola fuente. Saber qué produce cada institución, y qué se puede cruzar con qué, es el paso previo a cualquier análisis.</p>
+      </div>
+      <div>
+        <h3>Acceso realista</h3>
+        <p>No todas las fuentes son públicas. Distinguir lo descargable de lo que requiere convenio o credencial evita diseñar análisis que después no se pueden ejecutar.</p>
+      </div>
+      <div>
+        <h3>Evidencia para decidir</h3>
+        <p>El destino de este espacio es apoyar a los equipos del territorio en el uso de evidencia para la toma de decisiones, no solo en su lectura.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== CATÁLOGO DE FUENTES ====================== -->
+<section class="section section--alt" id="fuentes">
+  <div class="shell">
+    <div class="section-head">
+      <p class="eyebrow">Repositorio</p>
+      <h2 class="section-title">Fuentes de datos educativos</h2>
+      <p class="section-lede">Cada fila es un dato concreto publicado por una institución del sistema. Los enlaces llevan a la página pública del emisor.</p>
+    </div>
+
+    <div class="fm-filtros">
+      <div class="fm-campo fm-campo--busca">
+        <label for="fmBuscar">Buscar</label>
+        <input type="search" id="fmBuscar" placeholder="asistencia, matrícula, IVE…" autocomplete="off" />
+      </div>
+      <div class="fm-campo">
+        <label for="fmInstitucion">Institución</label>
+        <select id="fmInstitucion"><option value="">Todas</option></select>
+      </div>
+      <div class="fm-campo">
+        <label for="fmAcceso">Acceso</label>
+        <select id="fmAcceso">
+          <option value="">Cualquiera</option>
+          <option value="Acceso público">Público</option>
+          <option value="Acceso restringido">Restringido</option>
+        </select>
+      </div>
+      <div class="fm-campo">
+        <label for="fmAmbito">Ámbito de indagación</label>
+        <select id="fmAmbito"><option value="">Todos</option></select>
+      </div>
+      <button type="button" class="fm-limpiar" id="fmLimpiar">Limpiar filtros</button>
+    </div>
+
+    <p class="fm-resumen" id="fmResumen" role="status" aria-live="polite"></p>
+    <p class="fm-pregunta" id="fmPregunta" hidden></p>
+
+    <div class="fm-tabla-scroll">
+      <table class="fm-tabla" id="fmTabla">
+        <caption class="fm-caption">Fuentes de datos educativos públicos de Chile, por institución productora.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Dato</th>
+            <th scope="col">Institución</th>
+            <th scope="col">Base</th>
+            <th scope="col" class="fm-col-anio">Desde</th>
+            <th scope="col">Acceso</th>
+            <th scope="col">Fuente</th>
+          </tr>
+        </thead>
+        <tbody id="fmCuerpo"></tbody>
+      </table>
+    </div>
+
+    <p class="fm-vacio" id="fmVacio" hidden>Ninguna fuente coincide con estos filtros. Prueba con menos criterios o limpia la búsqueda.</p>
+    <p class="fm-nota">Catálogo en revisión. La información de cada fuente se está verificando contra los sitios de cada institución antes de la difusión del sitio.</p>
+  </div>
+</section>
+
+<!-- ====================== ATLAS (PENDIENTE) ====================== -->
+<section class="section" id="atlas">
+  <div class="shell">
+    <div class="section-head">
+      <p class="eyebrow">Atlas</p>
+      <h2 class="section-title">Mapa de las fuentes y sus conexiones</h2>
+      <p class="section-lede">La misma información de la tabla, representada como un mapa navegable donde cada institución es un sistema y cada base, un cuerpo que lo orbita.</p>
+    </div>
+    <div class="fm-atlas-espera">
+      <p class="fm-atlas-foot">En desarrollo · disponible en una próxima versión del sitio</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-legal">
+      <span><a href="https://slepcostacentral.gob.cl" target="_blank" rel="noopener">Servicio Local de Educación Pública Costa Central</a> · Concón · Puchuncaví · Quintero · Viña del Mar</span>
+      <span>Versión 1.0 · 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script src="atlas_datos.js"></script>
+<script src="formacion.js"></script>
+</body>
+</html>

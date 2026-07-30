@@ -1,0 +1,217 @@
+/* ===========================================================
+   Formación en uso de datos educativos — estilos de página
+   Solo se carga en formacion.html. Los tokens y la barra de
+   navegación viven en styles.css, compartida con index.html.
+   =========================================================== */
+
+/* ---------- propósito: tres columnas de texto ---------- */
+.fm-proposito {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+}
+.fm-proposito h3 { font-size: 17px; margin-bottom: 8px; }
+.fm-proposito p { font-size: 14.5px; margin: 0; }
+@media (max-width: 760px) {
+  .fm-proposito { grid-template-columns: 1fr; gap: 26px; }
+}
+
+/* ---------- filtros ---------- */
+.fm-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.fm-campo { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.fm-campo--busca { flex: 1 1 260px; }
+
+.fm-campo label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate);
+}
+.fm-campo input,
+.fm-campo select {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-2);
+  padding: 8px 11px;
+  min-height: 38px;
+  transition: border-color 120ms ease;
+}
+.fm-campo input:hover,
+.fm-campo select:hover { border-color: var(--slate); }
+.fm-campo input:focus-visible,
+.fm-campo select:focus-visible {
+  outline: 2px solid var(--accent-active);
+  outline-offset: 1px;
+  border-color: var(--accent-active);
+}
+
+.fm-limpiar {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--slate);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-2);
+  padding: 8px 14px;
+  min-height: 38px;
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.fm-limpiar:hover { color: var(--ink); border-color: var(--slate); }
+.fm-limpiar:active { transform: translateY(1px); }
+.fm-limpiar:focus-visible { outline: 2px solid var(--accent-active); outline-offset: 2px; }
+
+/* ---------- resumen y pregunta del ámbito ---------- */
+.fm-resumen {
+  font-size: 13px;
+  color: var(--slate);
+  margin: 0 0 4px;
+}
+.fm-pregunta {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--ink);
+  margin: 0 0 14px;
+  max-width: 60ch;
+}
+.fm-pregunta[hidden] { display: none; }
+
+/* ---------- tabla ---------- */
+.fm-tabla-scroll {
+  overflow-x: auto;
+  border-top: 1px solid var(--line-strong);
+}
+.fm-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 720px;
+}
+.fm-tabla[hidden] { display: none; }
+.fm-caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 13px;
+  color: var(--slate);
+  padding: 0 0 10px;
+}
+/* El encabezado NO es sticky. Con la barra de navegación ya adherida
+   arriba, un segundo elemento pegajoso dejaba la primera fila cortada
+   permanentemente bajo él. Se prefiere perder la referencia de columnas
+   al desplazar antes que mostrar una fila mutilada. */
+.fm-tabla thead th {
+  background: var(--page-alt);
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--slate);
+  padding: 10px 14px 10px 0;
+  border-bottom: 1px solid var(--line-strong);
+  white-space: nowrap;
+}
+.fm-tabla tbody tr { border-bottom: 1px solid var(--line); }
+.fm-tabla tbody tr:hover { background: var(--cream-50); }
+.fm-tabla td,
+.fm-tabla tbody th {
+  padding: 13px 14px 13px 0;
+  vertical-align: top;
+  font-weight: 300;
+  color: var(--ink-2);
+  text-align: left;
+}
+.fm-col-anio { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* --- celda del dato: nombre, descripción y variables --- */
+.fm-dato { max-width: 380px; padding-left: 0 !important; }
+.fm-punto {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: var(--radius-full);
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+.fm-dato-nombre {
+  font-weight: 700;
+  color: var(--ink);
+}
+.fm-dato-desc {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--slate);
+}
+.fm-vars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.fm-var {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--slate);
+  background: var(--cream-200);
+  border-radius: var(--radius-1);
+  padding: 2px 7px;
+}
+
+/* --- acceso --- */
+.fm-acceso {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--olive);
+  white-space: nowrap;
+}
+.fm-acceso--rest { color: var(--coral); }
+.fm-sin-url { color: var(--slate); font-size: 13px; }
+
+/* ---------- vacío y nota ---------- */
+.fm-vacio {
+  margin: 22px 0 0;
+  font-size: 14px;
+  color: var(--slate);
+}
+.fm-vacio[hidden] { display: none; }
+.fm-nota {
+  margin: 18px 0 0;
+  font-size: 12.5px;
+  color: var(--slate);
+  max-width: 68ch;
+}
+
+/* ---------- atlas en espera ----------
+   Campo inerte y declarado: no parece un control porque no lo es. */
+.fm-atlas-espera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-2);
+}
+.fm-atlas-foot {
+  margin: 0;
+  font-size: 13px;
+  color: var(--slate);
+}
+
+@media (max-width: 720px) {
+  .fm-filtros { gap: 10px; }
+  .fm-campo--busca { flex: 1 1 100%; }
+}
