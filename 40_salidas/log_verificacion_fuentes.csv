@@ -44,3 +44,18 @@ tramo,lote,orden,url,resultado,filas_generadas,timestamp
 3,B,43,https://www.agenciaeducacion.cl/visor-simce-una-nueva-mirada-a-los-datos-de-la-educacion-chilena/,"Responde. Es la noticia de lanzamiento; entrega la URL real del visor, visorsimce.agenciaeducacion.cl.",1,2026-07-30
 3,B,44,https://resultadossimce.agenciaeducacion.cl/login,HTTP 404 en la ruta /login. El host resuelve: la plataforma probablemente tiene otra ruta de entrada.,1,2026-07-30
 3,B,45,mencionada sin URL directa (bases Simce a nivel de estudiante),Sin URL que abrir. Va al catalogo como Declarada sin verificar. F050 confirma que la via es solicitud formal.,1,2026-07-30
+4,D,46,https://www.junaeb.cl/mapa-nutricional,"Responde. Series 2009-2025 en XLSX y PDF, intervalos comunales, y diccionario de variables publicado.",1,2026-07-30
+4,D,47,https://bibliotecadatos.sead.junaeb.cl/,"Entrega solo el encabezado; el cuerpo no llega. No se pudo confirmar catalogo, registro ni la llave ID_JUNAEB.",1,2026-07-30
+4,D,48,https://www.junaeb.cl/wp-content/uploads/2026/03/Mapa-Nutricional-Resultados-2025.pdf,"Responde. El archivo existe, 2,2 MB, pero es un PDF de imagen sin texto extraible.",1,2026-07-30
+4,C,49,https://datos.gob.cl/organization/superintendencia-de-educacion,"Responde. 3 conjuntos en CSV, licencia CC-BY, los tres actualizados el 2024-07-01.",1,2026-07-30
+4,C,50,https://datos.gob.cl/dataset/denuncias,La ficha del conjunto devuelve la portada del portal. Poblada con lo que declara la pagina de organizacion.,1,2026-07-30
+4,C,51,https://datos.gob.cl/dataset/solicitudes-de-mediacion,Misma falla: la ficha devuelve la portada del portal.,1,2026-07-30
+4,C,52,https://datos.gob.cl/dataset/procesos-administrativos-sancionatorios,Misma falla: la ficha devuelve la portada del portal. Tercera consecutiva del mismo patron.,1,2026-07-30
+4,C,53,mencionada sin URL directa (portal propio de la Superintendencia),Sin URL que abrir. La sospecha 1 del reconocimiento sigue abierta.,1,2026-07-30
+4,E,54,https://datos.gob.cl/organization/junta_nacional_de_jardines_infantiles,"Responde. 2 conjuntos homonimos sin formato declarado, ultima actualizacion 2015-10-30.",1,2026-07-30
+4,E,55,https://geoportal.cl/geoportal/catalog/34965/Jardines%20Infantiles%20JUNJI,"Responde. Capa de puntos con URL de descarga directa, ficha de metadatos y servicio WMS.",1,2026-07-30
+4,E,56,https://parvularia.mineduc.cl/,Responde. Sitio de recursos pedagogicos; estadistica marginal y sin descargas con enlace directo.,1,2026-07-30
+4,E,57,https://datosabiertos.mineduc.cl/resumen-de-matricula-en-educacion-parvularia-por-establecimiento-educacional/,"Responde. .rar anuales 2011-2025, con enlace directo del ano 2025.",1,2026-07-30
+4,F,58,https://cpeip.cl/evaluacion-de-la-docencia/,"Responde. Pagina descriptiva del Sistema de Reconocimiento, sin informes ni descargas.",1,2026-07-30
+4,F,59,https://cpeip.cl/informe-nacional-del-portafolio-2022/,"Responde. El informe no vive aqui: remite a docentemas.cl, dominio fuera del inventario.",1,2026-07-30
+4,F,60,https://www.evaluacionconocimientos.cl/,Responde. Pagina informativa publica con temarios 2026; no es un sistema con credenciales como declaraba el reconocimiento.,1,2026-07-30

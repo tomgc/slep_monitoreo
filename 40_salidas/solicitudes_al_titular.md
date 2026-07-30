@@ -271,3 +271,34 @@ la existencia del recurso.
 - **URL de descarga:** no hay descarga. La vía es **solicitud formal por Portal de Transparencia u OIRS**, confirmada en la sección Simce (F050).
 - **Qué falta:** decidir si el Área cursa la solicitud formal; sin eso la fila no puede pasar de `Declarada sin verificar`.
 - **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `periodicidad`, `documentacion_tecnica`, `fecha_verificacion`
+
+---
+
+# Tramo 4 — 6 solicitudes nuevas
+
+## F056 — Biblioteca de Datos para la Investigación (JUNAEB)
+
+- **id_fuente:** F056
+- **base_datos y emisor:** Biblioteca de Datos · Junta Nacional de Auxilio Escolar y Becas (Junaeb)
+- **URL de descarga:** <https://bibliotecadatos.sead.junaeb.cl/> — **entrega solo el encabezado; el cuerpo no llega**
+- **Qué falta:** revisión desde navegador del catálogo, del requisito de registro y de la llave `ID_JUNAEB`. **Es la fuente de mayor valor potencial no verificada del catálogo**: el reconocimiento la destacó como su hallazgo n° 1 porque permitiría vincular Mapa Nutricional y alimentación escolar a nivel individual.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `llaves_de_union`, `cobertura_temporal`, `nivel_acceso` (por confirmar)
+
+## F059, F060, F061 — Los tres conjuntos de la Superintendencia de Educación
+
+- **id_fuente:** F059 (Denuncias), F060 (Solicitudes de mediación), F061 (Procesos administrativos sancionatorios)
+- **base_datos y emisor:** datos.gob.cl · Superintendencia de Educación (SIE)
+- **URL de descarga:** las tres fichas **devuelven la portada del portal** en vez de su propia página:
+  - <https://datos.gob.cl/dataset/denuncias>
+  - <https://datos.gob.cl/dataset/solicitudes-de-mediacion>
+  - <https://datos.gob.cl/dataset/procesos-administrativos-sancionatorios>
+- **Qué falta:** desde navegador, el enlace CSV de cada conjunto y su cobertura temporal (el reconocimiento declaraba denuncias desde 2014 y mediaciones desde 2015; no se pudo confirmar).
+- **Campos bloqueados:** `variables`, `url_descarga`, `cobertura_temporal`, `periodicidad`, `llaves_de_union`
+
+## F066 — Resumen de matrícula parvularia por establecimiento (CEM)
+
+- **id_fuente:** F066
+- **base_datos y emisor:** Datos Abiertos · Centro de Estudios del Ministerio de Educación (CEM)
+- **URL de descarga:** <https://datosabiertos.mineduc.cl/wp-content/uploads/2026/02/Resumen-Educacion-Parvularia-2025.rar> (año 2025; los demás años en <https://datosabiertos.mineduc.cl/resumen-de-matricula-en-educacion-parvularia-por-establecimiento-educacional/>, `.rar` 2011-2025)
+- **Qué falta:** esquema de registros y nombres de columna.
+- **Campos bloqueados:** `variables`, `llaves_de_union`, `documentacion_tecnica`
