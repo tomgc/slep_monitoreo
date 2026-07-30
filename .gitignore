@@ -14,3 +14,6 @@ handoff/
 50_documentacion/traspasos/**
 POLITICA_PROYECTO.md
 SETTINGS_Y_PROMPTS_OPERACIONALES.md
+
+# Andamios de sesión: encargos y logs de ejecución, NO se publican
+50_documentacion/andamios/**
