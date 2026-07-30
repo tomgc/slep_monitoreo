@@ -28,49 +28,100 @@
   /* ===========================================================
      PORTAFOLIO
      =========================================================== */
-  const bannerList = $("#bannerList");
+  /* Render del pliego: una franja por proyecto, capturas a altura
+     normalizada y ancho natural. Reemplaza los banners de v1. */
+  const pliego = $("#pliego");
   const estadoLabel = { vigente: "Vigente", desarrollo: "En desarrollo" };
 
-  function bannerEl(p, i) {
-    const node = el("div", "banner");
-    node.setAttribute("role", "button");
-    node.setAttribute("tabindex", "0");
-    node.setAttribute("data-estado", p.estado);
-    node.setAttribute("aria-label", "Ver reseña: " + p.titulo);
-    const media = (p.imgs && p.imgs.length)
-      ? `<img class="banner-shot" src="${esc(p.imgs[0])}" alt="${esc(p.titulo)}" loading="lazy">`
-      : `<div class="banner-ph"><span>Próximamente</span></div>`;
-    node.innerHTML = `
-      <div class="banner-body">
-        <div class="banner-top">
-          <span class="estado estado--${p.estado}"><span class="dot"></span>${estadoLabel[p.estado]}</span>
-          <span class="banner-cta">Ver reseña <span class="arrow">→</span></span>
-        </div>
-        <h3>${esc(p.titulo)}</h3>
-        <p class="banner-obj">${esc(p.objetivo)}</p>
-      </div>
-      <div class="banner-media">
-        ${media}
-      </div>`;
-    node.addEventListener("click", () => openLightbox(p));
-    node.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(p); }
-    });
-    return node;
+  /* Marca si el pasador tiene capturas fuera de vista, para mostrar el
+     degradado y la flecha del borde derecho. Se recalcula al cargar cada
+     imagen (el ancho depende de la proporción real), al desplazar y al
+     redimensionar la ventana. */
+  function marcarDesplazamiento(wrap) {
+    var s = wrap.querySelector(".pl-strip");
+    if (!s) return;
+    var resto = s.scrollWidth - s.clientWidth;
+    wrap.classList.toggle("has-more", resto > 4 && s.scrollLeft < resto - 4);
   }
 
-  function renderBanners() {
-    bannerList.innerHTML = "";
+  function bandEl(p) {
+    var band = el("div", "pl-band");
+    band.setAttribute("data-estado", p.estado);
+
+    /* ---- columna de texto ---- */
+    var side = el("div", "pl-side");
+    side.innerHTML =
+      '<div class="pl-head">' +
+        '<span class="pl-num">' + String(p.orden).padStart(2, "0") + "</span>" +
+        '<span class="pl-tipo">' + esc(p.tipo) + "</span>" +
+      "</div>" +
+      '<span class="estado estado--' + p.estado + '"><span class="dot"></span>' + estadoLabel[p.estado] + "</span>" +
+      '<h3 class="pl-title">' + esc(p.titulo) + "</h3>" +
+      '<p class="pl-resumen">' + esc(p.objetivo) + "</p>";
+
+    var link = el("button", "pl-link", 'Ver reseña <span class="arrow">→</span>');
+    link.type = "button";
+    link.setAttribute("aria-label", "Ver reseña: " + p.titulo);
+    link.addEventListener("click", function () { openLightbox(p); });
+    side.appendChild(link);
+    band.appendChild(side);
+
+    /* ---- capturas ---- */
+    if (p.imgs && p.imgs.length) {
+      var wrap = el("div", "pl-scroll");
+      var strip = el("div", "pl-strip");
+      strip.setAttribute("role", "group");
+      strip.setAttribute("aria-label", "Capturas de " + p.titulo);
+      p.imgs.forEach(function (src, i) {
+        var b = el("button", "pl-shot");
+        b.type = "button";
+        b.setAttribute("aria-label", "Ver captura " + (i + 1) + " de " + p.imgs.length + ": " + p.titulo);
+        b.innerHTML = '<img src="' + esc(src) + '" alt="' + esc(p.titulo) + " — captura " + (i + 1) + '" loading="lazy">';
+        b.addEventListener("click", function () { openLightbox(p, i); });
+        b.querySelector("img").addEventListener("load", function () { marcarDesplazamiento(wrap); });
+        strip.appendChild(b);
+      });
+      wrap.appendChild(strip);
+      wrap.appendChild(el("span", "pl-more", "&#8250;"));
+      strip.addEventListener("scroll", function () { marcarDesplazamiento(wrap); });
+      band.appendChild(wrap);
+    } else {
+      /* sin capturas: campo azul claro.
+         - en desarrollo → campo vacío, solo el pie "En desarrollo…"
+         - vigente       → eyebrow + línea destacada + pie
+         El texto opcional vive en data.js como p.vacio = [eyebrow, linea, pie]. */
+      var v = p.vacio || [];
+      var empty = el("div", "pl-empty");
+      if (p.estado === "desarrollo") {
+        empty.innerHTML = '<span class="pl-empty-foot">En desarrollo…</span>';
+      } else {
+        empty.innerHTML =
+          (v[0] ? '<p class="pl-empty-eyebrow">' + esc(v[0]) + "</p>" : "<span></span>") +
+          (v[1] ? '<p class="pl-empty-line">' + esc(v[1]) + "</p>" : "") +
+          '<span class="pl-empty-foot">' + esc(v[2] || "Vigente · capturas en preparación") + "</span>";
+      }
+      band.appendChild(empty);
+    }
+
+    return band;
+  }
+
+  function renderPliego() {
+    pliego.innerHTML = "";
     var grupo = { vigente: 0, desarrollo: 1 };
     var list = PROYECTOS.slice().sort(function (a, b) {
       var g = (grupo[a.estado] || 0) - (grupo[b.estado] || 0);
       if (g !== 0) return g;
       return (a.orden || 0) - (b.orden || 0);
     });
-    list.forEach((p, i) => bannerList.appendChild(bannerEl(p, i)));
+    list.forEach(function (p) { pliego.appendChild(bandEl(p)); });
+    $$(".pl-scroll", pliego).forEach(marcarDesplazamiento);
   }
+  window.addEventListener("resize", function () {
+    $$(".pl-scroll", pliego).forEach(marcarDesplazamiento);
+  });
 
-  renderBanners();
+  renderPliego();
 
   /* ===========================================================
      LIGHTBOX
@@ -188,7 +239,7 @@
     lbRender();
   }
 
-  function openLightbox(p) {
+  function openLightbox(p, startIndex) {
     $("#lbType").textContent = p.tipo;
     $("#lbTitle").textContent = p.titulo;
     const lbObj = $("#lbObj");
@@ -196,6 +247,7 @@
     const parrafos = (p.sintesis && p.sintesis.length) ? p.sintesis : [p.objetivo];
     parrafos.forEach((txt) => lbObj.appendChild(el("p", null, esc(txt))));
     buildGallery(p);
+    if (startIndex) { lbIndex = startIndex; lbRender(); }
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
     $("#lbClose").focus();
