@@ -59,3 +59,17 @@ tramo,lote,orden,url,resultado,filas_generadas,timestamp
 4,F,58,https://cpeip.cl/evaluacion-de-la-docencia/,"Responde. Pagina descriptiva del Sistema de Reconocimiento, sin informes ni descargas.",1,2026-07-30
 4,F,59,https://cpeip.cl/informe-nacional-del-portafolio-2022/,"Responde. El informe no vive aqui: remite a docentemas.cl, dominio fuera del inventario.",1,2026-07-30
 4,F,60,https://www.evaluacionconocimientos.cl/,Responde. Pagina informativa publica con temarios 2026; no es un sistema con credenciales como declaraba el reconocimiento.,1,2026-07-30
+5,F,61,https://datosabiertos.mineduc.cl/evaluacion-docente/,"Responde. .rar y .zip 2004-2024, con enlace directo del ano 2024.",1,2026-07-30
+5,F,62,https://datosabiertos.mineduc.cl/evaluacion-de-conocimientos-especificos-y-pedagogicos-ecep-2/,"Responde. .rar y .zip 2016-2024, con enlace directo del ano 2024.",1,2026-07-30
+5,F,63,https://datosabiertos.mineduc.cl/cargos-docentes/,Responde. .rar 2003-2025. La pagina se titula Cargos docentes y el archivo se publica como Directorio-Docentes.,1,2026-07-30
+5,F,64,https://datosabiertos.mineduc.cl/asistentes-de-la-educacion/,"Responde. .rar 2007-2025, con enlace directo del ano 2025.",1,2026-07-30
+5,G,65,https://demre.cl/portales/portal-bases-datos,Cabeceras HTTP malformadas: la respuesta no se puede parsear. Falla de protocolo de todo el dominio demre.cl.,1,2026-07-30
+5,G,66,https://demre.cl/estadisticas/compendios-estadisticos,Misma falla de protocolo del dominio demre.cl.,1,2026-07-30
+5,G,67,mencionada sin URL directa (resultados de admision por unidad educativa),Sin URL que abrir. Tercera y ultima de las tres filas sin URL del reconocimiento.,1,2026-07-30
+5,G,68,https://www.mifuturo.cl/sies/,"Responde. Buscadores, informes y tableros. La descarga exige registro, contra lo que declaraba el reconocimiento.",1,2026-07-30
+5,G,69,https://www.cned.cl/bases-de-datos,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
+5,G,70,https://datosabiertos.mineduc.cl/pruebas-de-admision-a-la-educacion-superior/,Responde. .rar y .zip para los procesos 2021-2026. Archivo mas reciente de todo el catalogo.,1,2026-07-30
+5,I,71,https://educacionpublica.gob.cl/servicios-locales-de-educacion-publica/,Redirige 301 a dep.gob.cl: la Direccion de Educacion Publica migro de dominio. El destino responde.,1,2026-07-30
+5,I,72,https://educacionpublica.gob.cl/wp-content/uploads/2025/08/REX-N%C2%B0177-APRUEBA-CONVENIO-DE-DESEMPENO-SLEP-ATACAMA-FAEP-2025.pdf,"Redirige 301 a dep.gob.cl. El archivo existe, 4,3 MB, pero su texto no es extraible.",1,2026-07-30
+5,I,73,https://educacionpublica.gob.cl/dep/informe-2025-del-consejo-de-evaluacion-releva-avances-en-la-implementacion-de-los-slep-y-entrega-recomendaciones-para-su-consolidacion/,"Responde en dep.gob.cl. Informe 2025 mas ocho informes previos, 2018-2024.",1,2026-07-30
+5,I,74,https://slepsantiagocentro.gob.cl/,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
