@@ -1,7 +1,7 @@
 # Inventario de estructura — slep_monitoreo
 
 - **Raíz:** `/Users/tomgc/Projects/slep_monitoreo`
-- **Generado:** 2026-07-30 11:33:20
+- **Generado:** 2026-07-30 11:35:06
 - **Total de carpetas:** 13
 - **Total de archivos:** 77
 - **Exclusiones:** `.git/` `_archivo/` `handoff/` `.claude/` `node_modules/` `.DS_Store`
@@ -31,8 +31,8 @@
       20260729_cierre_operativo_log.md  (23.1 KB)
   estructura/
     .gitkeep  (0 B)
-    estructura_actual.md  (2.9 KB)
-    estructura_actual.txt  (3.2 KB)
+    estructura_actual.md  (3.1 KB)
+    estructura_actual.txt  (3.4 KB)
     estructura_anterior.md  (2.9 KB)
     estructura_anterior.txt  (3.2 KB)
   traspasos/

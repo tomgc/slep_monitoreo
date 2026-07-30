@@ -1,9 +1,9 @@
 # Inventario de estructura — slep_monitoreo
 
 - **Raíz:** `/Users/tomgc/Projects/slep_monitoreo`
-- **Generado:** 2026-07-30 11:35:06
+- **Generado:** 2026-07-30 12:44:26
 - **Total de carpetas:** 13
-- **Total de archivos:** 77
+- **Total de archivos:** 82
 - **Exclusiones:** `.git/` `_archivo/` `handoff/` `.claude/` `node_modules/` `.DS_Store`
 
 ## Árbol
@@ -20,21 +20,25 @@
     .gitkeep  (0 B)
     50_catalogo_project_cards.md  (13.0 KB)
     50_contrato_atlas_datos.md  (12.6 KB)
-    backlog_acumulativo.md  (42.3 KB)
+    backlog_acumulativo.md  (53.5 KB)
     encargo_diseno_portafolio.md  (4.3 KB)
-    ESTADO.md  (1.5 KB)
+    ESTADO.md  (1.1 KB)
     POLITICA_PROYECTO.md  (39.1 KB)
+    resultado_reconocimiento_fuentes.md  (33.1 KB)
     SETTINGS_Y_PROMPTS_OPERACIONALES.md  (81.7 KB)
   andamios/
     20260729_encargo_cierre_sesion09.md  (15.9 KB)
+    20260730_encargo_sesion11.md  (23.4 KB)
+    20260730_encargo_sesion11b.md  (10.3 KB)
     logs/
       20260729_cierre_operativo_log.md  (23.1 KB)
+      20260730_ordenacion_y_deuda_log.md  (21.8 KB)
   estructura/
     .gitkeep  (0 B)
     estructura_actual.md  (3.1 KB)
     estructura_actual.txt  (3.4 KB)
-    estructura_anterior.md  (2.9 KB)
-    estructura_anterior.txt  (3.2 KB)
+    estructura_anterior.md  (3.1 KB)
+    estructura_anterior.txt  (3.4 KB)
   traspasos/
     .gitkeep  (0 B)
     archivo/
@@ -46,7 +50,8 @@
       traspaso_cierre_v06.md  (16.1 KB)
       traspaso_cierre_v07.md  (12.0 KB)
       traspaso_cierre_v08.md  (26.7 KB)
-    traspaso_cierre_v09.md  (43.4 KB)
+      traspaso_cierre_v09.md  (43.4 KB)
+    traspaso_cierre_v10.md  (45.9 KB)
 CLAUDE.md  (3.6 KB)
 docs/
   .nojekyll  (0 B)
@@ -106,7 +111,7 @@ docs/
 | Extensión | Archivos |
 | --- | ---: |
 | png | 30 |
-| md | 21 |
+| md | 26 |
 | otf | 6 |
 | js | 5 |
 | gitkeep | 4 |
