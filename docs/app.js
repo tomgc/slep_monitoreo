@@ -40,8 +40,46 @@
   function marcarDesplazamiento(wrap) {
     var s = wrap.querySelector(".pl-strip");
     if (!s) return;
+    /* Con una sola captura no hay "más capturas" que anunciar, aunque esa
+       captura sea más ancha que la franja y por tanto desplazable. */
+    if (s.querySelectorAll(".pl-shot").length < 2) {
+      wrap.classList.remove("has-more");
+      wrap.classList.remove("has-prev");
+      return;
+    }
     var resto = s.scrollWidth - s.clientWidth;
     wrap.classList.toggle("has-more", resto > 4 && s.scrollLeft < resto - 4);
+    wrap.classList.toggle("has-prev", s.scrollLeft > 4);
+  }
+
+  /* Avanza o retrocede el pasador hasta el borde de la captura siguiente, en
+     vez de una cantidad fija de píxeles: las capturas tienen anchos distintos
+     (la altura es la que se normaliza), así que un salto fijo dejaría medias
+     capturas a la vista. */
+  var SIN_ANIMACION = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function desplazarPasador(wrap, dir) {
+    var s = wrap.querySelector(".pl-strip");
+    if (!s) return;
+    var base = s.getBoundingClientRect().left;
+    var shots = $$(".pl-shot", s);
+    var destino = null;
+    for (var i = 0; i < shots.length; i++) {
+      var x = shots[i].getBoundingClientRect().left - base + s.scrollLeft;
+      if (dir > 0 && x > s.scrollLeft + 4) { destino = x; break; }
+      if (dir < 0 && x < s.scrollLeft - 4) { destino = x; }
+    }
+    if (destino === null) destino = dir > 0 ? s.scrollWidth : 0;
+    s.scrollTo({ left: destino, behavior: SIN_ANIMACION ? "auto" : "smooth" });
+  }
+
+  function navEl(wrap, dir) {
+    var b = el("button", "pl-nav " + (dir > 0 ? "next" : "prev"),
+      '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M' +
+      (dir > 0 ? "9 5l7 7-7 7" : "15 5l-7 7 7 7") + '"/></svg>');
+    b.type = "button";
+    b.setAttribute("aria-label", dir > 0 ? "Ver capturas siguientes" : "Ver capturas anteriores");
+    b.addEventListener("click", function () { desplazarPasador(wrap, dir); });
+    return b;
   }
 
   function bandEl(p) {
@@ -82,7 +120,8 @@
         strip.appendChild(b);
       });
       wrap.appendChild(strip);
-      wrap.appendChild(el("span", "pl-more", "&#8250;"));
+      wrap.appendChild(navEl(wrap, -1));
+      wrap.appendChild(navEl(wrap, 1));
       strip.addEventListener("scroll", function () { marcarDesplazamiento(wrap); });
       band.appendChild(wrap);
     } else {
