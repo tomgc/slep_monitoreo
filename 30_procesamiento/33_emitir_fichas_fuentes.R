@@ -101,6 +101,11 @@ if (file.exists(RUTA_SOL)) {
   w(glue("| Bloque B | {extraer(fila_b)} | Abrir desde navegador, por 403 o falla de transporte |"))
   w(glue("| Bloque C | {extraer(fila_c)} | Acceso con credenciales institucionales |"))
   w("")
+  w(glue("**Quedan {extraer(fila_a)} solicitudes en el bloque A, ",
+         "{extraer(fila_b)} en el B y {extraer(fila_c)} en el C.** ",
+         "Mientras esas fuentes no se resuelvan, sus fichas conservan sus `NA`: ",
+         "el catalogo no las inventa."))
+  w("")
   w("El detalle vive en `40_salidas/solicitudes_al_titular.md`.")
   w("")
 }

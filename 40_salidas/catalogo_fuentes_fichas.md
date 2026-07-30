@@ -26,15 +26,17 @@ Que parte de este catalogo esta verificada y que parte es promesa.
 | Completitud de campos clave | Fuentes | De un total de |
 |---|---|---|
 | Con enlace de descarga directo | 24 | 83 |
-| Con nombres de variable | 7 | 83 |
-| Con copia local en un proyecto hermano | 7 | 83 |
-| Con documentacion tecnica identificada | 18 | 83 |
+| Con nombres de variable | 10 | 83 |
+| Con copia local en un proyecto hermano | 10 | 83 |
+| Con documentacion tecnica identificada | 21 | 83 |
 
 | Solicitudes pendientes al titular | Fuentes | Que se necesita |
 |---|---|---|
 | Bloque A | 12 | Descargar el archivo y ponerlo a disposicion |
 | Bloque B | 23 | Abrir desde navegador, por 403 o falla de transporte |
 | Bloque C | 3 | Acceso con credenciales institucionales |
+
+**Quedan 12 solicitudes en el bloque A, 23 en el B y 3 en el C.** Mientras esas fuentes no se resuelvan, sus fichas conservan sus `NA`: el catalogo no las inventa.
 
 El detalle vive en `40_salidas/solicitudes_al_titular.md`.
 
@@ -531,8 +533,8 @@ El detalle vive en `40_salidas/solicitudes_al_titular.md`.
 
 - **ambito_monitoreo:** 1. Comunidades educativas
 - **subambito:** 1.1 Trayectorias estudiantiles
-- **descripcion:** NA
-- **variables:** NA
+- **descripcion:** Asistencia mensual declarada por estudiante, construida desde el Sistema de Informacion General de Estudiantes (SIGE), con dias asistidos, dias trabajados y asistencia promedio del mes.
+- **variables:** AGNO; MES_ESCOLAR; RBD; DGV_RBD; NOM_RBD; COD_REG_RBD; NOM_REG_RBD_A; COD_PRO_RBD; COD_COM_RBD; NOM_COM_RBD; COD_DEPROV_RBD; NOM_DEPROV_RBD; RURAL_RBD; NOMBRE_SLEP; COD_DEPE; COD_DEPE2; COD_ENSE; COD_ENSE2; COD_GRADO; LET_CUR; MRUN; GEN_ALU; FEC_NAC_ALU; COD_COM_ALU; NOM_COM_ALU; DIAS_ASISTIDOS12; DIAS_TRABAJADOS; ASIS_PROMEDIO
 - **base_datos:** Datos Abiertos
 - **emisor:** Centro de Estudios del Ministerio de Educacion (CEM)
 - **via_de_acceso:** Portal de datos abiertos
@@ -540,29 +542,29 @@ El detalle vive en `40_salidas/solicitudes_al_titular.md`.
 - **url_referencia:** https://datosabiertos.mineduc.cl/
 - **url_descarga:** NA
 - **formato:** NA
-- **detalle_tecnico:** NA
-- **unidad_de_analisis:** NA
-- **llaves_de_union:** NA
-- **desagregacion_territorial:** NA
-- **cobertura_temporal:** NA
-- **periodicidad:** NA
+- **detalle_tecnico:** 28 variables declaradas en el esquema de registro del emisor. Unidad responsable: Unidad de Estadisticas del Centro de Estudios. La unidad basica es el registro, no el estudiante: un alumno puede tener mas de un registro por cambio de establecimiento, de curso o de nivel dentro del mismo mes.
+- **unidad_de_analisis:** Estudiante
+- **llaves_de_union:** MRUN; RBD; AGNO; MES_ESCOLAR
+- **desagregacion_territorial:** Establecimiento
+- **cobertura_temporal:** 2023 a marzo de 2026 segun el esquema de registro consultado
+- **periodicidad:** Mensual
 - **mes_publicacion:** NA
-- **datos_personales:** NA
-- **documentacion_tecnica:** NA
+- **datos_personales:** Identificador enmascarado (MRUN)
+- **documentacion_tecnica:** Esquema de registro er_asistencia_mensual_2026_web.pdf, 22 paginas, en copia local; no publicado como URL en la pagina del portal
 - **condiciones_de_uso:** NA
 - **usos_en_monitoreo:** Asistencia mensual, insumo central de la minuta de asistencia del Area.
 - **estado_verificacion:** Declarada sin verificar
 - **fecha_verificacion:** NA
-- **observaciones:** Listada en la seccion Estudiantes del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior.
-- **copia_local:** NA
+- **observaciones:** Listada en la seccion Estudiantes del portal y ausente del reconocimiento. El estado se mantiene porque su pagina propia no se abrio; la ESTRUCTURA si quedo verificada en el barrido de esquemas de registro, leyendo el documento del propio emisor en copia local. El emisor declara que la entrega es mensual sin fecha fija.
+- **copia_local:** slep_seguimiento_educacion_inicial
 - **fuente_equivalente:** NA
 
 #### F017 <c2><b7> Asistencia anual por estudiante
 
 - **ambito_monitoreo:** 1. Comunidades educativas
 - **subambito:** 1.1 Trayectorias estudiantiles
-- **descripcion:** NA
-- **variables:** NA
+- **descripcion:** Asistencia anual por estudiante, agregada desde las bases de asistencia mensual, con dias asistidos por mes, dias asistidos del ano, tasa de asistencia anual y su categoria.
+- **variables:** AGNO; MRUN; RBD; COD_REG_RBD; NOM_REG_RBD_A; COD_PRO_RBD; COD_COM_RBD; NOM_COM_RBD; COD_DEPROV_RBD; NOM_DEPROV_RBD; RURAL_RBD; COD_DEPE2; COD_ENSE; COD_ENSE2; COD_GRADO; LET_CUR; GEN_ALU; FEC_NAC; DIAS_ASISTIDOS_3 a DIAS_ASISTIDOS_12; DIAS_ASISTIDOS_ANUAL; TASA_ASISTENCIA_ANUAL; CATEGORIA_ASIS_ANUAL; SLEP; NOMBRE_SLEP; COHORTE
 - **base_datos:** Datos Abiertos
 - **emisor:** Centro de Estudios del Ministerio de Educacion (CEM)
 - **via_de_acceso:** Portal de datos abiertos
@@ -570,21 +572,21 @@ El detalle vive en `40_salidas/solicitudes_al_titular.md`.
 - **url_referencia:** https://datosabiertos.mineduc.cl/
 - **url_descarga:** NA
 - **formato:** NA
-- **detalle_tecnico:** NA
-- **unidad_de_analisis:** NA
-- **llaves_de_union:** NA
-- **desagregacion_territorial:** NA
-- **cobertura_temporal:** NA
-- **periodicidad:** NA
+- **detalle_tecnico:** El esquema de registro del emisor declara el bloque DIAS_ASISTIDOS_3 a DIAS_ASISTIDOS_12 como una variable por mes, de marzo a diciembre; se abrevia por rango. Fuente declarada: Sistema de Informacion General de Estudiantes (SIGE). Fecha de la informacion del esquema consultado: 31 de enero de 2026. Las observaciones excluyen a estudiantes de establecimientos particulares pagados, que no reportan asistencia mensual.
+- **unidad_de_analisis:** Estudiante
+- **llaves_de_union:** MRUN; RBD; AGNO
+- **desagregacion_territorial:** Establecimiento
+- **cobertura_temporal:** 2015-2019; 2022-2025. Serie discontinua: sin 2020 ni 2021
+- **periodicidad:** Anual
 - **mes_publicacion:** NA
-- **datos_personales:** NA
-- **documentacion_tecnica:** NA
+- **datos_personales:** Identificador enmascarado (MRUN)
+- **documentacion_tecnica:** Esquema de registro ER_Asistencia_anual_PUB.pdf, 19 paginas, en copia local; no publicado como URL en la pagina del portal
 - **condiciones_de_uso:** NA
 - **usos_en_monitoreo:** Asistencia individual anual; llave de trayectoria junto a matricula y rendimiento.
 - **estado_verificacion:** Declarada sin verificar
 - **fecha_verificacion:** NA
-- **observaciones:** Listada en la seccion Estudiantes del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior.
-- **copia_local:** NA
+- **observaciones:** Listada en la seccion Estudiantes del portal y ausente del reconocimiento. El estado se mantiene porque su pagina propia no se abrio; la ESTRUCTURA si quedo verificada en el barrido de esquemas de registro. SERIE DISCONTINUA, y el corte es de la FUENTE, no de la copia local: el propio esquema de registro declara que la base dejo de elaborarse en 2020 y 2021 producto del cierre de establecimientos durante la pandemia. Quien construya una serie larga sin saberlo leera dos anos ausentes como una caida de asistencia. Segunda advertencia del emisor: de la base publica se eliminaron los registros de estudiantes no binarios por ser pocos casos facilmente identificables al cruzar variables, en cumplimiento de la Ley 19.628.
+- **copia_local:** slep_estudio_oferta_demanda
 - **fuente_equivalente:** NA
 
 #### F020 <c2><b7> Resumen de matricula por establecimiento
@@ -1345,30 +1347,30 @@ El detalle vive en `40_salidas/solicitudes_al_titular.md`.
 
 - **ambito_monitoreo:** 1. Comunidades educativas
 - **subambito:** 1.3 Aprendizajes y resultados
-- **descripcion:** NA
-- **variables:** NA
+- **descripcion:** Promedio de notas y marca de egreso de estudiantes de ensenanza media, con el establecimiento de egreso y el identificador enmascarado del estudiante.
+- **variables:** AGNO; RBD; DGV_RBD; COD_REG_RBD; NOM_REG_RBD_A; COD_PRO_RBD; COD_COM_RBD; NOM_COM_RBD; COD_DEPROV_RBD; NOM_DEPROV_RBD; COD_ENSE; COD_GRADO; COD_DEPE; COD_DEPE2; RURAL_RBD; MRUN; MRUN_IPE; PROM_NOTAS_ALU; ORIGEN; ENSE_COMPLETA; MARCA_EGRESO
 - **base_datos:** Datos Abiertos
 - **emisor:** Centro de Estudios del Ministerio de Educacion (CEM)
 - **via_de_acceso:** Portal de datos abiertos
 - **nivel_acceso:** Abierto
 - **url_referencia:** https://datosabiertos.mineduc.cl/
 - **url_descarga:** NA
-- **formato:** NA
-- **detalle_tecnico:** NA
-- **unidad_de_analisis:** NA
-- **llaves_de_union:** NA
-- **desagregacion_territorial:** NA
-- **cobertura_temporal:** NA
-- **periodicidad:** NA
+- **formato:** csv
+- **detalle_tecnico:** 21 variables declaradas en el esquema de registro del emisor. Trae dos identificadores enmascarados distintos, MRUN y MRUN_IPE, lo que permite enlazar con el registro de admision a la educacion superior. La copia local cubre 2023, 2024 y 2025.
+- **unidad_de_analisis:** Estudiante
+- **llaves_de_union:** MRUN; MRUN_IPE; RBD; AGNO
+- **desagregacion_territorial:** Establecimiento
+- **cobertura_temporal:** 2023-2025 en la copia local; el rango del portal no se observo
+- **periodicidad:** Anual
 - **mes_publicacion:** NA
-- **datos_personales:** NA
-- **documentacion_tecnica:** NA
+- **datos_personales:** Identificador enmascarado (MRUN)
+- **documentacion_tecnica:** Esquema de registro er_notas_y_egresados_ensenanza_media_publ_2025.pdf, 8 paginas, en copia local; no publicado como URL en la pagina del portal
 - **condiciones_de_uso:** NA
 - **usos_en_monitoreo:** Cierre de trayectoria de ensenanza media.
 - **estado_verificacion:** Declarada sin verificar
 - **fecha_verificacion:** NA
-- **observaciones:** Listada en la seccion Estudiantes del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior.
-- **copia_local:** NA
+- **observaciones:** Listada en la seccion Estudiantes del portal y ausente del reconocimiento. El estado se mantiene porque su pagina propia no se abrio; la ESTRUCTURA si quedo verificada en el barrido de esquemas de registro. La copia local vive en slep_paes, no en el proyecto de matricula: el equipo la usa como insumo de la trayectoria hacia la educacion superior, y MRUN_IPE es la llave de ese enlace.
+- **copia_local:** slep_paes
 - **fuente_equivalente:** NA
 
 #### F019 <c2><b7> Resumen de rendimiento por establecimiento
@@ -2739,9 +2741,9 @@ Las fuentes cuyo `estado_verificacion` no es `Verificada`, con su observacion.
 |---|---|---|
 | F012 CEM Interactivo | URL viva sin descarga confirmada | No se siguio la redireccion: el destino es una aplicacion JavaScript de Power BI que no rinde como HTML plano. La observacion del 301 y del host de destino basta para clasificar la via de acceso. |
 | F013 Portal API de datos abiertos del Mineduc | URL viva sin descarga confirmada | El host responde pero la validacion TLS falla: el certificado presentado cubre workspace.junar.com y workspace.vor-tex.io, no api.datos.mineduc.cl. El dominio parece delegado a la plataforma Junar. El reconocimiento la registro como http; sobre https no es inspeccionable desde esta sesion. Contenido no verificado. |
-| F016 Asistencia declarada mensual por ano | Declarada sin verificar | Listada en la seccion Estudiantes del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior. |
-| F017 Asistencia anual por estudiante | Declarada sin verificar | Listada en la seccion Estudiantes del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior. |
-| F018 Notas y egresados de ensenanza media | Declarada sin verificar | Listada en la seccion Estudiantes del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior. |
+| F016 Asistencia declarada mensual por ano | Declarada sin verificar | Listada en la seccion Estudiantes del portal y ausente del reconocimiento. El estado se mantiene porque su pagina propia no se abrio; la ESTRUCTURA si quedo verificada en el barrido de esquemas de registro, leyendo el documento del propio emisor en copia local. El emisor declara que la entrega es mensual sin fecha fija. |
+| F017 Asistencia anual por estudiante | Declarada sin verificar | Listada en la seccion Estudiantes del portal y ausente del reconocimiento. El estado se mantiene porque su pagina propia no se abrio; la ESTRUCTURA si quedo verificada en el barrido de esquemas de registro. SERIE DISCONTINUA, y el corte es de la FUENTE, no de la copia local: el propio esquema de registro declara que la base dejo de elaborarse en 2020 y 2021 producto del cierre de establecimientos durante la pandemia. Quien construya una serie larga sin saberlo leera dos anos ausentes como una caida de asistencia. Segunda advertencia del emisor: de la base publica se eliminaron los registros de estudiantes no binarios por ser pocos casos facilmente identificables al cruzar variables, en cumplimiento de la Ley 19.628. |
+| F018 Notas y egresados de ensenanza media | Declarada sin verificar | Listada en la seccion Estudiantes del portal y ausente del reconocimiento. El estado se mantiene porque su pagina propia no se abrio; la ESTRUCTURA si quedo verificada en el barrido de esquemas de registro. La copia local vive en slep_paes, no en el proyecto de matricula: el equipo la usa como insumo de la trayectoria hacia la educacion superior, y MRUN_IPE es la llave de ese enlace. |
 | F019 Resumen de rendimiento por establecimiento | Declarada sin verificar | Listada en la seccion Establecimientos del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior. |
 | F020 Resumen de matricula por establecimiento | Declarada sin verificar | Listada en la seccion Establecimientos del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior. |
 | F021 Planes de Mejoramiento Educativo (PME) | Declarada sin verificar | Listada en la seccion Establecimientos del portal y ausente del reconocimiento. Pendiente de verificacion en una pasada posterior. |
