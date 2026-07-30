@@ -410,6 +410,235 @@ catalogo <- tribble(
   "NA"
 )
 
+# ==============================================================================
+# TRAMO 2: 11 URLs restantes del lote H mas las 4 primeras del lote J.
+#
+# Cuatro sitios respondieron HTTP 403 a la herramienta de consulta. Un 403 NO es
+# un enlace roto: el host respondio y lo mas probable es que un navegador humano
+# si alcance la pagina. Se clasifican como "URL viva sin descarga confirmada" y
+# el 403 queda declarado en observaciones, para que el titular lo revise a mano.
+# ==============================================================================
+
+INE  <- "Instituto Nacional de Estadisticas (INE)"
+MDSF <- "Ministerio de Desarrollo Social y Familia (MDSF)"
+DEIS <- "Departamento de Estadisticas e Informacion de Salud (DEIS)"
+
+catalogo_t2 <- tribble(
+  ~id_fuente, ~ambito_monitoreo, ~subambito, ~dato, ~descripcion, ~variables, ~base_datos, ~emisor, ~via_de_acceso, ~nivel_acceso, ~url_referencia, ~url_descarga, ~formato, ~detalle_tecnico, ~unidad_de_analisis, ~llaves_de_union, ~desagregacion_territorial, ~cobertura_temporal, ~periodicidad, ~mes_publicacion, ~datos_personales, ~documentacion_tecnica, ~condiciones_de_uso, ~usos_en_monitoreo, ~estado_verificacion, ~fecha_verificacion, ~observaciones, ~copia_local,
+
+  "F025", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Geodatos abiertos y cartografia censal",
+  "Cartografia censal y division politico administrativa: limites regionales, provinciales, comunales, distritales y urbanos, manzana y entidad censal, mas capas de estadisticas vitales, permisos de edificacion, genero y migracion internacional.",
+  "NA", "Geodatos Abiertos", INE, "Descarga directa desde sitio institucional", "Abierto",
+  "https://www.ine.gob.cl/herramientas/portal-de-mapas/geodatos-abiertos", "NA",
+  "shapefile; zip",
+  "Capas en shapefile comprimido y geodatabase, mas puntos de servicio REST de ArcGIS. La pagina no expone enlaces directos de archivo en su HTML.",
+  "Comuna", "NA", "Comuna",
+  "Censos 1970-2024; permisos de edificacion 2010-2020; registros administrativos 2011-2020",
+  "Sin periodicidad definida", "NA", "Sin datos de personas",
+  "Metodologia de georreferenciacion de permisos de edificacion",
+  "Declara terminos de uso y licencia de datos abiertos, sin detalle en la pagina",
+  "Capas base para georreferenciar establecimientos y construir indicadores territoriales.",
+  "Verificada", HOY,
+  "Es el portal desde el cual cuelga el conjunto de microdatos por manzana de F026, cuya URL directa esta rota. Unica via viva observada para ese material.",
+  "NA",
+
+  "F026", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Microdatos del Censo 2017 a nivel de manzana",
+  "Microdatos censales agregados a nivel de manzana, publicados como conjunto en el portal ArcGIS Open Data del INE.",
+  "NA", "Portal ArcGIS Open Data", INE, "Descarga directa desde sitio institucional", "Abierto",
+  "https://geoine-ine-chile.opendata.arcgis.com/datasets/54e0c40680054efaabeb9d53b09e1e7a_0", "NA",
+  "NA", "NA", "NA", "NA", "NA", "2017", "Por evento", "NA",
+  "Sin datos de personas", "NA", "NA",
+  "Caracterizacion socioeconomica del entorno inmediato de cada establecimiento.",
+  "Enlace roto", HOY,
+  "El servidor devuelve HTTP 404. El identificador del conjunto en la URL del reconocimiento ya no resuelve. El material parece seguir disponible por el portal de geodatos abiertos (F025); confirmar la URL vigente es una solicitud al titular.",
+  "NA",
+
+  "F027", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Estimaciones y proyecciones de poblacion",
+  "Estimaciones y proyecciones de poblacion del pais, sus regiones y comunas, por area urbana y rural, construidas sobre supuestos de fecundidad, mortalidad y migracion.",
+  "NA", "Demografia y vitales", INE, "Descarga directa desde sitio institucional", "Abierto",
+  "https://www.ine.gob.cl/estadisticas/sociales/demografia-y-vitales/proyecciones-de-poblacion", "NA",
+  "pdf",
+  "En la pagina solo se observaron publicaciones en PDF (infografias y sintesis). El reconocimiento le atribuia formato xlsx, que no se observo como enlace en esta verificacion.",
+  "Comuna", "NA", "Comuna",
+  "1992-2050 base 2017 a nivel pais; 2002-2035 a nivel region y area",
+  "Sin periodicidad definida", "NA", "Sin datos de personas",
+  "Declara secciones de metodologias y metadatos, sin enlace observable en la pagina",
+  "Declara terminos de uso y licencia de datos abiertos",
+  "Denominador poblacional para tasas de cobertura y de asistencia por comuna.",
+  "Verificada", HOY,
+  "Discrepancia con el reconocimiento, que declaraba xlsx: en la pagina solo se observaron PDF. Los archivos de datos, si existen, no estan expuestos como enlace en el HTML. Solicitud registrada.",
+  "NA",
+
+  "F028", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Banco de datos de la Encuesta Nacional de Empleo",
+  "Sistema de consulta que permite cruces dinamicos sobre los microdatos de la Encuesta Nacional de Empleo desde el trimestre enero-marzo de 2010.",
+  "NA", "Banco de datos ENE", INE, "Sistema con credenciales", "Abierto con registro",
+  "https://bancodatosene.ine.cl/", "NA", "sin descarga",
+  "Exige cuenta con correo y contrasena; el registro pide RUT, nombre, correo, tipo de institucion y rol. Ofrece una funcion de exportar datos cuyo formato no se declara. Serie recalibrada con proyecciones del Censo 2017; las calibraciones con Censo 2002 se conservan hasta diciembre de 2019.",
+  "Nacional", "NA", "Region",
+  "2010 en adelante, por trimestre movil",
+  "Trimestral", "NA", "Sin datos de personas",
+  "Diccionario de variables, cuestionario y preguntas frecuentes, los tres en PDF",
+  "NA",
+  "Contexto laboral del territorio; ocupacion y desocupacion como determinantes de trayectoria escolar.",
+  "Verificada", HOY,
+  "Unica fuente de los dos tramos que publica diccionario de variables. El registro exige RUT del solicitante, dato personal del funcionario que se inscribe, no de terceros.",
+  "NA",
+
+  "F029", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Organizacion Instituto Nacional de Estadisticas en datos.gob.cl",
+  "Organizacion del portal nacional de datos abiertos que agrupa 63 conjuntos del INE: encuestas estructurales de servicios, comercio y transporte, entre otras.",
+  "NA", "datos.gob.cl", INE, "Portal de datos abiertos", "Abierto",
+  "https://datos.gob.cl/organization/instituto_nacional_de_estadisticas", "NA", "html",
+  "Publica 63 conjuntos. El portal declara explicitamente que no hay formatos que coincidan con la busqueda, de modo que los formatos por conjunto no son observables desde la pagina de la organizacion.",
+  "NA", "NA", "Nacional", "NA", "Sin periodicidad definida", "NA",
+  "Sin datos de personas", "NA",
+  "Creative Commons Non-Commercial en los 63 conjuntos",
+  "Via alternativa a las encuestas del INE, con licencia declarada.",
+  "Verificada", HOY,
+  "Ultima actualizacion mas reciente observada: 2021-10-12, casi cinco anos atras, lo que sugiere una organizacion poco mantenida frente al sitio propio del INE. Sus 63 conjuntos no se catalogan como filas propias (enmienda E7): no se observo aporte por conjunto frente a la fuente primaria.",
+  "NA",
+
+  "F030", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Encuesta de Caracterizacion Socioeconomica Nacional (Casen)",
+  "Bases de datos de la encuesta Casen, con series historicas de pobreza, ingresos y caracterizacion socioeconomica de los hogares.",
+  "NA", "Observatorio Social", MDSF, "Descarga directa desde sitio institucional", "Abierto",
+  "https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen", "NA", "NA",
+  "La pagina remite a la seccion Base de Datos de cada ano, sin exponer enlaces directos de archivo ni declarar formatos.",
+  "Nacional", "NA", "Region",
+  "1990, 1992, 1994, 1996, 1998, 2000, 2003, 2006, 2009, 2011, 2013, 2015, 2017, 2020, 2022, 2024",
+  "Bienal", "NA", "NA", "NA",
+  "No declara licencia; solo politica de privacidad",
+  "Caracterizacion socioeconomica del territorio; pobreza comunal como contexto de la trayectoria escolar.",
+  "Verificada", HOY,
+  "El reconocimiento declaraba un libro de codigos de 2017 como documentacion asociada; en esta verificacion no se observo enlace a libro de codigos, manual ni cuestionario. La periodicidad Bienal se deduce del patron de la serie declarada en la pagina y no de una declaracion del emisor.",
+  "NA",
+
+  "F031", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Banco Integrado de Datos (BIDAT)",
+  "Repositorio centralizado de datos sociales y de inversion publica: encuestas del Observatorio Social, Registro Social de Hogares, pobreza comunal, canasta basica de alimentos, vulnerabilidad socioterritorial y programas sociales.",
+  "NA", "BIDAT", MDSF, "Portal de datos abiertos", "Abierto",
+  "https://bidat.gob.cl/", "NA", "csv; xlsx; pdf; shapefile; zip",
+  "Ofrece ademas formatos estadisticos propietarios no cubiertos por el vocabulario del esquema: STATA (.dta), R (.rdata) y SPSS (.sav). Los mapas en shapefile requieren conversion a .zip. Sitio servido como HTML, no como aplicacion JavaScript.",
+  "Comuna", "NA", "Comuna", "NA", "Sin periodicidad definida", "NA",
+  "NA", "Declara glosario y centro de ayuda, sin enlace a documentacion tecnica",
+  "Remite a una pagina de terminos de uso, sin licencia declarada en la portada",
+  "Punto de acceso real a los datos del Registro Social de Hogares y a la pobreza comunal.",
+  "Verificada", HOY,
+  "Republicacion que SI genera fila propia bajo la enmienda E7: aporta formatos que la fuente primaria no da (.dta, .rdata, .sav y shapefile) y agrega conjuntos que Casen por si sola no cubre. El acceso al Registro de Informacion Social exige afiliacion institucional; el resto del portal es abierto.",
+  "NA",
+
+  "F032", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Indicadores territoriales del Observatorio Social",
+  "Reportes comunales de caracterizacion social y estimaciones de pobreza comunal, segun lo declara el reconocimiento.",
+  "NA", "Observatorio Social", MDSF, "Consulta web sin descarga", "Abierto",
+  "http://observatorio.ministeriodesarrollosocial.gob.cl/indicadores/", "NA", "NA", "NA",
+  "Comuna", "NA", "Comuna", "NA", "Sin periodicidad definida", "NA",
+  "NA", "NA", "NA",
+  "Reportes comunales listos para caracterizar el territorio sin procesar microdatos.",
+  "URL viva sin descarga confirmada", HOY,
+  "El servidor devuelve HTTP 403 a la herramienta de consulta. El host respondio, de modo que no es un enlace roto: lo mas probable es que un navegador humano si alcance la pagina. Contenido no verificado. Solicitud registrada.",
+  "NA",
+
+  "F033", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Consulta interactiva de datos Casen (Redatam)",
+  "Herramienta de consulta interactiva del Observatorio Social que genera tabulados y mapas tematicos de Casen en linea.",
+  "NA", "Redatam", MDSF, "Consulta web sin descarga", "Abierto",
+  "https://redatam.org/redchl/mds/casen/", "NA", "sin descarga",
+  "Aplicacion de servidor Redatam. Solo se obtuvo el encabezado de la pagina; el resto exige interaccion.",
+  "Nacional", "NA", "Comuna", "NA", "Sin periodicidad definida", "NA",
+  "NA", "NA", "NA",
+  "Tabulados de Casen sin descargar ni procesar microdatos.",
+  "URL viva sin descarga confirmada", HOY,
+  "La pagina responde pero entrega solo su encabezado: los anos cubiertos, la desagregacion y el requisito de registro no son observables sin interactuar con la aplicacion. Solicitud registrada.",
+  "NA",
+
+  "F034", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Data Social, catalogo Casen",
+  "Series historicas de indicadores sociales de Casen, segun lo declara el reconocimiento.",
+  "NA", "Data Social", MDSF, "Consulta web sin descarga", "Abierto",
+  "https://datasocial.ministeriodesarrollosocial.gob.cl/catalogo/casen", "NA", "NA", "NA",
+  "NA", "NA", "NA", "NA", "Sin periodicidad definida", "NA",
+  "NA", "NA", "NA",
+  "Series de indicadores sociales ya calculadas.",
+  "No encontrada", HOY,
+  "El dominio datasocial.ministeriodesarrollosocial.gob.cl no resuelve en DNS. No es un 404 dentro de un sitio vivo: el host no existe. El servicio parece haber sido retirado o absorbido por BIDAT (F031), que el propio reconocimiento describe como sucesor operativo del Observatorio Social.",
+  "NA",
+
+  "F035", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Registro Social de Hogares",
+  "Portal del Registro Social de Hogares: entrega la cartola con la calificacion socioeconomica del hogar y gestiona solicitudes de ingreso, actualizacion y rectificacion.",
+  "NA", "Registro Social de Hogares", MDSF, "Sistema con credenciales", "Institucional mediado",
+  "https://www.registrosocial.gob.cl/", "NA", "sin descarga",
+  "Exige autenticacion; la pagina no declara cual es el metodo. Entrega la cartola del hogar, no bases de datos.",
+  "NA", "NA", "NA", "NA", "Sin periodicidad definida", "NA",
+  "Datos personales sensibles", "Publica documentos, protocolos, material audiovisual e infografias",
+  "NA",
+  "Tramo de calificacion socioeconomica del hogar, consultable caso a caso.",
+  "Verificada", HOY,
+  "No publica estadisticas agregadas ni bases descargables: los datos del Registro Social de Hogares en formato de base viven en BIDAT (F031), como ya advertia el reconocimiento. No es equivalente de F031: aqui se consulta un hogar, alla se descarga una base.",
+  "NA",
+
+  "F036", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Portal del Departamento de Estadisticas e Informacion de Salud",
+  "Portal de estadisticas de salud: estadisticas vitales, egresos hospitalarios, urgencias, vacunacion y defunciones, segun lo declara el reconocimiento.",
+  "NA", "DEIS", DEIS, "Portal de datos abiertos", "Abierto",
+  "https://deis.minsal.cl/", "NA", "NA", "NA",
+  "NA", "NA", "Comuna", "NA", "Sin periodicidad definida", "NA",
+  "NA", "NA", "NA",
+  "Contexto de salud del territorio escolar.",
+  "URL viva sin descarga confirmada", HOY,
+  "El servidor devuelve HTTP 403 a la herramienta de consulta. El host respondio: no es un enlace roto. El reconocimiento ya advertia que el sitio combina secciones nuevas y antiguas y sugeria una migracion en curso; conviene verificar estabilidad de URLs desde navegador. Solicitud registrada.",
+  "NA",
+
+  "F037", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Organizacion Ministerio de Salud en datos.gob.cl",
+  "Organizacion del portal nacional de datos abiertos con 10 conjuntos del sector salud: urgencias respiratorias por semana epidemiologica, establecimientos de salud, defunciones, hospitalizacion y notificaciones ENO.",
+  "NA", "datos.gob.cl", DEIS, "Portal de datos abiertos", "Abierto",
+  "https://datos.gob.cl/organization/ministerio_de_salud", "NA",
+  "csv; xlsx; pdf; json; zip",
+  "Publica 10 conjuntos. Declara ademas formatos estadisticos propietarios fuera del vocabulario del esquema: STATA (.dta), R (.rdata), SPSS (.sav) y Parquet.",
+  "Comuna", "NA", "Region", "NA", "Semanal", "NA",
+  "Sin datos de personas", "NA",
+  "Creative Commons: CCZero en 7 conjuntos, Non-Commercial en 2, Attribution en 1",
+  "Contexto sanitario del territorio; defunciones y urgencias como senal de contexto.",
+  "Verificada", HOY,
+  "Actualizacion mas reciente observada: 2026-07-29, dos dias antes de esta verificacion. Es la via mas viva del DEIS frente a su portal propio (F036), que no fue inspeccionable. La periodicidad Semanal se toma de los conjuntos por semana epidemiologica y no de una declaracion global del portal.",
+  "NA",
+
+  "F038", "3. Contexto", "3.1 Contexto socioterritorial",
+  "Repositorio DEIS de indicadores basicos de salud",
+  "Indicadores basicos de salud por comuna, natalidad y mortalidad, segun lo declara el reconocimiento.",
+  "NA", "Repositorio DEIS", DEIS, "Descarga directa desde sitio institucional", "Abierto",
+  "https://repositoriodeis.minsal.cl/", "NA", "NA", "NA",
+  "Comuna", "NA", "Comuna", "NA", "Sin periodicidad definida", "NA",
+  "NA", "NA", "NA",
+  "Natalidad y mortalidad comunal como contexto demografico.",
+  "URL viva sin descarga confirmada", HOY,
+  "El servidor devuelve HTTP 403 a la herramienta de consulta. El host respondio: no es un enlace roto. Solicitud registrada.",
+  "NA",
+
+  "F039", "1. Comunidades educativas", "1.2 Desarrollo social y personal",
+  "Estudio Nacional de Drogas en Poblacion Escolar 2023",
+  "Base de datos del decimoquinto Estudio Nacional de Drogas en Poblacion Escolar, segun lo declara el reconocimiento.",
+  "NA", "Observatorio Chileno de Drogas",
+  "Servicio Nacional para la Prevencion y Rehabilitacion del Consumo de Drogas y Alcohol (SENDA)",
+  "Descarga directa desde sitio institucional", "Abierto con registro",
+  "https://www.senda.gob.cl/informacion-y-conocimiento/observatorio-chileno-drogas/base-de-datos/base-de-datos-estudio-nacional-de-poblacion-escolar-2023/",
+  "NA", "NA", "NA",
+  "Estudiante", "NA", "Comuna", "2023", "Por evento", "NA",
+  "NA", "NA", "NA",
+  "Consumo de sustancias en poblacion escolar; insumo de convivencia y desarrollo personal.",
+  "URL viva sin descarga confirmada", HOY,
+  "El servidor devuelve HTTP 403 a la herramienta de consulta. El host respondio: no es un enlace roto. Las prevalencias que el reconocimiento atribuia a esta base no se transcriben al catalogo por no haberse observado. Solicitud registrada.",
+  "NA"
+)
+
+catalogo <- bind_rows(catalogo, catalogo_t2)
+
 # ---- Enmienda E8: campo `fuente_equivalente`, aplicado retroactivamente ------
 # Es el id_fuente de la fila que publica el mismo dato por otra via, y es
 # bidireccional. En las 24 filas del tramo 1 el valor es "NA" en todas, y el
@@ -419,6 +648,27 @@ catalogo <- tribble(
 # no hay id_fuente al cual apuntar. En cuanto una republicacion genere fila, el
 # par se declara explicitamente en ambos extremos.
 catalogo <- catalogo |> mutate(fuente_equivalente = "NA")
+
+# Cuando una fuente tiene mas de una equivalente, van separadas por "; ", igual
+# que el resto de los campos multivalor del esquema. Las cuatro filas de Casen
+# publican el mismo dato por cuatro vias distintas y se apuntan entre si.
+EQUIVALENCIAS <- c(
+  F030 = "F031; F033; F034",   # Casen en el Observatorio Social
+  F031 = "F030; F033; F034",   # Casen dentro de BIDAT
+  F033 = "F030; F031; F034",   # Casen tabulada en Redatam
+  F034 = "F030; F031; F033"    # Casen en Data Social (host caido)
+)
+catalogo$fuente_equivalente[match(names(EQUIVALENCIAS), catalogo$id_fuente)] <-
+  unname(EQUIVALENCIAS)
+
+# Comprobacion de reciprocidad: si A declara a B, B debe declarar a A.
+for (id in names(EQUIVALENCIAS)) {
+  destinos <- trimws(strsplit(EQUIVALENCIAS[[id]], ";")[[1]])
+  for (d in destinos) {
+    vuelta <- trimws(strsplit(catalogo$fuente_equivalente[catalogo$id_fuente == d], ";")[[1]])
+    if (!id %in% vuelta) stop("equivalencia no reciproca: ", id, " -> ", d)
+  }
+}
 
 # ==============================================================================
 # LOG DE VERIFICACION: una linea por URL visitada (encargo fase 1, punto 5)
@@ -440,7 +690,23 @@ log_verificacion <- tribble(
   1L, "A", 12L, "https://datosabiertos.mineduc.cl/CEM_Interactivo", "Responde 301. Redirige a app.powerbi.com. Redireccion no seguida: destino es aplicacion JavaScript.", 1L, HOY,
   1L, "A", 13L, "http://api.datos.mineduc.cl/", "Host responde pero falla la validacion TLS: certificado de workspace.junar.com y workspace.vor-tex.io. Contenido no inspeccionable.", 1L, HOY,
   1L, "A", 14L, "https://datos.gob.cl/organization/subsecretaria_de_educacion", "Responde. 30 conjuntos. Unica fuente del tramo con licencia declarada (Creative Commons).", 1L, HOY,
-  1L, "H", 15L, "https://censo2024.ine.gob.cl/resultados/", "Responde. Sintesis en PDF, consulta interactiva y Redatam Web hasta manzana. No publica las cifras que el reconocimiento le atribuia.", 1L, HOY
+  1L, "H", 15L, "https://censo2024.ine.gob.cl/resultados/", "Responde. Sintesis en PDF, consulta interactiva y Redatam Web hasta manzana. No publica las cifras que el reconocimiento le atribuia.", 1L, HOY,
+
+  2L, "H", 16L, "https://www.ine.gob.cl/herramientas/portal-de-mapas/geodatos-abiertos", "Responde. Capas censales y de division politico administrativa en shapefile y geodatabase. Sin enlaces directos de archivo en el HTML.", 1L, HOY,
+  2L, "H", 17L, "https://geoine-ine-chile.opendata.arcgis.com/datasets/54e0c40680054efaabeb9d53b09e1e7a_0", "HTTP 404. El identificador del conjunto ya no resuelve. Enlace roto.", 1L, HOY,
+  2L, "H", 18L, "https://www.ine.gob.cl/estadisticas/sociales/demografia-y-vitales/proyecciones-de-poblacion", "Responde. Solo PDF observados, no xlsx como declaraba el reconocimiento. Proyecciones 1992-2050.", 1L, HOY,
+  2L, "H", 19L, "https://bancodatosene.ine.cl/", "Responde. Exige registro con correo y contrasena. Unica fuente de los dos tramos con diccionario de variables publicado.", 1L, HOY,
+  2L, "H", 20L, "https://datos.gob.cl/organization/instituto_nacional_de_estadisticas", "Responde. 63 conjuntos, licencia CC Non-Commercial. Ultima actualizacion observada: 2021-10-12.", 1L, HOY,
+  2L, "H", 21L, "https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen", "Responde. Serie 1990-2024. Sin enlaces directos ni documentacion tecnica observable.", 1L, HOY,
+  2L, "H", 22L, "https://bidat.gob.cl/", "Responde. Nueve colecciones. Aporta formatos que la fuente primaria no da: .dta, .rdata, .sav y shapefile.", 1L, HOY,
+  2L, "H", 23L, "http://observatorio.ministeriodesarrollosocial.gob.cl/indicadores/", "HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.", 1L, HOY,
+  2L, "H", 24L, "https://redatam.org/redchl/mds/casen/", "Responde solo con su encabezado. Aplicacion Redatam que exige interaccion.", 1L, HOY,
+  2L, "H", 25L, "https://datasocial.ministeriodesarrollosocial.gob.cl/catalogo/casen", "El dominio no resuelve en DNS. El host no existe.", 1L, HOY,
+  2L, "H", 26L, "https://www.registrosocial.gob.cl/", "Responde. Consulta de cartola con autenticacion; no publica bases descargables.", 1L, HOY,
+  2L, "J", 27L, "https://deis.minsal.cl/", "HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.", 1L, HOY,
+  2L, "J", 28L, "https://datos.gob.cl/organization/ministerio_de_salud", "Responde. 10 conjuntos, licencias CC. Actualizacion mas reciente: 2026-07-29.", 1L, HOY,
+  2L, "J", 29L, "https://repositoriodeis.minsal.cl/", "HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.", 1L, HOY,
+  2L, "J", 30L, "https://www.senda.gob.cl/informacion-y-conocimiento/observatorio-chileno-drogas/base-de-datos/base-de-datos-estudio-nacional-de-poblacion-escolar-2023/", "HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.", 1L, HOY
 )
 
 # ==============================================================================

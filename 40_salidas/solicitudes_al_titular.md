@@ -15,7 +15,12 @@
 > y desde qué URL exacta. Cuando los archivos queden en una ruta, se leen en
 > solo lectura, se completan las filas y la entrada se marca resuelta.
 
-**Estado al cierre del tramo 1:** 8 solicitudes, todas pendientes.
+**Estado al cierre del tramo 2:** 18 solicitudes acumuladas, todas pendientes
+(8 del tramo 1, 10 del tramo 2). Ninguna resuelta todavía.
+
+---
+
+# Tramo 1 — 8 solicitudes
 >
 > *Actualizado antes del tramo 2:* las URL pasaron de ser la página del conjunto a
 > ser el enlace directo al archivo. Los enlaces sí estaban expuestos como `<a href>`
@@ -86,3 +91,93 @@
 - **URL de descarga:** <https://datosabiertos.mineduc.cl/wp-content/uploads/2026/06/Practicantes-y-Titulados-TP-2025.rar> (año 2025; los demás años en <https://datosabiertos.mineduc.cl/practicantes-y-titulados-tecnico-profesional/>, `.rar` 2013-2021 y 2023-2025, `.zip` 2022)
 - **Qué falta:** esquema de registros y nombres de columna.
 - **Campos bloqueados:** `variables`, `unidad_de_analisis`, `llaves_de_union`, `datos_personales`, `documentacion_tecnica`
+
+---
+
+# Tramo 2 — 10 solicitudes nuevas
+
+Cuatro de estas entradas tienen una causa distinta a la del tramo 1: **el
+servidor devuelve HTTP 403 a la herramienta de consulta**. Un 403 no es un
+enlace roto —el host respondió— y lo más probable es que un navegador humano sí
+alcance la página. Lo que se pide en esos casos no es el archivo, sino una
+mirada desde navegador.
+
+## F025 — Geodatos abiertos y cartografía censal (INE)
+
+- **id_fuente:** F025
+- **base_datos y emisor:** Geodatos Abiertos · Instituto Nacional de Estadísticas (INE)
+- **URL de descarga:** <https://www.ine.gob.cl/herramientas/portal-de-mapas/geodatos-abiertos> (la página no expone enlaces directos de archivo en su HTML; las capas se descargan desde la interfaz)
+- **Qué falta:** nombres de campos de las capas y URL directa de la capa de manzana del Censo 2024.
+- **Campos bloqueados:** `variables`, `url_descarga`, `llaves_de_union`
+
+## F026 — Microdatos del Censo 2017 a nivel de manzana (INE)
+
+- **id_fuente:** F026
+- **base_datos y emisor:** Portal ArcGIS Open Data · Instituto Nacional de Estadísticas (INE)
+- **URL de descarga:** <https://geoine-ine-chile.opendata.arcgis.com/datasets/54e0c40680054efaabeb9d53b09e1e7a_0> — **devuelve HTTP 404**
+- **Qué falta:** la URL vigente del conjunto; el identificador del reconocimiento ya no resuelve y el material parece seguir disponible vía F025.
+- **Campos bloqueados:** todos salvo `dato`, `emisor` y `cobertura_temporal`
+
+## F027 — Estimaciones y proyecciones de población (INE)
+
+- **id_fuente:** F027
+- **base_datos y emisor:** Demografía y vitales · Instituto Nacional de Estadísticas (INE)
+- **URL de descarga:** <https://www.ine.gob.cl/estadisticas/sociales/demografia-y-vitales/proyecciones-de-poblacion> (solo se observaron PDF; el reconocimiento le atribuía `xlsx`)
+- **Qué falta:** confirmar si existen los archivos `xlsx` de proyecciones por comuna y su URL; hoy solo se ven infografías y síntesis en PDF.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato` (parcial)
+
+## F030 — Encuesta Casen (Observatorio Social)
+
+- **id_fuente:** F030
+- **base_datos y emisor:** Observatorio Social · Ministerio de Desarrollo Social y Familia (MDSF)
+- **URL de descarga:** <https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen> (remite a la sección Base de Datos de cada año, sin enlaces directos)
+- **Qué falta:** libro de códigos y URL de la base del año 2024; la página no expone ni documentación ni enlaces de archivo.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `llaves_de_union`, `documentacion_tecnica`, `datos_personales`
+
+## F031 — Banco Integrado de Datos (BIDAT)
+
+- **id_fuente:** F031
+- **base_datos y emisor:** BIDAT · Ministerio de Desarrollo Social y Familia (MDSF)
+- **URL de descarga:** <https://bidat.gob.cl/> (portada; los conjuntos cuelgan de sus fichas)
+- **Qué falta:** esquema de las bases de pobreza comunal y Registro Social de Hogares, y sus URL de ficha.
+- **Campos bloqueados:** `variables`, `url_descarga`, `llaves_de_union`, `cobertura_temporal`, `datos_personales`
+
+## F032 — Indicadores territoriales del Observatorio Social
+
+- **id_fuente:** F032
+- **base_datos y emisor:** Observatorio Social · Ministerio de Desarrollo Social y Familia (MDSF)
+- **URL de descarga:** <http://observatorio.ministeriodesarrollosocial.gob.cl/indicadores/> — **devuelve HTTP 403 a la herramienta**
+- **Qué falta:** una revisión desde navegador que confirme qué reportes comunales ofrece y si permiten descarga.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `documentacion_tecnica`, `condiciones_de_uso`
+
+## F033 — Consulta interactiva de Casen (Redatam)
+
+- **id_fuente:** F033
+- **base_datos y emisor:** Redatam · Ministerio de Desarrollo Social y Familia (MDSF)
+- **URL de descarga:** <https://redatam.org/redchl/mds/casen/> (aplicación de servidor; solo entregó su encabezado)
+- **Qué falta:** años de Casen cubiertos, desagregación disponible y si exige registro. Requiere interactuar con la aplicación.
+- **Campos bloqueados:** `cobertura_temporal`, `desagregacion_territorial`, `nivel_acceso` (por confirmar)
+
+## F036 — Portal del DEIS
+
+- **id_fuente:** F036
+- **base_datos y emisor:** DEIS · Departamento de Estadísticas e Información de Salud (DEIS)
+- **URL de descarga:** <https://deis.minsal.cl/> — **devuelve HTTP 403 a la herramienta**
+- **Qué falta:** revisión desde navegador del catálogo de conjuntos y sus formatos; el reconocimiento advertía una migración en curso y conviene confirmar qué URL son estables.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `periodicidad`, `documentacion_tecnica`
+
+## F038 — Repositorio DEIS de indicadores básicos de salud
+
+- **id_fuente:** F038
+- **base_datos y emisor:** Repositorio DEIS · Departamento de Estadísticas e Información de Salud (DEIS)
+- **URL de descarga:** <https://repositoriodeis.minsal.cl/> — **devuelve HTTP 403 a la herramienta**
+- **Qué falta:** revisión desde navegador de las series disponibles y sus formatos.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `periodicidad`
+
+## F039 — Estudio Nacional de Drogas en Población Escolar 2023 (SENDA)
+
+- **id_fuente:** F039
+- **base_datos y emisor:** Observatorio Chileno de Drogas · Servicio Nacional para la Prevención y Rehabilitación del Consumo de Drogas y Alcohol (SENDA)
+- **URL de descarga:** <https://www.senda.gob.cl/informacion-y-conocimiento/observatorio-chileno-drogas/base-de-datos/base-de-datos-estudio-nacional-de-poblacion-escolar-2023/> — **devuelve HTTP 403 a la herramienta**
+- **Qué falta:** revisión desde navegador; el reconocimiento declaraba que la base exige registro, lo que no se pudo confirmar.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `nivel_acceso` (por confirmar), `documentacion_tecnica`

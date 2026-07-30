@@ -14,3 +14,18 @@ tramo,lote,orden,url,resultado,filas_generadas,timestamp
 1,A,13,http://api.datos.mineduc.cl/,Host responde pero falla la validacion TLS: certificado de workspace.junar.com y workspace.vor-tex.io. Contenido no inspeccionable.,1,2026-07-30
 1,A,14,https://datos.gob.cl/organization/subsecretaria_de_educacion,Responde. 30 conjuntos. Unica fuente del tramo con licencia declarada (Creative Commons).,1,2026-07-30
 1,H,15,https://censo2024.ine.gob.cl/resultados/,"Responde. Sintesis en PDF, consulta interactiva y Redatam Web hasta manzana. No publica las cifras que el reconocimiento le atribuia.",1,2026-07-30
+2,H,16,https://www.ine.gob.cl/herramientas/portal-de-mapas/geodatos-abiertos,Responde. Capas censales y de division politico administrativa en shapefile y geodatabase. Sin enlaces directos de archivo en el HTML.,1,2026-07-30
+2,H,17,https://geoine-ine-chile.opendata.arcgis.com/datasets/54e0c40680054efaabeb9d53b09e1e7a_0,HTTP 404. El identificador del conjunto ya no resuelve. Enlace roto.,1,2026-07-30
+2,H,18,https://www.ine.gob.cl/estadisticas/sociales/demografia-y-vitales/proyecciones-de-poblacion,"Responde. Solo PDF observados, no xlsx como declaraba el reconocimiento. Proyecciones 1992-2050.",1,2026-07-30
+2,H,19,https://bancodatosene.ine.cl/,Responde. Exige registro con correo y contrasena. Unica fuente de los dos tramos con diccionario de variables publicado.,1,2026-07-30
+2,H,20,https://datos.gob.cl/organization/instituto_nacional_de_estadisticas,"Responde. 63 conjuntos, licencia CC Non-Commercial. Ultima actualizacion observada: 2021-10-12.",1,2026-07-30
+2,H,21,https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen,Responde. Serie 1990-2024. Sin enlaces directos ni documentacion tecnica observable.,1,2026-07-30
+2,H,22,https://bidat.gob.cl/,"Responde. Nueve colecciones. Aporta formatos que la fuente primaria no da: .dta, .rdata, .sav y shapefile.",1,2026-07-30
+2,H,23,http://observatorio.ministeriodesarrollosocial.gob.cl/indicadores/,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
+2,H,24,https://redatam.org/redchl/mds/casen/,Responde solo con su encabezado. Aplicacion Redatam que exige interaccion.,1,2026-07-30
+2,H,25,https://datasocial.ministeriodesarrollosocial.gob.cl/catalogo/casen,El dominio no resuelve en DNS. El host no existe.,1,2026-07-30
+2,H,26,https://www.registrosocial.gob.cl/,Responde. Consulta de cartola con autenticacion; no publica bases descargables.,1,2026-07-30
+2,J,27,https://deis.minsal.cl/,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
+2,J,28,https://datos.gob.cl/organization/ministerio_de_salud,"Responde. 10 conjuntos, licencias CC. Actualizacion mas reciente: 2026-07-29.",1,2026-07-30
+2,J,29,https://repositoriodeis.minsal.cl/,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
+2,J,30,https://www.senda.gob.cl/informacion-y-conocimiento/observatorio-chileno-drogas/base-de-datos/base-de-datos-estudio-nacional-de-poblacion-escolar-2023/,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
