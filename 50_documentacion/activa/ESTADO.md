@@ -1,23 +1,21 @@
 ---
 slug: slep_monitoreo
-nombre_real: Sitio del Area de Monitoreo — SLEP Costa Central
+nombre_real: Sitio del Área de Monitoreo — SLEP Costa Central
 categoria: activo
 semaforo: activo
-sesion_actual: v09
+sesion_actual: v10
 ultima_actividad: 2026-07-30
 maneja_sensibles: false
-tipo_pendiente: bloqueante
+tipo_pendiente: nuevo
 ---
 ## En que vamos
 
-La sesion 9 reconcilio el repositorio tras una sesion paralela, restauro el blindaje de los documentos de protocolo y implemento el rediseno del portafolio entregado por Claude Design: el pliego de capturas, con una franja por proyecto y las capturas recorridas en horizontal a altura normalizada. Se materializo el encargo del catalogo de Project Cards con arquitectura de fuente unica en `data.js`, y un encargo autonomo a Claude Code cerro la optimizacion de las 26 capturas arrastrada desde la sesion 6 (9,21 MB a 2,39 MB). El sitio esta funcional y el repositorio sincronizado hasta `84a415b`.
+El sitio dejó de ser single-page: tiene una segunda página de formación en uso de datos educativos, con una tabla filtrable de 52 fuentes y una barra de navegación compartida. Cada proyecto del portafolio tiene ahora una llave estable y un enlace profundo compartible. El catálogo que alimenta la tabla es provisorio y no verificado, pero ya existe un contrato de ingesta y un validador ejecutable para el que llegue desde la revisión bibliográfica en curso.
 
 ## Proximo paso
 
-Commitear y sincronizar el cierre (escaner, capturas optimizadas, traspaso v09, backlog y este archivo), y luego agregar el campo `id` a los 12 proyectos con enlaces profundos `#p=<id>` en `app.js`.
+Versionar el cierre de la sesión 10 (escáner, traspaso, backlog y este archivo) y luego depositar el catálogo revisado si llegó, o construir el atlas si no.
 
 ## Bloqueantes
 
-- El cierre de la sesion 9 quedo sin commitear: escaner, 24 capturas recomprimidas, traspaso, backlog, `ESTADO.md` y los dos andamios.
-- Gate del titular pendiente: aceptar o revertir la recompresion de capturas (auditada visualmente en 1 de 26).
-- Gate del titular pendiente: que hacer con las cinco ramas remotas `claude/*`, cuatro de proyectos ajenos que tocan rutas de la raiz anteriores al traslado del sitio a `docs/`.
+Ninguno para desarrollar. Uno para difundir: el catálogo de `docs/atlas_datos.js` no está verificado contra las fuentes, y el sitio no se difunde hasta que el titular lo revise.
