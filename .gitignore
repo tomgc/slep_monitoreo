@@ -11,6 +11,6 @@ _archivo/
 handoff/
 
 # Traspasos de sesión: memoria interna, NO se publican (Pages sirve todo el repo)
-50_documentacion/traspasos/*.md
+50_documentacion/traspasos/**
 POLITICA_PROYECTO.md
 SETTINGS_Y_PROMPTS_OPERACIONALES.md
