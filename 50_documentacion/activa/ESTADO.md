@@ -3,19 +3,19 @@ slug: slep_monitoreo
 nombre_real: Sitio del Área de Monitoreo — SLEP Costa Central
 categoria: activo
 semaforo: activo
-sesion_actual: v10
+sesion_actual: v11
 ultima_actividad: 2026-07-30
 maneja_sensibles: false
-tipo_pendiente: nuevo
+tipo_pendiente: documentacion
 ---
 ## En que vamos
 
-El sitio dejó de ser single-page: tiene una segunda página de formación en uso de datos educativos, con una tabla filtrable de 52 fuentes y una barra de navegación compartida. Cada proyecto del portafolio tiene ahora una llave estable y un enlace profundo compartible. El catálogo que alimenta la tabla es provisorio y no verificado, pero ya existe un contrato de ingesta y un validador ejecutable para el que llegue desde la revisión bibliográfica en curso.
+El proyecto dejó de ser solo un sitio estático: tiene un pipeline de R que produjo el catálogo de fuentes de datos del Área, con 83 fuentes verificadas una por una contra la página de su emisor, validadas por script y emitidas como fichas. El catálogo nace del CSV, nunca de las fichas, que se regeneran. El frente del atlas quedó intacto y es la siguiente decisión del titular.
 
 ## Proximo paso
 
-Versionar el cierre de la sesión 10 (escáner, traspaso, backlog y este archivo) y luego depositar el catálogo revisado si llegó, o construir el atlas si no.
+Publicar los 10 commits de la sesión 11 y luego resolver las 38 solicitudes del catálogo, agrupadas por bloque en `40_salidas/solicitudes_al_titular.md`.
 
 ## Bloqueantes
 
-Ninguno para desarrollar. Uno para difundir: el catálogo de `docs/atlas_datos.js` no está verificado contra las fuentes, y el sitio no se difunde hasta que el titular lo revise.
+Ninguno para desarrollar. Uno para completar el catálogo: 38 de sus 83 fuentes conservan campos en `NA` que solo se llenan con acceso del titular (12 exigen descargar un archivo, 23 abrirlo desde navegador, 3 credenciales institucionales). El sitio sigue sin difundirse hasta que el titular revise el contenido del catálogo del atlas, que no se tocó.
