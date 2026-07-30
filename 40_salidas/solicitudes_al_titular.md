@@ -15,8 +15,12 @@
 > y desde qué URL exacta. Cuando los archivos queden en una ruta, se leen en
 > solo lectura, se completan las filas y la entrada se marca resuelta.
 
-**Estado al cierre del tramo 2:** 18 solicitudes acumuladas, todas pendientes
-(8 del tramo 1, 10 del tramo 2). Ninguna resuelta todavía.
+**Estado al cierre del tramo 3:** 27 solicitudes acumuladas, todas pendientes
+(8 del tramo 1, 10 del tramo 2, 9 del tramo 3). Ninguna resuelta todavía.
+
+**La más pertinente para el Área es F053**, la plataforma de resultados Simce
+para SLEP y sostenedores: es la vía institucional propia del servicio y hoy
+devuelve 404 en la ruta que registró el reconocimiento.
 
 ---
 
@@ -181,3 +185,89 @@ mirada desde navegador.
 - **URL de descarga:** <https://www.senda.gob.cl/informacion-y-conocimiento/observatorio-chileno-drogas/base-de-datos/base-de-datos-estudio-nacional-de-poblacion-escolar-2023/> — **devuelve HTTP 403 a la herramienta**
 - **Qué falta:** revisión desde navegador; el reconocimiento declaraba que la base exige registro, lo que no se pudo confirmar.
 - **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `nivel_acceso` (por confirmar), `documentacion_tecnica`
+
+---
+
+# Tramo 3 — 9 solicitudes nuevas
+
+Aparecen tres fallas de transporte que no se habían visto antes y que no se
+confunden entre sí: **bucle de redirecciones** (F040), **certificado TLS sin
+cadena verificable** (F043, F047) y **plantilla sin renderizar** (F051). En los
+tres casos el host responde: lo que falla es la recuperación del contenido, no
+la existencia del recurso.
+
+## F040 — Bibliodrogas, listado de estudios (SENDA)
+
+- **id_fuente:** F040
+- **base_datos y emisor:** Bibliodrogas · Servicio Nacional para la Prevención y Rehabilitación del Consumo de Drogas y Alcohol (SENDA)
+- **URL de descarga:** <https://bibliodrogas.gob.cl/observatorio/> — **bucle de redirecciones, excede 10 saltos**
+- **Qué falta:** revisión desde navegador de la serie de estudios en población escolar y sus enlaces de descarga.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `documentacion_tecnica`
+
+## F041 — Datos abiertos de permisos de residencia (SERMIG)
+
+- **id_fuente:** F041
+- **base_datos y emisor:** Datos abiertos SERMIG · Servicio Nacional de Migraciones (SERMIG)
+- **URL de descarga:** los cuatro libros de metadatos, que son el esquema publicado y no exigen bajar el dato:
+  - <https://serviciomigraciones.cl/wp-content/uploads/2024/03/Metadatos_RT_Acogidas_2000_1er_semestre_2026.xlsx>
+  - <https://serviciomigraciones.cl/wp-content/uploads/estudios/Datos-abiertos/RT/Metadatos_RT_Resueltas_2000_1er_semestre_2026.xlsx>
+  - <https://serviciomigraciones.cl/wp-content/uploads/estudios/Datos-abiertos/RD/Metadatos_RD_Acogidas_2000_1er_semestre_2026.xlsx>
+  - <https://serviciomigraciones.cl/wp-content/uploads/estudios/Datos-abiertos/RD/Metadatos_RD_Resueltas_2000_1er_semestre_2026.xlsx>
+- **Qué falta:** los libros de metadatos, que traen los nombres de variable sin necesidad de descargar las bases.
+- **Campos bloqueados:** `variables`, `llaves_de_union`, `desagregacion_territorial`, `datos_personales`
+
+## F043 — Sistema de información estadística (Mejor Niñez)
+
+- **id_fuente:** F043
+- **base_datos y emisor:** Sistema de información estadística · Servicio Nacional de Protección Especializada a la Niñez y Adolescencia (Mejor Niñez)
+- **URL de descarga:** <https://sis.mejorninez.cl/mejor-ninez.html> — **cadena de certificados TLS no verificable**
+- **Qué falta:** revisión desde navegador (probablemente lo abra con advertencia de certificado) de qué estadísticas ofrece y si permiten descarga.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `desagregacion_territorial`
+
+## F045 — III Estudio Nacional de la Discapacidad (SENADIS)
+
+- **id_fuente:** F045
+- **base_datos y emisor:** III ENDISC · Servicio Nacional de la Discapacidad (SENADIS)
+- **URL de descarga:** <https://www.senadis.gob.cl/descarga/i/7442/documento> (libro del estudio en PDF)
+- **Qué falta:** la base de datos del estudio, que no se observó en la página; solo aparece el libro. Confirmar si ENDIDE 2022 publica microdatos y dónde.
+- **Campos bloqueados:** `variables`, `formato` (parcial), `llaves_de_union`, `datos_personales`
+
+## F047 — Encuesta Nacional de Juventudes (INJUV)
+
+- **id_fuente:** F047
+- **base_datos y emisor:** Encuesta Nacional de Juventudes · Instituto Nacional de la Juventud (INJUV)
+- **URL de descarga:** <https://www.injuv.gob.cl/encuestanacionaldejuventud> — **cadena de certificados TLS no verificable**
+- **Qué falta:** revisión desde navegador de las versiones disponibles de la encuesta y sus bases.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `periodicidad`
+
+## F050 — Resultados Simce e IDPS, sección institucional (Agencia de Calidad)
+
+- **id_fuente:** F050
+- **base_datos y emisor:** Simce · Agencia de Calidad de la Educación (ACE)
+- **URL de descarga:** <https://www.agenciaeducacion.cl/simce/> (los archivos complementarios `.rar` y los informes técnicos cuelgan de esa sección, alojados en Amazon S3)
+- **Qué falta:** los archivos complementarios `.rar` con las bases por establecimiento, y confirmar qué trae el conjunto de datos enlazados RDF/TTL/JSON-LD.
+- **Campos bloqueados:** `variables`, `url_descarga`, `llaves_de_union`, `cobertura_temporal` (parcial)
+
+## F051 — Información estadística por establecimiento (Agencia de Calidad)
+
+- **id_fuente:** F051
+- **base_datos y emisor:** Información estadística · Agencia de Calidad de la Educación (ACE)
+- **URL de descarga:** <https://informacionestadistica.agenciaeducacion.cl> — **entrega la plantilla sin renderizar (`{{titulo}}` literal)**
+- **Qué falta:** revisión desde navegador del catálogo de conjuntos, sus formatos y si publica datos enlazados como declaraba el reconocimiento.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `periodicidad`
+
+## F053 — Plataforma de resultados para SLEP y sostenedores (Agencia de Calidad)
+
+- **id_fuente:** F053
+- **base_datos y emisor:** Plataforma de resultados · Agencia de Calidad de la Educación (ACE)
+- **URL de descarga:** <https://resultadossimce.agenciaeducacion.cl/login> — **HTTP 404 en esa ruta**; el host sí resuelve
+- **Qué falta:** la ruta de entrada vigente. **Es la solicitud más pertinente de las 27**: es la vía institucional propia del SLEP a sus resultados por establecimiento, con el detalle que el dato público no trae, y probablemente ya tengas credenciales.
+- **Campos bloqueados:** `variables`, `url_referencia` (por corregir), `formato`, `cobertura_temporal`, `documentacion_tecnica`
+
+## F054 — Bases Simce a nivel de estudiante (Agencia de Calidad)
+
+- **id_fuente:** F054
+- **base_datos y emisor:** Simce · Agencia de Calidad de la Educación (ACE)
+- **URL de descarga:** no hay descarga. La vía es **solicitud formal por Portal de Transparencia u OIRS**, confirmada en la sección Simce (F050).
+- **Qué falta:** decidir si el Área cursa la solicitud formal; sin eso la fila no puede pasar de `Declarada sin verificar`.
+- **Campos bloqueados:** `variables`, `url_descarga`, `formato`, `cobertura_temporal`, `periodicidad`, `documentacion_tecnica`, `fecha_verificacion`

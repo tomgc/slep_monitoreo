@@ -29,3 +29,18 @@ tramo,lote,orden,url,resultado,filas_generadas,timestamp
 2,J,28,https://datos.gob.cl/organization/ministerio_de_salud,"Responde. 10 conjuntos, licencias CC. Actualizacion mas reciente: 2026-07-29.",1,2026-07-30
 2,J,29,https://repositoriodeis.minsal.cl/,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
 2,J,30,https://www.senda.gob.cl/informacion-y-conocimiento/observatorio-chileno-drogas/base-de-datos/base-de-datos-estudio-nacional-de-poblacion-escolar-2023/,"HTTP 403 a la herramienta. Host vivo, contenido no inspeccionable desde esta sesion.",1,2026-07-30
+3,J,31,https://bibliodrogas.gob.cl/observatorio/,Bucle de redirecciones: excede diez saltos sin llegar a contenido.,1,2026-07-30
+3,J,32,https://serviciomigraciones.cl/en/migration-studies/open-data/,"Responde. Ocho libros xlsx en cuatro pares dato mas metadatos, y un zip de refugio. Unica fuente con metadatos publicados junto al dato.",1,2026-07-30
+3,J,33,https://serviciomigraciones.cl/en/migration-studies/demography/,"Responde. PDF por region y comuna mas zip por continente, sobre Censo 2024. Sin href absolutos en el HTML.",1,2026-07-30
+3,J,34,https://sis.mejorninez.cl/mejor-ninez.html,Cadena de certificados TLS no verificable: falta el intermedio. Contenido no inspeccionable.,1,2026-07-30
+3,J,35,https://cead.spd.gov.cl/estadisticas-delictuales/,"El dominio no resuelve en DNS. Se verifico el espejo cead.minsegpublica.gob.cl, que si responde y es el que se cataloga.",1,2026-07-30
+3,J,36,https://www.senadis.gob.cl/pag/693/2004/iii_estudio_nacional_de_la_discapacidad,"Responde. III ENDISC 2022, libro en PDF. La base de datos como tal no se observo.",1,2026-07-30
+3,J,37,https://datos.gob.cl/organization/servicio_de_registro_civil_e_identificacion,"Responde. Solo 3 conjuntos en xls, ultima actualizacion 2015-10-30. Discrepa fuerte del reconocimiento.",1,2026-07-30
+3,J,38,https://www.injuv.gob.cl/encuestanacionaldejuventud,"Cadena de certificados TLS no verificable: falta el intermedio, igual que en Mejor Ninez.",1,2026-07-30
+3,J,39,https://www.mindep.cl/secciones/211,"Responde. Informe ejecutivo y presentacion en PDF, alojados en Amazon S3.",1,2026-07-30
+3,J,40,https://observatorio.defensorianinez.cl/,"Responde. Indicadores de derechos en cuatro grupos, 2018-2025, con diagnosticos anuales.",1,2026-07-30
+3,B,41,https://www.agenciaeducacion.cl/simce/,Responde. La fuente mejor documentada de los tres tramos: informes tecnicos 2012-2024 y metodologia publicada.,1,2026-07-30
+3,B,42,https://informacionestadistica.agenciaeducacion.cl,Responde con la plantilla sin renderizar: el cuerpo llega con el marcador literal {{titulo}}. Aplicacion de pagina unica.,1,2026-07-30
+3,B,43,https://www.agenciaeducacion.cl/visor-simce-una-nueva-mirada-a-los-datos-de-la-educacion-chilena/,"Responde. Es la noticia de lanzamiento; entrega la URL real del visor, visorsimce.agenciaeducacion.cl.",1,2026-07-30
+3,B,44,https://resultadossimce.agenciaeducacion.cl/login,HTTP 404 en la ruta /login. El host resuelve: la plataforma probablemente tiene otra ruta de entrada.,1,2026-07-30
+3,B,45,mencionada sin URL directa (bases Simce a nivel de estudiante),Sin URL que abrir. Va al catalogo como Declarada sin verificar. F050 confirma que la via es solicitud formal.,1,2026-07-30
