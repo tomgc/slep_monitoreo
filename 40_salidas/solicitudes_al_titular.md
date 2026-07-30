@@ -115,7 +115,7 @@ mirada desde navegador.
 - **id_fuente:** F026
 - **base_datos y emisor:** Portal ArcGIS Open Data · Instituto Nacional de Estadísticas (INE)
 - **URL de descarga:** <https://geoine-ine-chile.opendata.arcgis.com/datasets/54e0c40680054efaabeb9d53b09e1e7a_0> — **devuelve HTTP 404**
-- **Qué falta:** la URL vigente del conjunto; el identificador del reconocimiento ya no resuelve y el material parece seguir disponible vía F025.
+- **Qué falta:** confirmar desde navegador si el conjunto sigue publicado. Se buscó la URL vigente y no se encontró una que responda: los buscadores siguen indexando este mismo identificador como conjunto vivo, y la variante sin sufijo de capa (<https://hub.arcgis.com/datasets/54e0c40680054efaabeb9d53b09e1e7a>) también devuelve 404. Rutas alternativas a probar: <https://ine-chile.maps.arcgis.com/home/item.html?id=54e0c40680054efaabeb9d53b09e1e7a> y el portal de geodatos abiertos (F025).
 - **Campos bloqueados:** todos salvo `dato`, `emisor` y `cobertura_temporal`
 
 ## F027 — Estimaciones y proyecciones de población (INE)

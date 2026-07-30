@@ -452,7 +452,7 @@ catalogo_t2 <- tribble(
   "Sin datos de personas", "NA", "NA",
   "Caracterizacion socioeconomica del entorno inmediato de cada establecimiento.",
   "Enlace roto", HOY,
-  "El servidor devuelve HTTP 404. El identificador del conjunto en la URL del reconocimiento ya no resuelve. El material parece seguir disponible por el portal de geodatos abiertos (F025); confirmar la URL vigente es una solicitud al titular.",
+  "El servidor devuelve HTTP 404. Se busco la URL vigente y no se encontro: los buscadores siguen indexando este mismo identificador como conjunto vivo, y la variante sin el sufijo de capa (hub.arcgis.com/datasets/54e0c40680054efaabeb9d53b09e1e7a) tambien devuelve 404. El 404 puede significar que el conjunto se retiro o que ArcGIS Hub no sirve contenido a un cliente que no sea navegador; con la evidencia disponible no se puede distinguir, y se registra el estado observado sin decidir la causa. Rutas alternativas anotadas para revision desde navegador: ine-chile.maps.arcgis.com/home/item.html?id=54e0c40680054efaabeb9d53b09e1e7a y el portal de geodatos abiertos (F025), que es la via viva confirmada.",
   "NA",
 
   "F027", "3. Contexto", "3.1 Contexto socioterritorial",
