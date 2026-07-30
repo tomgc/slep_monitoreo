@@ -79,6 +79,85 @@ body[data-variant="d5"] .hero h1 { max-width: 22ch; }
 body[data-variant="d5"] .section-head { margin-left: auto; margin-right: auto; text-align: center; }
 body[data-variant="d5"] .eyebrow { justify-content: center; }
 
+/* ===========================================================
+   BARRA DE NAVEGACIÓN (compartida por index.html y formacion.html)
+   -----------------------------------------------------------
+   Mínima y adherida al borde superior. Existe porque el sitio pasó a
+   tener dos páginas: sin ella, la segunda es indescubrible. La página
+   activa se marca con aria-current="page" y no con una clase, para que
+   el estado sea el mismo para el lector de pantalla y para la vista.
+   =========================================================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--page-bg) 92%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  backdrop-filter: saturate(180%) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+/* Sin color-mix (navegadores anteriores a 2023) el fondo queda opaco:
+   se pierde el velo, no la legibilidad. */
+@supports not (background: color-mix(in srgb, white 50%, transparent)) {
+  .topbar { background: var(--page-bg); }
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 56px;
+}
+
+.topbar-brand {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  color: var(--head);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topbar-brand:hover { color: var(--accent-active); }
+
+.topbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.topbar-links a {
+  display: block;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--slate);
+  text-decoration: none;
+  border-radius: var(--radius-2);
+  transition: color 120ms ease, background 120ms ease;
+}
+.topbar-links a:hover { color: var(--ink); background: var(--cream-200); }
+.topbar-links a[aria-current="page"] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--accent-active);
+  border-radius: 0;
+}
+.topbar-links a[aria-current="page"]:hover { background: transparent; }
+
+:where(.topbar a):focus-visible {
+  outline: 2px solid var(--accent-active);
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .topbar-inner { min-height: 50px; gap: 12px; }
+  .topbar-brand { font-size: 13px; }
+  .topbar-links a { padding: 6px 9px; font-size: 13px; }
+}
+
 /* ---------- Shells / sections ---------- */
 .shell { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
 @media (max-width: 720px){ .shell { padding: 0 22px; } }
