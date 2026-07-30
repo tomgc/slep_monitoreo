@@ -14,16 +14,19 @@
 > queden en una ruta, se leen en solo lectura, se completan las filas y la
 > entrada se marca resuelta.
 
-**Estado al cierre del tramo 5 (catálogo completo):** 43 fuentes con solicitud
-pendiente, de 83 filas del catálogo. Ninguna resuelta todavía.
+**Estado tras la segunda pasada de doble fuente (2026-07-30):** de las 43 fuentes
+con solicitud, **5 quedaron resueltas** leyendo copias locales de proyectos
+hermanos y **38 siguen pendientes**. Las resueltas se marcan `✅ RESUELTA` y
+**no se borran**.
 
 Agrupadas por **lo que necesitan de ti**, para resolverlas de una vez:
 
-| Bloque | Qué se necesita | Fuentes |
-|---|---|---|
-| **A** | Descargar el archivo y ponerlo a disposición | 16 |
-| **B** | Abrir desde navegador (403 o falla de transporte) | 24 |
-| **C** | Acceso con credenciales institucionales | 3 |
+| Bloque | Qué se necesita | Fuentes | Resueltas | Pendientes |
+|---|---|---|---|---|
+| **A** | Descargar el archivo y ponerlo a disposición | 16 | 4 | **12** |
+| **B** | Abrir desde navegador (403 o falla de transporte) | 24 | 1 | **23** |
+| **C** | Acceso con credenciales institucionales | 3 | 0 | **3** |
+| | **Total** | **43** | **5** | **38** |
 
 **La más pertinente para el Área es F053**, la plataforma de resultados Simce
 para SLEP y sostenedores: es la vía institucional propia del servicio y hoy
@@ -38,7 +41,12 @@ descarga**, pero que no publican el esquema de registros (el libro de códigos,
 como lo llama Datos Abiertos) ni los nombres de columna. El dato está a un clic;
 lo que falta es abrirlo para leer su estructura.
 
-## F003 — Matrícula educación parvularia
+## F003 — Matrícula educación parvularia · ✅ RESUELTA
+
+> **Resuelta el 2026-07-30** por la segunda pasada de doble fuente: copia local completa
+> (2011-2025) en `slep_estudio_oferta_demanda`, con el esquema de registros
+> `ER_Educacion_parvularia_Oficial_WEB.pdf` que la página no publica. 49 columnas leídas.
+> La entrada se conserva como registro.
 
 - **base_datos y emisor:** Datos Abiertos · Centro de Estudios del Ministerio de Educación (CEM)
 - **URL de descarga:** <https://datosabiertos.mineduc.cl/wp-content/uploads/2025/12/Matricula-Parvularia-2025.rar> (año 2025; los demás años en <https://datosabiertos.mineduc.cl/matricula-educacion-parvularia/>, `.rar` 2011-2025 y `.zip` 2019)
@@ -52,14 +60,24 @@ lo que falta es abrirlo para leer su estructura.
 - **Qué falta:** esquema de registros y nombres de columna.
 - **Campos bloqueados:** `variables`, `unidad_de_analisis`, `llaves_de_union`, `datos_personales`, `documentacion_tecnica`
 
-## F006 — Sistema de Admisión Escolar (SAE)
+## F006 — Sistema de Admisión Escolar (SAE) · ✅ RESUELTA
+
+> **Resuelta el 2026-07-30** por la segunda pasada de doble fuente: copia local completa
+> (2016-2025) en `slep_estudio_oferta_demanda`, con esquemas de registro por año.
+> La entrada se conserva como registro.
 
 - **base_datos y emisor:** Datos Abiertos · CEM
 - **URL de descarga:** <https://datosabiertos.mineduc.cl/wp-content/uploads/2026/03/SAE_2025.rar> (año 2025; los demás en <https://datosabiertos.mineduc.cl/sistema-de-admision-escolar-sae/>, `.rar` y `.zip` 2016-2025)
 - **Qué falta:** esquema de registros y nombres de columna.
 - **Campos bloqueados:** `variables`, `unidad_de_analisis`, `llaves_de_union`, `datos_personales`, `documentacion_tecnica`
 
-## F007 — Directorio de establecimientos educacionales
+## F007 — Directorio de establecimientos educacionales · ✅ RESUELTA
+
+> **Resuelta el 2026-07-30** por la segunda pasada de doble fuente: copia local (2025) en
+> `slep_seguimiento_educacion_inicial`, más las glosas del directorio en
+> `slep_estudio_oferta_demanda`. 58 columnas leídas.
+> **Atención de gobernanza:** trae `RUT_SOSTENEDOR` sin enmascarar.
+> La entrada se conserva como registro.
 
 - **base_datos y emisor:** Datos Abiertos · CEM
 - **URL de descarga:** <https://datosabiertos.mineduc.cl/wp-content/uploads/2025/11/Directorio-Oficial-EE-2025.rar> (año 2025) y <https://datosabiertos.mineduc.cl/wp-content/uploads/2021/12/Directorio_oficial_EE_2004.csv> (año 2004, formato `.csv`). Índice completo en <https://datosabiertos.mineduc.cl/directorio-de-establecimientos-educacionales/>
@@ -119,7 +137,12 @@ lo que falta es abrirlo para leer su estructura.
 - **Qué falta:** esquema de registros y nombres de columna.
 - **Campos bloqueados:** `variables`, `llaves_de_union`, `documentacion_tecnica`
 
-## F070 — Evaluación docente
+## F070 — Evaluación docente · ✅ RESUELTA
+
+> **Resuelta el 2026-07-30** por la segunda pasada de doble fuente: copia local completa
+> (2004-2024) en `slep_estudio_oferta_demanda`, con el esquema de registros
+> `ER_Evaluacion_Docente_PUBL_CLAVE.pdf`. 22 columnas leídas.
+> La entrada se conserva como registro.
 
 - **base_datos y emisor:** Datos Abiertos · CEM
 - **URL de descarga:** <https://datosabiertos.mineduc.cl/wp-content/uploads/2026/03/Evaluacion-Docente-2024.rar> (año 2024; los demás en <https://datosabiertos.mineduc.cl/evaluacion-docente/>, `.rar` y `.zip` 2004-2024)
@@ -286,7 +309,12 @@ malformadas, y plantillas que solo se arman en el navegador.
 - **Qué falta:** el enlace CSV de cada conjunto y su cobertura temporal (el reconocimiento declaraba denuncias desde 2014 y mediaciones desde 2015; no se pudo confirmar).
 - **Campos bloqueados:** `variables`, `url_descarga`, `cobertura_temporal`, `periodicidad`, `llaves_de_union`
 
-## F074, F075 — Portal de bases de datos y compendios estadísticos (DEMRE)
+## F074, F075 — Portal de bases de datos y compendios estadísticos (DEMRE) · ⚠️ F074 RESUELTA, F075 PENDIENTE
+
+> **F074 resuelta el 2026-07-30** por la segunda pasada de doble fuente: copia local
+> (procesos 2023-2026) en `slep_paes`, con la guía de uso de datos abiertos del DEMRE.
+> 56 columnas leídas. **F075 (compendios estadísticos) sigue pendiente.**
+> La entrada se conserva como registro.
 
 - **base_datos y emisor:** Portal Bases de Datos y Compendios Estadísticos · Departamento de Evaluación, Medición y Registro Educacional (DEMRE)
 - **URL:** **todo el dominio `demre.cl` entrega cabeceras HTTP malformadas** y la respuesta no se puede parsear:
