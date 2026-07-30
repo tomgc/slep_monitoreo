@@ -1,9 +1,9 @@
 # Inventario de estructura — slep_monitoreo
 
 - **Raíz:** `/Users/tomgc/Projects/slep_monitoreo`
-- **Generado:** 2026-07-30 05:59:12
+- **Generado:** 2026-07-30 11:33:20
 - **Total de carpetas:** 13
-- **Total de archivos:** 70
+- **Total de archivos:** 77
 - **Exclusiones:** `.git/` `_archivo/` `handoff/` `.claude/` `node_modules/` `.DS_Store`
 
 ## Árbol
@@ -12,27 +12,29 @@
 .github/
   workflows/
     static.yml  (1.3 KB)
-.gitignore  (383 B)
+.gitignore  (482 B)
 00_escanear_proyecto.R  (7.8 KB)
+00_validar_atlas.js  (11.8 KB)
 50_documentacion/
   activa/
     .gitkeep  (0 B)
     50_catalogo_project_cards.md  (13.0 KB)
-    backlog_acumulativo.md  (26.5 KB)
+    50_contrato_atlas_datos.md  (12.6 KB)
+    backlog_acumulativo.md  (42.3 KB)
     encargo_diseno_portafolio.md  (4.3 KB)
-    ESTADO.md  (1.4 KB)
+    ESTADO.md  (1.5 KB)
     POLITICA_PROYECTO.md  (39.1 KB)
     SETTINGS_Y_PROMPTS_OPERACIONALES.md  (81.7 KB)
   andamios/
     20260729_encargo_cierre_sesion09.md  (15.9 KB)
     logs/
-      20260729_cierre_operativo_log.md  (14.3 KB)
+      20260729_cierre_operativo_log.md  (23.1 KB)
   estructura/
     .gitkeep  (0 B)
-    estructura_actual.md  (3.3 KB)
-    estructura_actual.txt  (3.6 KB)
-    estructura_anterior.md  (2.8 KB)
-    estructura_anterior.txt  (3.1 KB)
+    estructura_actual.md  (2.9 KB)
+    estructura_actual.txt  (3.2 KB)
+    estructura_anterior.md  (2.9 KB)
+    estructura_anterior.txt  (3.2 KB)
   traspasos/
     .gitkeep  (0 B)
     archivo/
@@ -44,10 +46,11 @@
       traspaso_cierre_v06.md  (16.1 KB)
       traspaso_cierre_v07.md  (12.0 KB)
       traspaso_cierre_v08.md  (26.7 KB)
+    traspaso_cierre_v09.md  (43.4 KB)
 CLAUDE.md  (3.6 KB)
 docs/
   .nojekyll  (0 B)
-  app.js  (11.2 KB)
+  app.js  (16.0 KB)
   assets/
     logo-color-stacked.png  (126.3 KB)
     logo-mark-cc.png  (118.1 KB)
@@ -81,8 +84,9 @@ docs/
       resguardo-2.png  (235.6 KB)
       resguardo-3.png  (62.8 KB)
       resguardo-4.png  (58.4 KB)
+  atlas_datos.js  (39.0 KB)
   colors_and_type.css  (8.6 KB)
-  data.js  (21.7 KB)
+  data.js  (22.3 KB)
   fonts/
     gobCL_300.otf  (37.1 KB)
     gobCL_400.otf  (35.7 KB)
@@ -90,8 +94,11 @@ docs/
     MuseoSans_300.otf  (61.4 KB)
     MuseoSans_500.otf  (61.0 KB)
     MuseoSans_700.otf  (62.1 KB)
-  index.html  (6.2 KB)
-  styles.css  (20.9 KB)
+  formacion.css  (5.3 KB)
+  formacion.html  (7.4 KB)
+  formacion.js  (6.1 KB)
+  index.html  (6.6 KB)
+  styles.css  (24.4 KB)
 ```
 
 ## Conteo por extensión
@@ -99,14 +106,14 @@ docs/
 | Extensión | Archivos |
 | --- | ---: |
 | png | 30 |
-| md | 19 |
+| md | 21 |
 | otf | 6 |
+| js | 5 |
 | gitkeep | 4 |
-| css | 2 |
-| js | 2 |
+| css | 3 |
+| html | 2 |
 | txt | 2 |
 | gitignore | 1 |
-| html | 1 |
 | nojekyll | 1 |
 | r | 1 |
 | yml | 1 |
