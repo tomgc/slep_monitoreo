@@ -1,0 +1,16 @@
+tramo,lote,orden,url,resultado,filas_generadas,timestamp
+1,A,1,https://datosabiertos.mineduc.cl/,"Responde. Portal vivo, lista cinco secciones de conjuntos. No declara formatos, licencia ni documentacion.",1,2026-07-30
+1,A,2,https://datosabiertos.mineduc.cl/matricula-por-estudiante-2/,"Responde. 21 archivos .rar, 2004-2025. Completada con copia local de slep_analisis_matricula.",1,2026-07-30
+1,A,3,https://datosabiertos.mineduc.cl/matricula-educacion-parvularia/,Responde. .rar 2011-2025 y .zip 2019. Sin esquema de registros.,1,2026-07-30
+1,A,4,https://datosabiertos.mineduc.cl/rendimiento-por-estudiante-2/,Responde. .rar 2002-2025. Completada con copia local de slep_rendimiento_historico.,1,2026-07-30
+1,A,5,https://datosabiertos.mineduc.cl/alumnos-preferentes-prioritarios-y-beneficiarios-sep/,Responde. .rar 2008-2025. Sin esquema de registros.,1,2026-07-30
+1,A,6,https://datosabiertos.mineduc.cl/sistema-de-admision-escolar-sae/,Responde. .rar y .zip 2016-2025. Sin esquema de registros.,1,2026-07-30
+1,A,7,https://datosabiertos.mineduc.cl/directorio-de-establecimientos-educacionales/,"Responde. Formato mixto por rango de anos: .rar, .csv y .zip, 1992-2025.",1,2026-07-30
+1,A,8,https://datosabiertos.mineduc.cl/subvenciones-a-establecimientos-educacionales/,Responde. .rar y .zip 2005-2025. No declara periodicidad de publicacion.,1,2026-07-30
+1,A,9,https://datosabiertos.mineduc.cl/matricula-longitudinal/,Responde. .xlsx 2010-2025. Excluye parvularia de JUNJI e Integra.,1,2026-07-30
+1,A,10,https://datosabiertos.mineduc.cl/desvinculacion/,"Responde. .xlsx unico, 2010-2024. Cobertura un ano mas corta que el resto del portal.",1,2026-07-30
+1,A,11,https://datosabiertos.mineduc.cl/practicantes-y-titulados-tecnico-profesional/,"Responde. .rar 2013-2021 y 2023-2025, .zip 2022.",1,2026-07-30
+1,A,12,https://datosabiertos.mineduc.cl/CEM_Interactivo,Responde 301. Redirige a app.powerbi.com. Redireccion no seguida: destino es aplicacion JavaScript.,1,2026-07-30
+1,A,13,http://api.datos.mineduc.cl/,Host responde pero falla la validacion TLS: certificado de workspace.junar.com y workspace.vor-tex.io. Contenido no inspeccionable.,1,2026-07-30
+1,A,14,https://datos.gob.cl/organization/subsecretaria_de_educacion,Responde. 30 conjuntos. Unica fuente del tramo con licencia declarada (Creative Commons).,1,2026-07-30
+1,H,15,https://censo2024.ine.gob.cl/resultados/,"Responde. Sintesis en PDF, consulta interactiva y Redatam Web hasta manzana. No publica las cifras que el reconocimiento le atribuia.",1,2026-07-30
