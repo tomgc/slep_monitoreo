@@ -103,14 +103,16 @@ catalogo <- tribble(
   "Matricula por estudiante del sistema escolar en establecimientos reconocidos oficialmente por el Estado, con informacion del estudiante, del establecimiento y del nivel de ensenanza.",
   "AGNO; RBD; DGV_RBD; NOM_RBD; COD_REG_RBD; NOM_REG_RBD_A; COD_PRO_RBD; COD_COM_RBD; NOM_COM_RBD; COD_DEPROV_RBD; NOM_DEPROV_RBD; COD_DEPE; COD_DEPE2; RURAL_RBD; ESTADO_ESTAB; NOMBRE_SLEP; COD_ENSE; COD_ENSE2; COD_ENSE3; COD_GRADO; COD_GRADO2; LET_CUR; COD_JOR; COD_TIP_CUR; COD_DES_CUR; TIPO_AULA; MRUN; GEN_ALU; FEC_NAC_ALU; EDAD_ALU; COD_REG_ALU; COD_COM_ALU; NOM_COM_ALU; COD_SEC; COD_ESPE; COD_RAMA; COD_MEN; ENS",
   DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/matricula-por-estudiante-2/", "NA", "rar",
-  "La pagina publica 21 archivos .rar, uno por ano, 2004-2025. La copia local del ano 2025 es .csv de 566 MB, separador punto y coma, cabecera en UTF-8 con marca de orden de bytes (BOM), 38 columnas.",
+  "https://datosabiertos.mineduc.cl/matricula-por-estudiante-2/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2025/10/Matricula-por-estudiante-2025.rar",
+  "rar",
+  "La pagina publica 21 archivos .rar, uno por ano, 2004-2025. url_descarga apunta al ano 2025. La serie NO tiene patron derivable: el nombre se mantiene (Matricula-por-estudiante-AAAA.rar) pero la carpeta de subida cambia (2025/10, 2024/11, 2023/10), de modo que cada ano exige leer su enlace en la pagina. La copia local del ano 2025 es .csv de 566 MB, separador punto y coma, cabecera en UTF-8 con marca de orden de bytes (BOM), 38 columnas.",
   "Estudiante", "MRUN; RBD; AGNO; COD_COM_RBD", "Establecimiento",
   "2004-2025 en el portal; 2016-2025 en la copia local, sin anos faltantes",
   "Anual", "NA", "Identificador enmascarado (MRUN)", "NA", "NA",
   "Base de matricula del territorio; llave RBD para cruce con asistencia y rendimiento.",
   "Verificada", HOY,
-  "Columnas, separador, codificacion y anos efectivos leidos de la copia local (solo cabecera), no de la pagina, que no publica esquema de registros.",
+  "Columnas, separador, codificacion y anos efectivos leidos de la copia local (solo cabecera), no de la pagina, que no publica esquema de registros. Equivalencia de nombres (enmienda E9): la raiz de datos se llama slep_analisis_matricula y el repositorio hermano correspondiente en ~/Projects se llama slep_minuta_matricula; copia_local registra la raiz de datos, que es donde vive el archivo. Republicada en datos.gob.cl (F014) sin aporte propio: misma cobertura y misma desagregacion.",
   "slep_analisis_matricula",
 
   # --- F003: matricula parvularia ---
@@ -118,8 +120,10 @@ catalogo <- tribble(
   "Matricula educacion parvularia",
   "Ninos y ninas en educacion parvularia en establecimientos de JUNJI, Fundacion Integra y otros reconocidos oficialmente.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/matricula-educacion-parvularia/", "NA", "rar; zip",
-  "Archivos anuales: .rar en 2011-2025 y .zip en 2019.",
+  "https://datosabiertos.mineduc.cl/matricula-educacion-parvularia/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2025/12/Matricula-Parvularia-2025.rar",
+  "rar; zip",
+  "Archivos anuales: .rar en 2011-2025 y .zip en 2019. url_descarga apunta al ano 2025, subido en 2025/12. La carpeta de subida varia por ano, de modo que la serie exige leer cada enlace en la pagina.",
   "NA", "NA", "Establecimiento", "2011-2025", "Anual", "NA",
   "NA", "NA", "NA",
   "Matricula del nivel parvulario del territorio.",
@@ -133,8 +137,10 @@ catalogo <- tribble(
   "Notas y situacion final por estudiante del sistema escolar, con identificacion del establecimiento, el curso y el nivel de ensenanza.",
   "AGNO; RBD; DGV_RBD; NOM_RBD; COD_REG_RBD; NOM_REG_RBD_A; COD_PRO_RBD; COD_COM_RBD; NOM_COM_RBD; COD_DEPROV_RBD; NOM_DEPROV_RBD; COD_DEPE; COD_DEPE2; RURAL_RBD; ESTADO_ESTAB; NOMBRE_SLEP; COD_ENSE; COD_ENSE2; COD_GRADO; LET_CUR; COD_JOR; COD_TIP_CUR; COD_DES_CUR; MRUN; GEN_ALU; FEC_NAC_ALU; EDAD_ALU; COD_REG_ALU; COD_COM_ALU; NOM_COM_ALU; COD_RAMA; COD_SEC; COD_ESPE; PROM_GRAL; ASISTENCIA; SIT_FIN; SIT_FIN_R; COD_MEN",
   DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/rendimiento-por-estudiante-2/", "NA", "rar",
-  "La pagina publica un .rar por ano, 2002-2025. La copia local del ano 2025 es .csv de 576 MB, separador punto y coma, cabecera en UTF-8 con marca de orden de bytes (BOM), 38 columnas. Incluye PROM_GRAL, ASISTENCIA y SIT_FIN.",
+  "https://datosabiertos.mineduc.cl/rendimiento-por-estudiante-2/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2026/03/Rendimiento-por-estudiante-2025.rar",
+  "rar",
+  "La pagina publica un .rar por ano, 2002-2025. url_descarga apunta al ano 2025. La serie NO tiene patron derivable: el nombre del archivo cambia entre anos (Rendimiento-por-estudiante-2025.rar, Rendimiento_2024.rar, Rendimiento-2023.rar) y la carpeta de subida tambien (2026/03, 2025/04, 2024/09). Cada ano exige leer su enlace en la pagina. La copia local del ano 2025 es .csv de 576 MB, separador punto y coma, cabecera en UTF-8 con marca de orden de bytes (BOM), 38 columnas. Incluye PROM_GRAL, ASISTENCIA y SIT_FIN.",
   "Estudiante", "MRUN; RBD; AGNO; COD_COM_RBD", "Establecimiento",
   "2002-2025 en el portal; 2015-2025 en la copia local, sin anos faltantes",
   "Anual", "NA", "Identificador enmascarado (MRUN)", "NA", "NA",
@@ -148,8 +154,10 @@ catalogo <- tribble(
   "Alumnos preferentes, prioritarios y beneficiarios SEP",
   "Bases de alumnos prioritarios, preferentes y beneficiarios de la Subvencion Escolar Preferencial.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/alumnos-preferentes-prioritarios-y-beneficiarios-sep/", "NA", "rar",
-  "Un archivo .rar por ano, 2008-2025.",
+  "https://datosabiertos.mineduc.cl/alumnos-preferentes-prioritarios-y-beneficiarios-sep/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2026/01/Alumnos-SEP-2025.rar",
+  "rar",
+  "Un archivo .rar por ano, 2008-2025. url_descarga apunta al ano 2025, subido en 2026/01. La carpeta de subida varia por ano, de modo que la serie exige leer cada enlace en la pagina.",
   "NA", "NA", "Establecimiento", "2008-2025", "Anual", "NA",
   "NA", "NA", "NA",
   "Marcador de vulnerabilidad socioeconomica por estudiante; insumo de focalizacion.",
@@ -162,8 +170,10 @@ catalogo <- tribble(
   "Sistema de Admision Escolar (SAE)",
   "Procesos de admision de estudiantes que asisten a establecimientos subvencionados o que reciben aportes del Estado.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/sistema-de-admision-escolar-sae/", "NA", "rar; zip",
-  "Archivos comprimidos anuales, .rar y .zip, 2016-2025.",
+  "https://datosabiertos.mineduc.cl/sistema-de-admision-escolar-sae/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2026/03/SAE_2025.rar",
+  "rar; zip",
+  "Archivos comprimidos anuales, .rar y .zip, 2016-2025. url_descarga apunta al ano 2025, subido en 2026/03. La carpeta de subida varia por ano, de modo que la serie exige leer cada enlace en la pagina.",
   "NA", "NA", "Establecimiento", "2016-2025", "Anual", "NA",
   "NA", "NA", "NA",
   "Postulaciones y resultados de admision; insumo de demanda por establecimiento.",
@@ -176,8 +186,10 @@ catalogo <- tribble(
   "Directorio de establecimientos educacionales",
   "Directorios de establecimientos educacionales del pais desde 1992 en adelante.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/directorio-de-establecimientos-educacionales/", "NA", "rar; csv; zip",
-  "El formato cambia por rango de anos: .rar en 1992-1997 y 2013-2025; .csv en 2004-2012; .zip en 1998-2003.",
+  "https://datosabiertos.mineduc.cl/directorio-de-establecimientos-educacionales/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2025/11/Directorio-Oficial-EE-2025.rar",
+  "rar; csv; zip",
+  "El formato cambia por rango de anos: .rar en 1992-1997 y 2013-2025; .csv en 2004-2012; .zip en 1998-2003. url_descarga apunta al ano 2025. Los anos en .csv viven bajo otra carpeta y otra grafia (ejemplo 2004: /wp-content/uploads/2021/12/Directorio_oficial_EE_2004.csv), de modo que ni el nombre ni la ruta siguen patron: cada ano exige leer su enlace en la pagina.",
   "Establecimiento", "NA", "Establecimiento", "1992-2025", "Anual", "NA",
   "Sin datos de personas", "NA", "NA",
   "Universo de establecimientos con RBD, dependencia y ubicacion; tabla maestra de cruce territorial.",
@@ -190,8 +202,10 @@ catalogo <- tribble(
   "Subvenciones a establecimientos educacionales",
   "Bases de subvenciones y asignaciones otorgadas a establecimientos educacionales desde 2005 en adelante.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/subvenciones-a-establecimientos-educacionales/", "NA", "rar; zip",
-  "Un archivo por ano calendario, .rar y .zip, 2005-2025.",
+  "https://datosabiertos.mineduc.cl/subvenciones-a-establecimientos-educacionales/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2026/06/Subvenciones-a-EE-2025.rar",
+  "rar; zip",
+  "Un archivo por ano calendario, .rar y .zip, 2005-2025. url_descarga apunta al ano 2025, subido en 2026/06. La carpeta de subida varia por ano, de modo que la serie exige leer cada enlace en la pagina.",
   "Establecimiento", "NA", "Establecimiento", "2005-2025", "Anual", "NA",
   "Sin datos de personas", "NA", "NA",
   "Montos de subvencion por establecimiento; insumo financiero del territorio.",
@@ -204,8 +218,10 @@ catalogo <- tribble(
   "Matricula longitudinal",
   "Serie de matricula escolar de todos los niveles, desglosada por dependencia, zona, genero, region, provincia, comuna y establecimiento.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/matricula-longitudinal/", "NA", "xlsx",
-  "Un libro Excel con la serie completa. Excluye la educacion parvularia de JUNJI e Integra.",
+  "https://datosabiertos.mineduc.cl/matricula-longitudinal/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2025/10/excel-matricula-longuitudinal-2010-2025_no_modificable.xlsx",
+  "xlsx",
+  "Un libro Excel unico con la serie completa; no hay serie de archivos y por tanto no hay patron que declarar. Excluye la educacion parvularia de JUNJI e Integra. El nombre publicado trae una errata del emisor (longuitudinal) que se conserva literal porque es parte de la URL.",
   "Establecimiento", "NA", "Establecimiento", "2010-2025", "Anual", "NA",
   "Sin datos de personas", "NA", "NA",
   "Serie agregada de matricula para tendencias territoriales.",
@@ -218,8 +234,10 @@ catalogo <- tribble(
   "Tasas de incidencia de desvinculacion",
   "Tasas de incidencia de desvinculacion de ninos, ninas y jovenes de educacion basica y media, por region, provincia, comuna, genero y grado.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/desvinculacion/", "NA", "xlsx",
-  "Un libro Excel unico con la serie 2010-2024. Nombre publicado del archivo: OFICIAL Tasa-Incidencia-Desvinculacion-2010-2024.",
+  "https://datosabiertos.mineduc.cl/desvinculacion/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2025/10/OFICIAL-Tasa-Incidencia-Desvinculacion-2010-2024.xlsx",
+  "xlsx",
+  "Un libro Excel unico con la serie 2010-2024; no hay serie de archivos y por tanto no hay patron que declarar.",
   "Establecimiento", "NA", "Comuna", "2010-2024", "Anual", "NA",
   "Sin datos de personas", "NA", "NA",
   "Indicador de abandono escolar; insumo directo del modelo de desvinculacion del Area.",
@@ -232,8 +250,10 @@ catalogo <- tribble(
   "Practicantes y titulados tecnico profesional",
   "Bases de alumnos practicantes y titulados de educacion media tecnico profesional desde 2013 en adelante.",
   "NA", DA, CEM, "Portal de datos abiertos", "Abierto",
-  "https://datosabiertos.mineduc.cl/practicantes-y-titulados-tecnico-profesional/", "NA", "rar; zip",
-  "Archivos anuales: .rar en 2013-2021 y 2023-2025; .zip en 2022.",
+  "https://datosabiertos.mineduc.cl/practicantes-y-titulados-tecnico-profesional/",
+  "https://datosabiertos.mineduc.cl/wp-content/uploads/2026/06/Practicantes-y-Titulados-TP-2025.rar",
+  "rar; zip",
+  "Archivos anuales: .rar en 2013-2021 y 2023-2025; .zip en 2022. url_descarga apunta al ano 2025, subido en 2026/06. La carpeta de subida varia por ano, de modo que la serie exige leer cada enlace en la pagina.",
   "NA", "NA", "Establecimiento", "2013-2025", "Anual", "NA",
   "NA", "NA", "NA",
   "Titulacion y practica de la modalidad tecnico profesional; cierre de trayectoria.",
@@ -282,7 +302,7 @@ catalogo <- tribble(
   "Creative Commons: Non-Commercial en 15 conjuntos, Attribution en 14, CCZero en 1",
   "Segunda via de acceso a bases del CEM, con licencia declarada donde el portal propio no la declara.",
   "Verificada", HOY,
-  "Unica fuente del tramo que declara licencia explicita. Fecha de ultima actualizacion visible solo en el primer conjunto (2026-07-27). Sus 30 conjuntos se solapan con los del portal del CEM y no se catalogan como filas propias en este tramo para no duplicar el mismo dato bajo dos bases; la decision se eleva al titular en el cierre.",
+  "Unica fuente del tramo que declara licencia explicita. Fecha de ultima actualizacion visible solo en el primer conjunto (2026-07-27). Sus 30 conjuntos NO se catalogan como filas propias, por la regla de la enmienda E7: una republicacion genera fila solo si aporta licencia, formato, cobertura o desagregacion que la fuente primaria no da. De los 30 solo se observaron 12 nombres en la pagina de la organizacion, y ninguno de esos 12 declara a nivel de conjunto un aporte verificable frente a su fuente primaria en el portal del CEM; la unica diferencia observada es agregada (la licencia Creative Commons se declara a nivel de organizacion, no por conjunto). Evaluar los 30 uno a uno exige abrir 30 paginas de conjunto y es una pasada propia, no parte de este tramo.",
   "NA",
 
   # --- F015: Censo 2024 (lote H, primera URL) ---
@@ -390,6 +410,16 @@ catalogo <- tribble(
   "NA"
 )
 
+# ---- Enmienda E8: campo `fuente_equivalente`, aplicado retroactivamente ------
+# Es el id_fuente de la fila que publica el mismo dato por otra via, y es
+# bidireccional. En las 24 filas del tramo 1 el valor es "NA" en todas, y el
+# motivo es verificable, no una omision: ninguna fila de este tramo republica a
+# otra fila de este tramo. Las republicaciones que si existen (los 30 conjuntos
+# de datos.gob.cl) no generaron fila por la regla de la enmienda E7, de modo que
+# no hay id_fuente al cual apuntar. En cuanto una republicacion genere fila, el
+# par se declara explicitamente en ambos extremos.
+catalogo <- catalogo |> mutate(fuente_equivalente = "NA")
+
 # ==============================================================================
 # LOG DE VERIFICACION: una linea por URL visitada (encargo fase 1, punto 5)
 # ==============================================================================
@@ -424,11 +454,14 @@ CAMPOS <- c(
   "unidad_de_analisis", "llaves_de_union", "desagregacion_territorial",
   "cobertura_temporal", "periodicidad", "mes_publicacion", "datos_personales",
   "documentacion_tecnica", "condiciones_de_uso", "usos_en_monitoreo",
-  "estado_verificacion", "fecha_verificacion", "observaciones", "copia_local"
+  "estado_verificacion", "fecha_verificacion", "observaciones", "copia_local",
+  "fuente_equivalente"
 )
 
+catalogo <- catalogo |> select(all_of(CAMPOS))
+
 stopifnot(
-  "el esquema debe tener 28 campos"           = length(CAMPOS) == 28,
+  "el esquema debe tener 29 campos"           = length(CAMPOS) == 29,
   "los nombres deben coincidir y estar en orden" = identical(names(catalogo), CAMPOS),
   "ninguna celda puede quedar vacia"          = !any(is.na(catalogo) | catalogo == ""),
   "id_fuente sin duplicados"                  = !any(duplicated(catalogo$id_fuente)),
