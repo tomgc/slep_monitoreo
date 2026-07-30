@@ -45,7 +45,18 @@ Aplicación **pragmática** de `POLITICA_PROYECTO.md` (en `50_documentacion/acti
     que la ejecuta. Revisar esa exclusión está pendiente de decisión del
     titular.
   - `estructura/` — snapshots del escáner.
-- **Sin pipeline de R:** la feature "Fuentes" y su procesamiento se retiraron en v1.0.
+- **Pipeline de R para el catálogo de fuentes** (desde la sesión 11), con las
+  decenas de la política §1.1:
+  - `20_insumos/` — insumos de solo lectura. Contiene
+    `resultado_reconocimiento_fuentes.md`, el inventario de URLs candidatas que
+    produjo la investigación de reconocimiento del 2026-07-29. Conserva su
+    nombre original por la excepción de §1.2.4 (dato heredado de fuente
+    externa).
+  - `30_procesamiento/` — scripts del flujo, con correlativos por orden de
+    ejecución (`31_`, `32_`, `33_`).
+  - `40_salidas/` — el catálogo de fuentes en CSV, las fichas en Markdown y el
+    log de verificación. Nombre descriptivo sin fecha (política §2).
+  - Ninguna de las tres se publica: Pages sirve solo `main` `/docs`.
 
 ## Escáner de estructura
 
@@ -61,10 +72,18 @@ Rscript 00_escanear_proyecto.R
 
 ## Excepciones declaradas
 
-- Sin orquestador `00_run_all.R`: no hay pipeline de R que orquestar.
-- Sin `10_utils/` ni decenas de procesamiento: no hay código R de proceso.
-- El **único** script de R es el escáner de estructura (`00_escanear_proyecto.R`),
-  que es herramienta de estructura, no procesamiento de datos.
+- Sin orquestador `00_run_all.R`. El pipeline del catálogo de fuentes tiene una
+  compuerta humana en medio: la verificación de URLs de su fase 1 no es
+  automatizable y ocurre entre el parseo y la validación. Un orquestador que no
+  puede correr de extremo a extremo declara una automatización que no existe.
+  Cada script de `30_procesamiento/` se corre por separado.
+- Sin `10_utils/`: la política §1.4 exige duplicación real para migrar una
+  función a utils, y todavía no la hay. Deja un hueco en la decena 10 que la
+  política §1.2.3 desaconseja; se declara en vez de fabricar una carpeta vacía.
+  Cuando dos scripts de `30_procesamiento/` compartan una función, se crea.
+- El escáner de estructura (`00_escanear_proyecto.R`) y el validador del atlas
+  (`00_validar_atlas.js`) siguen en la raíz con prefijo `00_`: son herramientas
+  transversales, no etapas del flujo, y la política §2 admite varios `00_*`.
 - El escáner usa dos versiones fijas (actual/anterior) en vez de snapshots sellados
   con timestamp y poda de retención 2 (se aparta de la política 7.3-7.4; simplificación
   para un sitio estático que cambia poco).
