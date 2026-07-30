@@ -1,20 +1,23 @@
 ---
 slug: slep_monitoreo
-nombre_real: Sitio institucional del Área de Monitoreo del SLEP Costa Central (portafolio web estático)
+nombre_real: Sitio del Area de Monitoreo — SLEP Costa Central
 categoria: activo
 semaforo: activo
-sesion_actual: v08
-ultima_actividad: 2026-07-29
+sesion_actual: v09
+ultima_actividad: 2026-07-30
 maneja_sensibles: false
-tipo_pendiente: deuda_tecnica
+tipo_pendiente: bloqueante
 ---
 ## En que vamos
-La sesión 8 construyó la entrada del proyecto de minutas Simce 2025 en `data.js` a partir de tres PDF y la desplegó verificada en producción, con `orden: 3` y sin capturas todavía. También versionó el registro documental del cierre de v07, absorbió una rama huérfana y encargó a Claude Design el rediseño del portafolio para dar protagonismo a las imágenes. La sesión cerró antes de tiempo al detectarse una sesión paralela de Claude Code escribiendo sobre el mismo repositorio, que movió el sitio a `docs/`, corrigió el workflow de Pages y actualizó los documentos de gobernanza a POLITICA v5.5 y SETTINGS v14.
+
+La sesion 9 reconcilio el repositorio tras una sesion paralela, restauro el blindaje de los documentos de protocolo y implemento el rediseno del portafolio entregado por Claude Design: el pliego de capturas, con una franja por proyecto y las capturas recorridas en horizontal a altura normalizada. Se materializo el encargo del catalogo de Project Cards con arquitectura de fuente unica en `data.js`, y un encargo autonomo a Claude Code cerro la optimizacion de las 26 capturas arrastrada desde la sesion 6 (9,21 MB a 2,39 MB). El sitio esta funcional y el repositorio sincronizado hasta `84a415b`.
 
 ## Proximo paso
-Reconciliar el estado de Git antes de cualquier escritura: `main` local quedó atrás de `origin/main`, `HEAD` en la rama `gobernanza/v14` y el árbol con cambios sin commitear.
+
+Commitear y sincronizar el cierre (escaner, capturas optimizadas, traspaso v09, backlog y este archivo), y luego agregar el campo `id` a los 12 proyectos con enlaces profundos `#p=<id>` en `app.js`.
 
 ## Bloqueantes
-- Sesión paralela de Claude Code sobre el mismo repositorio: se desconoce si terminó.
-- Knowledge base del Project desactualizada (tiene POLITICA v5.2 y SETTINGS v7; el repositorio ya tiene v5.5 y v14).
-- Handoff de Claude Design pendiente: bloquea el rediseño del portafolio y, con él, la decisión sobre las capturas del proyecto Simce.
+
+- El cierre de la sesion 9 quedo sin commitear: escaner, 24 capturas recomprimidas, traspaso, backlog, `ESTADO.md` y los dos andamios.
+- Gate del titular pendiente: aceptar o revertir la recompresion de capturas (auditada visualmente en 1 de 26).
+- Gate del titular pendiente: que hacer con las cinco ramas remotas `claude/*`, cuatro de proyectos ajenos que tocan rutas de la raiz anteriores al traslado del sitio a `docs/`.
