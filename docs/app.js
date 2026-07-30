@@ -313,6 +313,81 @@
   });
 
   /* ===========================================================
+     ENLACES PROFUNDOS  (#p=<id>)
+     -----------------------------------------------------------
+     Permite compartir la reseña de un proyecto por su URL. Se engancha
+     por ENVOLTURA de openLightbox/closeLightbox: el cuerpo de ninguna de
+     las dos se modifica, porque el lightbox y el visor full-res son
+     invariantes heredados del handoff de diseño.
+     =========================================================== */
+  const PREFIJO_HASH = "#p=";
+
+  function proyectoPorId(id) {
+    if (!id) return null;
+    for (var i = 0; i < PROYECTOS.length; i++) {
+      if (PROYECTOS[i].id === id) return PROYECTOS[i];
+    }
+    return null;
+  }
+
+  function idDesdeHash() {
+    var h = location.hash || "";
+    if (h.indexOf(PREFIJO_HASH) !== 0) return "";
+    try { return decodeURIComponent(h.slice(PREFIJO_HASH.length)); }
+    catch (e) { return ""; }
+  }
+
+  /* replaceState y no `location.hash = ...`: asignar el hash directamente
+     agrega una entrada al historial por cada reseña abierta (el botón
+     "atrás" tendría que pulsarse una vez por click) y desplaza la página
+     si existiera un elemento con ese id. Con file:// la History API puede
+     no estar disponible; en ese caso el enlace profundo simplemente no se
+     escribe y todo lo demás sigue funcionando. */
+  function escribirHash(id) {
+    var destino = id
+      ? PREFIJO_HASH + encodeURIComponent(id)
+      : location.pathname + location.search;
+    try { history.replaceState(null, "", destino); } catch (e) { /* sin History API */ }
+  }
+
+  const abrirBase = openLightbox;
+  const cerrarBase = closeLightbox;
+  /* En true mientras la URL es la CAUSA de la apertura, para no reescribir
+     el hash que la provocó. */
+  let sincronizandoDesdeUrl = false;
+
+  openLightbox = function (p, startIndex) {
+    abrirBase(p, startIndex);
+    if (!sincronizandoDesdeUrl) escribirHash(p.id);
+  };
+  closeLightbox = function () {
+    cerrarBase();
+    if (!sincronizandoDesdeUrl) escribirHash("");
+  };
+
+  /* El botón de cerrar recibió la referencia ORIGINAL de closeLightbox al
+     registrarse, así que no ve la envoltura: se vuelve a enlazar. Los demás
+     disparadores (clic en el fondo, tecla Escape) llaman por nombre y
+     resuelven la envoltura solos. */
+  $("#lbClose").removeEventListener("click", cerrarBase);
+  $("#lbClose").addEventListener("click", function () { closeLightbox(); });
+
+  function sincronizarConUrl() {
+    var id = idDesdeHash();
+    var p = id ? proyectoPorId(id) : null;
+    /* Un id inexistente o mal escrito no hace nada: la página queda como
+       si no hubiera hash. */
+    if (!p && !lightbox.classList.contains("open")) return;
+    sincronizandoDesdeUrl = true;
+    if (p) openLightbox(p);
+    else closeLightbox();
+    sincronizandoDesdeUrl = false;
+  }
+
+  window.addEventListener("hashchange", sincronizarConUrl);
+  sincronizarConUrl();
+
+  /* ===========================================================
      TRAYECTORIA
      =========================================================== */
   const timeline = $("#timeline");

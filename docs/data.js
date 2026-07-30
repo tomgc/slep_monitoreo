@@ -5,6 +5,11 @@
    =========================================================== */
 
 /* Estado: "vigente" | "desarrollo"
+   id: llave estable y única del proyecto. Es la llave de la URL
+       (#p=<id> abre la reseña de ese proyecto) y el prerrequisito de los
+       códigos QR del catálogo impreso. NO se cambia una vez publicado:
+       cualquier enlace ya compartido dejaría de resolver. `orden` no
+       sirve para esto porque se renumera al insertar proyectos.
    orden: número de aparición en el sitio. Los proyectos "vigente" se
           muestran primero, ordenados por este número; los "desarrollo"
           van siempre al final, también ordenados entre sí por este número.
@@ -14,6 +19,7 @@
    sintesis: arreglo de párrafos que se muestra en la reseña (lightbox). */
 const PROYECTOS = [
   {
+    id: "asistencia",
     orden: 1,
     tipo: "Minuta · Dirección Ejecutiva",
     titulo: "Minuta de asistencia mensual",
@@ -31,6 +37,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "resguardo",
     orden: 2,
     tipo: "Reporte · Directores/as",
     titulo: "Reportes del Modelo de Resguardo de la Asistencia Educativa del Territorio",
@@ -48,6 +55,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "simce",
     orden: 3,
     tipo: "Minuta · Resultados Simce",
     titulo: "Minutas de resultados Simce 2025 del territorio",
@@ -63,6 +71,7 @@ const PROYECTOS = [
     imgs: []
   },
   {
+    id: "estandares",
     orden: 4,
     tipo: "Motor de comparación",
     titulo: "Motor de comparación interactivo de los resultados de los estándares de aprendizaje medidos por las pruebas Simce",
@@ -80,6 +89,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "idps",
     orden: 5,
     tipo: "Motor de comparación",
     titulo: "Motor de comparación interactivo de los resultados en los Indicadores de Desarrollo Personal y Social (IDPS)",
@@ -97,6 +107,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "categorias",
     orden: 6,
     tipo: "Motor de comparación",
     titulo: "Motor de comparación interactivo de la Categoría de Desempeño de los establecimientos educacionales del país",
@@ -113,6 +124,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "parvularia",
     orden: 7,
     tipo: "Monitoreo",
     titulo: "Monitoreo de aprendizajes en la educación parvularia",
@@ -129,6 +141,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "inicial",
     orden: 8,
     tipo: "Análisis longitudinal",
     titulo: "Análisis longitudinal de preferencias de matrícula de egresados de jardines infantiles",
@@ -145,6 +158,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "costapresente",
     orden: 9,
     tipo: "Plataforma · CostaPresente",
     titulo: "CostaPresente",
@@ -158,6 +172,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "ael",
     orden: 10,
     tipo: "Sistema de alertas",
     titulo: "Sistema de alertas de Anótate en la Lista",
@@ -171,6 +186,7 @@ const PROYECTOS = [
     ]
   },
   {
+    id: "trayectorias",
     orden: 11,
     tipo: "Minuta · Dirección Ejecutiva",
     titulo: "Análisis de trayectorias educativas interrumpidas",
@@ -183,6 +199,7 @@ const PROYECTOS = [
     imgs: []
   },
   {
+    id: "rendimiento",
     orden: 12,
     tipo: "Diagnóstico",
     titulo: "Diagnóstico histórico del rendimiento escolar",
