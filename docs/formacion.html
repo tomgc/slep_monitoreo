@@ -29,6 +29,7 @@
 <link rel="icon" href="assets/logo-mark-cc.png" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="formacion.css" />
+<link rel="stylesheet" href="atlas.css" />
 </head>
 <body data-variant="d2" data-density="comfortable">
 
@@ -72,13 +73,29 @@
   </div>
 </section>
 
+<!-- ====================== ATLAS ====================== -->
+<section class="section section--alt" id="atlas">
+  <div class="shell">
+    <div class="section-head">
+      <p class="eyebrow">Atlas</p>
+      <h2 class="section-title">Mapa de las fuentes y sus conexiones</h2>
+      <p class="section-lede">Un mapa navegable de las fuentes: cada institución es un sistema, cada base un cuerpo que lo orbita y cada dato una ficha con sus variables, su cobertura y sus conexiones.</p>
+    </div>
+    <div class="atlas" id="atlasCeleste" role="application" aria-label="Atlas celeste de los datos educativos"></div>
+    <noscript>
+      <p class="fm-nota">El atlas necesita JavaScript para dibujarse. La misma información está disponible como tabla en la sección anterior.</p>
+    </noscript>
+    <p class="fm-nota">Cada institución es un sistema, cada base una órbita y cada dato un cuerpo que se puede abrir. Los ámbitos de indagación conectan datos de distintas instituciones alrededor de una pregunta.</p>
+  </div>
+</section>
+
 <!-- ====================== CATÁLOGO DE FUENTES ====================== -->
-<section class="section section--alt" id="fuentes">
+<section class="section" id="fuentes">
   <div class="shell">
     <div class="section-head">
       <p class="eyebrow">Repositorio</p>
       <h2 class="section-title">Fuentes de datos educativos</h2>
-      <p class="section-lede">Cada fila es un dato concreto publicado por una institución del sistema. Los enlaces llevan a la página pública del emisor.</p>
+      <p class="section-lede">La misma información del atlas, en forma de tabla filtrable. Cada fila es un dato concreto publicado por una institución del sistema y los enlaces llevan a la página pública del emisor.</p>
     </div>
 
     <div class="fm-filtros">
@@ -130,20 +147,6 @@
   </div>
 </section>
 
-<!-- ====================== ATLAS (PENDIENTE) ====================== -->
-<section class="section" id="atlas">
-  <div class="shell">
-    <div class="section-head">
-      <p class="eyebrow">Atlas</p>
-      <h2 class="section-title">Mapa de las fuentes y sus conexiones</h2>
-      <p class="section-lede">La misma información de la tabla, representada como un mapa navegable donde cada institución es un sistema y cada base, un cuerpo que lo orbita.</p>
-    </div>
-    <div class="fm-atlas-espera">
-      <p class="fm-atlas-foot">En desarrollo · disponible en una próxima versión del sitio</p>
-    </div>
-  </div>
-</section>
-
 <!-- ====================== FOOTER ====================== -->
 <footer class="site-footer">
   <div class="shell">
@@ -156,5 +159,6 @@
 
 <script src="atlas_datos.js"></script>
 <script src="formacion.js"></script>
+<script src="atlas.js"></script>
 </body>
 </html>
