@@ -1,18 +1,9 @@
-/* ===========================================================
-   Atlas Celeste de los Datos Educativos — catálogo
-   -----------------------------------------------------------
-   Contrato del archivo: 50_documentacion/activa/50_contrato_atlas_datos.md
-   Validar antes de depositar:  node 00_validar_atlas.js docs/atlas_datos.js
+/* Catálogo del Atlas Celeste de los Datos Educativos.
+   Contrato: 50_documentacion/activa/50_contrato_atlas_datos.md
+   Validar con: node 00_validar_atlas.js docs/atlas_datos.js
 
-   PROVISORIO. Este catálogo proviene del handoff de diseño y NO ha sido
-   verificado contra las fuentes. Se reemplaza íntegro cuando llegue el
-   producto de la revisión bibliográfica documental. Las relaciones
-   recíprocas ausentes en el original se completaron automáticamente
-   (41 agregadas): una relación afirma que dos datos se cruzan, y
-   cruzarse es simétrico.
-
-   Script clásico, sin export ni import: el sitio no tiene build.
-   =========================================================== */
+   Alcance nacional: la institución "internacional" (UNESCO · OECD) se
+   retiró junto con todas las rutas que la referenciaban. */
 
 const ATLAS_INSTITUCIONES = [
   {
@@ -49,7 +40,6 @@ const ATLAS_INSTITUCIONES = [
               "dep.monitoreo.matricula-run",
               "ine.censo.poblacion-escolar",
               "ine.proyecciones.proyeccion",
-              "internacional.uis.indicadores-uis",
               "junaeb.beneficios.tne",
               "junaeb.sinae.ive",
               "mineduc.datos-abiertos.asistencia",
@@ -587,8 +577,7 @@ const ATLAS_INSTITUCIONES = [
               "Ciencias"
             ],
             "relaciones": [
-              "agencia.simce.puntajes",
-              "internacional.oecd.eag"
+              "agencia.simce.puntajes"
             ]
           },
           {
@@ -602,9 +591,7 @@ const ATLAS_INSTITUCIONES = [
               "Matemática",
               "Escritura"
             ],
-            "relaciones": [
-              "internacional.uis.indicadores-uis"
-            ]
+            "relaciones": []
           }
         ]
       },
@@ -1161,65 +1148,6 @@ const ATLAS_INSTITUCIONES = [
             "relaciones": [
               "junji.dotaciones.educadoras",
               "mineduc.gestion.asistentes"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "internacional",
-    "nombre": "UNESCO · OECD",
-    "desc": "Organismos internacionales. El espejo comparado del sistema chileno.",
-    "color": "#FFF6E0",
-    "x": 30,
-    "y": 26,
-    "bases": [
-      {
-        "id": "uis",
-        "nombre": "UNESCO · UIS",
-        "desde": 1999,
-        "url": "https://uis.unesco.org",
-        "desc": "Instituto de Estadística de la UNESCO.",
-        "datos": [
-          {
-            "id": "indicadores-uis",
-            "nombre": "Indicadores mundiales",
-            "desde": 1999,
-            "acceso": "Acceso público",
-            "desc": "Indicadores educativos comparables entre países.",
-            "variables": [
-              "Tasa neta de matrícula",
-              "Conclusión",
-              "País"
-            ],
-            "relaciones": [
-              "agencia.internacionales.erce",
-              "mineduc.datos-abiertos.matricula"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "oecd",
-        "nombre": "OECD Education",
-        "desde": 1996,
-        "url": "https://www.oecd.org/education",
-        "desc": "Estadísticas educativas de la OECD.",
-        "datos": [
-          {
-            "id": "eag",
-            "nombre": "Education at a Glance",
-            "desde": 1996,
-            "acceso": "Acceso público",
-            "desc": "Panorama anual comparado de los sistemas educativos.",
-            "variables": [
-              "Gasto por estudiante",
-              "Salarios docentes",
-              "País"
-            ],
-            "relaciones": [
-              "agencia.internacionales.pisa"
             ]
           }
         ]
