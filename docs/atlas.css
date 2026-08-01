@@ -1,26 +1,32 @@
 /* ===========================================================
-   Atlas de los datos educativos
+   Atlas de los datos educativos — tablero de dos mitades
    Área de Monitoreo · SLEP Costa Central
 
-   Superficie clara. La metáfora espacial queda como geometría
-   abstracta: círculos concéntricos, no un cielo nocturno.
-   Cada cuerpo tiene su propia órbita, de modo que dos cuerpos
-   nunca comparten anillo.
+   Dos caras enfrentadas: a la izquierda las fuentes, en la
+   jerarquía de tres niveles del contrato (institución, base,
+   dato); a la derecha los ámbitos de indagación. Seleccionar
+   una pieza de cualquiera de las dos caras destaca sus
+   contrapartes en la otra.
+
+   Reemplaza la representación orbital de la sesión 12, que el
+   titular descartó. No queda geometría circular salvo puntos de
+   tamaño fijo en píxeles: la lección de BUG-02 es que un
+   porcentaje de CSS no describe un círculo, y aquí no hay
+   ninguno que dependa del tamaño del contenedor.
 
    Todo selector vive bajo .atlas. Los colores salen de los
    tokens del sitio (colors_and_type.css); el atlas no define
-   paleta propia.
+   paleta propia. Los colores institucionales llegan desde el
+   catálogo por la variable --c, escrita en el elemento.
    =========================================================== */
 
 .atlas {
   --at-acento: var(--accent-active, #0062A0);
-  --at-guia: rgba(28, 18, 18, 0.07);
-  --at-guia-fuerte: rgba(28, 18, 18, 0.13);
+  --at-atenuado: 0.28;
 
-  position: relative;
   display: flex;
   flex-direction: column;
-  height: min(78vh, 700px);
+  height: min(78vh, 720px);
   min-height: 520px;
   border: 1px solid var(--line);
   border-radius: var(--radius-2, 4px);
@@ -31,428 +37,356 @@
   font-weight: 300;
   line-height: 1.5;
 }
+/* Guardia obligatoria: una regla de autor con display en el mismo
+   selector anula el display:none del agente de usuario. */
 .atlas[hidden] { display: none; }
-.atlas:fullscreen { height: 100vh; min-height: 0; border: 0; border-radius: 0; }
 
-/* ---------- Barra superior ---------- */
+/* ---------- barra superior ---------- */
 
 .atlas-barra {
   flex: none;
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 16px;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 11px 16px;
   border-bottom: 1px solid var(--line);
   background: var(--cream-50);
-  z-index: 4;
-}
-.atlas-migas {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 6px;
-  min-width: 0;
   font-size: 12.5px;
-}
-.atlas-migas button {
-  border: 0; background: none; padding: 0;
   color: var(--slate);
-  font: inherit; cursor: pointer;
 }
-.atlas-migas button:hover { color: var(--at-acento); }
-.atlas-migas .actual {
+.atlas-barra .at-estado { color: var(--ink); }
+.atlas-barra .at-estado b {
   font-family: var(--font-display);
   font-weight: 400;
-  color: var(--ink);
 }
-.atlas-migas .sep { color: var(--line-strong); }
-
-.atlas-barra .crece { flex: 1 1 auto; }
-
-.atlas-ambitos { position: relative; flex: none; }
-.atlas-ambitos > button {
-  padding: 6px 12px;
+.atlas-barra .at-sep { color: var(--line-strong); }
+.atlas-barra .at-crece { flex: 1 1 auto; }
+.atlas-barra button {
+  font: inherit;
+  font-size: 12px;
+  padding: 5px 12px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-2, 4px);
   background: var(--paper);
-  color: var(--ink-2);
-  font: inherit;
-  font-size: 12.5px;
+  color: var(--slate);
   cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
 }
-.atlas-ambitos > button:hover,
-.atlas-ambitos > button[aria-expanded="true"] {
-  border-color: var(--at-acento);
+.atlas-barra button:hover { color: var(--ink); border-color: var(--slate); }
+.atlas-barra button:focus-visible { outline: 2px solid var(--at-acento); outline-offset: 2px; }
+.atlas-barra button[hidden] { display: none; }
+
+/* ---------- las dos caras ---------- */
+
+.atlas-tablero {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.atlas-cara {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.atlas-cara--der { border-left: 1px solid var(--line); }
+
+.atlas-cara > header {
+  flex: none;
+  padding: 15px 18px 11px;
+  border-bottom: 1px solid var(--line);
+}
+.atlas-cara > header .eyebrow {
+  margin: 0 0 2px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.08em;
   color: var(--at-acento);
 }
-.atlas-menu {
-  position: absolute;
-  right: 0; top: calc(100% + 6px);
-  width: 264px;
-  max-height: 340px;
-  overflow-y: auto;
-  padding: 4px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-2, 4px);
-  box-shadow: var(--shadow-3);
-  z-index: 6;
+.atlas-cara > header h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--ink);
 }
-.atlas-menu[hidden] { display: none; }
-.atlas-menu button {
-  display: block;
+.atlas-cara > header p {
+  margin: 3px 0 0;
+  font-size: 11.5px;
+  color: var(--slate);
+}
+
+.atlas-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 6px 18px 22px;
+  overscroll-behavior: contain;
+}
+
+/* ---------- cara izquierda: el árbol ---------- */
+
+.atlas-arbol,
+.atlas-arbol ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.atlas-fila {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   width: 100%;
-  padding: 9px 10px;
-  border: 0; border-radius: var(--radius-1, 2px);
+  padding: 8px 4px 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
   background: none;
   color: inherit;
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: background 120ms ease, opacity 180ms ease;
 }
-.atlas-menu button:hover { background: var(--cream-50); }
-.atlas-menu .n {
-  display: block;
-  font-weight: 500;
-  font-size: 12.5px;
+.atlas-fila:hover { background: var(--cream-50); }
+.atlas-fila:focus-visible { outline: 2px solid var(--at-acento); outline-offset: -2px; }
+
+.atlas-fila .at-n {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.atlas-fila .at-m {
+  flex: none;
+  font-size: 11px;
+  color: var(--slate);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.atlas-fila .at-caret {
+  flex: none;
+  width: 10px;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--slate);
+  transition: transform 140ms ease;
+}
+.atlas-inst.abierta > .atlas-fila .at-caret,
+.atlas-base.abierta > .atlas-fila .at-caret { transform: rotate(90deg); }
+
+.atlas-punto {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c, var(--slate));
+  transform: translateY(-1px);
+}
+
+.atlas-inst > .atlas-fila .at-n {
+  font-family: var(--font-display);
+  font-size: 15px;
   color: var(--ink);
 }
-.atlas-menu .q {
-  display: block;
-  font-weight: 300;
-  font-size: 11.5px;
-  color: var(--slate);
+.atlas-base > .atlas-fila { padding-left: 20px; }
+.atlas-base > .atlas-fila .at-n { font-size: 13.5px; color: var(--ink); }
+.atlas-dato > .atlas-fila { padding-left: 40px; }
+.atlas-dato > .atlas-fila .at-n { font-size: 13.5px; }
+
+.atlas-hijos { display: none; }
+.atlas-inst.abierta > .atlas-hijos,
+.atlas-base.abierta > .atlas-hijos { display: block; }
+
+/* marca de cuántos ámbitos tocan a un dato */
+.atlas-fila .at-amb {
+  flex: none;
+  font-size: 10.5px;
+  color: var(--at-acento);
+  white-space: nowrap;
 }
 
-/* ---------- Lienzo ---------- */
+/* ---------- cara derecha: los ámbitos ---------- */
 
-.atlas-lienzo {
-  position: relative;
-  flex: 1 1 auto;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 46%, var(--cream-50) 0%, var(--paper) 68%);
-  cursor: grab;
-  touch-action: none;
-  user-select: none;
-}
-.atlas-lienzo.is-arrastrando { cursor: grabbing; }
-
-.atlas-escena {
-  position: absolute;
-  inset: 0;
-  transform-origin: 50% 50%;
-  will-change: transform;
-  transition: opacity 200ms ease;
-}
-.atlas.menu-abierto .atlas-escena { opacity: 0.35; }
-
-.atlas-mapa { position: absolute; inset: 0; }
-.atlas-vista { position: absolute; inset: 0; }
-.atlas-vista.entra-in  { animation: at-in  380ms cubic-bezier(0.22, 1, 0.36, 1); }
-.atlas-vista.entra-out { animation: at-out 380ms cubic-bezier(0.22, 1, 0.36, 1); }
-@keyframes at-in  { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } }
-@keyframes at-out { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .atlas-vista.entra-in, .atlas-vista.entra-out { animation: none; }
-  .atlas-nodo { transition: none !important; }
-}
-
-/* ---------- Órbitas ---------- */
-
-/* Una órbita por cuerpo: nunca dos cuerpos en el mismo anillo. */
-.atlas-orbita {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  border: 1px solid var(--at-guia);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.atlas-orbita.destacada { border-color: var(--at-guia-fuerte); }
-
-/* ---------- Nodos ---------- */
-
-.atlas-nodo {
-  position: absolute;
-  transform: translate(-50%, -50%);
+.atlas-ambitos {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 7px;
+  gap: 9px;
+  margin: 8px 0 0;
   padding: 0;
-  border: 0;
-  background: none;
+  list-style: none;
+}
+.atlas-amb {
+  display: block;
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-2, 4px);
+  background: var(--paper);
   color: inherit;
   font: inherit;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
-  z-index: 1;
-  transition: left 620ms cubic-bezier(0.22, 1, 0.36, 1),
-              top 620ms cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 320ms ease;
+  transition: border-color 140ms ease, box-shadow 140ms ease, opacity 180ms ease;
 }
-.atlas-nodo .cuerpo {
-  position: relative;
-  flex: none;
-  border-radius: 50%;
-  background: var(--c);
-  box-shadow: 0 1px 2px rgba(28, 18, 18, 0.16);
-  transition: transform 160ms ease, box-shadow 160ms ease;
-}
-.atlas-nodo .cuerpo::after {
-  content: "";
-  position: absolute;
-  left: 26%; top: 22%;
-  width: 26%; height: 26%;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.55);
-}
-.atlas-nodo:hover .cuerpo,
-.atlas-nodo:focus-visible .cuerpo {
-  transform: scale(1.14);
-  box-shadow: 0 2px 10px rgba(28, 18, 18, 0.22);
-}
-.atlas-nodo:focus-visible { outline: 2px solid var(--at-acento); outline-offset: 4px; }
-.atlas-nodo.atenuado { opacity: 0.2; }
-.atlas-nodo .cuerpo.activo { box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--at-acento); }
-
-.atlas-nodo .nombre {
+.atlas-amb:hover { border-color: var(--at-acento); }
+.atlas-amb:focus-visible { outline: 2px solid var(--at-acento); outline-offset: 2px; }
+.atlas-amb .at-q {
+  display: block;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 13px;
-  line-height: 1.2;
+  font-size: 15px;
+  line-height: 1.3;
   color: var(--ink);
-  max-width: 15ch;
+  margin-bottom: 5px;
 }
-/* La meta solo aparece al enfocar el nodo: con nueve etiquetas
-   permanentes el mapa se leía como una lista, no como un mapa. */
-.atlas-nodo .meta {
-  font-size: 11px;
-  color: var(--slate);
-  opacity: 0;
-  transition: opacity 160ms ease;
-}
-.atlas-nodo:hover .meta,
-.atlas-nodo:focus-visible .meta { opacity: 1; }
-
-.atlas-centro {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-  pointer-events: none;
-  max-width: 320px;
-  z-index: 2;
-}
-.atlas-centro .cuerpo {
-  position: relative;
-  border-radius: 50%;
-  background: var(--c);
-  box-shadow: 0 2px 10px rgba(28, 18, 18, 0.18);
-}
-.atlas-centro .cuerpo::after {
-  content: "";
-  position: absolute;
-  left: 26%; top: 22%;
-  width: 26%; height: 26%;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.55);
-}
-.atlas-centro h3 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 1.15;
-  color: var(--ink);
-}
-.atlas-centro h3.menor { font-size: 20px; }
-.atlas-centro p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-2); max-width: 44ch; }
-.atlas-centro .meta { font-size: 11.5px; color: var(--slate); }
-
-/* ---------- Ámbito ---------- */
-
-.atlas-trazo { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.atlas-trazo line { stroke: var(--at-acento); stroke-width: 1.2; opacity: 0.5; }
-.atlas-trazo.punteado line { stroke-dasharray: 3 5; }
-
-.atlas-cabecera-amb {
-  position: absolute;
-  left: 50%; top: 8%;
-  transform: translateX(-50%);
-  width: min(46ch, 86%);
-  text-align: center;
-  pointer-events: none;
-  z-index: 2;
-}
-.atlas-cabecera-amb .eyebrow {
-  margin: 0 0 4px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: none;
-  color: var(--at-acento);
-}
-.atlas-cabecera-amb h3 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 21px;
-  line-height: 1.25;
-  color: var(--ink);
-}
-
-/* ---------- Pie y controles ---------- */
-
-.atlas-pie {
-  position: absolute;
-  left: 16px; bottom: 14px;
-  margin: 0;
+.atlas-amb .at-n {
+  display: block;
   font-size: 11.5px;
   color: var(--slate);
-  z-index: 2;
-  pointer-events: none;
 }
-
-.atlas-controles {
-  position: absolute;
-  right: 14px; bottom: 14px;
+.atlas-amb .at-pts {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  z-index: 5;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 9px;
 }
-.atlas-controles button {
-  width: 32px; height: 32px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-2, 4px);
-  background: var(--paper);
-  color: var(--ink-2);
-  font: inherit;
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
+.atlas-amb .at-pts i {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c, var(--slate));
 }
-.atlas-controles button:hover { border-color: var(--at-acento); color: var(--at-acento); }
 
-/* ---------- Ficha ---------- */
+/* ---------- estados de vínculo ---------- */
+
+.atlas.hay-seleccion .atlas-fila,
+.atlas.hay-seleccion .atlas-amb { opacity: var(--at-atenuado); }
+
+.atlas.hay-seleccion .destacado > .atlas-fila,
+.atlas.hay-seleccion .atlas-amb.destacado { opacity: 1; }
+.atlas.hay-seleccion .destacado > .atlas-fila { background: var(--cream-50); }
+.atlas.hay-seleccion .atlas-amb.destacado {
+  border-color: var(--at-acento);
+  box-shadow: 0 1px 8px rgba(28, 18, 18, 0.1);
+}
+
+/* la rama que contiene una contraparte se mantiene legible aunque
+   el ancestro no sea contraparte por sí mismo */
+.atlas.hay-seleccion .rama > .atlas-fila { opacity: 0.7; }
+
+.atlas.hay-seleccion .elegido > .atlas-fila,
+.atlas.hay-seleccion .atlas-amb.elegido {
+  opacity: 1;
+  background: var(--paper);
+  box-shadow: inset 3px 0 0 var(--at-acento);
+}
+.atlas.hay-seleccion .atlas-amb.elegido {
+  border-color: var(--at-acento);
+  box-shadow: inset 3px 0 0 var(--at-acento), 0 1px 8px rgba(28, 18, 18, 0.1);
+}
+
+/* ---------- ficha en línea ---------- */
 
 .atlas-ficha {
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: min(370px, 90%);
-  padding: 24px 26px;
-  overflow-y: auto;
-  background: var(--paper);
-  border-left: 1px solid var(--line);
-  box-shadow: var(--shadow-3);
-  animation: at-ficha 260ms cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 7;
-  cursor: auto;
+  margin: 0 0 8px 40px;
+  padding: 12px 14px;
+  border-left: 2px solid var(--at-acento);
+  background: var(--cream-50);
+  border-radius: 0 var(--radius-2, 4px) var(--radius-2, 4px) 0;
+  font-size: 12.5px;
+  opacity: 1 !important;
 }
-.atlas-ficha[hidden] { display: none; }
-@keyframes at-ficha { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: none; } }
+.atlas-inst > .atlas-ficha { margin-left: 0; }
+.atlas-base > .atlas-ficha { margin-left: 20px; }
+.atlas-amb + .atlas-ficha { margin-left: 0; }
 
-.atlas-ficha .cerrar {
-  position: absolute;
-  right: 16px; top: 16px;
-  width: 28px; height: 28px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-2, 4px);
-  background: var(--paper);
+.atlas-ficha .at-desc {
+  margin: 0 0 9px;
+  line-height: 1.55;
   color: var(--ink-2);
-  font: inherit;
-  line-height: 1;
-  cursor: pointer;
 }
-.atlas-ficha .cerrar:hover { border-color: var(--at-acento); color: var(--at-acento); }
-.atlas-ficha .ruta-larga {
-  display: flex; align-items: center; gap: 7px;
-  margin: 0 40px 8px 0;
+.atlas-ficha .at-meta {
+  margin: 0 0 9px;
   font-size: 11.5px;
   color: var(--slate);
 }
-.atlas-ficha h3 {
-  margin: 0 0 10px;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1.2;
-  color: var(--ink);
-}
-.atlas-ficha .desc { margin: 0 0 10px; font-size: 13.5px; line-height: 1.55; color: var(--ink-2); }
-.atlas-ficha .meta { margin: 0 0 20px; font-size: 11.5px; color: var(--slate); }
 .atlas-ficha h4 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--slate);
 }
-.atlas-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
-.atlas-chips li {
-  padding: 3px 8px;
-  font-size: 11.5px;
-  color: var(--ink-2);
-  background: var(--cream-50);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-2, 4px);
+.atlas-ficha .at-vars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 11px;
+  padding: 0;
+  list-style: none;
 }
-.atlas-conexiones { display: flex; flex-direction: column; margin: 0 0 20px; }
-.atlas-conexiones button,
-.atlas-lista button {
+.atlas-ficha .at-vars li {
+  padding: 2px 7px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--slate);
+  background: var(--cream-200);
+  border-radius: var(--radius-1, 2px);
+}
+.atlas-ficha .at-acceso {
+  font-weight: 500;
+  color: var(--olive);
+}
+.atlas-ficha .at-acceso--rest { color: var(--coral); }
+
+.atlas-ficha .at-enlaces { margin: 0; }
+.atlas-ficha .at-enlaces a {
+  color: var(--at-acento);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.atlas-ficha .at-conex {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 11px;
+  padding: 0;
+  list-style: none;
+}
+.atlas-ficha .at-conex button {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 7px;
   width: 100%;
-  padding: 8px 0;
+  padding: 6px 0;
   border: 0;
   border-top: 1px solid var(--line);
   background: none;
   color: var(--ink-2);
   font: inherit;
-  font-size: 12.5px;
+  font-size: 12px;
   text-align: left;
   cursor: pointer;
 }
-.atlas-conexiones button:hover,
-.atlas-lista button:hover { color: var(--at-acento); }
-.atlas-punto {
-  flex: none;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--c);
-  transform: translateY(-1px);
-}
-.atlas-ruta { font-size: 11px; color: var(--slate); }
-.atlas-ficha .fuente { font-size: 12.5px; }
-.atlas-ficha .sin { margin: 0 0 20px; font-size: 12px; color: var(--slate); }
-
-/* ---------- Lista lateral del ámbito ---------- */
-
-.atlas-lista {
-  position: absolute;
-  left: 16px; top: 16px;
-  width: 244px;
-  max-height: calc(100% - 64px);
-  overflow-y: auto;
-  padding: 14px 16px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-2, 4px);
-  box-shadow: var(--shadow-2);
-  z-index: 3;
-}
-.atlas-lista h4 {
-  margin: 0 0 4px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 12px;
+.atlas-ficha .at-conex button:hover { color: var(--at-acento); }
+.atlas-ficha .at-conex button:focus-visible { outline: 2px solid var(--at-acento); outline-offset: -2px; }
+.atlas-ficha .at-conex .at-ruta {
+  font-size: 10.5px;
   color: var(--slate);
 }
+.atlas-ficha .at-sin {
+  margin: 0 0 11px;
+  font-size: 11.5px;
+  color: var(--slate);
+}
+
+/* ---------- error ---------- */
 
 .atlas-error {
   display: flex;
@@ -465,14 +399,32 @@
   color: var(--slate);
 }
 
-/* ---------- Angosto ---------- */
+/* ---------- movimiento reducido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-fila,
+  .atlas-amb,
+  .atlas-fila .at-caret { transition: none; }
+}
+
+/* ---------- angosto ----------
+   Las dos caras dejan de estar enfrentadas y se apilan: en un
+   teléfono, dos columnas de 160 px no son un tablero. El alto fijo
+   se suelta para que cada cara crezca con su contenido. */
 
 @media (max-width: 880px) {
-  .atlas { height: 72vh; min-height: 440px; }
-  .atlas-barra { flex-wrap: wrap; gap: 10px; }
-  .atlas-menu { left: 0; right: auto; width: min(264px, 88vw); }
-  .atlas-lista { display: none; }
-  .atlas-ficha { width: 100%; }
-  .atlas-pie { display: none; }
-  .atlas-nodo .meta { opacity: 1; }
+  .atlas { height: auto; min-height: 0; }
+  .atlas-tablero { grid-template-columns: minmax(0, 1fr); }
+  .atlas-cara--der {
+    border-left: 0;
+    border-top: 1px solid var(--line-strong);
+  }
+  .atlas-scroll {
+    overflow-y: visible;
+    max-height: none;
+    padding: 6px 14px 18px;
+  }
+  .atlas-cara > header { padding: 14px 14px 10px; }
+  .atlas-dato > .atlas-fila { padding-left: 28px; }
+  .atlas-ficha { margin-left: 28px; }
 }

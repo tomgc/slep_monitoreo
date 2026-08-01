@@ -1,594 +1,477 @@
 /* ===========================================================
-   Atlas de los datos educativos
+   Atlas de los datos educativos — tablero de dos mitades
    Área de Monitoreo · SLEP Costa Central
 
-   Consume las tres constantes globales de atlas_datos.js
-   (ATLAS_INSTITUCIONES, ATLAS_AMBITOS, ATLAS_FRASES).
+   Dos caras enfrentadas sobre el mismo catálogo:
 
-   Todo vive dentro de una IIFE: este archivo no agrega ninguna
-   constante al ámbito global.
+     izquierda   fuentes, en la jerarquía de tres niveles del
+                 contrato: institución → base → dato
+     derecha     ámbitos de indagación, una tarjeta por pregunta
 
-   Geometría en píxeles, no en porcentajes: las órbitas son
-   círculos y un porcentaje sobre un contenedor no cuadrado los
-   convierte en elipses distintas por eje. Cada cuerpo tiene su
-   propio radio, de modo que dos cuerpos nunca comparten anillo.
+   Seleccionar una pieza de cualquiera de las dos caras destaca
+   sus contrapartes en la otra y abre su ficha en línea. Los
+   cuatro niveles del contrato son alcanzables sin salir del
+   tablero.
 
-   No toca app.js, data.js ni atlas_datos.js.
+   Consume las constantes de atlas_datos.js. Contrato del archivo:
+   50_documentacion/activa/50_contrato_atlas_datos.md
+
+   Todo el código vive en una IIFE y NO declara ninguna constante
+   global: no puede colisionar con PROYECTOS, HITOS, EQUIPO,
+   ATLAS_INSTITUCIONES, ATLAS_AMBITOS ni ATLAS_FRASES.
+
+   Sustituye la representación orbital de la sesión 12, descartada
+   por el titular. Dos lecciones de esa sesión se conservan como
+   restricciones de este archivo: no hay setPointerCapture (BUG-01)
+   y no hay geometría circular dependiente del tamaño del
+   contenedor (BUG-02). Aquí, sencillamente, no hay geometría.
    =========================================================== */
-
 (function () {
   "use strict";
 
-  // El id de la sección (#atlas) es el ancla de navegación;
-  // el contenedor del mapa usa uno propio.
   var raiz = document.getElementById("atlasCeleste");
   if (!raiz) return;
 
-  var INST = typeof ATLAS_INSTITUCIONES !== "undefined" ? ATLAS_INSTITUCIONES : null;
-  var AMB = typeof ATLAS_AMBITOS !== "undefined" ? ATLAS_AMBITOS : [];
+  var INST = (typeof ATLAS_INSTITUCIONES !== "undefined" && Array.isArray(ATLAS_INSTITUCIONES))
+    ? ATLAS_INSTITUCIONES : null;
+  var AMB = (typeof ATLAS_AMBITOS !== "undefined" && Array.isArray(ATLAS_AMBITOS))
+    ? ATLAS_AMBITOS : [];
 
+  /* Sin catálogo no hay tablero: se dice qué pasó, en vez de dejar
+     un contenedor vacío sin explicación. */
   if (!INST || !INST.length) {
-    raiz.innerHTML = '<p class="atlas-error">El catálogo del atlas no está disponible en esta página.</p>';
+    raiz.innerHTML = '<p class="atlas-error">No se pudo cargar el catálogo de fuentes. ' +
+                     'La misma información está disponible como tabla más abajo.</p>';
     return;
   }
 
-  /* ---------- Utilidades ---------- */
+  /* ---------- utilidades ---------- */
 
   function esc(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (m) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m];
+    });
   }
-  function bases(i) { return (i && i.bases) || []; }
-  function datos(b) { return (b && b.datos) || []; }
-  function nDatos(i) { var n = 0; bases(i).forEach(function (b) { n += datos(b).length; }); return n; }
-  function porId(l, id) { for (var k = 0; k < l.length; k++) if (l[k].id === id) return l[k]; return null; }
+  function porId(lista, id) {
+    for (var k = 0; k < lista.length; k++) if (lista[k].id === id) return lista[k];
+    return null;
+  }
   function plural(n, s, p) { return n + " " + (n === 1 ? s : p); }
-  function acotar(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
+  /* Resolutor de rutas de tres segmentos. La unicidad de base y dato
+     es por ámbito y no global, así que ningún id sirve como llave por
+     sí solo: la llave es la ruta completa. */
   function buscar(ruta) {
     var p = String(ruta || "").split(".");
     if (p.length !== 3) return null;
     var i = porId(INST, p[0]); if (!i) return null;
-    var b = porId(bases(i), p[1]); if (!b) return null;
-    var d = porId(datos(b), p[2]); if (!d) return null;
+    var b = porId(i.bases || [], p[1]); if (!b) return null;
+    var d = porId(b.datos || [], p[2]); if (!d) return null;
     return { inst: i, base: b, dato: d, ruta: ruta };
   }
 
-  /* Posiciones normalizadas del nivel raíz. El catálogo trae x,y
-     en una franja pensada para un encabezado superpuesto; con la
-     barra arriba esa franja quedó libre y se reescala para llenar
-     el lienzo. Si todas las instituciones comparten coordenada, el
-     divisor cae a 1 y no se divide por cero. */
-  var norm = (function () {
-    var xs = INST.map(function (i) { return +i.x || 0; });
-    var ys = INST.map(function (i) { return +i.y || 0; });
-    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
-    var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
-    return function (i) {
-      var dx = x1 - x0 || 1, dy = y1 - y0 || 1;
-      return {
-        x: 12 + ((+i.x || 0) - x0) / dx * 76,
-        y: 16 + ((+i.y || 0) - y0) / dy * 68
-      };
-    };
-  })();
+  /* ---------- índices ---------- */
 
-  /* ---------- Estado ---------- */
+  var RUTAS = [];         // toda ruta de dato existente
+  var AMB_DE_RUTA = {};   // ruta -> [idAmbito]
+  var RUTAS_DE_AMB = {};  // idAmbito -> [ruta que resuelve]
+  var nBases = 0, nDatos = 0;
 
-  var st = {
-    nivel: "raiz",   // raiz | institucion | base | ambito
-    inst: null, base: null, ruta: null, ambito: null,
-    prev: null, dir: "in",
-    z: 1, px: 0, py: 0, menu: false
-  };
+  INST.forEach(function (i) {
+    (i.bases || []).forEach(function (b) {
+      nBases++;
+      (b.datos || []).forEach(function (d) {
+        nDatos++;
+        RUTAS.push(i.id + "." + b.id + "." + d.id);
+      });
+    });
+  });
 
-  /* ---------- Andamio ---------- */
+  AMB.forEach(function (a) {
+    RUTAS_DE_AMB[a.id] = [];
+    (a.datos || []).forEach(function (r) {
+      if (!buscar(r)) return;   // ruta colgante: no se dibuja
+      RUTAS_DE_AMB[a.id].push(r);
+      (AMB_DE_RUTA[r] = AMB_DE_RUTA[r] || []).push(a.id);
+    });
+  });
+
+  var sinAmbito = RUTAS.filter(function (r) { return !AMB_DE_RUTA[r]; }).length;
+
+  /* ---------- esqueleto ---------- */
 
   raiz.innerHTML =
     '<div class="atlas-barra">' +
-      '<nav class="atlas-migas" id="atMigas" aria-label="Nivel del atlas"></nav>' +
-      '<span class="crece"></span>' +
-      '<div class="atlas-ambitos">' +
-        '<button type="button" id="atBtnAmb" aria-expanded="false" aria-controls="atMenu">Ámbitos de indagación</button>' +
-        '<div class="atlas-menu" id="atMenu" hidden></div>' +
-      "</div>" +
+      '<span class="at-estado" id="atEstado" role="status" aria-live="polite"></span>' +
+      '<span class="at-crece"></span>' +
+      '<button type="button" id="atLimpiar" hidden>Limpiar selección</button>' +
     "</div>" +
-    '<div class="atlas-lienzo" id="atLienzo">' +
-      '<div class="atlas-escena" id="atEscena"><div class="atlas-mapa" id="atMapa"></div></div>' +
-      '<aside class="atlas-ficha" id="atFicha" hidden aria-label="Ficha del dato"></aside>' +
-      '<div class="atlas-controles">' +
-        '<button type="button" id="atFull" title="Pantalla completa" aria-label="Pantalla completa">⛶</button>' +
-        '<button type="button" id="atMas" title="Acercar" aria-label="Acercar">+</button>' +
-        '<button type="button" id="atMenos" title="Alejar" aria-label="Alejar">−</button>' +
-        '<button type="button" id="atReset" title="Restablecer la vista" aria-label="Restablecer la vista">↺</button>' +
-      "</div>" +
-      '<p class="atlas-pie" id="atPie"></p>' +
+    '<div class="atlas-tablero">' +
+      '<section class="atlas-cara atlas-cara--izq" aria-labelledby="atTitIzq">' +
+        "<header>" +
+          '<p class="eyebrow">Quién los produce</p>' +
+          '<h3 id="atTitIzq">Fuentes</h3>' +
+          '<p id="atMetaIzq"></p>' +
+        "</header>" +
+        '<div class="atlas-scroll" id="atIzq"></div>' +
+      "</section>" +
+      '<section class="atlas-cara atlas-cara--der" aria-labelledby="atTitDer">' +
+        "<header>" +
+          '<p class="eyebrow">Para qué preguntar</p>' +
+          '<h3 id="atTitDer">Ámbitos de indagación</h3>' +
+          '<p id="atMetaDer"></p>' +
+        "</header>" +
+        '<div class="atlas-scroll" id="atDer"></div>' +
+      "</section>" +
     "</div>";
 
-  var elLienzo = raiz.querySelector("#atLienzo");
-  var elEscena = raiz.querySelector("#atEscena");
-  var elMapa = raiz.querySelector("#atMapa");
-  var elMigas = raiz.querySelector("#atMigas");
-  var elMenu = raiz.querySelector("#atMenu");
-  var elBtnAmb = raiz.querySelector("#atBtnAmb");
-  var elFicha = raiz.querySelector("#atFicha");
-  var elPie = raiz.querySelector("#atPie");
+  var elIzq = raiz.querySelector("#atIzq");
+  var elDer = raiz.querySelector("#atDer");
+  var elEstado = raiz.querySelector("#atEstado");
+  var elLimpiar = raiz.querySelector("#atLimpiar");
 
-  function medida() {
-    var r = elLienzo.getBoundingClientRect();
-    return { w: r.width || 900, h: r.height || 520 };
+  raiz.querySelector("#atMetaIzq").textContent =
+    plural(INST.length, "institución", "instituciones") + " · " +
+    plural(nBases, "base", "bases") + " · " + plural(nDatos, "dato", "datos");
+  raiz.querySelector("#atMetaDer").textContent =
+    plural(AMB.length, "pregunta", "preguntas") + " que cruzan emisores";
+
+  /* ---------- cara izquierda ---------- */
+
+  function pintarArbol() {
+    var html = '<ul class="atlas-arbol">';
+    INST.forEach(function (i) {
+      var bs = i.bases || [];
+      var cd = bs.reduce(function (a, b) { return a + (b.datos || []).length; }, 0);
+
+      html += '<li class="atlas-inst" data-inst="' + esc(i.id) + '" style="--c:' + esc(i.color) + '">' +
+        '<button type="button" class="atlas-fila" data-tipo="inst" data-clave="' + esc(i.id) + '" aria-expanded="false">' +
+          '<span class="at-caret" aria-hidden="true">&#9654;</span>' +
+          '<span class="atlas-punto" aria-hidden="true"></span>' +
+          '<span class="at-n">' + esc(i.nombre) + "</span>" +
+          '<span class="at-m">' + bs.length + " b · " + cd + " d</span>" +
+        "</button>" +
+        '<ul class="atlas-hijos">';
+
+      bs.forEach(function (b) {
+        var rb = i.id + "." + b.id;
+        html += '<li class="atlas-base" data-base="' + esc(rb) + '">' +
+          '<button type="button" class="atlas-fila" data-tipo="base" data-clave="' + esc(rb) + '" aria-expanded="false">' +
+            '<span class="at-caret" aria-hidden="true">&#9654;</span>' +
+            '<span class="at-n">' + esc(b.nombre) + "</span>" +
+            '<span class="at-m">desde ' + esc(b.desde) + "</span>" +
+          "</button>" +
+          '<ul class="atlas-hijos">';
+
+        (b.datos || []).forEach(function (d) {
+          var rd = rb + "." + d.id;
+          var na = (AMB_DE_RUTA[rd] || []).length;
+          html += '<li class="atlas-dato" data-dato="' + esc(rd) + '">' +
+            '<button type="button" class="atlas-fila" data-tipo="dato" data-clave="' + esc(rd) + '" aria-pressed="false">' +
+              '<span class="at-n">' + esc(d.nombre) + "</span>" +
+              (na ? '<span class="at-amb" title="' + esc(plural(na, "ámbito de indagación", "ámbitos de indagación")) + '">' +
+                    na + "&#9670;</span>" : "") +
+              '<span class="at-m">' + esc(d.desde) + "</span>" +
+            "</button></li>";
+        });
+
+        html += "</ul></li>";
+      });
+
+      html += "</ul></li>";
+    });
+    elIzq.innerHTML = html + "</ul>";
   }
 
-  /* ---------- Zoom y paneo ---------- */
+  /* ---------- cara derecha ---------- */
 
-  function transform() {
-    elEscena.style.transform = "translate(" + st.px + "px," + st.py + "px) scale(" + st.z + ")";
-  }
-  function acotarZ(z) { return acotar(z, 0.5, 3.2); }
-  function resetVista() { st.z = 1; st.px = 0; st.py = 0; transform(); }
+  function pintarAmbitos() {
+    elDer.innerHTML = '<ul class="atlas-ambitos">' + AMB.map(function (a) {
+      var rs = RUTAS_DE_AMB[a.id] || [];
+      var emisores = {};
+      var pts = rs.map(function (r) {
+        var n = buscar(r);
+        emisores[r.split(".")[0]] = 1;
+        return '<i style="--c:' + esc(n ? n.inst.color : "") + '"></i>';
+      }).join("");
 
-  elLienzo.addEventListener("wheel", function (e) {
-    if (elFicha.contains(e.target)) return;
-    e.preventDefault();
-    var r = elLienzo.getBoundingClientRect();
-    var cx = e.clientX - r.left - r.width / 2;
-    var cy = e.clientY - r.top - r.height / 2;
-    var nz = acotarZ(st.z * Math.exp(-e.deltaY * 0.0012));
-    var k = nz / st.z;
-    st.px = cx - (cx - st.px) * k;
-    st.py = cy - (cy - st.py) * k;
-    st.z = nz;
-    transform();
-  }, { passive: false });
-
-  /* Arrastre sin setPointerCapture. La captura hacía que el evento
-     click posterior se despachara sobre el contenedor y no sobre el
-     nodo, de modo que ningún clic del mapa llegaba a su destino.
-     El seguimiento va en document y el umbral de 5 px distingue un
-     arrastre real de un clic. */
-  var drag = null;
-
-  elLienzo.addEventListener("pointerdown", function (e) {
-    if (e.button !== 0) return;
-    if (elFicha.contains(e.target)) return;
-    if (e.target.closest(".atlas-controles, .atlas-lista, .atlas-nodo")) return;
-    drag = { x: e.clientX, y: e.clientY, px: st.px, py: st.py, movido: false };
-  });
-
-  document.addEventListener("pointermove", function (e) {
-    if (!drag) return;
-    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-    if (!drag.movido && Math.abs(dx) + Math.abs(dy) > 5) {
-      drag.movido = true;
-      elLienzo.classList.add("is-arrastrando");
-    }
-    if (!drag.movido) return;
-    st.px = drag.px + dx;
-    st.py = drag.py + dy;
-    transform();
-  });
-
-  document.addEventListener("pointerup", function () {
-    if (!drag) return;
-    drag = null;
-    elLienzo.classList.remove("is-arrastrando");
-  });
-
-  raiz.querySelector("#atMas").addEventListener("click", function () { st.z = acotarZ(st.z * 1.25); transform(); });
-  raiz.querySelector("#atMenos").addEventListener("click", function () { st.z = acotarZ(st.z / 1.25); transform(); });
-  raiz.querySelector("#atReset").addEventListener("click", resetVista);
-  raiz.querySelector("#atFull").addEventListener("click", function () {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else if (raiz.requestFullscreen) raiz.requestFullscreen();
-  });
-
-  /* ---------- Navegación ---------- */
-
-  function ir(nuevo, dir) {
-    st.dir = dir || "in";
-    Object.keys(nuevo).forEach(function (k) { st[k] = nuevo[k]; });
-    resetVista();
-    render();
+      return '<li>' +
+        '<button type="button" class="atlas-amb" data-amb="' + esc(a.id) + '" ' +
+                'data-tipo="ambito" data-clave="' + esc(a.id) + '" aria-pressed="false">' +
+          '<span class="at-q">' + esc(a.pregunta) + "</span>" +
+          '<span class="at-n">' + esc(a.nombre) + " · " + plural(rs.length, "dato", "datos") +
+            " de " + plural(Object.keys(emisores).length, "institución", "instituciones") + "</span>" +
+          '<span class="at-pts" aria-hidden="true">' + pts + "</span>" +
+        "</button></li>";
+    }).join("") + "</ul>";
   }
 
-  function subir() {
-    if (st.ruta) { st.ruta = null; render(); return; }
-    if (st.nivel === "base") ir({ nivel: "institucion", base: null }, "out");
-    else if (st.nivel === "institucion") ir({ nivel: "raiz", inst: null }, "out");
-    else if (st.nivel === "ambito") ir({ nivel: "raiz", ambito: null }, "out");
+  /* ---------- estado de selección ---------- */
+
+  var sel = null;   // { tipo: "inst"|"base"|"dato"|"ambito", clave: string }
+
+  function rutasDe(s) {
+    if (!s) return [];
+    if (s.tipo === "dato") return [s.clave];
+    if (s.tipo === "base") return RUTAS.filter(function (r) { return r.indexOf(s.clave + ".") === 0; });
+    if (s.tipo === "inst") return RUTAS.filter(function (r) { return r.split(".")[0] === s.clave; });
+    if (s.tipo === "ambito") return RUTAS_DE_AMB[s.clave] || [];
+    return [];
   }
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key !== "Escape" || !raiz.isConnected) return;
-    if (st.menu) { cerrarMenu(); return; }
-    if (st.ruta || st.nivel !== "raiz") subir();
-  });
-
-  /* ---------- Menú de ámbitos ---------- */
-
-  if (!AMB.length) elBtnAmb.hidden = true;
-  elMenu.innerHTML = AMB.map(function (a) {
-    return '<button type="button" data-ambito="' + esc(a.id) + '">' +
-      '<span class="n">' + esc(a.nombre) + "</span>" +
-      '<span class="q">' + esc(a.pregunta) + "</span></button>";
-  }).join("");
-
-  function cerrarMenu() {
-    st.menu = false;
-    var habia = st.prev !== null;
-    st.prev = null;
-    elMenu.hidden = true;
-    elBtnAmb.setAttribute("aria-expanded", "false");
-    raiz.classList.remove("menu-abierto");
-    if (habia) render();
-  }
-
-  elBtnAmb.addEventListener("click", function (e) {
-    e.stopPropagation();
-    if (st.menu) { cerrarMenu(); return; }
-    st.menu = true;
-    elMenu.hidden = false;
-    elBtnAmb.setAttribute("aria-expanded", "true");
-    raiz.classList.add("menu-abierto");
-  });
-
-  elMenu.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-ambito]");
-    if (!b) return;
-    e.stopPropagation();
-    var id = b.getAttribute("data-ambito");
-    cerrarMenu();
-    ir({ nivel: "ambito", ambito: id, inst: null, base: null, ruta: null }, "in");
-  });
-
-  elMenu.addEventListener("mouseover", function (e) {
-    var b = e.target.closest("[data-ambito]");
-    if (!b) return;
-    var id = b.getAttribute("data-ambito");
-    if (st.prev === id) return;
-    st.prev = id;
-    if (st.nivel === "raiz") render();
-  });
-  elMenu.addEventListener("mouseleave", function () {
-    if (st.prev === null) return;
-    st.prev = null;
-    if (st.nivel === "raiz") render();
-  });
-
-  document.addEventListener("click", function (e) {
-    if (!st.menu) return;
-    if (e.target.closest(".atlas-ambitos")) return;
-    cerrarMenu();
-  });
-
-  /* ---------- Migas ---------- */
-
-  function pintarMigas() {
-    var partes = [{ t: "Instituciones", ir: { nivel: "raiz", inst: null, base: null, ambito: null, ruta: null } }];
-
-    if (st.nivel === "ambito") {
-      var a = porId(AMB, st.ambito);
-      partes.push({ t: a ? a.nombre : "Ámbito" });
-    } else if (st.nivel !== "raiz") {
-      var i = porId(INST, st.inst);
-      if (i) partes.push({ t: i.nombre, ir: { nivel: "institucion", base: null, ruta: null } });
-      if (st.nivel === "base") {
-        var b = porId(bases(i), st.base);
-        if (b) partes.push({ t: b.nombre });
-      }
-    }
-
-    elMigas.innerHTML = partes.map(function (p, k) {
-      var sep = k ? '<span class="sep">›</span>' : "";
-      if (k === partes.length - 1) return sep + '<span class="actual">' + esc(p.t) + "</span>";
-      return sep + '<button type="button" data-miga="' + k + '">' + esc(p.t) + "</button>";
-    }).join("");
-
-    elMigas.querySelectorAll("[data-miga]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        ir(partes[+btn.getAttribute("data-miga")].ir, "out");
+  function ambitosDe(s, rutas) {
+    if (!s) return [];
+    if (s.tipo === "ambito") return [s.clave];
+    var vistos = {}, out = [];
+    rutas.forEach(function (r) {
+      (AMB_DE_RUTA[r] || []).forEach(function (a) {
+        if (!vistos[a]) { vistos[a] = 1; out.push(a); }
       });
     });
-  }
-
-  /* ---------- Piezas de dibujo ---------- */
-
-  function orbita(cx, cy, r, destacada) {
-    return '<div class="atlas-orbita' + (destacada ? " destacada" : "") + '" style="left:' + cx +
-      "px;top:" + cy + "px;width:" + r * 2 + "px;height:" + r * 2 + 'px"></div>';
-  }
-
-  function nodo(o) {
-    var s = '<button type="button" class="atlas-nodo' + (o.atenuado ? " atenuado" : "") +
-      '" style="left:' + o.x + "px;top:" + o.y + 'px" ' + (o.attr || "") +
-      ' title="' + esc(o.desc || "") + '">';
-    s += '<span class="cuerpo' + (o.activo ? " activo" : "") + '" style="--c:' + esc(o.color) +
-      ";width:" + o.d + "px;height:" + o.d + 'px"></span>';
-    s += '<span class="nombre">' + esc(o.nombre) + "</span>";
-    if (o.meta) s += '<span class="meta">' + esc(o.meta) + "</span>";
-    s += "</button>";
-    return s;
-  }
-
-  function trazo(pts, punteado) {
-    if (pts.length < 2) return "";
-    var m = medida();
-    var s = '<svg class="atlas-trazo' + (punteado ? " punteado" : "") + '" viewBox="0 0 ' +
-      m.w + " " + m.h + '" width="' + m.w + '" height="' + m.h + '">';
-    for (var k = 0; k < pts.length - 1; k++) {
-      s += '<line x1="' + pts[k].x + '" y1="' + pts[k].y +
-        '" x2="' + pts[k + 1].x + '" y2="' + pts[k + 1].y + '" />';
-    }
-    return s + "</svg>";
-  }
-
-  /* Reparte n cuerpos en anillos concéntricos distintos. Devuelve
-     para cada índice su radio y su ángulo. */
-  function anillos(n, rMin, rMax) {
-    var out = [];
-    for (var k = 0; k < n; k++) {
-      var t = n === 1 ? 0.5 : k / (n - 1);
-      out.push({ r: rMin + (rMax - rMin) * t, a: (-90 + (k * 360) / n) * Math.PI / 180 });
-    }
     return out;
   }
 
-  /* ---------- Vistas ---------- */
+  /* ---------- fichas en línea ---------- */
 
-  function preview(ambitoId) {
-    var a = porId(AMB, ambitoId);
-    if (!a) return null;
-    var ids = [];
-    (a.datos || []).forEach(function (r) {
-      var f = buscar(r);
-      if (f && ids.indexOf(f.inst.id) === -1) ids.push(f.inst.id);
-    });
-    if (!ids.length) return null;
-    var m = medida(), mapa = {}, orden = [];
-    ids.forEach(function (id, k) {
-      var t = ids.length === 1 ? 0.5 : k / (ids.length - 1);
-      var p = { x: m.w * (0.14 + t * 0.72), y: m.h * (0.58 - 0.26 * Math.sin(t * Math.PI)) };
-      mapa[id] = p; orden.push(p);
-    });
-    return { mapa: mapa, orden: orden };
+  function enlaceDe(url, texto) {
+    if (!url) return "";
+    return '<p class="at-enlaces"><a href="' + esc(url) + '" target="_blank" rel="noopener">' +
+           esc(texto) + "</a></p>";
   }
 
-  function vistaRaiz() {
-    var m = medida();
-    var pv = st.prev ? preview(st.prev) : null;
-    var s = pv ? trazo(pv.orden, true) : "";
+  function fichaDato(n) {
+    var d = n.dato;
+    var rest = d.acceso === "Acceso restringido";
+    var vars = (d.variables || []).map(function (v) { return "<li>" + esc(v) + "</li>"; }).join("");
+    var rel = (d.relaciones || []).map(function (r) {
+      var o = buscar(r);
+      if (!o) return "";
+      return "<li>" +
+        '<button type="button" class="at-ir" data-ir="' + esc(r) + '">' +
+          '<span class="atlas-punto" style="--c:' + esc(o.inst.color) + '" aria-hidden="true"></span>' +
+          "<span>" + esc(o.dato.nombre) + "</span>" +
+          '<span class="at-ruta">' + esc(o.inst.nombre) + " · " + esc(o.base.nombre) + "</span>" +
+        "</button></li>";
+    }).join("");
 
-    INST.forEach(function (i) {
-      var n = nDatos(i);
-      var d = acotar(18 + n * 1.1, 20, 44);
-      var p = norm(i);
-      var pos = pv && pv.mapa[i.id] ? pv.mapa[i.id] : { x: m.w * p.x / 100, y: m.h * p.y / 100 };
-      // Un solo anillo por institución, proporcional a su tamaño.
-      s += orbita(pos.x, pos.y, d / 2 + 14, false);
-      s += nodo({
-        x: Math.round(pos.x), y: Math.round(pos.y), d: Math.round(d),
-        color: i.color, nombre: i.nombre,
-        meta: plural(bases(i).length, "base", "bases") + " · " + plural(n, "dato", "datos"),
-        desc: i.desc,
-        atenuado: !!(pv && !pv.mapa[i.id]),
-        attr: 'data-inst="' + esc(i.id) + '"'
-      });
-    });
-    return s;
+    return '<div class="atlas-ficha">' +
+      '<p class="at-desc">' + esc(d.desc) + "</p>" +
+      '<p class="at-meta">' + esc(n.inst.nombre) + " · " + esc(n.base.nombre) +
+        " · serie desde " + esc(d.desde) +
+        ' · <span class="at-acceso' + (rest ? " at-acceso--rest" : "") + '">' +
+        (rest ? "Acceso restringido" : "Acceso público") + "</span></p>" +
+      (vars ? "<h4>Variables</h4><ul class=\"at-vars\">" + vars + "</ul>" : "") +
+      (rel ? "<h4>Se cruza con</h4><ul class=\"at-conex\">" + rel + "</ul>"
+           : '<p class="at-sin">Sin cruces declarados en el catálogo.</p>') +
+      enlaceDe(d.url || n.base.url, "Ir a la fuente") +
+      "</div>";
   }
 
-  function vistaInstitucion() {
-    var i = porId(INST, st.inst);
-    if (!i) return "";
-    var m = medida(), bs = bases(i);
-    var cx = m.w / 2, cy = m.h * 0.54;
-    var rMax = Math.min(m.w, m.h) * 0.40;
-    var rMin = Math.min(rMax - 10, 96);
-    var an = anillos(bs.length, rMin, rMax);
-    var s = "";
-
-    an.forEach(function (o) { s += orbita(cx, cy, o.r, false); });
-
-    s += '<div class="atlas-centro" style="left:' + cx + "px;top:" + cy + 'px">' +
-      '<span class="cuerpo" style="--c:' + esc(i.color) + ';width:46px;height:46px"></span>' +
-      "<h3>" + esc(i.nombre) + "</h3><p>" + esc(i.desc) + "</p>" +
-      '<span class="meta">' + plural(bs.length, "base", "bases") + " · " +
-      plural(nDatos(i), "dato", "datos") + "</span></div>";
-
-    bs.forEach(function (b, k) {
-      var n = datos(b).length;
-      s += nodo({
-        x: Math.round(cx + an[k].r * Math.cos(an[k].a)),
-        y: Math.round(cy + an[k].r * Math.sin(an[k].a)),
-        d: Math.round(acotar(14 + n * 2, 16, 32)),
-        color: i.color, nombre: b.nombre,
-        meta: plural(n, "dato", "datos") + (b.desde ? " · desde " + b.desde : ""),
-        desc: b.desc,
-        attr: 'data-base="' + esc(b.id) + '"'
-      });
-    });
-    return s;
+  function fichaBase(i, b) {
+    return '<div class="atlas-ficha">' +
+      '<p class="at-desc">' + esc(b.desc) + "</p>" +
+      '<p class="at-meta">' + esc(i.nombre) + " · " + plural((b.datos || []).length, "dato", "datos") +
+        " · serie desde " + esc(b.desde) + "</p>" +
+      enlaceDe(b.url, "Ir al portal de la base") +
+      "</div>";
   }
 
-  function vistaBase() {
-    var i = porId(INST, st.inst);
-    var b = i && porId(bases(i), st.base);
-    if (!b) return "";
-    var m = medida(), ds = datos(b);
-    var cx = m.w * (st.ruta ? 0.40 : 0.5), cy = m.h * 0.54;
-    var rMax = Math.min(m.w, m.h) * 0.38;
-    var rMin = Math.min(rMax - 10, 92);
-    var an = anillos(ds.length, rMin, rMax);
-    var s = "";
-
-    an.forEach(function (o) { s += orbita(cx, cy, o.r, false); });
-
-    s += '<div class="atlas-centro" style="left:' + cx + "px;top:" + cy + 'px">' +
-      '<span class="cuerpo" style="--c:' + esc(i.color) + ';width:54px;height:54px"></span>' +
-      '<h3 class="menor">' + esc(b.nombre) + "</h3><p>" + esc(b.desc) + "</p>" +
-      '<span class="meta">' + (b.desde ? "Desde " + esc(b.desde) + " · " : "") +
-      plural(ds.length, "dato", "datos") + "</span></div>";
-
-    ds.forEach(function (d, k) {
-      var nv = (d.variables || []).length;
-      var ruta = i.id + "." + b.id + "." + d.id;
-      s += nodo({
-        x: Math.round(cx + an[k].r * Math.cos(an[k].a)),
-        y: Math.round(cy + an[k].r * Math.sin(an[k].a)),
-        d: Math.round(acotar(12 + nv * 1.4, 14, 26)),
-        color: i.color, nombre: d.nombre, desc: d.desc,
-        activo: st.ruta === ruta,
-        attr: 'data-dato="' + esc(ruta) + '"'
-      });
-    });
-    return s;
+  function fichaInst(i) {
+    var bs = i.bases || [];
+    var cd = bs.reduce(function (a, b) { return a + (b.datos || []).length; }, 0);
+    return '<div class="atlas-ficha">' +
+      '<p class="at-desc">' + esc(i.desc) + "</p>" +
+      '<p class="at-meta">' + plural(bs.length, "base", "bases") + " · " +
+        plural(cd, "dato", "datos") + "</p>" +
+      "</div>";
   }
 
-  function vistaAmbito() {
-    var a = porId(AMB, st.ambito);
-    if (!a) return "";
-    var m = medida();
-    var fichas = (a.datos || []).map(buscar).filter(Boolean);
-
-    var pts = fichas.map(function (f, k) {
-      var t = fichas.length === 1 ? 0.5 : k / (fichas.length - 1);
-      return { x: m.w * (0.28 + t * 0.60), y: m.h * (0.52 + (k % 2 ? 0.13 : -0.13)) };
-    });
-
-    var s = trazo(pts, false);
-
-    s += '<div class="atlas-cabecera-amb"><p class="eyebrow">Ámbito de indagación · ' +
-      esc(a.nombre) + "</p><h3>" + esc(a.pregunta) + "</h3></div>";
-
-    fichas.forEach(function (f, k) {
-      s += nodo({
-        x: Math.round(pts[k].x), y: Math.round(pts[k].y), d: 16,
-        color: f.inst.color, nombre: f.dato.nombre, meta: f.inst.nombre,
-        desc: f.dato.desc, activo: st.ruta === f.ruta,
-        attr: 'data-dato="' + esc(f.ruta) + '"'
-      });
-    });
-
-    s += '<div class="atlas-lista"><h4>Datos de este ámbito</h4>' +
-      fichas.map(function (f) {
-        return '<button type="button" data-dato="' + esc(f.ruta) + '">' +
-          '<span class="atlas-punto" style="--c:' + esc(f.inst.color) + '"></span>' +
-          "<span>" + esc(f.dato.nombre) +
-          '<span class="atlas-ruta"><br>' + esc(f.inst.nombre + " · " + f.base.nombre) + "</span></span></button>";
-      }).join("") + "</div>";
-
-    return s;
+  function fichaAmbito(a) {
+    var rs = RUTAS_DE_AMB[a.id] || [];
+    var lis = rs.map(function (r) {
+      var o = buscar(r);
+      if (!o) return "";
+      return "<li>" +
+        '<button type="button" class="at-ir" data-ir="' + esc(r) + '">' +
+          '<span class="atlas-punto" style="--c:' + esc(o.inst.color) + '" aria-hidden="true"></span>' +
+          "<span>" + esc(o.dato.nombre) + "</span>" +
+          '<span class="at-ruta">' + esc(o.inst.nombre) + "</span>" +
+        "</button></li>";
+    }).join("");
+    return '<div class="atlas-ficha">' +
+      "<h4>Datos que responden esta pregunta</h4>" +
+      '<ul class="at-conex">' + lis + "</ul>" +
+      "</div>";
   }
 
-  /* ---------- Ficha ---------- */
+  /* ---------- aplicar la selección ---------- */
 
-  function pintarFicha() {
-    if (!st.ruta) { elFicha.hidden = true; elFicha.innerHTML = ""; return; }
-    var f = buscar(st.ruta);
-    if (!f) { st.ruta = null; elFicha.hidden = true; return; }
+  function limpiarPintado() {
+    raiz.querySelectorAll(".destacado, .elegido, .rama").forEach(function (n) {
+      n.classList.remove("destacado", "elegido", "rama");
+    });
+    raiz.querySelectorAll(".atlas-ficha").forEach(function (n) { n.remove(); });
+    raiz.querySelectorAll('[aria-pressed="true"]').forEach(function (n) {
+      n.setAttribute("aria-pressed", "false");
+    });
+  }
 
-    var d = f.dato;
-    var vars = d.variables || [];
-    var rel = (d.relaciones || []).map(buscar).filter(Boolean);
-    var url = d.url || f.base.url;
+  function abrirRama(li) {
+    while (li && li !== raiz) {
+      if (li.classList && (li.classList.contains("atlas-inst") || li.classList.contains("atlas-base"))) {
+        li.classList.add("abierta");
+        var b = li.querySelector(":scope > .atlas-fila");
+        if (b) b.setAttribute("aria-expanded", "true");
+      }
+      li = li.parentNode;
+    }
+  }
 
-    var s = '<button type="button" class="cerrar" aria-label="Cerrar la ficha">×</button>';
-    s += '<p class="ruta-larga"><span class="atlas-punto" style="--c:' + esc(f.inst.color) + '"></span>' +
-      esc(f.inst.nombre + " · " + f.base.nombre) + "</p>";
-    s += "<h3>" + esc(d.nombre) + "</h3>";
-    s += '<p class="desc">' + esc(d.desc) + "</p>";
-    s += '<p class="meta">' + (d.desde ? "Desde " + esc(d.desde) + " · " : "") + esc(d.acceso || "") + "</p>";
+  function aplicar() {
+    limpiarPintado();
 
-    if (vars.length) {
-      s += "<h4>Variables</h4><ul class=\"atlas-chips\">" +
-        vars.map(function (v) { return "<li>" + esc(v) + "</li>"; }).join("") + "</ul>";
+    if (!sel) {
+      raiz.classList.remove("hay-seleccion");
+      elLimpiar.hidden = true;
+      elEstado.innerHTML =
+        plural(nDatos, "dato", "datos") + " de " +
+        plural(INST.length, "institución", "instituciones") +
+        ' <span class="at-sep">·</span> ' + plural(AMB.length, "ámbito", "ámbitos") +
+        ' <span class="at-sep">·</span> ' +
+        plural(sinAmbito, "dato sin ámbito", "datos sin ámbito");
+      return;
     }
 
-    s += "<h4>Se cruza con</h4>";
-    if (rel.length) {
-      s += '<div class="atlas-conexiones">' + rel.map(function (r) {
-        return '<button type="button" data-dato="' + esc(r.ruta) + '">' +
-          '<span class="atlas-punto" style="--c:' + esc(r.inst.color) + '"></span>' +
-          "<span>" + esc(r.dato.nombre) +
-          '<span class="atlas-ruta"><br>' + esc(r.inst.nombre + " · " + r.base.nombre) + "</span></span></button>";
-      }).join("") + "</div>";
+    raiz.classList.add("hay-seleccion");
+    elLimpiar.hidden = false;
+
+    var rutas = rutasDe(sel);
+    var ambs = ambitosDe(sel, rutas);
+
+    /* contrapartes en la cara izquierda */
+    rutas.forEach(function (r) {
+      var p = r.split(".");
+      var li = elIzq.querySelector('.atlas-dato[data-dato="' + r + '"]');
+      if (li) { li.classList.add("destacado"); abrirRama(li.parentNode); }
+      var lb = elIzq.querySelector('.atlas-base[data-base="' + p[0] + "." + p[1] + '"]');
+      if (lb) lb.classList.add("rama");
+      var lin = elIzq.querySelector('.atlas-inst[data-inst="' + p[0] + '"]');
+      if (lin) lin.classList.add("rama");
+    });
+
+    /* contrapartes en la cara derecha */
+    ambs.forEach(function (a) {
+      var el = elDer.querySelector('.atlas-amb[data-amb="' + a + '"]');
+      if (el) el.classList.add("destacado");
+    });
+
+    /* la pieza elegida, con su ficha */
+    var etiqueta = "";
+    if (sel.tipo === "ambito") {
+      var a = porId(AMB, sel.clave);
+      var btn = elDer.querySelector('.atlas-amb[data-amb="' + sel.clave + '"]');
+      if (btn) {
+        btn.classList.add("elegido");
+        btn.setAttribute("aria-pressed", "true");
+        btn.parentNode.insertAdjacentHTML("beforeend", fichaAmbito(a));
+      }
+      etiqueta = "Ámbito · " + esc(a ? a.nombre : sel.clave);
+
+    } else if (sel.tipo === "dato") {
+      var n = buscar(sel.clave);
+      var li = elIzq.querySelector('.atlas-dato[data-dato="' + sel.clave + '"]');
+      if (li && n) {
+        li.classList.add("elegido");
+        abrirRama(li.parentNode);
+        li.querySelector(".atlas-fila").setAttribute("aria-pressed", "true");
+        li.insertAdjacentHTML("beforeend", fichaDato(n));
+      }
+      etiqueta = n ? "Dato · " + esc(n.inst.nombre) + " · " + esc(n.dato.nombre) : esc(sel.clave);
+
+    } else if (sel.tipo === "base") {
+      var pb = sel.clave.split(".");
+      var i2 = porId(INST, pb[0]);
+      var b2 = i2 ? porId(i2.bases || [], pb[1]) : null;
+      var lb2 = elIzq.querySelector('.atlas-base[data-base="' + sel.clave + '"]');
+      if (lb2 && b2) {
+        lb2.classList.add("elegido");
+        lb2.querySelector(":scope > .atlas-fila").insertAdjacentHTML("afterend", fichaBase(i2, b2));
+      }
+      etiqueta = "Base · " + esc(i2 ? i2.nombre : pb[0]) + " · " + esc(b2 ? b2.nombre : pb[1]);
+
     } else {
-      s += '<p class="sin">Este dato aún no declara cruces con otros datos del catálogo.</p>';
+      var i3 = porId(INST, sel.clave);
+      var li3 = elIzq.querySelector('.atlas-inst[data-inst="' + sel.clave + '"]');
+      if (li3 && i3) {
+        li3.classList.add("elegido");
+        li3.querySelector(":scope > .atlas-fila").insertAdjacentHTML("afterend", fichaInst(i3));
+      }
+      etiqueta = "Institución · " + esc(i3 ? i3.nombre : sel.clave);
     }
 
-    if (url) s += '<a class="fuente" href="' + esc(url) + '" target="_blank" rel="noopener">Ir a la fuente →</a>';
-
-    elFicha.innerHTML = s;
-    elFicha.hidden = false;
-    elFicha.querySelector(".cerrar").addEventListener("click", function () { st.ruta = null; render(); });
+    elEstado.innerHTML =
+      "<b>" + etiqueta + "</b>" +
+      ' <span class="at-sep">·</span> ' + plural(rutas.length, "dato", "datos") +
+      " ↔ " + plural(ambs.length, "ámbito", "ámbitos") +
+      (ambs.length === 0 ? ' <span class="at-sep">·</span> sin contraparte declarada' : "");
   }
 
-  /* ---------- Render ---------- */
+  /* ---------- selección y navegación ---------- */
 
-  var PIE = {
-    raiz: "Haz clic en una institución · rueda para acercar · arrastra para mover",
-    institucion: "Haz clic en una base de datos · Esc para volver",
-    base: "Haz clic en un dato para ver su ficha · Esc para volver",
-    ambito: "Haz clic en un dato para ver su ficha · Esc para volver"
-  };
-
-  function render() {
-    var html = "";
-    if (st.nivel === "raiz") html = vistaRaiz();
-    else if (st.nivel === "institucion") html = vistaInstitucion();
-    else if (st.nivel === "base") html = vistaBase();
-    else if (st.nivel === "ambito") html = vistaAmbito();
-
-    elMapa.innerHTML = '<div class="atlas-vista entra-' + st.dir + '">' + html + "</div>";
-    elPie.textContent = PIE[st.nivel] || "";
-    pintarMigas();
-    pintarFicha();
+  function seleccionar(tipo, clave, forzar) {
+    if (!forzar && sel && sel.tipo === tipo && sel.clave === clave) {
+      /* segundo clic sobre la misma pieza: se deselecciona, y las ramas
+         de nivel 1 y 2 se cierran para devolver el árbol a su estado. */
+      if (tipo === "inst" || tipo === "base") {
+        var attr = tipo === "inst" ? "data-inst" : "data-base";
+        var li = elIzq.querySelector("[" + attr + '="' + clave + '"]');
+        if (li) {
+          li.classList.remove("abierta");
+          var b = li.querySelector(":scope > .atlas-fila");
+          if (b) b.setAttribute("aria-expanded", "false");
+        }
+      }
+      sel = null;
+    } else {
+      sel = { tipo: tipo, clave: clave };
+      if (tipo === "inst" || tipo === "base") {
+        var attr2 = tipo === "inst" ? "data-inst" : "data-base";
+        var li2 = elIzq.querySelector("[" + attr2 + '="' + clave + '"]');
+        if (li2) abrirRama(li2);
+      }
+    }
+    aplicar();
   }
 
-  /* Delegación única. El guardia de arrastre evita que soltar el
-     puntero encima de un nodo, tras mover el mapa, se lea como un
-     clic de navegación. */
-  var ultimoArrastre = 0;
-  document.addEventListener("pointerup", function () {
-    if (drag && drag.movido) ultimoArrastre = Date.now();
-  }, true);
+  function irA(ruta) {
+    seleccionar("dato", ruta, true);
+    var li = elIzq.querySelector('.atlas-dato[data-dato="' + ruta + '"]');
+    if (li) li.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
 
   raiz.addEventListener("click", function (e) {
-    if (Date.now() - ultimoArrastre < 120) return;
-    var t = e.target.closest("[data-inst],[data-base],[data-dato]");
-    if (!t) return;
+    var ir = e.target.closest("[data-ir]");
+    if (ir) { irA(ir.getAttribute("data-ir")); return; }
 
-    if (t.hasAttribute("data-inst")) {
-      ir({ nivel: "institucion", inst: t.getAttribute("data-inst"), base: null, ruta: null }, "in");
-      return;
-    }
-    if (t.hasAttribute("data-base")) {
-      ir({ nivel: "base", base: t.getAttribute("data-base"), ruta: null }, "in");
-      return;
-    }
-    var ruta = t.getAttribute("data-dato");
-    var f = buscar(ruta);
-    if (!f) return;
-    if (st.nivel === "ambito" && porId(AMB, st.ambito) &&
-        (porId(AMB, st.ambito).datos || []).indexOf(ruta) !== -1) {
-      st.ruta = ruta;
-      render();
-      return;
-    }
-    ir({ nivel: "base", inst: f.inst.id, base: f.base.id, ruta: ruta, ambito: null }, "in");
+    if (e.target.closest("a")) return;   // el enlace a la fuente no selecciona
+
+    if (e.target.closest("#atLimpiar")) { sel = null; aplicar(); return; }
+
+    var b = e.target.closest("[data-tipo][data-clave]");
+    if (!b) return;
+    seleccionar(b.getAttribute("data-tipo"), b.getAttribute("data-clave"), false);
   });
 
-  /* Redibujo al cambiar de tamaño: la geometría está en píxeles. */
-  var t0 = null;
-  window.addEventListener("resize", function () {
-    clearTimeout(t0);
-    t0 = setTimeout(function () { st.dir = "in"; render(); }, 160);
-  });
-  document.addEventListener("fullscreenchange", function () {
-    setTimeout(function () { resetVista(); render(); }, 60);
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !sel) return;
+    if (!raiz.contains(document.activeElement)) return;
+    sel = null;
+    aplicar();
   });
 
-  transform();
-  render();
+  /* ---------- arranque ---------- */
+
+  pintarArbol();
+  pintarAmbitos();
+  aplicar();
 })();
