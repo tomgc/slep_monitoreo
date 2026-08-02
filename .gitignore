@@ -10,10 +10,20 @@ _archivo/
 # Insumo de traspaso entregado (referencia local, no se versiona)
 handoff/
 
-# Traspasos de sesión: memoria interna, NO se publican (Pages sirve todo el repo)
-50_documentacion/traspasos/**
+# Memoria del proyecto: los traspasos de cierre y los logs de encargos
+# ejecutados SE VERSIONAN y, por lo tanto, se publican. Este repositorio es
+# publico por diseno: todo lo que entre queda legible en
+# github.com/tomgc/slep_monitoreo, aunque Pages sirva solo main:/docs.
+# Se redactan bajo esa condicion: sin nombres de establecimientos, RBD, RUT,
+# correos ni rutas locales.
+
+# Gobernanza: viven en la knowledge base del Project, no en el repositorio.
 POLITICA_PROYECTO.md
 SETTINGS_Y_PROMPTS_OPERACIONALES.md
 
-# Andamios de sesión: encargos y logs de ejecución, NO se publican
-50_documentacion/andamios/**
+# Andamios de sesion: instrumentos de un turno. El encargo y la maqueta
+# caducan al ejecutarse; el log del encargo es memoria y se versiona.
+50_documentacion/andamios/*
+!50_documentacion/andamios/logs/
+50_documentacion/andamios/logs/*
+!50_documentacion/andamios/logs/*.md
