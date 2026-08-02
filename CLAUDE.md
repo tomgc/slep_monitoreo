@@ -37,13 +37,16 @@ Aplicación **pragmática** de `POLITICA_PROYECTO.md` (en `50_documentacion/acti
 - `50_documentacion/` agrupa la documentación:
   - `activa/` — política y documentos vigentes.
   - `traspasos/` — traspasos de cierre de sesión y `backlog_acumulado.md`
-    (snake_case). **Gitignored**: no se versionan porque el repositorio es
-    público y su contenido no debe serlo. Al no versionarse, este repo queda
-    fuera de la regla 1.3.1 de `POLITICA_PROYECTO.md` v5.5 (traspaso vigente:
-    un solo archivo a la vista, el resto en `traspasos/archivo/`) y del
-    bloque 1 del protocolo §4.7 de `SETTINGS_Y_PROMPTS_OPERACIONALES.md` v14,
-    que la ejecuta. Revisar esa exclusión está pendiente de decisión del
-    titular.
+    (snake_case). **Versionados** desde el 2026-08-02, por decisión del
+    titular: son el registro metodológico del trabajo del Área, del mismo
+    tipo que el backlog que ya era público. El repositorio es público por
+    diseño, de modo que se redactan sabiendo que quedan legibles en
+    `github.com/tomgc/slep_monitoreo`: sin nombres de establecimientos, RBD,
+    RUT, correos ni rutas locales. Al versionarse, este repo vuelve a quedar
+    dentro de la regla 1.3.1 de `POLITICA_PROYECTO.md` (traspaso vigente: un
+    solo archivo a la vista, el resto en `traspasos/archivo/`) y del bloque 1
+    del protocolo §4.7 de `SETTINGS_Y_PROMPTS_OPERACIONALES.md`, que la
+    ejecuta.
   - `estructura/` — snapshots del escáner.
 - **Pipeline de R para el catálogo de fuentes** (desde la sesión 11), con las
   decenas de la política §1.1:
@@ -87,7 +90,10 @@ Rscript 00_escanear_proyecto.R
 - El escáner usa dos versiones fijas (actual/anterior) en vez de snapshots sellados
   con timestamp y poda de retención 2 (se aparta de la política 7.3-7.4; simplificación
   para un sitio estático que cambia poco).
-- Los traspasos de sesión y `backlog_acumulado.md` NO se versionan: viven en
-  `50_documentacion/traspasos/` pero están **gitignored** porque GitHub Pages
-  publica todo el repo y no deben ser públicos. Se adjuntan a mano al abrir
-  cada sesión.
+- Los traspasos de sesión y `backlog_acumulado.md` **sí se versionan** (desde el
+  2026-08-02) y viajan con el repositorio: ya no hay que adjuntarlos a mano al
+  abrir cada sesión. Pages sirve solo `main` `/docs`, pero el repositorio
+  completo es público y navegable en `github.com`: eso, y no Pages, es lo que
+  determina qué queda a la vista. Los logs de encargos ejecutados
+  (`50_documentacion/andamios/logs/*.md`) siguen la misma regla; los encargos y
+  maquetas de `50_documentacion/andamios/` siguen ignorados por caducos.
