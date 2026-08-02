@@ -1156,7 +1156,7 @@ const ATLAS_INSTITUCIONES = [
   }
 ];
 
-const ATLAS_AMBITOS = [
+const ATLAS_DESAFIOS = [
   {
     "id": "trayectorias",
     "nombre": "Trayectorias educativas",
@@ -1236,5 +1236,5 @@ const ATLAS_FRASES = {
   "institucion": "Cada institución es un sistema solar: sus bases de datos lo orbitan como planetas.",
   "base": "Cada base de datos es un planeta: al acercarnos vemos los datos que lo componen.",
   "dato": "El conocimiento aparece cuando conectamos los puntos.",
-  "ambito": "Las preguntas educativas dibujan constelaciones entre datos distantes."
+  "desafio": "Las preguntas educativas dibujan constelaciones entre datos distantes."
 };

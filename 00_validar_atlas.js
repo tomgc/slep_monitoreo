@@ -29,7 +29,7 @@ const RE_ID = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const RE_HEX = /^#[0-9A-Fa-f]{6}$/;
 const RE_URL = /^https:\/\/[^\s"']+$/;
 const VARS_MIN = 2, VARS_MAX = 8;
-const DATOS_AMBITO_MIN = 3, DATOS_AMBITO_MAX = 8;
+const DATOS_DESAFIO_MIN = 3, DATOS_DESAFIO_MAX = 8;
 const DIST_MIN = 12;
 const X_MIN = 30, X_MAX = 88, Y_MIN = 12, Y_MAX = 88;
 const ANIO_MIN = 1900;
@@ -66,24 +66,24 @@ if (/^\s*import\s/m.test(fuente) || /\bimport\s*\(/.test(fuente)) {
 
 const ctx = {};
 vm.createContext(ctx);
-let INST, AMB, FRASES;
+let INST, DES, FRASES;
 try {
   vm.runInContext(
     fuente.replace(/^\s*export\s+/gm, "") +
     "\nthis.__I = typeof ATLAS_INSTITUCIONES !== 'undefined' ? ATLAS_INSTITUCIONES : undefined;" +
-    "\nthis.__A = typeof ATLAS_AMBITOS !== 'undefined' ? ATLAS_AMBITOS : undefined;" +
+    "\nthis.__A = typeof ATLAS_DESAFIOS !== 'undefined' ? ATLAS_DESAFIOS : undefined;" +
     "\nthis.__F = typeof ATLAS_FRASES !== 'undefined' ? ATLAS_FRASES : undefined;",
     ctx,
     { timeout: 5000 }
   );
-  INST = ctx.__I; AMB = ctx.__A; FRASES = ctx.__F;
+  INST = ctx.__I; DES = ctx.__A; FRASES = ctx.__F;
 } catch (e) {
   console.error("El archivo no es JavaScript evaluable:\n  " + e.message);
   process.exit(1);
 }
 
 if (!Array.isArray(INST)) err("archivo", "no declara ATLAS_INSTITUCIONES como arreglo");
-if (!Array.isArray(AMB)) err("archivo", "no declara ATLAS_AMBITOS como arreglo");
+if (!Array.isArray(DES)) err("archivo", "no declara ATLAS_DESAFIOS como arreglo");
 if (!FRASES || typeof FRASES !== "object") err("archivo", "no declara ATLAS_FRASES como objeto");
 
 if (errores.length) { informar(); process.exit(1); }
@@ -185,12 +185,12 @@ relacionesPorRuta.forEach((rels, origen) => {
   if (dup.length) avi("relacion", origen + ": destino repetido (" + [...new Set(dup)].join(", ") + ")");
 });
 
-/* ---------- ámbitos ---------- */
+/* ---------- desafíos ---------- */
 
-unicos(AMB.map((a) => a.id), "ambitos", "id");
+unicos(DES.map((a) => a.id), "desafios", "id");
 
-AMB.forEach((A, aIdx) => {
-  const dA = "ambito[" + (A.id || aIdx) + "]";
+DES.forEach((A, aIdx) => {
+  const dA = "desafio[" + (A.id || aIdx) + "]";
   if (!texto(A.id) || !RE_ID.test(A.id)) err(dA, "id ausente o con formato inválido");
   if (!texto(A.nombre)) err(dA, "nombre ausente");
   if (!texto(A.pregunta)) err(dA, "pregunta ausente");
@@ -198,16 +198,16 @@ AMB.forEach((A, aIdx) => {
   if (Array.isArray(A.estrellas)) err(dA, "usa `estrellas`; el contrato lo renombró a `datos`");
 
   if (!Array.isArray(A.datos)) { err(dA, "sin `datos`"); return; }
-  if (A.datos.length < DATOS_AMBITO_MIN || A.datos.length > DATOS_AMBITO_MAX)
-    err(dA, "tiene " + A.datos.length + " datos; el contrato pide entre " + DATOS_AMBITO_MIN + " y " + DATOS_AMBITO_MAX);
+  if (A.datos.length < DATOS_DESAFIO_MIN || A.datos.length > DATOS_DESAFIO_MAX)
+    err(dA, "tiene " + A.datos.length + " datos; el contrato pide entre " + DATOS_DESAFIO_MIN + " y " + DATOS_DESAFIO_MAX);
   A.datos.forEach((r) => { if (!rutas.has(r)) err(dA, "la ruta " + r + " no existe"); });
   const insts = new Set(A.datos.map((r) => String(r).split(".")[0]));
-  if (insts.size < 2) avi(dA, "todos sus datos son de una sola institución; un ámbito gana valor cruzando emisores");
+  if (insts.size < 2) avi(dA, "todos sus datos son de una sola institución; un desafío gana valor cruzando emisores");
 });
 
 /* ---------- frases ---------- */
 
-["universo", "institucion", "base", "dato", "ambito"].forEach((k) => {
+["universo", "institucion", "base", "dato", "desafio"].forEach((k) => {
   if (!texto(FRASES[k])) err("frases", "falta la frase `" + k + "`");
 });
 
@@ -244,7 +244,7 @@ function informar() {
   console.log("Catálogo: " + ruta);
   console.log("Instituciones: " + (Array.isArray(INST) ? INST.length : "?") +
               " | bases: " + nB + " | datos: " + nD +
-              " | ámbitos: " + (Array.isArray(AMB) ? AMB.length : "?") +
+              " | desafíos: " + (Array.isArray(DES) ? DES.length : "?") +
               " | relaciones: " + nR);
   console.log("");
 
