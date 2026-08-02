@@ -3,7 +3,7 @@
    Área de Monitoreo · SLEP Costa Central
 
    Consume las tres constantes globales de atlas_datos.js
-   (ATLAS_INSTITUCIONES, ATLAS_AMBITOS, ATLAS_FRASES).
+   (ATLAS_INSTITUCIONES, ATLAS_DESAFIOS, ATLAS_FRASES).
 
    Todo vive dentro de una IIFE: este archivo no agrega ninguna
    constante al ámbito global.
@@ -25,7 +25,7 @@
   if (!raiz) return;
 
   var INST = typeof ATLAS_INSTITUCIONES !== "undefined" ? ATLAS_INSTITUCIONES : null;
-  var AMB = typeof ATLAS_AMBITOS !== "undefined" ? ATLAS_AMBITOS : [];
+  var DES = typeof ATLAS_DESAFIOS !== "undefined" ? ATLAS_DESAFIOS : [];
 
   if (!INST || !INST.length) {
     raiz.innerHTML = '<p class="atlas-error">El catálogo del atlas no está disponible en esta página.</p>';
@@ -77,8 +77,8 @@
   /* ---------- Estado ---------- */
 
   var st = {
-    nivel: "raiz",   // raiz | institucion | base | ambito
-    inst: null, base: null, ruta: null, ambito: null,
+    nivel: "raiz",   // raiz | institucion | base | desafio
+    inst: null, base: null, ruta: null, desafio: null,
     prev: null, dir: "in",
     z: 1, px: 0, py: 0, menu: false
   };
@@ -89,8 +89,8 @@
     '<div class="atlas-barra">' +
       '<nav class="atlas-migas" id="atMigas" aria-label="Nivel del atlas"></nav>' +
       '<span class="crece"></span>' +
-      '<div class="atlas-ambitos">' +
-        '<button type="button" id="atBtnAmb" aria-expanded="false" aria-controls="atMenu">Ámbitos de indagación</button>' +
+      '<div class="atlas-desafios">' +
+        '<button type="button" id="atBtnDes" aria-expanded="false" aria-controls="atMenu">Ámbitos de indagación</button>' +
         '<div class="atlas-menu" id="atMenu" hidden></div>' +
       "</div>" +
     "</div>" +
@@ -111,7 +111,7 @@
   var elMapa = raiz.querySelector("#atMapa");
   var elMigas = raiz.querySelector("#atMigas");
   var elMenu = raiz.querySelector("#atMenu");
-  var elBtnAmb = raiz.querySelector("#atBtnAmb");
+  var elBtnDes = raiz.querySelector("#atBtnDes");
   var elFicha = raiz.querySelector("#atFicha");
   var elPie = raiz.querySelector("#atPie");
 
@@ -196,7 +196,7 @@
     if (st.ruta) { st.ruta = null; render(); return; }
     if (st.nivel === "base") ir({ nivel: "institucion", base: null }, "out");
     else if (st.nivel === "institucion") ir({ nivel: "raiz", inst: null }, "out");
-    else if (st.nivel === "ambito") ir({ nivel: "raiz", ambito: null }, "out");
+    else if (st.nivel === "desafio") ir({ nivel: "raiz", desafio: null }, "out");
   }
 
   document.addEventListener("keydown", function (e) {
@@ -205,11 +205,11 @@
     if (st.ruta || st.nivel !== "raiz") subir();
   });
 
-  /* ---------- Menú de ámbitos ---------- */
+  /* ---------- Menú de desafíos ---------- */
 
-  if (!AMB.length) elBtnAmb.hidden = true;
-  elMenu.innerHTML = AMB.map(function (a) {
-    return '<button type="button" data-ambito="' + esc(a.id) + '">' +
+  if (!DES.length) elBtnDes.hidden = true;
+  elMenu.innerHTML = DES.map(function (a) {
+    return '<button type="button" data-desafio="' + esc(a.id) + '">' +
       '<span class="n">' + esc(a.nombre) + "</span>" +
       '<span class="q">' + esc(a.pregunta) + "</span></button>";
   }).join("");
@@ -219,33 +219,33 @@
     var habia = st.prev !== null;
     st.prev = null;
     elMenu.hidden = true;
-    elBtnAmb.setAttribute("aria-expanded", "false");
+    elBtnDes.setAttribute("aria-expanded", "false");
     raiz.classList.remove("menu-abierto");
     if (habia) render();
   }
 
-  elBtnAmb.addEventListener("click", function (e) {
+  elBtnDes.addEventListener("click", function (e) {
     e.stopPropagation();
     if (st.menu) { cerrarMenu(); return; }
     st.menu = true;
     elMenu.hidden = false;
-    elBtnAmb.setAttribute("aria-expanded", "true");
+    elBtnDes.setAttribute("aria-expanded", "true");
     raiz.classList.add("menu-abierto");
   });
 
   elMenu.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-ambito]");
+    var b = e.target.closest("[data-desafio]");
     if (!b) return;
     e.stopPropagation();
-    var id = b.getAttribute("data-ambito");
+    var id = b.getAttribute("data-desafio");
     cerrarMenu();
-    ir({ nivel: "ambito", ambito: id, inst: null, base: null, ruta: null }, "in");
+    ir({ nivel: "desafio", desafio: id, inst: null, base: null, ruta: null }, "in");
   });
 
   elMenu.addEventListener("mouseover", function (e) {
-    var b = e.target.closest("[data-ambito]");
+    var b = e.target.closest("[data-desafio]");
     if (!b) return;
-    var id = b.getAttribute("data-ambito");
+    var id = b.getAttribute("data-desafio");
     if (st.prev === id) return;
     st.prev = id;
     if (st.nivel === "raiz") render();
@@ -258,17 +258,17 @@
 
   document.addEventListener("click", function (e) {
     if (!st.menu) return;
-    if (e.target.closest(".atlas-ambitos")) return;
+    if (e.target.closest(".atlas-desafios")) return;
     cerrarMenu();
   });
 
   /* ---------- Migas ---------- */
 
   function pintarMigas() {
-    var partes = [{ t: "Instituciones", ir: { nivel: "raiz", inst: null, base: null, ambito: null, ruta: null } }];
+    var partes = [{ t: "Instituciones", ir: { nivel: "raiz", inst: null, base: null, desafio: null, ruta: null } }];
 
-    if (st.nivel === "ambito") {
-      var a = porId(AMB, st.ambito);
+    if (st.nivel === "desafio") {
+      var a = porId(DES, st.desafio);
       partes.push({ t: a ? a.nombre : "Ámbito" });
     } else if (st.nivel !== "raiz") {
       var i = porId(INST, st.inst);
@@ -336,8 +336,8 @@
 
   /* ---------- Vistas ---------- */
 
-  function preview(ambitoId) {
-    var a = porId(AMB, ambitoId);
+  function preview(desafioId) {
+    var a = porId(DES, desafioId);
     if (!a) return null;
     var ids = [];
     (a.datos || []).forEach(function (r) {
@@ -445,8 +445,8 @@
     return s;
   }
 
-  function vistaAmbito() {
-    var a = porId(AMB, st.ambito);
+  function vistaDesafio() {
+    var a = porId(DES, st.desafio);
     if (!a) return "";
     var m = medida();
     var fichas = (a.datos || []).map(buscar).filter(Boolean);
@@ -458,7 +458,7 @@
 
     var s = trazo(pts, false);
 
-    s += '<div class="atlas-cabecera-amb"><p class="eyebrow">Ámbito de indagación · ' +
+    s += '<div class="atlas-cabecera-des"><p class="eyebrow">Ámbito de indagación · ' +
       esc(a.nombre) + "</p><h3>" + esc(a.pregunta) + "</h3></div>";
 
     fichas.forEach(function (f, k) {
@@ -530,7 +530,7 @@
     raiz: "Haz clic en una institución · rueda para acercar · arrastra para mover",
     institucion: "Haz clic en una base de datos · Esc para volver",
     base: "Haz clic en un dato para ver su ficha · Esc para volver",
-    ambito: "Haz clic en un dato para ver su ficha · Esc para volver"
+    desafio: "Haz clic en un dato para ver su ficha · Esc para volver"
   };
 
   function render() {
@@ -538,7 +538,7 @@
     if (st.nivel === "raiz") html = vistaRaiz();
     else if (st.nivel === "institucion") html = vistaInstitucion();
     else if (st.nivel === "base") html = vistaBase();
-    else if (st.nivel === "ambito") html = vistaAmbito();
+    else if (st.nivel === "desafio") html = vistaDesafio();
 
     elMapa.innerHTML = '<div class="atlas-vista entra-' + st.dir + '">' + html + "</div>";
     elPie.textContent = PIE[st.nivel] || "";
@@ -570,13 +570,13 @@
     var ruta = t.getAttribute("data-dato");
     var f = buscar(ruta);
     if (!f) return;
-    if (st.nivel === "ambito" && porId(AMB, st.ambito) &&
-        (porId(AMB, st.ambito).datos || []).indexOf(ruta) !== -1) {
+    if (st.nivel === "desafio" && porId(DES, st.desafio) &&
+        (porId(DES, st.desafio).datos || []).indexOf(ruta) !== -1) {
       st.ruta = ruta;
       render();
       return;
     }
-    ir({ nivel: "base", inst: f.inst.id, base: f.base.id, ruta: ruta, ambito: null }, "in");
+    ir({ nivel: "base", inst: f.inst.id, base: f.base.id, ruta: ruta, desafio: null }, "in");
   });
 
   /* Redibujo al cambiar de tamaño: la geometría está en píxeles. */

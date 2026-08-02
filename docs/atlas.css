@@ -69,8 +69,8 @@
 
 .atlas-barra .crece { flex: 1 1 auto; }
 
-.atlas-ambitos { position: relative; flex: none; }
-.atlas-ambitos > button {
+.atlas-desafios { position: relative; flex: none; }
+.atlas-desafios > button {
   padding: 6px 12px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-2, 4px);
@@ -80,8 +80,8 @@
   font-size: 12.5px;
   cursor: pointer;
 }
-.atlas-ambitos > button:hover,
-.atlas-ambitos > button[aria-expanded="true"] {
+.atlas-desafios > button:hover,
+.atlas-desafios > button[aria-expanded="true"] {
   border-color: var(--at-acento);
   color: var(--at-acento);
 }
@@ -272,13 +272,13 @@
 .atlas-centro p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-2); max-width: 44ch; }
 .atlas-centro .meta { font-size: 11.5px; color: var(--slate); }
 
-/* ---------- Ámbito ---------- */
+/* ---------- Desafío ---------- */
 
 .atlas-trazo { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .atlas-trazo line { stroke: var(--at-acento); stroke-width: 1.2; opacity: 0.5; }
 .atlas-trazo.punteado line { stroke-dasharray: 3 5; }
 
-.atlas-cabecera-amb {
+.atlas-cabecera-des {
   position: absolute;
   left: 50%; top: 8%;
   transform: translateX(-50%);
@@ -287,7 +287,7 @@
   pointer-events: none;
   z-index: 2;
 }
-.atlas-cabecera-amb .eyebrow {
+.atlas-cabecera-des .eyebrow {
   margin: 0 0 4px;
   font-family: var(--font-display);
   font-size: 11px;
@@ -295,7 +295,7 @@
   text-transform: none;
   color: var(--at-acento);
 }
-.atlas-cabecera-amb h3 {
+.atlas-cabecera-des h3 {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
@@ -431,7 +431,7 @@
 .atlas-ficha .fuente { font-size: 12.5px; }
 .atlas-ficha .sin { margin: 0 0 20px; font-size: 12px; color: var(--slate); }
 
-/* ---------- Lista lateral del ámbito ---------- */
+/* ---------- Lista lateral del desafío ---------- */
 
 .atlas-lista {
   position: absolute;

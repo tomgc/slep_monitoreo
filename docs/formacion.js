@@ -53,7 +53,7 @@
     });
   });
 
-  var AMBITOS = (typeof ATLAS_AMBITOS !== "undefined" && Array.isArray(ATLAS_AMBITOS)) ? ATLAS_AMBITOS : [];
+  var DESAFIOS = (typeof ATLAS_DESAFIOS !== "undefined" && Array.isArray(ATLAS_DESAFIOS)) ? ATLAS_DESAFIOS : [];
 
   /* Texto de búsqueda precalculado: se normaliza una vez y no en cada
      pulsación de tecla. Sin acentos, para que "matricula" encuentre
@@ -75,12 +75,12 @@
     selInst.appendChild(o);
   });
 
-  var selAmb = $("#fmAmbito");
-  AMBITOS.forEach(function (a) {
+  var selDes = $("#fmDesafio");
+  DESAFIOS.forEach(function (a) {
     var o = document.createElement("option");
     o.value = a.id;
     o.textContent = a.nombre;
-    selAmb.appendChild(o);
+    selDes.appendChild(o);
   });
 
   /* ---------- render ---------- */
@@ -138,14 +138,14 @@
     var q = normalizar(iBuscar.value.trim());
     var inst = selInst.value;
     var acc = iAcceso.value;
-    var amb = selAmb.value;
+    var des = selDes.value;
 
-    var rutasAmbito = null;
-    var elAmbito = amb ? AMBITOS.filter(function (a) { return a.id === amb; })[0] : null;
-    if (elAmbito) rutasAmbito = elAmbito.datos || [];
+    var rutasDesafio = null;
+    var elDesafio = des ? DESAFIOS.filter(function (a) { return a.id === des; })[0] : null;
+    if (elDesafio) rutasDesafio = elDesafio.datos || [];
 
-    if (elAmbito) {
-      pregunta.textContent = elAmbito.pregunta;
+    if (elDesafio) {
+      pregunta.textContent = elDesafio.pregunta;
       pregunta.hidden = false;
     } else {
       pregunta.hidden = true;
@@ -155,7 +155,7 @@
       if (q && f._busca.indexOf(q) === -1) return false;
       if (inst && f.institucionId !== inst) return false;
       if (acc && f.acceso !== acc) return false;
-      if (rutasAmbito && rutasAmbito.indexOf(f.ruta) === -1) return false;
+      if (rutasDesafio && rutasDesafio.indexOf(f.ruta) === -1) return false;
       return true;
     }));
   }
@@ -165,13 +165,13 @@
   iBuscar.addEventListener("input", filtrar);
   selInst.addEventListener("change", filtrar);
   iAcceso.addEventListener("change", filtrar);
-  selAmb.addEventListener("change", filtrar);
+  selDes.addEventListener("change", filtrar);
 
   $("#fmLimpiar").addEventListener("click", function () {
     iBuscar.value = "";
     selInst.value = "";
     iAcceso.value = "";
-    selAmb.value = "";
+    selDes.value = "";
     filtrar();
     iBuscar.focus();
   });
