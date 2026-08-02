@@ -4,7 +4,7 @@
 > **Versión 1.** Generado en la sesión 10 de `slep_monitoreo`.
 > **Fuente del esquema:** inspección programática de
 > `design_handoff_atlas_celeste/atlas-data.js` (10 instituciones, 27 bases,
-> 52 datos, 6 ámbitos), no la descripción que el README hace de sí mismo.
+> 52 datos, 6 desafíos), no la descripción que el README hace de sí mismo.
 
 Este documento es el contrato entre quien **produce** el catálogo de fuentes
 (revisión bibliográfica documental) y quien lo **consume** (la tabla filtrable
@@ -26,7 +26,7 @@ El archivo declara tres constantes y nada más:
 
 ```javascript
 const ATLAS_INSTITUCIONES = [ /* ... */ ];
-const ATLAS_AMBITOS       = [ /* ... */ ];
+const ATLAS_DESAFIOS      = [ /* ... */ ];
 const ATLAS_FRASES        = { /* ... */ };
 ```
 
@@ -44,7 +44,7 @@ a colisionar con lo próximo que se agregue.
 
 ## 2. Esquema
 
-Tres niveles anidados más los ámbitos. La metáfora visual (sistema solar,
+Tres niveles anidados más los desafíos. La metáfora visual (sistema solar,
 planeta, satélite) no aparece en los nombres de campo: los datos se nombran
 por lo que son, para que la tabla y el atlas puedan leer el mismo archivo.
 
@@ -96,22 +96,22 @@ concreto**, solo al portal del emisor. Si la revisión documental encuentra la
 página específica de un dato, incluirla aquí mejora directamente la utilidad
 de la tabla.
 
-### 2.4 Ámbito de indagación
+### 2.4 Desafío educativo
 
 | Campo | Tipo | Obligatorio | Regla |
 |---|---|---|---|
-| `id` | string | sí | único entre ámbitos |
+| `id` | string | sí | único entre desafíos |
 | `nombre` | string | sí | dos o tres palabras |
 | `pregunta` | string | sí | pregunta educativa real, terminada en signo de cierre |
 | `datos` | array de rutas | sí | mínimo 3, máximo 8. Antes se llamaba `estrellas` |
 
-Un ámbito con datos de una sola institución no es un ámbito: su valor está en
+Un desafío con datos de una sola institución no es un desafío: su valor está en
 cruzar emisores. La validación lo advierte sin bloquear.
 
 ### 2.5 Frases
 
 Objeto con cinco claves de texto (`universo`, `institucion`, `base`, `dato`,
-`ambito`), una frase cada una. Son el eslogan por nivel del atlas. Si no se
+`desafio`), una frase cada una. Son el eslogan por nivel del atlas. Si no se
 tocan, se conservan las actuales.
 
 ---
@@ -264,7 +264,7 @@ const ATLAS_INSTITUCIONES = [
   }
 ];
 
-const ATLAS_AMBITOS = [
+const ATLAS_DESAFIOS = [
   {
     id: "asistencia",
     nombre: "Asistencia y permanencia",
@@ -282,7 +282,7 @@ const ATLAS_FRASES = {
   institucion: "Cada institución es un sistema solar: sus bases de datos lo orbitan como planetas.",
   base: "Cada base de datos es un planeta: al acercarnos vemos los datos que lo componen.",
   dato: "El conocimiento aparece cuando conectamos los puntos.",
-  ambito: "Las preguntas educativas dibujan constelaciones entre datos distantes."
+  desafio: "Las preguntas educativas dibujan constelaciones entre datos distantes."
 };
 ```
 
@@ -295,7 +295,7 @@ const ATLAS_FRASES = {
 - [ ] Toda base con `url` `https://` de la página pública del emisor.
 - [ ] Todo dato con `acceso` en uno de los dos valores exactos.
 - [ ] Todo dato con entre 2 y 8 variables.
-- [ ] Toda ruta de `relaciones` y de ámbitos resuelve a un dato existente.
+- [ ] Toda ruta de `relaciones` y de desafíos resuelve a un dato existente.
 - [ ] Toda relación declarada en ambos extremos.
 - [ ] `desde` de la base es el año en que existe la base; el del dato, el de su serie.
 - [ ] `node 00_validar_atlas.js <archivo>` devuelve 0.
