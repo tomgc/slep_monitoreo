@@ -1,33 +1,46 @@
 ---
 proyecto: slep_monitoreo
 estado: activo
-sesion_actual: v14
+sesion_actual: v15
 ultima_actividad: 2026-08-02
 maneja_sensibles: no
-tipo_pendiente: nuevo
+tipo_pendiente: deuda_tecnica
 ---
 
 ## En que vamos
 
-La seccion Formacion del sitio quedo con su documento de fundamento cerrado
-(`50_documentacion/activa/50_fundamento_seccion_formacion.md`): proposito,
-audiencia, alcance, linea editorial, orden de los siete elementos, etapas de
-publicacion, siete criterios de aceptacion y regla de descarte. La sesion 14 no
-escribio codigo: fue una entrevista de diez bloques al titular. El tablero
-descartado quedo aislado en la rama local `wip/atlas_tablero_v3`.
+La seccion Formacion paso de tener fundamento a tener texto: los elementos 1, 2
+y 4 quedaron escritos y el elemento 3 se redacto con el caso del reporte de
+aprendizaje en educacion parvularia, desafio elegido por el titular. Todo vive
+en `50_documentacion/activa/50_contenido_seccion_formacion.md`, en texto plano
+y sin maqueta todavia. En lo tecnico se cerro el renombre `ambito` → `desafio`
+en los cuatro artefactos del atlas (validador en `exit=0`, conteos identicos y
+verificacion en navegador) y se refuto la premisa del traspaso v14 sobre
+`docs/atlas.*`: `main` nunca tuvo el tablero experimental y
+`wip/atlas_tablero_v3` es su unica copia. La memoria del proyecto (14 traspasos
+y 5 logs) quedo versionada en local.
 
 ## Proximo paso
 
-Sesion 1 de la ruta de implementacion: redaccion de contenido en texto plano,
-sin HTML ni CSS. Texto de los elementos 1, 2 y 4, y eleccion del desafio
-educativo del elemento 3 con su caso real del Area en terminos conceptuales.
-Antes, en un turno: verificar el estado real de `docs/atlas.js` y
-`docs/atlas.css` en `main` (discrepancia de tamanos entre escaneres, §6 del
-traspaso v14).
+Aprobacion de los cuatro textos y maqueta desechable del elemento 2, que es el
+camino critico de la etapa 1: el fundamento §9 exige maqueta antes de codigo de
+produccion. Dos intentos por elemento; si se descarta, nombrar el criterio
+incumplido. Despues, la redaccion del elemento 7 (cierre hacia portafolio y
+contacto), unico elemento de la etapa 1 sin texto.
 
 ## Bloqueantes
 
-Ninguno.
+Ninguno. Sin bugs activos.
+
+## Deuda abierta
+
+Cuatro decisiones pendientes del titular: el destino del tablero en
+`wip/atlas_tablero_v3` (🔒 no borrar la rama sin decision explicita, es la unica
+copia), el estado de los cuatro archivos de `50_documentacion/estructura/` hoy
+trackeados (publican un snapshot congelado que nunca coincide con el arbol), las
+38 fuentes pendientes del catalogo (bloquean la difusion segun el fundamento §8)
+y la autorizacion del push: `main` esta 29 commits por delante de `origin/main`,
+de modo que el sitio publicado no refleja el trabajo de tres sesiones.
 
 ## Condiciones permanentes
 
