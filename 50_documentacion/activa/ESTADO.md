@@ -28,3 +28,14 @@ traspaso v14).
 ## Bloqueantes
 
 Ninguno.
+
+## Condiciones permanentes
+
+El repositorio es publico por diseno. Desde el 2026-08-02 los traspasos de
+cierre (`50_documentacion/traspasos/`) y los logs de encargos ejecutados
+(`50_documentacion/andamios/logs/`) se versionan, de modo que son contenido
+publicado: quedan legibles en `github.com/tomgc/slep_monitoreo` aunque Pages
+sirva solo `main` `/docs`. Se redactan bajo esa condicion, sin nombres de
+establecimientos, RBD, RUT, correos ni rutas locales. Los encargos y maquetas
+de `50_documentacion/andamios/` siguen ignorados: son instrumentos de un turno
+y caducan al ejecutarse.
