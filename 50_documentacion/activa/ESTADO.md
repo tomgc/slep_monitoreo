@@ -1,34 +1,30 @@
 ---
-slug: slep_monitoreo
-nombre_real: Sitio institucional del Area de Monitoreo, SLEP Costa Central
-categoria: activo
-semaforo: activo
-sesion_actual: v12
-ultima_actividad: 2026-07-31
-maneja_sensibles: false
-tipo_pendiente: bloqueante
+proyecto: slep_monitoreo
+estado: activo
+sesion_actual: v14
+ultima_actividad: 2026-08-02
+maneja_sensibles: no
+tipo_pendiente: nuevo
 ---
+
 ## En que vamos
 
-El catalogo de fuentes quedo verificado por la sesion paralela y el sitio ya
-tiene su segunda pagina con tabla filtrable. El atlas se construyo dos veces
-sobre una representacion orbital y las dos fueron descartadas por el titular:
-funciona, pero la metafora no se sostiene sin el fondo oscuro y los ambitos de
-indagacion quedaban como menu en vez de ser una dimension del dato. La direccion
-acordada es un tablero de dos mitades enfrentadas, fuentes a la izquierda y
-ambitos a la derecha, con destacado reciproco al hacer clic.
+La seccion Formacion del sitio quedo con su documento de fundamento cerrado
+(`50_documentacion/activa/50_fundamento_seccion_formacion.md`): proposito,
+audiencia, alcance, linea editorial, orden de los siete elementos, etapas de
+publicacion, siete criterios de aceptacion y regla de descarte. La sesion 14 no
+escribio codigo: fue una entrevista de diez bloques al titular. El tablero
+descartado quedo aislado en la rama local `wip/atlas_tablero_v3`.
 
 ## Proximo paso
 
-Correr `node 00_validar_atlas.js docs/atlas_datos.js` y versionar los cuatro
-archivos de `docs/` que quedaron sin commitear, antes de empezar el tablero.
+Sesion 1 de la ruta de implementacion: redaccion de contenido en texto plano,
+sin HTML ni CSS. Texto de los elementos 1, 2 y 4, y eleccion del desafio
+educativo del elemento 3 con su caso real del Area en terminos conceptuales.
+Antes, en un turno: verificar el estado real de `docs/atlas.js` y
+`docs/atlas.css` en `main` (discrepancia de tamanos entre escaneres, §6 del
+traspaso v14).
 
 ## Bloqueantes
 
-- El validador del atlas no se ejecuto tras el retiro de UNESCO y OECD: toda
-  cifra del catalogo declarada en v12 proviene del transformador y no de la
-  fuente canonica.
-- Cuatro archivos de `docs/` sin commitear (`atlas.js`, `atlas.css`,
-  `atlas_datos.js`, `formacion.html`).
-- La difusion del sitio sigue bloqueada por la revision de contenido del
-  catalogo: 38 solicitudes al titular sin resolver.
+Ninguno.
