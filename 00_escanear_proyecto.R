@@ -43,7 +43,7 @@ if (requireNamespace("here", quietly = TRUE)) {
 
 # --- Configuración de exclusiones ---
 # No hay raíz de datos externa que excluir: el proyecto es un sitio público.
-excluir_dir     <- c(".git", "_archivo", "handoff", ".claude", "node_modules")
+excluir_dir     <- c(".git", "_archivo", "handoff", "handoffs", ".claude", "node_modules")
 excluir_archivo <- c(".DS_Store")
 
 es_excluido <- function(ruta_rel) {
