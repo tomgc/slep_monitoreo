@@ -27,3 +27,14 @@ SETTINGS_Y_PROMPTS_OPERACIONALES.md
 !50_documentacion/andamios/logs/
 50_documentacion/andamios/logs/*
 !50_documentacion/andamios/logs/*.md
+
+# Escaner de estructura: su salida se regenera con un comando y la version
+# committeada quedaba desfasada respecto del arbol. Se conserva el .gitkeep
+# para que la carpeta siga existiendo al clonar.
+50_documentacion/estructura/*
+!50_documentacion/estructura/.gitkeep
+
+# Handoffs de diseno: entregables de un tercero, insumo local de trabajo.
+# Mismo criterio que handoff/: no se versionan.
+50_documentacion/handoffs/*
+!50_documentacion/handoffs/.gitkeep
