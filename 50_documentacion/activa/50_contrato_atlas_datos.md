@@ -3,8 +3,9 @@
 > **Destino:** `50_documentacion/activa/50_contrato_atlas_datos.md`
 > **Versión 1.** Generado en la sesión 10 de `slep_monitoreo`.
 > **Fuente del esquema:** inspección programática de
-> `design_handoff_atlas_celeste/atlas-data.js` (10 instituciones, 27 bases,
-> 52 datos, 6 desafíos), no la descripción que el README hace de sí mismo.
+> `50_documentacion/handoffs/20260730_atlas_celeste/atlas-data.js` (10
+> instituciones, 27 bases, 52 datos, 6 desafíos), no la descripción que el
+> README hace de sí mismo.
 
 Este documento es el contrato entre quien **produce** el catálogo de fuentes
 (revisión bibliográfica documental) y quien lo **consume** (la tabla filtrable
