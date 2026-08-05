@@ -195,22 +195,6 @@
   max-width: 68ch;
 }
 
-/* ---------- atlas en espera ----------
-   Campo inerte y declarado: no parece un control porque no lo es. */
-.fm-atlas-espera {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 180px;
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius-2);
-}
-.fm-atlas-foot {
-  margin: 0;
-  font-size: 13px;
-  color: var(--slate);
-}
-
 @media (max-width: 720px) {
   .fm-filtros { gap: 10px; }
   .fm-campo--busca { flex: 1 1 100%; }
