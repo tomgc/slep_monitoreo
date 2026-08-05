@@ -22,22 +22,29 @@ que la etapa 1 tiene sus cinco elementos redactados—, el archivado de
 ordenación del repositorio sin ejecutar un solo movimiento, y el push de los 53
 commits acumulados durante cuatro sesiones, con lo que el sitio en internet
 volvió a reflejar el repositorio. Quedan abiertos la redacción de los elementos
-3, 4 y 6, la decisión sobre los nueve movimientos del diagnóstico, y un desfase
-de versiones de la gobernanza descubierto al cierre.
+3, 4 y 6 y la decisión sobre los nueve movimientos del diagnóstico.
+
+El desfase de versiones de la gobernanza que se descubrió al cierre de la
+sesión 17 quedó resuelto (**P3 cerrado**): las copias en disco de
+`POLITICA_PROYECTO.md` y `SETTINGS_Y_PROMPTS_OPERACIONALES.md` declaran v5.6 y
+v16, verificado por encabezado y por longitud. No deja rastro en el historial
+porque `.gitignore:21-22` mantiene esos dos documentos fuera del repositorio:
+viven en la knowledge base de la cartera, y la sincronización es un reemplazo
+en disco, no un commit.
 
 ## Proximo paso
 
-Sincronizar la gobernanza en disco (P3, prioridad 1 de la §11.4 del traspaso
-v17). Las copias de `POLITICA_PROYECTO.md` y `SETTINGS_Y_PROMPTS_OPERACIONALES.md`
-en `50_documentacion/activa/` declaran v5.5 y v15, mientras la knowledge base va
-en v5.6 y v16. Es de complejidad baja y condición para lo demás: todo encargo
-que lea la copia en disco opera contra una versión anterior, y el diagnóstico de
-ordenación ya lo hizo. Criterio de éxito: los encabezados en disco declaran v5.6
-y v16.
+Redactar el elemento 3 de la sección Formación (P1, prioridad 2 de la §11.4 del
+traspaso v17, que pasa a ser la primera al cerrarse P3). Un elemento por sesión
+y no los tres: el fundamento §10 concede dos intentos por elemento, y el 3 es el
+que usa un caso real del Área, de modo que exige decisiones del titular sobre
+qué se cuenta y cómo. Debe mantenerse en términos conceptuales, sin nombrar
+establecimientos. Criterio de éxito: texto aprobado contra los siete criterios
+del fundamento §9.
 
 ## Bloqueantes
 
 Ninguno activo. La memoria del repositorio es pública, de modo que nada de lo que
 entra a `50_documentacion/` puede contener nombres de establecimientos ni
-identificadores. Hay 2 commits locales sin pushear; el push requiere autorización
+identificadores. Hay 5 commits locales sin pushear; el push requiere autorización
 explícita del titular.
