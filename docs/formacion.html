@@ -29,7 +29,6 @@
 <link rel="icon" href="assets/logo-mark-cc.png" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="formacion.css" />
-<link rel="stylesheet" href="atlas.css" />
 </head>
 <body data-variant="d2" data-density="comfortable">
 
@@ -73,19 +72,64 @@
   </div>
 </section>
 
-<!-- ====================== ATLAS ====================== -->
-<section class="section section--alt" id="atlas">
+<!-- ====================== RECORRIDO (ELEMENTO 2) ====================== -->
+<section class="section section--alt" id="recorrido" aria-labelledby="recorridoTitulo">
   <div class="shell">
     <div class="section-head">
-      <p class="eyebrow">Atlas</p>
-      <h2 class="section-title">Mapa de las fuentes y sus conexiones</h2>
-      <p class="section-lede">Un mapa navegable de las fuentes: cada institución es un sistema, cada base un cuerpo que lo orbita y cada dato una ficha con sus variables, su cobertura y sus conexiones.</p>
+      <p class="eyebrow">Cómo contribuimos desde los datos</p>
+      <h2 class="section-title" id="recorridoTitulo">De la pregunta a la respuesta</h2>
+      <p class="section-lede">Nuestro trabajo casi nunca empieza en un dato: empieza en una pregunta que alguien necesita responder. Lo que hacemos entre esa pregunta y la respuesta es siempre el mismo recorrido. No siempre termina en el mismo lugar: hay puntos donde el camino se abre según lo que encontramos.</p>
     </div>
-    <div class="atlas" id="atlasCeleste" role="application" aria-label="Atlas celeste de los datos educativos"></div>
-    <noscript>
-      <p class="fm-nota">El atlas necesita JavaScript para dibujarse. La misma información está disponible como tabla en la sección anterior.</p>
-    </noscript>
-    <p class="fm-nota">Cada institución es un sistema, cada base una órbita y cada dato un cuerpo que se puede abrir. Los ámbitos de indagación conectan datos de distintas instituciones alrededor de una pregunta.</p>
+  </div>
+
+  <div class="fm-ruta-ancho">
+    <div class="fm-ruta" id="fmRuta">
+      <!-- El lienzo aloja la pista y el globo en un mismo plano desplazable:
+           el globo se ancla al nodo elegido, de modo que si se quedara fuera
+           del desplazamiento quedaria desalineado de su muesca. -->
+      <div class="fm-ruta-mapa" id="fmRutaMapa">
+        <div class="fm-ruta-lienzo">
+          <div class="fm-ruta-pista">
+            <div class="fm-ruta-fila" id="fmRutaFila"></div>
+            <!-- El trazo lo construye el script a partir de bGeo(): ni el origen,
+                 ni el destino, ni el ancho quedan escritos aquí. -->
+            <svg class="fm-ruta-retorno" id="fmRutaRetorno" aria-hidden="true" focusable="false"></svg>
+          </div>
+
+          <div class="fm-ruta-globo" id="fmRutaGlobo" aria-live="polite">
+            <span class="fm-ruta-globo-muesca" id="fmRutaMuesca" aria-hidden="true"></span>
+            <div class="fm-ruta-globo-cab">
+              <div>
+                <p class="fm-ruta-globo-kicker" id="fmRutaKicker"></p>
+                <h3 class="fm-ruta-globo-titulo" id="fmRutaGloboTitulo"></h3>
+              </div>
+              <div class="fm-ruta-controles">
+                <button type="button" class="fm-ruta-nav" id="fmRutaPrev">← Anterior</button>
+                <span class="fm-ruta-pos" id="fmRutaPos"></span>
+                <button type="button" class="fm-ruta-nav" id="fmRutaNext">Siguiente →</button>
+              </div>
+            </div>
+            <p class="fm-ruta-globo-cuerpo" id="fmRutaCuerpo"></p>
+            <p class="fm-ruta-instruccion" id="fmRutaInstruccion" hidden>Elige una salida en la columna de la decisión — todas se pueden recorrer, también las que se detienen.</p>
+            <p class="fm-ruta-rama" id="fmRutaRama" hidden></p>
+            <p class="fm-ruta-rama-cuerpo" id="fmRutaRamaCuerpo" hidden></p>
+            <div class="fm-ruta-vocab" id="fmRutaVocab" hidden>
+              <p class="fm-ruta-vocab-rotulo">Vocabulario</p>
+              <p class="fm-ruta-vocab-cuerpo" id="fmRutaVocabCuerpo"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="fm-nota">El recorrido se dibuja con JavaScript. Los seis pasos y las tres decisiones que lo componen están descritos en el texto de esta página y en el catálogo de la sección siguiente.</p>
+      </noscript>
+    </div>
+  </div>
+
+  <div class="shell">
+    <p class="fm-ruta-cierre">Ese recorrido explica por qué buena parte de nuestro trabajo ocurre antes de calcular nada. La pregunta de la que se parte y la fuente que se elige determinan lo que después puede afirmarse.</p>
+    <p class="fm-ruta-pase">Ahora, veamos cómo se recorre este itinerario en un desafío real del Área →</p>
   </div>
 </section>
 
@@ -95,7 +139,7 @@
     <div class="section-head">
       <p class="eyebrow">Repositorio</p>
       <h2 class="section-title">Fuentes de datos educativos</h2>
-      <p class="section-lede">La misma información del atlas, en forma de tabla filtrable. Cada fila es un dato concreto publicado por una institución del sistema y los enlaces llevan a la página pública del emisor.</p>
+      <p class="section-lede">El catálogo completo de fuentes, en forma de tabla filtrable. Cada fila es un dato concreto publicado por una institución del sistema y los enlaces llevan a la página pública del emisor.</p>
     </div>
 
     <div class="fm-filtros">
@@ -116,7 +160,7 @@
         </select>
       </div>
       <div class="fm-campo">
-        <label for="fmDesafio">Ámbito de indagación</label>
+        <label for="fmDesafio">Desafío educativo</label>
         <select id="fmDesafio"><option value="">Todos</option></select>
       </div>
       <button type="button" class="fm-limpiar" id="fmLimpiar">Limpiar filtros</button>
@@ -159,6 +203,5 @@
 
 <script src="atlas_datos.js"></script>
 <script src="formacion.js"></script>
-<script src="atlas.js"></script>
 </body>
 </html>
