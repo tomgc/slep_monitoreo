@@ -3,7 +3,7 @@ slug: slep_monitoreo
 nombre_real: Sitio institucional del Área de Monitoreo — SLEP Costa Central
 categoria: activo
 semaforo: activo
-sesion_actual: v16
+sesion_actual: v17
 ultima_actividad: 2026-08-05
 maneja_sensibles: false
 tipo_pendiente: nuevo
