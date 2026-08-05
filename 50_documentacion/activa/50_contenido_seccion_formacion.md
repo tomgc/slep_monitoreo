@@ -1,12 +1,16 @@
 # Contenido de la sección Formación — texto aprobable
 
 > **Destino:** `50_documentacion/activa/50_contenido_seccion_formacion.md`
-> **Versión 5 (elementos 1, 2, 3 y 4).** Fuente de verdad del texto de la
+> **Versión 6 (elementos 1, 2, 3, 4 y 7).** Fuente de verdad del texto de la
 > sección. Se juzga contra `50_fundamento_seccion_formacion.md`, que fija
 > propósito, voz, piso técnico, no-alcance y los siete criterios de aceptación.
-> **Estado:** los cuatro elementos redactados y en revisión del titular. El
-> elemento 3 fue corregido con las respuestas del titular: ya no contiene
-> puntos por confirmar.
+> **Estado:** cinco elementos redactados. Los elementos 1, 2, 3 y 4 en revisión
+> del titular; el elemento 2 ya está en producción en `docs/formacion.html`
+> desde la sesión 17. El elemento 3 fue corregido con las respuestas del
+> titular: ya no contiene puntos por confirmar.
+>
+> **Cambio respecto de la v5:** se agrega el elemento 7, cierre. Con él, los
+> cinco elementos de la etapa 1 del fundamento §8 tienen texto.
 >
 > **Cambio respecto de la v3:** el desafío del elemento 3 pasa de *Asistencia y
 > permanencia* a *Educación parvularia*, por decisión del titular. La elección
@@ -652,3 +656,111 @@ fundamento §3 restringe el caso a términos conceptuales.
    convertiría el panorama en tabla.
 4. **La tabla de descartes queda en este documento y no en el sitio.** Es
    justificación interna de la elección, no contenido publicable.
+
+---
+
+## Elemento 7 · Cierre
+
+**Peso interactivo:** nulo. Texto y dos salidas: el portafolio y el contacto del
+Área. Es el último elemento de la etapa 1 del fundamento §8.
+
+El fundamento §6 fija qué es y qué no: la conexión entre los mandatos del Área,
+no una llamada comercial. De ahí que el cierre no invite a contratar nada ni
+prometa respuestas, y que la salida al portafolio se presente como continuación
+del mismo relato: los desafíos que aquí se cuentan en método, allá están
+contados en resultados.
+
+---
+
+### Título
+
+Dónde seguir
+
+---
+
+### Texto de entrada
+
+Hasta aquí, cómo trabajamos. Lo que producimos con ese método está en el
+portafolio del Área: los desafíos ya abordados, con los productos concretos que
+salieron de cada uno.
+
+---
+
+### Bloque 1 · El portafolio
+
+**Los desafíos, ya abordados**
+
+El portafolio reúne el trabajo de nuestros dos primeros ámbitos de actuación: el
+monitoreo de procesos y resultados de establecimientos y jardines infantiles, y
+el del propio Servicio Local. Cada entrada muestra qué se preguntó, qué datos se
+usaron y qué se entregó.
+
+Es la otra cara de esta sección: aquí está el método, allá los resultados de
+aplicarlo.
+
+*Enlace: Portafolio*
+
+---
+
+### Bloque 2 · Escríbenos
+
+**Una pregunta también es un punto de partida**
+
+Si en tu establecimiento, tu jardín infantil o tu equipo del Servicio hay una
+pregunta que crees que se responde mirando datos, escríbenos. No prometemos
+resolverla: parte de nuestro trabajo es justamente distinguir qué se puede
+afirmar con los datos que existen y qué no. Esa conversación es el primer paso
+del recorrido que acabas de leer.
+
+También nos sirve saber si encuentras un error en el catálogo de fuentes, o si
+conoces una fuente pública que falta.
+
+- Tomás González · tomas.gonzalez@slepcostacentral.gob.cl
+- Javier Pizarro · javier.pizarro@slepcostacentral.gob.cl
+
+---
+
+### Cierre de la sección
+
+*Este es un espacio en crecimiento. Los contenidos formativos se irán sumando
+por etapas, y el catálogo de fuentes se sigue verificando contra los sitios de
+cada institución.*
+
+---
+
+## Verificación del elemento 7 contra los criterios del fundamento §9
+
+| # | Criterio | Cómo lo cumple este texto |
+|---|---|---|
+| 1 | Se sostiene sin facilitador | Las dos salidas se explican por sí mismas: qué hay en el portafolio y para qué escribir |
+| 2 | Legible proyectado | Dos bloques de tres o cuatro líneas y una lista de dos correos |
+| 3 | Ruta visible | Es el cuarto tramo anunciado en el bloque 4 del elemento 1, con el mismo rótulo: «Dónde seguir» |
+| 4 | Vocabulario | No introduce ningún término técnico nuevo |
+| 5 | Sin establecimientos ni código | No nombra ninguno. Los dos correos son institucionales, no datos personales de terceros |
+| 6 | Peso interactivo | Nulo, como fija el inventario del fundamento §7 |
+| 7 | Completitud narrativa | Cierra el arco: el método arriba, sus resultados en el portafolio, y la puerta de entrada para una pregunta nueva |
+
+**Decisiones tomadas al redactar, para revisión:**
+
+1. **«No prometemos resolverla».** Es la frase deliberadamente incómoda del
+   elemento y la que más conviene revisar. Evita que el cierre se lea como una
+   oferta de servicio, que es lo que el fundamento §6 prohíbe, y de paso repite
+   la tesis del elemento 2: la respuesta depende de qué datos existan.
+2. **Dos correos personales y no una casilla del Área.** Es lo que hay hoy. Si
+   más adelante existe una casilla institucional, este bloque se reemplaza por
+   ella: una casilla sobrevive a los cambios de equipo y dos direcciones
+   personales no.
+3. **El portafolio se presenta como la otra cara, no como un anexo.** El
+   fundamento §4 fija que son capas paralelas y que ninguna supone la otra
+   leída, de modo que el enlace explica qué hay del otro lado en vez de darlo
+   por sabido.
+4. **La invitación a reportar errores del catálogo aparece aquí y no en la
+   sección del catálogo.** Mientras la nota de «catálogo en revisión» siga
+   visible, el lugar donde alguien decide escribir es el cierre, no la tabla.
+5. **El cierre de sección va en cursiva y en tono menor**, igual que el anuncio
+   del bloque 4 del elemento 1, para que se lea como nota al pie de la sección
+   completa y no como un sexto bloque de contenido.
+
+**Pendiente que este texto no resuelve:** el elemento 7 remite al portafolio, que
+sigue escrito en tercera persona (P6). Publicar el cierre antes de esa
+reescritura deja al lector pasando de un «nosotros» a un «el Área» sin aviso.
