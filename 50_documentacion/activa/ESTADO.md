@@ -7,7 +7,7 @@ sesion_actual: v18
 ultima_actividad: 2026-08-05
 maneja_sensibles: false
 tipo_pendiente: nuevo
-sesion_abierta: false
+sesion_abierta: true
 maquina: MacBook-Pro-de-Tomas.local
 commit_cierre: bfebc02
 traspaso_vigente: traspaso_cierre_v18.md
