@@ -290,7 +290,7 @@ maqueta animada, el plan de fusión y el registro de errores).
 
 | # | supuesto | predicado | medicion |
 |---|---|---|---|
-| D1 | El candado huérfano del `fetch` no estorba | `.git/objects/maintenance.lock` ya no existe | `ls -la /Users/tomgc/Projects/slep_monitoreo/.git/objects/maintenance.lock` |
+| D1 | El candado huérfano del `fetch` no estorba | `.git/objects/maintenance.lock` ya no existe | `ls -la .git/objects/maintenance.lock` |
 | D2 | El GitHub Pages de la cartera quedó desactivado (DF2) | La API de Pages del repo responde 404 | `gh api repos/tomgc/slep_estado_area_monitoreo/pages` |
 | D3 | `slep_monitoreo` es público y publica por GitHub Pages desde `main/docs` | La API de Pages del repo responde con `source.path` = `/docs` | `gh api repos/tomgc/slep_monitoreo/pages --jq .source` |
 | D4 | La maqueta animada se ve igual fuera de Chromium | En Safari y Firefox los seis cortes y el bucle se ven sin saltos | Revisión del titular con `?t=4.9`, `?t=9.95`, `?t=14.8`, `?t=19.99`, `?t=24.99` y `?t=29.99` |
