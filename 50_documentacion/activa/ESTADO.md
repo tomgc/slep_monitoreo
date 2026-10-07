@@ -3,35 +3,33 @@ slug: slep_monitoreo
 nombre_real: Sitio institucional del Área de Monitoreo — SLEP Costa Central
 categoria: activo
 semaforo: activo
-sesion_actual: v18
-ultima_actividad: 2026-08-05
+sesion_actual: v19
+ultima_actividad: 2026-10-07
 maneja_sensibles: false
 tipo_pendiente: nuevo
-sesion_abierta: true
+sesion_abierta: false
 maquina: MacBook-Pro-de-Tomas.local
-commit_cierre: bfebc02
-traspaso_vigente: traspaso_cierre_v18.md
+commit_cierre: 61a14a8
+traspaso_vigente: traspaso_cierre_v19.md
 cierre_incompleto: no
-insumos_verificados: 2026-08-05
+insumos_verificados: 2026-10-07
 ventana_insumos: ./20_insumos
 ---
 ## En que vamos
 
-La sesión 18 cerró sin commit el desfase de gobernanza heredado (los dos
-documentos están ignorados por git por decisión de cartera), dejó aprobado el
-texto del elemento 3 de la sección Formación con su maqueta v2 en revisión del
-titular, y abrió un pendiente nuevo: una animación en estilo risograph con su
-guion v1. La gobernanza en disco quedó en POLITICA 5.8 y SETTINGS 38, idéntica
-al kit.
+La sesión 19 entregó la primera maqueta animada de la pieza risograph, que el
+titular difirió, e integró a `main` local del repo de la cartera el prototipo
+«Portafolio de Proyectos». El titular decidió fusionar este repo con los de la
+cartera y los indicadores en `slep_area_monitoreo`, privado y publicado en
+Cloudflare con Access, y aprobó el plan.
 
 ## Proximo paso
 
-Aprobar el guion de la animación risograph y producir su primera maqueta
-animada (P13), precedido del veredicto del titular sobre la maqueta del
-elemento 3 si ya la revisó.
+Importar los tres repos a `slep_area_monitoreo` con `git subtree` (fase F3 del
+plan), en una sesión NEW PROJECT del repo nuevo.
 
 ## Bloqueantes
 
-Ninguno activo. La memoria del repositorio es pública, de modo que nada de lo que
-entra a `50_documentacion/` puede contener nombres de establecimientos ni
+Ninguno activo. La memoria del repositorio es pública, de modo que nada de lo
+que entra a `50_documentacion/` puede contener nombres de establecimientos ni
 identificadores.
