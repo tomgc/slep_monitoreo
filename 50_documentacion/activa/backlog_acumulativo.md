@@ -1,7 +1,7 @@
 # Backlog acumulado — slep_monitoreo
 
 > Documento único de memoria de largo plazo. Consolida sesión 1 (v01), 2 (v02), 3 (v03), 4 (v04), 5 (v05), 6 (v06), 7 (v07), 8 (v08), 9 (v09) y 10 (v10). Numeración correlativa global y permanente: nunca se reinicia ni renumera. Entradas previas copiadas íntegras. Cierra la deuda de consolidación arrastrada desde v02.
-> Generado: 2026-06-16. Origen: traspaso_cierre_v01/v02/v03. Actualizado hasta v10 (2026-07-30).
+> Generado: 2026-06-16. Origen: traspaso_cierre_v01/v02/v03.
 
 ## 1. Objetivo del proyecto
 
