@@ -31,40 +31,6 @@
   font-display: swap;
 }
 
-/* Museo Sans — secondary humanist sans for body copy, UI, captions. */
-@font-face {
-  font-family: "Museo Sans";
-  src: url("fonts/MuseoSans_300.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Museo Sans";
-  src: url("fonts/MuseoSans_500.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-/* Museo Sans no tiene face 400 propia. Mapeo explícito del peso 400
-   al .otf 500 para eliminar la resolución silenciosa por font-matching
-   (antes, todo font-weight: 400 sobre --font-body caía a 500 sin control).
-   Revertir si más adelante se incorpora MuseoSans_400.otf real. */
-@font-face {
-  font-family: "Museo Sans";
-  src: url("fonts/MuseoSans_500.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Museo Sans";
-  src: url("fonts/MuseoSans_700.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* -----------------------------------------------------------
    Color tokens
    -----------------------------------------------------------
@@ -164,13 +130,13 @@
 
   /* --- Type families --- */
   --font-display: "gobCL", "Arial Black", system-ui, sans-serif;
-  --font-body:    "Museo Sans", "gobCL", system-ui, -apple-system, sans-serif;
+  --font-body:    "gobCL", system-ui, -apple-system, sans-serif;
   --font-mono:    ui-monospace, "SF Mono", "Menlo", monospace;
 
   /* --- Type scale ---
      Display uses gobCL Heavy in ALL CAPS for the brand voice
-     of headlines (mirrors the logo). Long-form body is Museo
-     Sans 300/500. */
+     of headlines (mirrors the logo). Long-form body is gobCL
+     300/400; weight 500 resolves to 400 and 700 to 900. */
   --fs-display-1: clamp(48px, 6vw, 88px);
   --fs-display-2: clamp(36px, 4.5vw, 64px);
   --fs-h1:        clamp(32px, 3.4vw, 44px);
