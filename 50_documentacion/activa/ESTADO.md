@@ -9,7 +9,7 @@ maneja_sensibles: false
 tipo_pendiente: nuevo
 sesion_abierta: false
 maquina: MacBook-Pro-de-Tomas.local
-commit_cierre: 61a14a8
+commit_cierre: 759af5d
 traspaso_vigente: traspaso_cierre_v19.md
 cierre_incompleto: no
 insumos_verificados: 2026-10-07
